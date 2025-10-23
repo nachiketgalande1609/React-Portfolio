@@ -1,34 +1,68 @@
 import React from "react";
-import { personalInfo } from "../data/portfolioData";
+import "../styles/About.css";
 
 const About: React.FC = () => {
     return (
-        <section id="about" className="section">
+        <section id="about" className="section about-section">
             <div className="container">
-                <h2 className="section-title">About Me</h2>
-                <div className="about-content">
-                    <div className="about-text">
-                        <p className="about-description">{personalInfo.about}</p>
+                <div className="about-header">
+                    <h2 className="section-title">About Me</h2>
+                    <p className="section-subtitle">Get to know me better</p>
+                </div>
 
-                        <div className="about-details">
-                            <div className="detail-item">
-                                <strong>Location:</strong>
-                                <span>{personalInfo.location}</span>
+                <div className="about-content">
+                    <div className="about-main">
+                        <div className="personal-info">
+                            <h3 className="name-title">Nachiket Galande</h3>
+                            <h4 className="role-title">Full Stack Software Developer</h4>
+                            <p className="about-description">
+                                Full Stack Software Developer with 4+ years of experience in designing, developing, and deploying scalable,
+                                high-performance web applications. Proficient in frontend and backend technologies, with expertise in database
+                                architecture.
+                            </p>
+                            <p className="about-passion">
+                                Passionate about transforming complex designs into efficient technical solutions that improve performance and user
+                                experience.
+                            </p>
+                        </div>
+
+                        <div className="personal-details-grid">
+                            <div className="detail-row">
+                                <div className="detail-item">
+                                    <strong>Birthday:</strong>
+                                    <span>16 Sept 1999</span>
+                                </div>
+                                <div className="detail-item">
+                                    <strong>Phone:</strong>
+                                    <span>+91 9764993023</span>
+                                </div>
                             </div>
-                            <div className="detail-item">
-                                <strong>Email:</strong>
-                                <span>{personalInfo.email}</span>
+                            <div className="detail-row">
+                                <div className="detail-item">
+                                    <strong>Location:</strong>
+                                    <span>Thane, Maharashtra, India</span>
+                                </div>
+                                <div className="detail-item">
+                                    <strong>Age:</strong>
+                                    <span>25</span>
+                                </div>
                             </div>
-                            <div className="detail-item">
-                                <strong>Phone:</strong>
-                                <span>{personalInfo.phone}</span>
+                            <div className="detail-row">
+                                <div className="detail-item">
+                                    <strong>Education:</strong>
+                                    <span>B.Tech Computer Science</span>
+                                </div>
+                                <div className="detail-item">
+                                    <strong>Email:</strong>
+                                    <span>nachiketgalande1609@gmail.com</span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div className="about-stats">
                         <div className="stat-card">
-                            <h3>3+</h3>
+                            <h3>4+</h3>
                             <p>Years Experience</p>
                         </div>
                         <div className="stat-card">
@@ -42,85 +76,6 @@ const About: React.FC = () => {
                     </div>
                 </div>
             </div>
-
-            <style jsx>{`
-                .about-content {
-                    display: grid;
-                    grid-template-columns: 2fr 1fr;
-                    gap: 4rem;
-                    align-items: start;
-                }
-
-                .about-description {
-                    font-size: 1.2rem;
-                    line-height: 1.8;
-                    color: var(--text-light);
-                    margin-bottom: 2rem;
-                }
-
-                .about-details {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1rem;
-                }
-
-                .detail-item {
-                    display: flex;
-                    gap: 1rem;
-                }
-
-                .detail-item strong {
-                    min-width: 80px;
-                    color: var(--text-color);
-                }
-
-                .about-stats {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1.5rem;
-                }
-
-                .stat-card {
-                    background: var(--background-alt);
-                    padding: 2rem;
-                    border-radius: 12px;
-                    text-align: center;
-                    border-left: 4px solid var(--primary-color);
-                }
-
-                .stat-card h3 {
-                    font-size: 2.5rem;
-                    font-weight: 700;
-                    color: var(--primary-color);
-                    margin-bottom: 0.5rem;
-                }
-
-                .stat-card p {
-                    color: var(--text-light);
-                    font-weight: 500;
-                }
-
-                @media (max-width: 768px) {
-                    .about-content {
-                        grid-template-columns: 1fr;
-                        gap: 2rem;
-                    }
-
-                    .about-stats {
-                        flex-direction: row;
-                        justify-content: space-around;
-                    }
-
-                    .stat-card {
-                        flex: 1;
-                        padding: 1.5rem 1rem;
-                    }
-
-                    .stat-card h3 {
-                        font-size: 2rem;
-                    }
-                }
-            `}</style>
         </section>
     );
 };

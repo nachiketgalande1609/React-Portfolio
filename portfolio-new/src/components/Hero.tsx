@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { personalInfo, socialLinks } from "../data/portfolioData";
 import "../styles/Hero.css";
 
@@ -14,28 +14,91 @@ import WavingHandIcon from "@mui/icons-material/WavingHand";
 import profileImage from "../assets/profile.png"; // or .png, .webp, etc.
 
 const Hero: React.FC = () => {
-    const scrollToProjects = () => {
-        document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-    };
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [cursorVariant, setCursorVariant] = useState("default");
+    const [isOverHero, setIsOverHero] = useState(false);
+    const heroRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            setMousePosition({
+                x: e.clientX,
+                y: e.clientY,
+            });
+
+            // Update CSS variables for interactive background
+            document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
+            document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
+
+            // Check if mouse is over hero section
+            if (heroRef.current) {
+                const rect = heroRef.current.getBoundingClientRect();
+                const isInHero = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
+
+                setIsOverHero(isInHero);
+
+                if (isInHero) {
+                    document.body.classList.add("hero-hover");
+
+                    // Move background shapes based on cursor position relative to hero
+                    const shapes = document.querySelectorAll(".shape");
+                    shapes.forEach((shape, index) => {
+                        const speed = (index + 1) * 0.02;
+                        const x = ((e.clientX - rect.left) * speed) / 50;
+                        const y = ((e.clientY - rect.top) * speed) / 50;
+                        (shape as HTMLElement).style.transform = `translate(${x}px, ${y}px)`;
+                    });
+                } else {
+                    document.body.classList.remove("hero-hover");
+                }
+            }
+        };
+
+        const handleMouseEnter = (e: Event) => {
+            setCursorVariant("hover");
+        };
+
+        const handleMouseLeave = (e: Event) => {
+            setCursorVariant("default");
+        };
+
+        // Add event listeners
+        window.addEventListener("mousemove", handleMouseMove);
+
+        // Add event listeners for interactive elements within hero
+        if (heroRef.current) {
+            const interactiveElements = heroRef.current.querySelectorAll("button, a, .social-link, .btn, .image-wrapper");
+            interactiveElements.forEach((el) => {
+                el.addEventListener("mouseenter", handleMouseEnter);
+                el.addEventListener("mouseleave", handleMouseLeave);
+            });
+        }
+
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+
+            if (heroRef.current) {
+                const interactiveElements = heroRef.current.querySelectorAll("button, a, .social-link, .btn, .image-wrapper");
+                interactiveElements.forEach((el) => {
+                    el.removeEventListener("mouseenter", handleMouseEnter);
+                    el.removeEventListener("mouseleave", handleMouseLeave);
+                });
+            }
+        };
+    }, []);
 
     const scrollToContact = () => {
         document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
     };
 
     const handleResumeDownload = () => {
-        // Add your resume download logic here
-        // For example:
-        // window.open('/resume.pdf', '_blank');
         console.log("Download resume");
     };
 
     const handleConnect = () => {
-        // Add your connection logic here
-        // For example, scroll to contact or open email
         scrollToContact();
     };
 
-    // Function to get the appropriate icon for each social link
     const getSocialIcon = (iconName: string) => {
         switch (iconName.toLowerCase()) {
             case "github":
@@ -52,25 +115,35 @@ const Hero: React.FC = () => {
     };
 
     return (
-        <section id="home" className="hero">
+        <section id="home" className="hero" ref={heroRef}>
+            {/* Custom Cursor - Only show when over hero section */}
+            {isOverHero && (
+                <>
+                    <div
+                        className="hero-cursor"
+                        style={{
+                            transform: `translate3d(${mousePosition.x - 10}px, ${mousePosition.y - 10}px, 0)`,
+                            scale: cursorVariant === "hover" ? 1.5 : 1,
+                        }}
+                    />
+                    <div
+                        className="hero-cursor-follower"
+                        style={{
+                            transform: `translate3d(${mousePosition.x - 20}px, ${mousePosition.y - 20}px, 0)`,
+                            scale: cursorVariant === "hover" ? 1.2 : 1,
+                        }}
+                    />
+                </>
+            )}
+
             {/* Animated Background Elements */}
             <div className="hero-bg">
                 <div className="bg-gradient"></div>
+                {/* Interactive Gradient Overlay */}
+                <div className="interactive-gradient"></div>
                 {/* Radial Gradient Overlay */}
                 <div className="radial-overlay">
                     <div className="radial-gradient"></div>
-                </div>
-                <div className="bg-shapes">
-                    <div className="shape shape-1"></div>
-                    <div className="shape shape-2"></div>
-                    <div className="shape shape-3"></div>
-                    <div className="shape shape-4"></div>
-                    <div className="shape shape-5"></div>
-                </div>
-                <div className="bg-particles">
-                    {[...Array(15)].map((_, i) => (
-                        <div key={i} className="particle"></div>
-                    ))}
                 </div>
             </div>
 
