@@ -58,24 +58,6 @@
     transform: translateX(200%);
 }
 
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 300;
-    color: #ffffff;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
-    margin: 0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease 0.1s;
-}
-
-.animate-in.header-decoration,
-.animate-in .section-title {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 /* Main Content */
 .about-content {
     max-width: 1000px;
@@ -408,10 +390,6 @@
         padding: 3rem 0;
     }
 
-    .section-title {
-        font-size: 2rem;
-    }
-
     .name-title {
         font-size: 1.8rem;
     }
@@ -467,10 +445,6 @@
 
     .about-main {
         gap: 2rem;
-    }
-
-    .section-title {
-        font-size: 1.8rem;
     }
 
     .name-title {

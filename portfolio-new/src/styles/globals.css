@@ -15,6 +15,8 @@
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --section-title: #3b82f6;
+    --mouse-x: 50%;
+    --mouse-y: 50%;
 }
 
 body {
@@ -22,6 +24,79 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     scroll-behavior: smooth;
+    cursor: none; /* Hide default cursor globally */
+}
+
+/* Global Custom Cursor */
+.global-cursor {
+    position: fixed;
+    width: 16px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: transform 0.05s ease;
+    left: 0;
+    top: 0;
+}
+
+.global-cursor-follower {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    mix-blend-mode: difference;
+    left: 0;
+    top: 0;
+}
+
+/* Hide custom cursor on mobile/touch devices */
+@media (hover: none) and (pointer: coarse) {
+    body {
+        cursor: auto;
+    }
+
+    .global-cursor,
+    .global-cursor-follower {
+        display: none !important;
+    }
+}
+
+/* Interactive gradient background for entire site */
+.interactive-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(63, 63, 63, 0.2) 0%, rgba(0, 0, 0, 0) 20%);
+    pointer-events: none;
+    z-index: -1;
+    transition: background 0.1s ease;
+}
+
+/* Cursor states for interactive elements */
+body.cursor-hover .global-cursor {
+    transform: scale(1.5);
+}
+
+body.cursor-hover .global-cursor-follower {
+    transform: scale(1.2);
+}
+
+/* Ensure buttons and interactive elements use custom cursor */
+.btn,
+.social-link,
+button,
+a,
+[role="button"],
+.interactive-element {
+    cursor: none !important;
 }
 
 .container {
@@ -45,6 +120,46 @@ body {
     background-clip: text;
 }
 
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ffffff, transparent);
+    transition: width 1s ease 0.5s;
+}
+
+.animate-in .section-title::after {
+    width: 200px;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease 0.4s;
+    letter-spacing: 0.05em;
+}
+
+.animate-in.header-decoration,
+.animate-in .section-title,
+.animate-in .section-subtitle {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-in.header-decoration,
+.animate-in .section-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -55,7 +170,7 @@ body {
     font-weight: 600;
     transition: all 0.3s ease;
     border: none;
-    cursor: pointer;
+    cursor: none !important;
     font-size: 1rem;
 }
 

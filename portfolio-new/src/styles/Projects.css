@@ -59,35 +59,6 @@
     transform: translateX(200%);
 }
 
-.section-title {
-    font-size: 3.5rem;
-    font-weight: 300;
-    color: #ffffff;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin: 0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease 0.2s;
-    position: relative;
-}
-
-.section-title::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #ffffff, transparent);
-    transition: width 1s ease 0.5s;
-}
-
-.animate-in .section-title::after {
-    width: 200px;
-}
-
 .section-subtitle {
     font-size: 1.2rem;
     font-weight: 300;
@@ -97,13 +68,6 @@
     transform: translateY(20px);
     transition: all 0.8s ease 0.4s;
     letter-spacing: 0.05em;
-}
-
-.animate-in.header-decoration,
-.animate-in .section-title,
-.animate-in .section-subtitle {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* Projects Grid */
@@ -455,10 +419,6 @@
         margin-bottom: 4rem;
     }
 
-    .section-title {
-        font-size: 2.8rem;
-    }
-
     .header-decoration {
         gap: 1.5rem;
     }
@@ -508,11 +468,6 @@
 @media (max-width: 480px) {
     .projects-section {
         padding: 3rem 0;
-    }
-
-    .section-title {
-        font-size: 2.2rem;
-        letter-spacing: 0.05em;
     }
 
     .header-decoration {
