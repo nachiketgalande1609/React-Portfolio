@@ -19,7 +19,6 @@ const About: React.FC = () => {
             }
         );
 
-        // Observe all animate-on-scroll elements
         const animateElements = document.querySelectorAll(".animate-on-scroll");
         animateElements.forEach((el) => observer.observe(el));
 
@@ -31,23 +30,21 @@ const About: React.FC = () => {
     return (
         <section ref={sectionRef} id="about" className="section about-section">
             <div className="container">
+                {/* Compact Header */}
                 <div className="about-header">
                     <div className="header-decoration animate-on-scroll">
                         <div className="decoration-line"></div>
                         <h2 className="section-title">About Me</h2>
                         <div className="decoration-line"></div>
                     </div>
-                    <p className="section-subtitle animate-on-scroll">Crafting digital experiences with precision and passion</p>
                 </div>
 
                 <div className="about-content">
                     <div className="about-main">
-                        <div className="personal-info animate-on-scroll">
-                            <div className="name-role-container">
+                        {/* Personal Info Compact */}
+                        <div className="personal-info-compact animate-on-scroll">
+                            <div className="name-role-compact">
                                 <h3 className="name-title">Nachiket Galande</h3>
-                                <div className="role-badge">
-                                    <span>Senior Full Stack Developer</span>
-                                </div>
                             </div>
                             <p className="about-description">
                                 Senior Full Stack Software Developer with 4+ years of experience in designing, developing, and deploying scalable,
@@ -56,72 +53,120 @@ const About: React.FC = () => {
                             </p>
                         </div>
 
-                        <div className="personal-details-grid">
-                            {[
-                                { label: "Birthday", value: "16 Sept 1999" },
-                                { label: "Phone", value: "+91 97649 93023" },
-                                { label: "Location", value: "Thane, India" },
-                                { label: "Age", value: "25" },
-                                { label: "Email", value: "nachiketgalande1609@gmail.com" },
-                            ].map((detail, index) => (
-                                <div key={detail.label} className="detail-card animate-on-scroll" style={{ animationDelay: `${index * 0.1}s` }}>
-                                    <div className="detail-content">
-                                        <strong>{detail.label}</strong>
-                                        <span>{detail.value}</span>
-                                    </div>
+                        {/* Combined Details Grid */}
+                        <div className="combined-details-grid">
+                            {/* Personal Details */}
+                            <div className="details-group">
+                                <h4 className="details-group-title">Personal Details</h4>
+                                <div className="details-grid">
+                                    {[
+                                        { label: "Birthday", value: "16 Sept 1999" },
+                                        { label: "Phone", value: "+91 97649 93023" },
+                                        { label: "Location", value: "Thane, India" },
+                                        { label: "Age", value: "25" },
+                                        { label: "Email", value: "nachiketgalande1609@gmail.com" },
+                                    ].map((detail, index) => (
+                                        <div
+                                            key={detail.label}
+                                            className="detail-item animate-on-scroll"
+                                            style={{ animationDelay: `${index * 0.05}s` }}
+                                        >
+                                            <strong>{detail.label}</strong>
+                                            <span>{detail.value}</span>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                            </div>
+
+                            {/* Education Timeline */}
+                            <div className="timeline-group">
+                                <h4 className="details-group-title">Education Timeline</h4>
+                                <div className="timeline">
+                                    {[
+                                        {
+                                            degree: "Bachelor of Technology in Computer Science & Engineering",
+                                            period: "2017 - 2021",
+                                            grade: "7.0 CGPA",
+                                            institution: "MIT ADT University, Pune",
+                                        },
+                                        {
+                                            degree: "Class XII (HSC)",
+                                            period: "2015 - 2017",
+                                            grade: "82%",
+                                            institution: "Shubham Raje Jr. College",
+                                        },
+                                        {
+                                            degree: "Class X (SSC)",
+                                            period: "2015",
+                                            grade: "88.40%",
+                                            institution: "St. Xavier's English High School",
+                                        },
+                                    ].map((edu, index) => (
+                                        <div
+                                            key={edu.degree}
+                                            className="timeline-item animate-on-scroll"
+                                            style={{ animationDelay: `${index * 0.1}s` }}
+                                        >
+                                            <div className="timeline-marker"></div>
+                                            <div className="timeline-content">
+                                                <div className="timeline-header">
+                                                    <h5 className="timeline-degree">{edu.degree}</h5>
+                                                    <span className="timeline-period">{edu.period}</span>
+                                                </div>
+                                                <div className="timeline-details">
+                                                    <span className="timeline-grade">{edu.grade}</span>
+                                                    <span className="timeline-institution">{edu.institution}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
 
-                        <div className="education-section animate-on-scroll">
-                            <h3 className="education-title">Education</h3>
-                            <div className="education-timeline">
+                        {/* Achievements Section */}
+                        <div className="achievements-section animate-on-scroll">
+                            <h3 className="achievements-title">Achievements</h3>
+                            <div className="achievements-grid">
                                 {[
                                     {
-                                        degree: "Bachelor of Technology in Computer Science & Engineering",
-                                        period: "2017 - 2021",
-                                        grade: "7.0 CGPA",
-                                        institution: "MIT ADT University, Pune",
+                                        number: "4+",
+                                        label: "Years Experience",
+                                        description: "Full stack development across multiple industries",
                                     },
                                     {
-                                        degree: "Class XII (HSC)",
-                                        period: "2015 - 2017",
-                                        grade: "82%",
-                                        institution: "Shubham Raje Jr. College",
+                                        number: "50+",
+                                        label: "Projects Completed",
+                                        description: "From startups to enterprise applications",
                                     },
                                     {
-                                        degree: "Class X (SSC)",
-                                        period: "2015",
-                                        grade: "88.40%",
-                                        institution: "St. Xavier's English High School",
+                                        number: "20+",
+                                        label: "Happy Clients",
+                                        description: "Consistently delivering quality solutions",
                                     },
-                                ].map((edu, index) => (
-                                    <div key={edu.degree} className="education-item animate-on-scroll" style={{ animationDelay: `${index * 0.15}s` }}>
-                                        <div className="education-header">
-                                            <h4 className="education-degree">{edu.degree}</h4>
-                                            <span className="education-period">{edu.period}</span>
+                                    {
+                                        number: "10k+",
+                                        label: "Lines of Code",
+                                        description: "Clean, maintainable and scalable code",
+                                    },
+                                ].map((achievement, index) => (
+                                    <div
+                                        key={achievement.label}
+                                        className="achievement-card animate-on-scroll"
+                                        style={{ animationDelay: `${index * 0.1}s` }}
+                                    >
+                                        <div className="achievement-main">
+                                            <div className="achievement-number">{achievement.number}</div>
+                                            <div className="achievement-content">
+                                                <h4 className="achievement-label">{achievement.label}</h4>
+                                                <p className="achievement-description">{achievement.description}</p>
+                                            </div>
                                         </div>
-                                        <div className="education-details">
-                                            <span className="education-grade">{edu.grade}</span>
-                                            <span className="education-institution">{edu.institution}</span>
-                                        </div>
+                                        <div className="achievement-glow"></div>
                                     </div>
                                 ))}
                             </div>
                         </div>
-                    </div>
-
-                    <div className="about-stats">
-                        {[
-                            { number: "4+", label: "Years Experience" },
-                            { number: "50+", label: "Projects Completed" },
-                            { number: "20+", label: "Happy Clients" },
-                        ].map((stat, index) => (
-                            <div key={stat.label} className="stat-card animate-on-scroll" style={{ animationDelay: `${index * 0.2}s` }}>
-                                <h3>{stat.number}</h3>
-                                <p>{stat.label}</p>
-                            </div>
-                        ))}
                     </div>
                 </div>
             </div>
