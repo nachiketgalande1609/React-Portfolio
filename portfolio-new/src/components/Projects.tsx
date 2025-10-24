@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "../styles/Projects.css";
 
+// Import project images
 import livoImage from "../assets/projects/livo.png";
 import rippleImage from "../assets/projects/ripple.png";
 import streamlineImage from "../assets/projects/streamline.png";
@@ -10,6 +11,53 @@ import cryptoImage from "../assets/projects/crypto.jpg";
 import flappyBirdImage from "../assets/projects/flappybird.png";
 import vocabImage from "../assets/projects/vocab.png";
 import tetrisImage from "../assets/projects/tetris.png";
+
+// Import tech stack icons
+import reactIcon from "../assets/icons/react.png";
+import flaskIcon from "../assets/icons/flask.png";
+import pythonIcon from "../assets/icons/python.svg";
+import mongodbIcon from "../assets/icons/mongodb.svg";
+import awsIcon from "../assets/icons/aws.webp";
+import materialuiIcon from "../assets/icons/mui.png";
+import reactnativeIcon from "../assets/icons/react.png";
+import typescriptIcon from "../assets/icons/typescript.png";
+import nodejsIcon from "../assets/icons/node.png";
+import webrtcIcon from "../assets/icons/webrtc.svg";
+import expressIcon from "../assets/icons/express.png";
+import openaiIcon from "../assets/icons/openai.svg";
+import azureIcon from "../assets/icons/azure.png";
+import bootstrapIcon from "../assets/icons/bootstrap.svg";
+import socketioIcon from "../assets/icons/socketio.webp";
+import streamlitIcon from "../assets/icons/Streamlit.svg";
+import pygameIcon from "../assets/icons/python.svg";
+import pyttsx3Icon from "../assets/icons/python.svg";
+import sqliteIcon from "../assets/icons/SQLite.svg";
+
+import GitHubIcon from "@mui/icons-material/GitHub";
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+
+// Tech stack icons mapping
+const techIcons: { [key: string]: string } = {
+    React: reactIcon,
+    Flask: flaskIcon,
+    Python: pythonIcon,
+    MongoDB: mongodbIcon,
+    AWS: awsIcon,
+    "Material UI": materialuiIcon,
+    "React Native": reactnativeIcon,
+    TypeScript: typescriptIcon,
+    "Node.js": nodejsIcon,
+    WebRTC: webrtcIcon,
+    "Express.js": expressIcon,
+    "Open AI": openaiIcon,
+    Azure: azureIcon,
+    Bootstrap: bootstrapIcon,
+    "Socket.IO": socketioIcon,
+    Streamlit: streamlitIcon,
+    Pygame: pygameIcon,
+    pyttsx3: pyttsx3Icon,
+    SQLite: sqliteIcon,
+};
 
 // Projects data object
 const projectsData = {
@@ -24,6 +72,7 @@ const projectsData = {
             liveLink: "https://livo.nachiketgalande.site/",
             githubLink: "https://github.com/nachiketgalande1609/dietplanner",
         },
+        // ... rest of your projects data remains the same
         {
             id: 2,
             name: "Social Media App (Web & Mobile) - Ripple",
@@ -49,7 +98,7 @@ const projectsData = {
             name: "Generative Intelligence Speech Therapy - GIST",
             description:
                 "Platform supporting children with autism through interactive modules and personalized learning experiences. Leverages generative AI for real-time therapist interaction and adaptive learning paths.",
-            techStack: ["Flask", "Python", "Gen AI", "Open AI", "SQLite"],
+            techStack: ["Flask", "Python", "Open AI", "SQLite"],
             image: "https://github.com/nachiketgalande1609/GIST/blob/main/static/screenshots/profile.png?raw=true",
             githubLink: "https://github.com/nachiketgalande1609/GIST",
         },
@@ -58,7 +107,7 @@ const projectsData = {
             name: "Gen AI Onboarding Assistant",
             description:
                 "AI-powered assistant for project knowledge transfer, featuring document summarization and advanced Q&A capabilities. Deployed on Azure to enhance productivity for new team members with contextual understanding.",
-            techStack: ["Flask", "Python", "Gen AI", "OpenAI", "Azure"],
+            techStack: ["Flask", "Python", "OpenAI", "Azure"],
             image: "https://github.com/nachiketgalande1609/GenAI-Onboarding-Assistant/blob/main/static/screenshots/snap.png?raw=true",
             githubLink: "https://github.com/nachiketgalande1609/GenAI-Onboarding-Assistant",
         },
@@ -85,7 +134,7 @@ const projectsData = {
             name: "Cryptocurrency Price Prediction",
             description:
                 "Web app for predicting Bitcoin and Ethereum prices using machine learning algorithms. Features data analysis, model training with historical data, and interactive visualizations. Published research in ICACCS 2021 journal.",
-            techStack: ["Python", "Streamlit", "Machine Learning"],
+            techStack: ["Python", "Streamlit"],
             image: cryptoImage,
             githubLink: "https://github.com/nachiketgalande1609/Cryptocurrency_Price_Prediction_Using_Neural_Networks_and_Deep_Learning",
         },
@@ -178,7 +227,16 @@ const Projects: React.FC = () => {
                     <div className="project-technologies">
                         {project.techStack.map((tech, techIndex) => (
                             <span key={techIndex} className="tech-tag" style={{ animationDelay: `${techIndex * 0.05}s` }}>
-                                {tech}
+                                <img
+                                    src={techIcons[tech]}
+                                    alt={tech}
+                                    className="tech-icon"
+                                    onError={(e) => {
+                                        // Fallback if icon doesn't exist
+                                        (e.target as HTMLElement).style.display = "none";
+                                    }}
+                                />
+                                <span className="tech-name">{tech}</span>
                             </span>
                         ))}
                     </div>
@@ -186,12 +244,15 @@ const Projects: React.FC = () => {
                     <div className="project-links">
                         {project.githubLink && (
                             <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="project-link">
+                                <GitHubIcon className="tech-icon" sx={{ fontSize: "30px", mr: 1 }} />
                                 <span>GitHub</span>
+
                                 <div className="link-hover-effect"></div>
                             </a>
                         )}
                         {project.liveLink && (
                             <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="project-link live">
+                                <PlayArrowRoundedIcon className="tech-icon" sx={{ fontSize: "38px", marginRight: "4px" }} />
                                 <span>Live Demo</span>
                                 <div className="link-hover-effect"></div>
                             </a>
@@ -200,10 +261,8 @@ const Projects: React.FC = () => {
                 </div>
 
                 <div className="project-image">
-                    <div className="image-placeholder">
-                        <img src={project.image} alt={project.name} className="project-img" />
-                        <div className="image-shine"></div>
-                    </div>
+                    <img src={project.image} alt={project.name} className="project-img" />
+                    <div className="image-shine"></div>
                     <div className="card-corner"></div>
                 </div>
             </div>
