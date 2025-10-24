@@ -181,6 +181,17 @@
     overflow: hidden;
     opacity: 0;
     transform: translateX(30px);
+    /* Add minimal separation between categories */
+    padding-bottom: 2rem !important;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Remove border from last category */
+.technologies-group:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 .technologies-group::before {
@@ -426,7 +437,8 @@
     }
 
     .technologies-group {
-        padding: 2rem;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
     }
 
     .technologies-grid {
@@ -490,7 +502,8 @@
     }
 
     .technologies-group {
-        padding: 1.5rem;
+        padding: 1.5rem 0;
+        margin-bottom: 1.5rem;
     }
 
     .technologies-grid {
