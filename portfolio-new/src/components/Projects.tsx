@@ -1,26 +1,62 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { projects } from "../data/portfolioData";
 import type { Project } from "../types";
+import "../styles/Projects.css";
 
 const Projects: React.FC = () => {
-    const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
-        <div className="project-card">
+    const sectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("animate-in");
+
+                        // Add staggered animation for project cards
+                        if (entry.target.classList.contains("projects-grid")) {
+                            const projectCards = entry.target.querySelectorAll(".project-card");
+                            projectCards.forEach((card, index) => {
+                                (card as HTMLElement).style.animationDelay = `${index * 0.1}s`;
+                            });
+                        }
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+        );
+
+        const animateElements = document.querySelectorAll(".animate-on-scroll");
+        animateElements.forEach((el) => observer.observe(el));
+
+        return () => {
+            animateElements.forEach((el) => observer.unobserve(el));
+        };
+    }, []);
+
+    const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, index }) => (
+        <div className="project-card animate-on-scroll" style={{ animationDelay: `${index * 0.1}s` }}>
             <div className="project-image">
                 <div className="image-placeholder">
                     <span>Project Image</span>
+                    <div className="image-shine"></div>
                 </div>
                 <div className="project-overlay">
                     <div className="project-links">
                         <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="project-link">
-                            GitHub
+                            <span>GitHub</span>
+                            <div className="link-hover-effect"></div>
                         </a>
                         {project.liveUrl && (
                             <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="project-link live">
-                                Live Demo
+                                <span>Live Demo</span>
+                                <div className="link-hover-effect"></div>
                             </a>
                         )}
                     </div>
                 </div>
+                <div className="card-corner"></div>
             </div>
 
             <div className="project-content">
@@ -28,138 +64,35 @@ const Projects: React.FC = () => {
                 <p className="project-description">{project.description}</p>
 
                 <div className="project-technologies">
-                    {project.technologies.map((tech, index) => (
-                        <span key={index} className="tech-tag">
+                    {project.technologies.map((tech, techIndex) => (
+                        <span key={techIndex} className="tech-tag" style={{ animationDelay: `${techIndex * 0.05}s` }}>
                             {tech}
                         </span>
                     ))}
                 </div>
             </div>
+            <div className="card-glow"></div>
         </div>
     );
 
     return (
-        <section id="projects" className="section">
+        <section ref={sectionRef} id="projects" className="section projects-section">
             <div className="container">
-                <h2 className="section-title">My Projects</h2>
+                <div className="projects-header">
+                    <div className="header-decoration animate-on-scroll">
+                        <div className="decoration-line"></div>
+                        <h2 className="section-title">MY PROJECTS</h2>
+                        <div className="decoration-line"></div>
+                    </div>
+                    <p className="section-subtitle animate-on-scroll">A collection of my recent work and creative solutions</p>
+                </div>
 
-                <div className="projects-grid">
-                    {projects.map((project) => (
-                        <ProjectCard key={project.id} project={project} />
+                <div className="projects-grid animate-on-scroll">
+                    {projects.map((project, index) => (
+                        <ProjectCard key={project.id} project={project} index={index} />
                     ))}
                 </div>
             </div>
-
-            <style jsx>{`
-                .projects-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-                    gap: 2rem;
-                }
-
-                .project-card {
-                    background: white;
-                    border-radius: 12px;
-                    overflow: hidden;
-                    box-shadow: var(--shadow);
-                    transition: all 0.3s ease;
-                }
-
-                .project-card:hover {
-                    transform: translateY(-8px);
-                    box-shadow: var(--shadow-lg);
-                }
-
-                .project-image {
-                    position: relative;
-                    height: 200px;
-                    background: var(--background-alt);
-                    overflow: hidden;
-                }
-
-                .image-placeholder {
-                    width: 100%;
-                    height: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: var(--text-light);
-                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                }
-
-                .project-overlay {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: rgba(0, 0, 0, 0.8);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    opacity: 0;
-                    transition: opacity 0.3s ease;
-                }
-
-                .project-card:hover .project-overlay {
-                    opacity: 1;
-                }
-
-                .project-links {
-                    display: flex;
-                    gap: 1rem;
-                }
-
-                .project-link {
-                    padding: 10px 20px;
-                    background: var(--primary-color);
-                    color: white;
-                    text-decoration: none;
-                    border-radius: 6px;
-                    font-weight: 600;
-                    transition: all 0.3s ease;
-                }
-
-                .project-link.live {
-                    background: #10b981;
-                }
-
-                .project-link:hover {
-                    transform: translateY(-2px);
-                }
-
-                .project-content {
-                    padding: 1.5rem;
-                }
-
-                .project-title {
-                    font-size: 1.25rem;
-                    font-weight: 600;
-                    margin-bottom: 0.5rem;
-                    color: var(--text-color);
-                }
-
-                .project-description {
-                    color: var(--text-light);
-                    margin-bottom: 1rem;
-                    line-height: 1.6;
-                }
-
-                .project-technologies {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 0.5rem;
-                }
-
-                .tech-tag {
-                    background: var(--background-alt);
-                    color: var(--primary-color);
-                    padding: 4px 8px;
-                    border-radius: 4px;
-                    font-size: 0.875rem;
-                    font-weight: 500;
-                }
-            `}</style>
         </section>
     );
 };

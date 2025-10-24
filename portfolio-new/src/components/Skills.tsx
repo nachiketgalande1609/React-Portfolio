@@ -99,11 +99,20 @@ const Skills: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
+        // Intersection Observer for scroll animations
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add("animate-in");
+
+                        // Add staggered animation for skill items
+                        if (entry.target.classList.contains("technologies-group")) {
+                            const skillItems = entry.target.querySelectorAll(".skill-item");
+                            skillItems.forEach((item, index) => {
+                                (item as HTMLElement).style.animationDelay = `${index * 0.05}s`;
+                            });
+                        }
                     }
                 });
             },
@@ -136,6 +145,7 @@ const Skills: React.FC = () => {
                 <span className="fallback-icon">{skill.name.charAt(0)}</span>
             </div>
             <span className="skill-name">{skill.name}</span>
+            <div className="skill-hover-effect"></div>
         </div>
     );
 
@@ -157,6 +167,7 @@ const Skills: React.FC = () => {
                         <h2 className="section-title">MY STACK</h2>
                         <div className="decoration-line"></div>
                     </div>
+                    <p className="section-subtitle animate-on-scroll">Technologies I work with to create amazing experiences</p>
                 </div>
 
                 <div className="two-column-layout">
@@ -165,6 +176,7 @@ const Skills: React.FC = () => {
                             {/* Header Column */}
                             <div className="headers-column">
                                 <div className="category-header-item animate-on-scroll" style={{ animationDelay: `${categoryIndex * 0.15}s` }}>
+                                    <div className="category-glow"></div>
                                     <h3 className="category-header-title">{categoryConfig[category].title}</h3>
                                 </div>
                             </div>
