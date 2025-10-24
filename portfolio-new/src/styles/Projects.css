@@ -470,6 +470,11 @@
     .project-card {
         padding: 2rem;
         margin-bottom: 0;
+        position: relative;
+    }
+
+    .projects-grid {
+        gap: 0rem;
     }
 
     .project-content-wrapper {
@@ -520,6 +525,7 @@
 
     .project-card {
         padding: 1.5rem;
+        position: relative;
     }
 
     .project-title {
@@ -554,6 +560,7 @@
 @media (max-width: 360px) {
     .project-card {
         padding: 1rem;
+        position: relative;
     }
 
     .project-title {
