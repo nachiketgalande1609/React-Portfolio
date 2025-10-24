@@ -110,7 +110,7 @@
 .two-column-layout {
     display: grid;
     grid-template-columns: 300px 1fr;
-    gap: 4rem;
+    gap: 2rem;
     max-width: 1000px;
     margin: 0 auto;
     align-items: start;
@@ -129,7 +129,7 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    padding: 2rem 1.5rem;
+    padding: 0.5rem;
     background: transparent;
     border-radius: 12px;
     transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -138,21 +138,6 @@
     opacity: 0;
     transform: translateX(-30px);
     border: 1px solid transparent;
-}
-
-.category-header-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.6s ease;
-}
-
-.category-header-item:hover::before {
-    left: 100%;
 }
 
 .category-header-item.animate-on-scroll {
@@ -171,10 +156,6 @@
     transition: all 0.4s ease;
 }
 
-.category-header-item:hover .category-glow {
-    height: 60%;
-}
-
 .category-header-title {
     font-size: 1.4rem;
     font-weight: 300;
@@ -183,10 +164,6 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     transition: all 0.3s ease;
-}
-
-.category-header-item:hover .category-header-title {
-    transform: translateX(5px);
 }
 
 /* Technologies Column */
@@ -229,7 +206,7 @@
 .technologies-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.2rem;
+    gap: 0.5rem;
 }
 
 .skill-item {
@@ -243,7 +220,7 @@
     overflow: hidden;
     opacity: 0;
     transform: translateY(20px);
-    padding: 1rem;
+    padding: 0.5rem;
     border: 1px solid transparent;
 }
 
