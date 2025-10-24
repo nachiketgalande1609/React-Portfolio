@@ -107,14 +107,6 @@
     transform: translateY(0);
 }
 
-/* Stacked Projects Layout */
-.projects-stack {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 0;
-}
-
 .project-card {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 20px;
@@ -399,11 +391,6 @@
 .animate-in {
     opacity: 1 !important;
     transform: translate(0, 0) !important;
-}
-
-/* Stacking effect styles */
-.projects-stack {
-    perspective: 1000px;
 }
 
 .project-card {
