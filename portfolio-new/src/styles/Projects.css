@@ -225,81 +225,23 @@
     border-top: 70px solid rgba(255, 255, 255, 0.15);
 }
 
-.project-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
-    z-index: 3;
-}
-
-.project-card:hover .project-overlay {
-    opacity: 1;
-}
-
-.overlay-links {
-    display: flex;
-    gap: 1.5rem;
-    transform: translateY(20px);
-    transition: transform 0.4s ease 0.1s;
-}
-
-.project-card:hover .overlay-links {
-    transform: translateY(0);
-}
-
-.overlay-link {
-    padding: 12px 24px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-}
-
-.overlay-link.live {
-    background: rgba(16, 185, 129, 0.2);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-}
-
-.overlay-link:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.overlay-link.live:hover {
-    background: rgba(16, 185, 129, 0.3);
-}
-
 .project-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     margin-top: 2rem;
 }
 
 .project-link {
     padding: 12px 24px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgb(0, 0, 0);
     color: white;
     text-decoration: none;
-    border-radius: 8px;
     font-weight: 500;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
     backdrop-filter: blur(10px);
 }
 
