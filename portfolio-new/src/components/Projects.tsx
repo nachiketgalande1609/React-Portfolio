@@ -36,13 +36,26 @@ const Projects: React.FC = () => {
     }, []);
 
     const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, index }) => (
-        <div className="project-card animate-on-scroll" style={{ animationDelay: `${index * 0.1}s` }}>
-            <div className="project-image">
-                <div className="image-placeholder">
-                    <span>Project Image</span>
-                    <div className="image-shine"></div>
-                </div>
-                <div className="project-overlay">
+        <div
+            className="project-card animate-on-scroll"
+            style={{
+                animationDelay: `${index * 0.1}s`,
+                top: `calc(80px + ${index * 60}px)`, // Sticky positioning with increasing offset
+            }}
+        >
+            <div className="project-content-wrapper">
+                <div className="project-content">
+                    <h3 className="project-title">{project.title}</h3>
+                    <p className="project-description">{project.description}</p>
+
+                    <div className="project-technologies">
+                        {project.technologies.map((tech, techIndex) => (
+                            <span key={techIndex} className="tech-tag" style={{ animationDelay: `${techIndex * 0.05}s` }}>
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
+
                     <div className="project-links">
                         <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="project-link">
                             <span>GitHub</span>
@@ -56,19 +69,25 @@ const Projects: React.FC = () => {
                         )}
                     </div>
                 </div>
-                <div className="card-corner"></div>
-            </div>
 
-            <div className="project-content">
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">{project.description}</p>
-
-                <div className="project-technologies">
-                    {project.technologies.map((tech, techIndex) => (
-                        <span key={techIndex} className="tech-tag" style={{ animationDelay: `${techIndex * 0.05}s` }}>
-                            {tech}
-                        </span>
-                    ))}
+                <div className="project-image">
+                    <div className="image-placeholder">
+                        <span>Project Image</span>
+                        <div className="image-shine"></div>
+                    </div>
+                    <div className="project-overlay">
+                        <div className="overlay-links">
+                            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="overlay-link">
+                                View Code
+                            </a>
+                            {project.liveUrl && (
+                                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="overlay-link live">
+                                    Live Demo
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                    <div className="card-corner"></div>
                 </div>
             </div>
             <div className="card-glow"></div>
