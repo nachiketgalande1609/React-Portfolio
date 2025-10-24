@@ -1,0 +1,251 @@
+/* styles/ScrollProgress.css */
+.scroll-progress {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.7;
+}
+
+.scroll-progress:hover,
+.scroll-progress.scrolling {
+    opacity: 1;
+    right: 18px;
+}
+
+.progress-track {
+    width: 8px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    position: relative;
+    overflow: visible;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.scroll-progress:hover .progress-track {
+    width: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* INVERTED PROGRESS BAR - Starts from top */
+.progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #3b82f6, #8b5cf6, #ec4899);
+    border-radius: 10px;
+    transition: height 0.1s ease-out;
+    transform-origin: top;
+}
+
+/* Inverted gradient overlay */
+.progress-fill::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent);
+    border-radius: 0 0 10px 10px;
+}
+
+/* Inverted glow effect */
+.progress-glow {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(to top, rgba(59, 130, 246, 0.8), transparent);
+    border-radius: 0 0 10px 10px;
+    filter: blur(5px);
+    opacity: 0.7;
+    animation: pulse 2s infinite;
+}
+
+/* Progress dot at the current position */
+.progress-dot {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-progress:hover .progress-dot {
+    opacity: 1;
+}
+
+/* Section Markers */
+.section-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.section-marker {
+    position: absolute;
+    left: -20px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    pointer-events: all;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.section-marker:hover {
+    left: -25px;
+}
+
+.section-marker:hover .marker-label {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.section-marker.active .marker-dot {
+    background: white;
+    transform: scale(1.2);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.8), 0 0 10px rgba(59, 130, 246, 0.6);
+}
+
+.marker-dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-marker:hover .marker-dot {
+    background: white;
+    transform: scale(1.1);
+}
+
+.marker-label {
+    position: absolute;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.marker-label::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 4px solid transparent;
+    border-right-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Hide browser scrollbar */
+html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 0.4;
+    }
+}
+
+/* Section transition animations */
+@keyframes markerPulse {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0);
+    }
+}
+
+.section-marker.active .marker-dot {
+    animation: markerPulse 2s infinite;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .scroll-progress {
+        right: 10px;
+        transform: translateY(-50%) scale(0.8);
+    }
+
+    .scroll-progress:hover {
+        right: 8px;
+    }
+
+    .progress-track {
+        height: 150px;
+    }
+
+    .section-marker {
+        left: -15px;
+    }
+
+    .section-marker:hover {
+        left: -18px;
+    }
+
+    .marker-label {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .scroll-progress,
+    .progress-fill,
+    .section-marker,
+    .marker-label {
+        transition: none;
+        animation: none;
+    }
+}
