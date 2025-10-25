@@ -4,20 +4,18 @@ import "./../styles/ScrollProgress.css";
 
 const ScrollProgress: React.FC = () => {
     const [scrollProgress, setScrollProgress] = useState(0);
-    const [isScrolling, setIsScrolling] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
 
     const sections = [
         { id: "home", label: "Home" },
         { id: "about", label: "About" },
         { id: "skills", label: "Skills" },
+        { id: "experience", label: "Experience" },
         { id: "projects", label: "Projects" },
         { id: "contact", label: "Contact" },
     ];
 
     useEffect(() => {
-        let scrollTimer: NodeJS.Timeout;
-
         const handleScroll = () => {
             // Calculate scroll progress
             const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -37,15 +35,6 @@ const ScrollProgress: React.FC = () => {
             if (currentSection) {
                 setActiveSection(currentSection.id);
             }
-
-            // Show progress bar when scrolling starts
-            setIsScrolling(true);
-
-            // Hide progress bar after scrolling stops
-            clearTimeout(scrollTimer);
-            scrollTimer = setTimeout(() => {
-                setIsScrolling(false);
-            }, 1500);
         };
 
         // Throttle scroll events for better performance
@@ -64,7 +53,6 @@ const ScrollProgress: React.FC = () => {
 
         return () => {
             window.removeEventListener("scroll", throttledScroll);
-            clearTimeout(scrollTimer);
         };
     }, []);
 
@@ -90,14 +78,13 @@ const ScrollProgress: React.FC = () => {
     };
 
     return (
-        <div className={`scroll-progress ${isScrolling ? "scrolling" : ""}`} onClick={handleProgressClick}>
-            <div className="progress-track">
+        <div className={`scroll-progress`}>
+            <div className="progress-track" onClick={handleProgressClick}>
                 <div className="progress-fill" style={{ height: `${scrollProgress}%` }}>
                     <div className="progress-glow" />
                     <div className="progress-dot" />
                 </div>
 
-                {/* Section markers */}
                 <div className="section-markers">
                     {sections.map((section, index) => {
                         const position = (index / (sections.length - 1)) * 100;
