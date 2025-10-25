@@ -1,14 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { personalInfo, socialLinks } from "../data/portfolioData";
 import "../styles/Contact.css";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import CheckIcon from "@mui/icons-material/Check";
 
 const Contact: React.FC = () => {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-    });
+    const sectionRef = useRef<HTMLElement>(null);
+    const [copiedField, setCopiedField] = useState<string | null>(null);
+
+    const copyToClipboard = async (text: string, field: string) => {
+        try {
+            await navigator.clipboard.writeText(text);
+            setCopiedField(field);
+            setTimeout(() => setCopiedField(null), 2000);
+        } catch (err) {
+            console.error("Failed to copy text: ", err);
+        }
+    };
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -33,22 +44,29 @@ const Contact: React.FC = () => {
         };
     }, []);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log("Form submitted:", formData);
-        alert("Thank you for your message! I'll get back to you soon.");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-    };
+    const contactDetails = [
+        {
+            icon: <EmailIcon className="contact-mui-icon" />,
+            label: "Email",
+            value: personalInfo.email,
+            copyable: true,
+        },
+        {
+            icon: <PhoneIcon className="contact-mui-icon" />,
+            label: "Phone",
+            value: personalInfo.phone,
+            copyable: true,
+        },
+        {
+            icon: <LocationOnIcon className="contact-mui-icon" />,
+            label: "Location",
+            value: personalInfo.location,
+            copyable: false,
+        },
+    ];
 
     return (
-        <section id="contact" className="section contact-section">
+        <section id="contact" className="section contact-section" ref={sectionRef}>
             <div className="container">
                 <div className="contact-header">
                     <div className="header-decoration animate-on-scroll">
@@ -63,101 +81,39 @@ const Contact: React.FC = () => {
                             <h3 className="contact-title">Let's Connect</h3>
                             <p className="contact-description">
                                 I'm always interested in new opportunities and exciting projects. Feel free to reach out if you'd like to work
-                                together or just say hello!
+                                together!
                             </p>
                         </div>
 
-                        <div className="contact-details">
-                            {[
-                                { icon: "📧", label: "Email", value: personalInfo.email },
-                                { icon: "📱", label: "Phone", value: personalInfo.phone },
-                                { icon: "📍", label: "Location", value: personalInfo.location },
-                            ].map((detail, index) => (
-                                <div key={detail.label} className="contact-item animate-on-scroll" style={{ animationDelay: `${index * 0.1}s` }}>
+                        <div className="contact-details-grid">
+                            {contactDetails.map((detail, index) => (
+                                <div key={detail.label} className="contact-grid-item animate-on-scroll" style={{ animationDelay: `${index * 0.1}s` }}>
                                     <div className="contact-item-content">
-                                        <div className="contact-icon">{detail.icon}</div>
+                                        <div className="contact-icon-wrapper">{detail.icon}</div>
                                         <div className="contact-text">
                                             <strong>{detail.label}</strong>
-                                            <span>{detail.value}</span>
+                                            <div className="contact-value-wrapper">
+                                                <span className="contact-value">{detail.value}</span>
+                                                {detail.copyable && (
+                                                    <button
+                                                        className={`copy-btn ${copiedField === detail.label ? "copied" : ""}`}
+                                                        onClick={() => copyToClipboard(detail.value, detail.label)}
+                                                        aria-label={`Copy ${detail.label}`}
+                                                    >
+                                                        {copiedField === detail.label ? (
+                                                            <CheckIcon className="copy-icon" />
+                                                        ) : (
+                                                            <ContentCopyIcon className="copy-icon" />
+                                                        )}
+                                                    </button>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
-
-                        <div className="contact-social animate-on-scroll">
-                            <h4 className="social-title">Follow Me</h4>
-                            <div className="social-links">
-                                {socialLinks.map((link, index) => (
-                                    <a
-                                        key={index}
-                                        href={link.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="social-link"
-                                        style={{ animationDelay: `${index * 0.1}s` }}
-                                    >
-                                        <span className="social-name">{link.name}</span>
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
                     </div>
-
-                    <form className="contact-form animate-on-scroll" onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="Your Name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                                className="form-input"
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Your Email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                                className="form-input"
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                name="subject"
-                                placeholder="Subject"
-                                value={formData.subject}
-                                onChange={handleChange}
-                                required
-                                className="form-input"
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <textarea
-                                name="message"
-                                placeholder="Your Message"
-                                rows={6}
-                                value={formData.message}
-                                onChange={handleChange}
-                                required
-                                className="form-textarea"
-                            ></textarea>
-                        </div>
-
-                        <button type="submit" className="submit-btn">
-                            <span>Send Message</span>
-                            <div className="btn-decoration"></div>
-                        </button>
-                    </form>
                 </div>
             </div>
         </section>
