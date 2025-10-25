@@ -37,13 +37,12 @@ import AbhishekProfileImage from "../assets/testimonials/abhishek.jpg";
 import SumitProfileImage from "../assets/testimonials/sumit.jpg";
 import SudarshanProfileImage from "../assets/testimonials/sudarshan.jpg";
 
-import AzureCertificateLogo from "../assets/certificates/azure.jpg";
-import CognitiveClassLogo from "../assets/certificates/cognitiveclass.jpg";
-import CourseraLogo from "../assets/certificates/coursera.png";
-import GreatLearningLogo from "../assets/certificates/greatlearning.png";
+import CognitiveClassLogo from "../assets/certificates/cognitiveclass.png";
+import CourseraLogo from "../assets/certificates/coursera.svg";
+import GreatLearningLogo from "../assets/certificates/greatlearning.svg";
 import HackerRankLogo from "../assets/certificates/hackerrank.png";
 import OracleLogo from "../assets/certificates/oracle.png";
-import SimpliLearnLogo from "../assets/certificates/simplilearn.jpg";
+import SimpliLearnLogo from "../assets/certificates/simplilearn.svg";
 import StudySectionLogo from "../assets/certificates/studySection-logo.png";
 
 export const projects: Project[] = [
@@ -301,7 +300,7 @@ export const certificatesData = [
         organization: "Microsoft",
         date: "Sep 30, 2023",
         credential_url: "https://www.credly.com/badges/bc8344bd-4101-48cf-b607-f81a26399582/public_url",
-        logo: AzureCertificateLogo,
+        logo: azureIcon,
     },
     {
         title: "MongoDB SI Associate Certification",
