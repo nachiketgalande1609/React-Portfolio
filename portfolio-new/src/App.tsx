@@ -11,6 +11,7 @@ import ScrollProgress from "./components/ScrollProgress";
 import AnimatedBackground from "./components/AnimatedBackground";
 import "./styles/globals.css";
 import Experience from "./components/Experience";
+import Recommendations from "./components/Recommendations";
 
 const App: React.FC = () => {
     return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
             <Skills />
             <Experience />
             <Projects />
+            <Recommendations />
             <Contact />
             <Footer />
         </div>
