@@ -215,8 +215,8 @@ const Projects: React.FC = () => {
             className="project-card animate-on-scroll"
             style={{
                 animationDelay: `${index * 0.1}s`,
-                top: `calc(100px + ${index * 20}px)`,
-                zIndex: index, // each next card appears above the previous one
+                top: `calc(100px + ${index * 10}px)`,
+                zIndex: index,
             }}
         >
             <div className="card-corner"></div>

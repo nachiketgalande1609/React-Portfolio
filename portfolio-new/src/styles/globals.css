@@ -372,6 +372,7 @@ body.cursor-click .global-cursor-follower {
     position: relative;
     text-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
     letter-spacing: -0.02em;
+    width: 100%;
 }
 
 .section-title::after {

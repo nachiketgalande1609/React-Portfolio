@@ -3,7 +3,6 @@
     position: fixed;
     right: 20px;
     top: 50%;
-    transform: translateY(-50%); /* This should center it, but let's debug */
     z-index: 10000;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -173,7 +172,7 @@
 }
 
 /* Hide browser scrollbar */
-html {
+/* html {
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
@@ -185,7 +184,7 @@ html::-webkit-scrollbar {
 body {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-}
+} */
 
 @keyframes pulse {
     0%,
