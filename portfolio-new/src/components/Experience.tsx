@@ -127,10 +127,6 @@ const Experience: React.FC = () => {
                                             </div>
                                         </div>
 
-                                        <div className="role-section">
-                                            <h4 className="role-title">{experience.role}</h4>
-                                        </div>
-
                                         <div className="tech-skills-section">
                                             <div className="technologies-section">
                                                 <div className="tags-container">
@@ -156,6 +152,9 @@ const Experience: React.FC = () => {
                                     <div className="work-card">
                                         <div className="card-corner"></div>
 
+                                        <div className="role-section">
+                                            <h4 className="role-title">{experience.role}</h4>
+                                        </div>
                                         <div className="experience-description">
                                             <ul className="description-list">
                                                 {experience.description.map((item, itemIndex) => (
