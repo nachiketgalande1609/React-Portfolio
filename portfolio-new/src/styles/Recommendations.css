@@ -2,150 +2,44 @@
 .recommendations-section {
     background: #000000;
     color: #ffffff;
-    position: relative;
-    padding: 6rem 0;
-    min-height: 100vh;
-    overflow: hidden; /* Prevent scrolling during animation */
-}
-
-.recommendations-section.scroll-enabled {
-    overflow-y: auto; /* Enable normal scrolling when animation is done */
-    overflow-x: hidden;
-}
-
-.recommendations-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, #ffffff 50%, transparent 100%);
-    opacity: 0.1;
+    padding: 4rem 0;
 }
 
 .recommendations-header {
     text-align: center;
-    margin-bottom: 4rem;
-    position: relative;
-    z-index: 10; /* Ensure header is above cards */
+    margin-bottom: 3rem;
 }
 
-.header-decoration {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.section-title {
-    font-size: 3rem;
-    font-weight: 300;
-    background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 0;
-    letter-spacing: -0.02em;
-}
-
-.section-subtitle {
-    font-size: 1.2rem;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.7);
-    margin: 0;
-    letter-spacing: 0.05em;
-}
-
-/* Recommendations Container */
-.recommendations-container {
-    position: relative;
-    max-width: 1200px;
+/* Recommendations List */
+.recommendations-list {
+    max-width: 800px;
     margin: 0 auto;
-    min-height: 600px;
     display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Align stack to the left */
-    padding-left: 5%; /* Adjust as needed for initial stack position */
-}
-
-.cards-stack {
-    position: relative;
-    width: 100%;
-    height: 500px; /* Adjust height based on card size */
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Align stack to the left */
+    flex-direction: column;
+    gap: 2rem;
 }
 
 /* Recommendation Card */
 .recommendation-card {
-    background: rgba(0, 0, 0, 0.95);
-    border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 3rem;
-    position: absolute;
-    top: 50%;
-    left: 0; /* Align to the left of the container */
-    width: 90%;
-    max-width: 800px;
-    height: auto;
-    min-height: 400px;
-    transform: translateY(-50%); /* Only vertical centering */
-    transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    will-change: transform, opacity;
-    transform-origin: left center; /* Pivot point for rotations */
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2.5rem;
+    width: 100%;
 }
 
-.recommendation-card.active {
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 50px rgba(255, 255, 255, 0.05);
-}
-
-.recommendation-card:hover {
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 80px rgba(255, 255, 255, 0.1);
-}
-
-/* Card Corner */
-.card-corner {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    border-top: 80px solid rgba(255, 255, 255, 0.05);
-    border-left: 80px solid transparent;
-    transition: all 0.4s ease;
-    border-radius: 0 24px 0 0;
-}
-
-.recommendation-card:hover .card-corner {
-    border-top: 90px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Recommendation Content */
 .recommendation-content {
-    position: relative;
-    z-index: 2;
-    height: 100%;
     display: flex;
     flex-direction: column;
+    gap: 2rem;
 }
 
 .quote-section {
-    margin-bottom: 2.5rem;
-    position: relative;
-    flex: 1;
+    text-align: left;
 }
 
 .quote-icon {
-    font-size: 4rem;
+    font-size: 3rem;
     color: rgba(255, 255, 255, 0.3);
     line-height: 1;
     margin-bottom: 1rem;
@@ -154,11 +48,9 @@
 
 .recommendation-quote {
     font-size: 1.1rem;
-    line-height: 1.8;
+    line-height: 1.7;
     color: rgba(255, 255, 255, 0.9);
-    font-weight: 300;
     margin: 0;
-    text-align: justify;
 }
 
 /* Recommendation Author */
@@ -166,14 +58,13 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    padding-top: 2rem;
+    padding-top: 1.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .author-image {
-    position: relative;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -184,25 +75,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.recommendation-card:hover .author-image img {
-    transform: scale(1.1);
-}
-
-.image-shine {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.8s ease;
-}
-
-.recommendation-card:hover .image-shine {
-    left: 100%;
 }
 
 .author-info {
@@ -210,134 +82,34 @@
 }
 
 .author-name {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: #ffffff;
     margin: 0 0 0.5rem 0;
-    background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .author-role {
     font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.7);
     margin: 0;
-    line-height: 1.5;
-    font-weight: 300;
-}
-
-/* Card Glow */
-.card-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    border-radius: 24px;
-    pointer-events: none;
-}
-
-.recommendation-card:hover .card-glow {
-    opacity: 1;
-}
-
-/* Scroll Indicator */
-.scroll-indicator {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-    animation: fadeInOut 2s ease-in-out infinite;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 1rem 1.5rem;
-    border-radius: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    z-index: 100; /* Ensure indicator is on top */
-}
-
-.scroll-arrow {
-    width: 2px;
-    height: 20px;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 1px;
-    position: relative;
-}
-
-.scroll-arrow::after {
-    content: "";
-    position: absolute;
-    bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 8px;
-    height: 8px;
-    border-right: 2px solid rgba(255, 255, 255, 0.7);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.7);
-    transform: translateX(-50%) rotate(45deg);
-}
-
-@keyframes fadeInOut {
-    0%,
-    100% {
-        opacity: 0.7;
-        transform: translateX(-50%) translateY(0);
-    }
-    50% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(-5px);
-    }
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-    .recommendation-card {
-        width: 95%;
-        padding: 2.5rem;
-    }
-
-    .section-title {
-        font-size: 2.5rem;
-    }
-
-    .cards-stack {
-        height: 450px;
-    }
-
-    .recommendations-container {
-        padding-left: 2%; /* Adjust for smaller screens */
-    }
-}
-
 @media (max-width: 768px) {
     .recommendations-section {
-        padding: 4rem 0;
+        padding: 3rem 0;
     }
 
     .recommendation-card {
         padding: 2rem;
-        width: 95%;
-        min-height: 350px;
     }
 
     .quote-icon {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     .recommendation-quote {
         font-size: 1rem;
-        line-height: 1.7;
     }
 
     .recommendation-author {
@@ -347,89 +119,17 @@
     }
 
     .author-image {
-        width: 70px;
-        height: 70px;
-    }
-
-    .section-title {
-        font-size: 2.2rem;
-    }
-
-    .section-subtitle {
-        font-size: 1.1rem;
-    }
-
-    .cards-stack {
-        height: 400px;
-    }
-
-    .recommendations-container {
-        padding-left: 0; /* No padding on very small screens, let cards manage their offset */
-        justify-content: center; /* Center the stack if there's less space */
-    }
-
-    /* Adjust transform for smaller screens to prevent cards from going off screen too much */
-    .recommendation-card {
-        max-width: 90%; /* Ensure cards don't exceed screen width */
+        width: 60px;
+        height: 60px;
     }
 }
 
 @media (max-width: 480px) {
-    .recommendations-section {
-        padding: 3rem 0;
-    }
-
     .recommendation-card {
         padding: 1.5rem;
-        min-height: 300px;
     }
 
-    .quote-icon {
-        font-size: 2.5rem;
-    }
-
-    .recommendation-quote {
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-
-    .author-image {
-        width: 60px;
-        height: 60px;
-    }
-
-    .author-name {
-        font-size: 1.1rem;
-    }
-
-    .author-role {
-        font-size: 0.9rem;
-    }
-
-    .section-title {
-        font-size: 2rem;
-    }
-
-    .section-subtitle {
-        font-size: 1rem;
-    }
-
-    .cards-stack {
-        height: 350px;
-    }
-}
-
-/* Reduced motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-    .recommendation-card {
-        transition: none;
-    }
-
-    .scroll-indicator {
-        animation: none;
-    }
-
-    .image-shine {
-        display: none;
+    .recommendations-list {
+        gap: 1.5rem;
     }
 }
