@@ -361,7 +361,7 @@ body.cursor-click .global-cursor-follower {
 }
 
 .section-title {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 800;
     text-align: center;
     margin-bottom: 3rem;
@@ -373,6 +373,7 @@ body.cursor-click .global-cursor-follower {
     text-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
     letter-spacing: -0.02em;
     width: 100%;
+    font-family: "Story Script", sans-serif;
 }
 
 .section-title::after {

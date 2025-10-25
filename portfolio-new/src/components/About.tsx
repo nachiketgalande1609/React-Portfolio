@@ -135,19 +135,14 @@ const About: React.FC = () => {
                                         description: "Full stack development across multiple industries",
                                     },
                                     {
-                                        number: "50+",
-                                        label: "Projects Completed",
-                                        description: "From startups to enterprise applications",
-                                    },
-                                    {
                                         number: "20+",
-                                        label: "Happy Clients",
-                                        description: "Consistently delivering quality solutions",
+                                        label: "Projects Completed",
+                                        description: "From personal projects to enterprise applications",
                                     },
                                     {
-                                        number: "10k+",
-                                        label: "Lines of Code",
-                                        description: "Clean, maintainable and scalable code",
+                                        number: "40+",
+                                        label: "Certifications",
+                                        description: "Recognized courses in various technologies",
                                     },
                                 ].map((achievement, index) => (
                                     <div
