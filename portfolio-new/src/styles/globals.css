@@ -26,7 +26,6 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     scroll-behavior: smooth;
-    cursor: none;
     background: var(--background-color);
     overflow-x: hidden;
 }
@@ -456,7 +455,6 @@ body {
     font-weight: 600;
     transition: all 0.4s ease;
     border: none;
-    cursor: none !important;
     font-size: 1rem;
     position: relative;
     overflow: hidden;
