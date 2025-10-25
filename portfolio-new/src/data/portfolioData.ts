@@ -33,9 +33,9 @@ import pyttsx3Icon from "../assets/icons/python.svg";
 import sqliteIcon from "../assets/icons/SQLite.svg";
 
 // Import testimonial images
-import AbhishekProfileImage from "../assets/recommendations/abhishek.jpg";
-import SumitProfileImage from "../assets/recommendations/sumit.jpg";
-import SudarshanProfileImage from "../assets/recommendations/sudarshan.jpg";
+import AbhishekProfileImage from "../assets/testimonials/abhishek.jpg";
+import SumitProfileImage from "../assets/testimonials/sumit.jpg";
+import SudarshanProfileImage from "../assets/testimonials/sudarshan.jpg";
 
 export const projects: Project[] = [
     {

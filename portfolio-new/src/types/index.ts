@@ -40,3 +40,10 @@ export interface Testimonial {
 export interface TestimonialsData {
     testimonials: Testimonial[];
 }
+
+export interface ReconmendationCardProps {
+    testimonial: Testimonial;
+    index: number;
+    currentCard: number;
+    totalCards: number;
+}

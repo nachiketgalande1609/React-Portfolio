@@ -324,7 +324,7 @@ body {
     background-clip: text;
 
     /* Animations */
-    animation: gradientShift 8s ease-in-out infinite, softPulse 4s ease-in-out infinite alternate;
+    animation: gradientShift 8s ease-in-out infinite;
 }
 
 /* Gradient movement */

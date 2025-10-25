@@ -13,6 +13,8 @@ const Header: React.FC = () => {
     const [isLinksModalOpen, setIsLinksModalOpen] = useState(false);
     const [isUsesModalOpen, setIsUsesModalOpen] = useState(false);
 
+    console.log("xxx", activeSection);
+
     useEffect(() => {
         const checkMobile = () => {
             setIsMobile(window.innerWidth <= 768);
@@ -24,7 +26,7 @@ const Header: React.FC = () => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
 
-            const sections = ["home", "about", "skills", "experience", "projects", "contact"];
+            const sections = ["home", "about", "skills", "experience", "projects", "testimonials", "contact"];
             const viewportMiddle = window.innerHeight / 2;
             let currentSection = sections[0];
 
@@ -110,6 +112,10 @@ const Header: React.FC = () => {
         {
             id: "projects",
             label: "Projects",
+        },
+        {
+            id: "testimonials",
+            label: "Testimonials",
         },
         {
             id: "contact",
