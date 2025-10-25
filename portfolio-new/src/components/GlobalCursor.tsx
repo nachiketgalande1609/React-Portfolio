@@ -1,5 +1,6 @@
 // components/GlobalCursor.tsx
 import React, { useEffect, useState } from "react";
+import "../styles/GlobalCursor.css";
 
 const GlobalCursor: React.FC = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });

@@ -1,0 +1,87 @@
+/* ===== ENHANCED CURSOR SYSTEM ===== */
+.global-cursor {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.global-cursor-follower {
+    position: fixed;
+    width: 26px;
+    height: 26px;
+    border: 1.5px solid rgba(59, 130, 246, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    mix-blend-mode: difference;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease-out, border-color 0.3s ease;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+/* Interactive Background */
+.interactive-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.08) 0%, transparent 30%),
+        radial-gradient(circle at calc(100% - var(--mouse-x, 50%)) calc(100% - var(--mouse-y, 50%)), rgba(139, 92, 246, 0.05) 0%, transparent 35%);
+    transition: all 0.15s ease-out;
+}
+
+/* Cursor interaction states */
+body.cursor-hover .global-cursor {
+    transform: translate(-50%, -50%) scale(2);
+    background: rgba(59, 130, 246, 0.95);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.8);
+}
+
+body.cursor-hover .global-cursor-follower {
+    transform: translate(-50%, -50%) scale(1.4);
+    border-color: rgba(255, 255, 255, 0.9);
+    border-width: 1px;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+}
+
+body.cursor-click .global-cursor-follower {
+    transform: translate(-50%, -50%) scale(0.7);
+    border-color: rgba(239, 68, 68, 0.8);
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.5);
+}
+
+/* Hide custom cursor on mobile */
+@media (hover: none) and (pointer: coarse) {
+    body {
+        cursor: auto;
+    }
+
+    .global-cursor,
+    .global-cursor-follower {
+        display: none !important;
+    }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+    .global-cursor,
+    .global-cursor-follower {
+        animation: none !important;
+        transition: none !important;
+    }
+}
