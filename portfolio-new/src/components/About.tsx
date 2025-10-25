@@ -1,5 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import "../styles/About.css";
+import CakeIcon from "@mui/icons-material/Cake";
+import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
+import CallRoundedIcon from "@mui/icons-material/CallRounded";
+import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
+import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 
 const About: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
@@ -30,7 +35,7 @@ const About: React.FC = () => {
     return (
         <section ref={sectionRef} id="about" className="section about-section">
             <div className="container">
-                {/* Compact Header */}
+                {/* Enhanced Header with Floating Animation */}
                 <div className="about-header">
                     <div className="header-decoration animate-on-scroll">
                         <div className="decoration-line"></div>
@@ -41,10 +46,12 @@ const About: React.FC = () => {
 
                 <div className="about-content">
                     <div className="about-main">
-                        {/* Personal Info Compact */}
+                        {/* Personal Info with Enhanced Typography */}
                         <div className="personal-info-compact animate-on-scroll">
                             <div className="name-role-compact">
+                                <div className="name-glow"></div>
                                 <h3 className="name-title">Nachiket Galande</h3>
+                                <div className="role-badge">Senior Full Stack Developer</div>
                             </div>
                             <p className="about-description">
                                 Senior Full Stack Software Developer with 4+ years of experience in designing, developing, and deploying scalable,
@@ -53,32 +60,36 @@ const About: React.FC = () => {
                             </p>
                         </div>
 
-                        {/* Combined Details Grid */}
+                        {/* Combined Details Grid with Enhanced Cards */}
                         <div className="combined-details-grid">
                             {/* Personal Details */}
                             <div className="details-group">
                                 <h4 className="details-group-title">Personal Details</h4>
                                 <div className="details-grid">
                                     {[
-                                        { label: "Birthday", value: "16 Sept 1999" },
-                                        { label: "Phone", value: "+91 97649 93023" },
-                                        { label: "Location", value: "Thane, India" },
-                                        { label: "Age", value: "25" },
-                                        { label: "Email", value: "nachiketgalande1609@gmail.com" },
+                                        { label: "Date of Birth", value: "16 Sept 1999", icon: <CalendarMonthRoundedIcon /> },
+                                        { label: "Phone", value: "+91 97649 93023", icon: <CallRoundedIcon /> },
+                                        { label: "Location", value: "Mumbai, India", icon: <PersonPinCircleRoundedIcon /> },
+                                        { label: "Age", value: "26", icon: <CakeIcon /> },
+                                        { label: "Email", value: "nachiketgalande1609@gmail.com", icon: <EmailRoundedIcon /> },
                                     ].map((detail, index) => (
                                         <div
                                             key={detail.label}
                                             className="detail-item animate-on-scroll"
                                             style={{ animationDelay: `${index * 0.05}s` }}
                                         >
-                                            <strong>{detail.label}</strong>
-                                            <span>{detail.value}</span>
+                                            <div className="detail-icon">{detail.icon}</div>
+                                            <div className="detail-content">
+                                                <strong>{detail.label}</strong>
+                                                <span>{detail.value}</span>
+                                            </div>
+                                            <div className="detail-hover-effect"></div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
-                            {/* Education Timeline */}
+                            {/* Education Timeline with Enhanced Markers */}
                             <div className="timeline-group">
                                 <h4 className="details-group-title">Education Timeline</h4>
                                 <div className="timeline">
@@ -107,8 +118,11 @@ const About: React.FC = () => {
                                             className="timeline-item animate-on-scroll"
                                             style={{ animationDelay: `${index * 0.1}s` }}
                                         >
-                                            <div className="timeline-marker"></div>
+                                            <div className="timeline-marker">
+                                                <div className="marker-pulse"></div>
+                                            </div>
                                             <div className="timeline-content">
+                                                <div className="timeline-glow"></div>
                                                 <div className="timeline-header">
                                                     <h5 className="timeline-degree">{edu.degree}</h5>
                                                     <span className="timeline-period">{edu.period}</span>
@@ -124,7 +138,7 @@ const About: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Achievements Section */}
+                        {/* Enhanced Achievements Section */}
                         <div className="achievements-section animate-on-scroll">
                             <h3 className="achievements-title">Achievements</h3>
                             <div className="achievements-grid">
@@ -133,16 +147,19 @@ const About: React.FC = () => {
                                         number: "4+",
                                         label: "Years Experience",
                                         description: "Full stack development across multiple industries",
+                                        gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                                     },
                                     {
                                         number: "20+",
                                         label: "Projects Completed",
                                         description: "From personal projects to enterprise applications",
+                                        gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
                                     },
                                     {
                                         number: "40+",
                                         label: "Certifications",
                                         description: "Recognized courses in various technologies",
+                                        gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
                                     },
                                 ].map((achievement, index) => (
                                     <div
@@ -150,6 +167,7 @@ const About: React.FC = () => {
                                         className="achievement-card animate-on-scroll"
                                         style={{ animationDelay: `${index * 0.1}s` }}
                                     >
+                                        <div className="achievement-bg" style={{ background: achievement.gradient }}></div>
                                         <div className="achievement-main">
                                             <div className="achievement-number">{achievement.number}</div>
                                             <div className="achievement-content">
