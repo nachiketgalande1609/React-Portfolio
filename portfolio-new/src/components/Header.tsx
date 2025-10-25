@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./../styles/Header.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+
 import LinksModal from "./LinksModal";
 import UsesModal from "./UsesModal";
 
@@ -92,7 +94,7 @@ const Header: React.FC = () => {
         };
     }, [isMoreOpen]);
 
-    const navItems = [
+    const mainNavItems = [
         {
             id: "home",
             label: "Home",
@@ -113,6 +115,9 @@ const Header: React.FC = () => {
             id: "projects",
             label: "Projects",
         },
+    ];
+
+    const dropdownNavItems = [
         {
             id: "testimonials",
             label: "Testimonials",
@@ -121,11 +126,44 @@ const Header: React.FC = () => {
             id: "contact",
             label: "Contact",
         },
+        {
+            id: "uses",
+            label: "Uses",
+            action: handleUsesClick,
+        },
+        {
+            id: "links",
+            label: "Links",
+            action: handleLinksClick,
+        },
     ];
+
+    // Check if any dropdown item is active
+    const isDropdownActive = dropdownNavItems.some((item) => item.id === activeSection);
 
     // Calculate active indicator position
     const getActiveIndicatorPosition = () => {
-        const activeIndex = navItems.findIndex((item) => item.id === activeSection);
+        // If active section is in dropdown, position indicator on "More" tab
+        if (isDropdownActive) {
+            if (isMobile) {
+                const itemWidth = 60;
+                const gap = 2;
+                const indicatorWidth = 40;
+                const moreTabIndex = mainNavItems.length;
+
+                return moreTabIndex * (itemWidth + gap) + (itemWidth - indicatorWidth) / 2;
+            } else {
+                const itemWidth = 80;
+                const gap = 4;
+                const indicatorWidth = 50;
+                const moreTabIndex = mainNavItems.length;
+
+                return moreTabIndex * (itemWidth + gap) + (itemWidth - indicatorWidth) / 2;
+            }
+        }
+
+        // Otherwise, position indicator on main nav items
+        const activeIndex = mainNavItems.findIndex((item) => item.id === activeSection);
 
         if (isMobile) {
             const itemWidth = 60;
@@ -158,7 +196,7 @@ const Header: React.FC = () => {
                         }}
                     />
 
-                    {navItems.map((item) => (
+                    {mainNavItems.map((item) => (
                         <div key={item.id} className="nav-item-wrapper">
                             <button
                                 className={`nav-item ${activeSection === item.id ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
@@ -174,7 +212,7 @@ const Header: React.FC = () => {
                     {/* More Tab with Dropdown - Click only */}
                     <div className="nav-item-wrapper more-wrapper">
                         <button
-                            className={`nav-item more-tab ${isMoreOpen ? "open" : ""}`}
+                            className={`nav-item more-tab ${isMoreOpen ? "open" : ""} ${isDropdownActive ? "active" : ""}`}
                             onClick={handleMoreClick}
                             aria-label="More options"
                             aria-expanded={isMoreOpen}
@@ -189,12 +227,20 @@ const Header: React.FC = () => {
                         {/* Dropdown Menu */}
                         {isMoreOpen && (
                             <div className="dropdown-menu">
-                                <button className="dropdown-item" onClick={handleUsesClick}>
-                                    <span>Uses</span>
-                                </button>
-                                <button className="dropdown-item" onClick={handleLinksClick}>
-                                    <span>Links</span>
-                                </button>
+                                {dropdownNavItems.map((item) => (
+                                    <button
+                                        key={item.id}
+                                        className={`dropdown-item ${activeSection === item.id ? "active" : ""}`}
+                                        onClick={item.action ? item.action : () => scrollToSection(item.id)}
+                                    >
+                                        <span>{item.label} </span>
+                                        {(item.id === "uses" || item.id === "links") && (
+                                            <ChevronRightIcon className="dropdown-chevron" fontSize="small" />
+                                        )}
+
+                                        {activeSection === item.id && <div className="dropdown-active-indicator" />}
+                                    </button>
+                                ))}
                             </div>
                         )}
                     </div>

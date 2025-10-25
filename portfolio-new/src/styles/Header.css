@@ -367,7 +367,7 @@
     top: 100%;
     right: 0;
     margin-top: 12px;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 1);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 2px solid rgba(255, 255, 255, 0.048);
@@ -492,5 +492,77 @@
         padding: 8px 10px;
         font-size: 0.75rem;
         border-radius: 8px;
+    }
+}
+
+/* Active state for More tab when dropdown items are active */
+.more-tab.active {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Active state for dropdown items */
+.dropdown-item.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.dropdown-item.active::before {
+    opacity: 1;
+}
+
+/* Active indicator for dropdown items */
+.dropdown-active-indicator {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* Mobile adjustments for dropdown active states */
+@media (max-width: 768px) {
+    .dropdown-active-indicator {
+        width: 5px;
+        height: 5px;
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dropdown-active-indicator {
+        width: 4px;
+        height: 4px;
+        right: 8px;
+    }
+}
+
+.dropdown-chevron {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+}
+
+/* Mobile adjustments for dropdown active states */
+@media (max-width: 768px) {
+    .dropdown-chevron {
+        width: 5px;
+        height: 5px;
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dropdown-chevron {
+        width: 4px;
+        height: 4px;
+        right: 8px;
     }
 }
