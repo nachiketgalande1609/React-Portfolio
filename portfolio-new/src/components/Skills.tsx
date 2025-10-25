@@ -85,8 +85,8 @@ const skills: Skill[] = [
     { name: "Azure", category: "cloud", icon: azureIcon },
     { name: "AWS", category: "cloud", icon: awsIcon },
     { name: "Google Cloud", category: "cloud", icon: googleCloudIcon },
-    { name: "Oracle Cloud Infrastructure (OCI)", category: "cloud", icon: oracleCloudIcon },
-    { name: "Oracle Integration Cloud (OIC)", category: "cloud", icon: oracleCloudIcon },
+    { name: "OCI", category: "cloud", icon: oracleCloudIcon },
+    { name: "OIC", category: "cloud", icon: oracleCloudIcon },
 
     // Tools
     { name: "Jest", category: "tools", icon: jestIcon },

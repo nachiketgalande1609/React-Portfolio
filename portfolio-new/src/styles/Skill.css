@@ -129,7 +129,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, transparent 50%, rgba(255, 255, 255, 0.02) 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
 }
@@ -162,6 +161,7 @@
     transform: translateY(20px);
     padding: 0.5rem;
     border: 1px solid transparent;
+    width: 100%;
 }
 
 .skill-item::before {
@@ -266,6 +266,10 @@
     transition: all 0.3s ease;
     position: relative;
     z-index: 2;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Hover effects */

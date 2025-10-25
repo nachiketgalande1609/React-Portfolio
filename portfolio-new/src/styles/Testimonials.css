@@ -28,6 +28,7 @@
     justify-content: center;
     position: relative;
     will-change: transform, opacity;
+    box-shadow: none !important;
 }
 
 .testimonials-content {
