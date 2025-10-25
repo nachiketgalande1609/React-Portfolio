@@ -1,41 +1,43 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/Recommendations.css";
-
 import { testimonialsData } from "../data/portfolioData";
 import type { Testimonial } from "../types";
 
 const Recommendations: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [isAnimating, setIsAnimating] = useState(true);
     const [currentCard, setCurrentCard] = useState(0);
-    const [isScrollEnabled, setIsScrollEnabled] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(true); // True when cards are actively unstacking
+    const [isScrollEnabled, setIsScrollEnabled] = useState(false); // True when all cards are unstacked and normal scroll resumes
 
     useEffect(() => {
         const handleScroll = (event: WheelEvent) => {
-            if (!isAnimating) return;
+            if (!isAnimating) return; // Only process scroll if animating
 
-            event.preventDefault();
+            event.preventDefault(); // Prevent default page scroll
 
             if (event.deltaY > 0) {
-                // Scroll down - animate next card
+                // Scrolling down
                 if (currentCard < testimonialsData.testimonials.length - 1) {
                     setCurrentCard((prev) => prev + 1);
                 } else {
-                    // All cards animated, enable normal scrolling
+                    // Last card revealed, enable normal scrolling
                     setIsAnimating(false);
                     setIsScrollEnabled(true);
                 }
             } else if (event.deltaY < 0) {
-                // Scroll up - animate previous card
+                // Scrolling up
                 if (currentCard > 0) {
                     setCurrentCard((prev) => prev - 1);
+                } else {
+                    // Back to first card, disable scroll if it was enabled
+                    setIsScrollEnabled(false);
+                    setIsAnimating(true); // Re-enable animating if we scroll back to start
                 }
             }
         };
 
         const handleKeyDown = (event: KeyboardEvent) => {
-            if (!isAnimating) return;
+            if (!isAnimating && event.key !== "ArrowUp") return; // Allow arrow up even when scroll is enabled to go back
 
             if (event.key === "ArrowDown" || event.key === " ") {
                 event.preventDefault();
@@ -49,15 +51,19 @@ const Recommendations: React.FC = () => {
                 event.preventDefault();
                 if (currentCard > 0) {
                     setCurrentCard((prev) => prev - 1);
+                } else {
+                    setIsScrollEnabled(false);
+                    setIsAnimating(true);
                 }
             }
         };
 
         const section = sectionRef.current;
         if (section && !isScrollEnabled) {
+            // Add scroll listener only if not scroll-enabled
             section.addEventListener("wheel", handleScroll, { passive: false });
-            document.addEventListener("keydown", handleKeyDown);
         }
+        document.addEventListener("keydown", handleKeyDown);
 
         return () => {
             if (section) {
@@ -68,38 +74,47 @@ const Recommendations: React.FC = () => {
     }, [isAnimating, currentCard, testimonialsData.testimonials.length, isScrollEnabled]);
 
     const getCardTransform = (index: number) => {
+        const stackOffset = 10; // Pixels offset for cards in the stack
+        const unstackOffset = 300; // Pixels offset for unstacked cards to move right
+
         if (index > currentCard) {
-            // Cards that haven't been animated yet - stacked on left
-            const stackOffset = (index - currentCard - 1) * 20;
-            return `translateX(${-100 - stackOffset}px) rotate(-5deg)`;
+            // Cards still in the stack (left side)
+            const offsetMultiplier = testimonialsData.testimonials.length - 1 - index; // Deeper cards are further left
+            return `translateX(${offsetMultiplier * -stackOffset}px) rotateY(-5deg)`;
         } else if (index === currentCard) {
-            // Current active card - center position
-            return "translateX(0) rotate(0deg)";
+            // Current active card (unstacking to the right of the stack)
+            return `translateX(${unstackOffset}px) rotateY(0deg)`;
         } else {
-            // Cards that have been animated - moved to right
-            const rightOffset = (currentCard - index) * 100;
-            return `translateX(${100 + rightOffset}px) rotate(0deg)`;
+            // Cards that have already been unstacked (further right)
+            const previousCardsCount = currentCard - index;
+            return `translateX(${unstackOffset + previousCardsCount * 100}px) rotateY(0deg)`;
         }
     };
 
     const getCardZIndex = (index: number) => {
-        return testimonialsData.testimonials.length - Math.abs(index - currentCard);
+        // Active card on top, then cards in stack, then unstacked cards
+        if (index === currentCard) return testimonialsData.testimonials.length + 1;
+        if (index > currentCard) return testimonialsData.testimonials.length - index; // Deeper cards in stack have lower z-index
+        return testimonialsData.testimonials.length - (index + 1); // Unstacked cards
     };
 
     const getCardOpacity = (index: number) => {
         if (index > currentCard) {
-            return 0.7 - (index - currentCard - 1) * 0.2;
+            // Cards in the stack are partially transparent, becoming more opaque as they get closer to active
+            const transparencyFactor = (index - currentCard) * 0.15; // Adjust this for desired transparency
+            return 1 - transparencyFactor;
         }
-        return 1;
+        return 1; // Active and unstacked cards are fully opaque
     };
 
     const RecommendationCard: React.FC<{ testimonial: Testimonial; index: number }> = ({ testimonial, index }) => (
         <div
-            className={`recommendation-card ${index === currentCard ? "active" : ""} ${index <= currentCard ? "animated" : ""}`}
+            className={`recommendation-card ${index === currentCard ? "active" : ""} ${index < currentCard ? "unstacked" : ""}`}
             style={{
                 zIndex: getCardZIndex(index),
                 transform: getCardTransform(index),
                 opacity: getCardOpacity(index),
+                // pointerEvents: index === currentCard ? 'auto' : 'none', // Only active card is interactive
             }}
         >
             <div className="card-corner"></div>
@@ -146,7 +161,7 @@ const Recommendations: React.FC = () => {
                     </p>
                 </div>
 
-                <div ref={containerRef} className="recommendations-container">
+                <div className="recommendations-container">
                     <div className="cards-stack">
                         {testimonialsData.testimonials.map((testimonial, index) => (
                             <RecommendationCard key={index} testimonial={testimonial} index={index} />

@@ -5,11 +5,12 @@
     position: relative;
     padding: 6rem 0;
     min-height: 100vh;
-    overflow: hidden;
+    overflow: hidden; /* Prevent scrolling during animation */
 }
 
 .recommendations-section.scroll-enabled {
-    overflow: auto;
+    overflow-y: auto; /* Enable normal scrolling when animation is done */
+    overflow-x: hidden;
 }
 
 .recommendations-section::before {
@@ -27,6 +28,7 @@
     text-align: center;
     margin-bottom: 4rem;
     position: relative;
+    z-index: 10; /* Ensure header is above cards */
 }
 
 .header-decoration {
@@ -66,16 +68,17 @@
     min-height: 600px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Align stack to the left */
+    padding-left: 5%; /* Adjust as needed for initial stack position */
 }
 
 .cards-stack {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 500px; /* Adjust height based on card size */
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Align stack to the left */
 }
 
 /* Recommendation Card */
@@ -86,16 +89,17 @@
     padding: 3rem;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 0; /* Align to the left of the container */
     width: 90%;
     max-width: 800px;
     height: auto;
     min-height: 400px;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%); /* Only vertical centering */
     transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     will-change: transform, opacity;
+    transform-origin: left center; /* Pivot point for rotations */
 }
 
 .recommendation-card.active {
@@ -260,6 +264,7 @@
     border-radius: 25px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
+    z-index: 100; /* Ensure indicator is on top */
 }
 
 .scroll-arrow {
@@ -309,6 +314,10 @@
     .cards-stack {
         height: 450px;
     }
+
+    .recommendations-container {
+        padding-left: 2%; /* Adjust for smaller screens */
+    }
 }
 
 @media (max-width: 768px) {
@@ -352,6 +361,16 @@
 
     .cards-stack {
         height: 400px;
+    }
+
+    .recommendations-container {
+        padding-left: 0; /* No padding on very small screens, let cards manage their offset */
+        justify-content: center; /* Center the stack if there's less space */
+    }
+
+    /* Adjust transform for smaller screens to prevent cards from going off screen too much */
+    .recommendation-card {
+        max-width: 90%; /* Ensure cards don't exceed screen width */
     }
 }
 
