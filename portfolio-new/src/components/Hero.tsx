@@ -1,4 +1,4 @@
-// Hero.tsx (simplified version)
+// Hero.tsx (updated version)
 import React from "react";
 import { personalInfo, socialLinks } from "../data/portfolioData";
 import "../styles/Hero.css";
@@ -11,16 +11,17 @@ import EmailIcon from "@mui/icons-material/Email";
 import ArticleIcon from "@mui/icons-material/Article";
 import WavingHandIcon from "@mui/icons-material/WavingHand";
 
-// Import your image
+// Import your images
 import profileImage from "../assets/profile.png";
+import resumeFile from "../assets/resume.pdf";
 
 const Hero: React.FC = () => {
     const scrollToContact = () => {
         document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
     };
 
-    const handleResumeDownload = () => {
-        console.log("Download resume");
+    const handleResumeOpen = () => {
+        window.open(resumeFile, "_blank", "noopener,noreferrer");
     };
 
     const handleConnect = () => {
@@ -64,7 +65,7 @@ const Hero: React.FC = () => {
                         <p className="hero-description">{personalInfo.about}</p>
 
                         <div className="hero-buttons">
-                            <button className="btn" onClick={handleResumeDownload}>
+                            <button className="btn" onClick={handleResumeOpen}>
                                 <span>My Resume</span>
                                 <ArticleIcon />
                             </button>

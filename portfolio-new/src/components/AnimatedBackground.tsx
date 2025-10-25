@@ -56,14 +56,14 @@ const AnimatedBackground: React.FC = () => {
 
     return (
         <div className="animated-background" ref={backgroundRef}>
-            <div className="gradient-bg"></div>
+            {/* <div className="gradient-bg"></div> */}
             <div className="particles-container"></div>
             <div className="grid-overlay"></div>
             <div className="orb orb-1"></div>
             <div className="orb orb-2"></div>
             <div className="orb orb-3"></div>
-            <div className="light-beam beam-1"></div>
-            <div className="light-beam beam-2"></div>
+            {/* <div className="light-beam beam-1"></div>
+            <div className="light-beam beam-2"></div> */}
             <div className="binary-rain"></div>
         </div>
     );
