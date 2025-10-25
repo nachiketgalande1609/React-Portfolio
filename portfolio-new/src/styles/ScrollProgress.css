@@ -170,7 +170,7 @@
 }
 
 /* Hide browser scrollbar */
-/* html {
+html {
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
@@ -182,7 +182,7 @@ html::-webkit-scrollbar {
 body {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-} */
+}
 
 @keyframes pulse {
     0%,
