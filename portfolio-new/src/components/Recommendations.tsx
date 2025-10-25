@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/Recommendations.css";
+import AbhishekProfileImage from "../assets/recommendations/abhishek.jpg";
+import SumitProfileImage from "../assets/recommendations/sumit.jpg";
+import SudarshanProfileImage from "../assets/recommendations/sudarshan.jpg";
 
 interface Testimonial {
     quote: string;
@@ -29,19 +32,19 @@ const Recommendations: React.FC = () => {
             },
             {
                 quote: "Nachiket is an exceptional software developer with an innate ability to conceive and deliver elegant and efficient software solutions. His meticulous attention to detail, passion for quality, and mastery of multiple programming languages and frameworks set him apart from his peers. Nachiket is also an excellent communicator and collaborative team player, consistently delivering high-quality work that exceeds expectations. It's been a pleasure to work with Nachiket, and I enthusiastically recommend him for any organization in need of a top-tier software developer.",
-                image: "assets/img/sumit.jpg",
+                image: SumitProfileImage,
                 name: "Sumit Biswas",
                 role: "Business Analyst + UX Designer @Canadiv",
             },
             {
                 quote: "I highly recommend Nachiket for his exceptional skills and expertise in Data Analysis as well as ML/deployment of ML models. I have had the pleasure of working with him on several projects and have been consistently impressed by his professionalism, attention to detail, and ability to deliver outstanding results. Nachiket is a dedicated team player who is always willing to go above and beyond to ensure the success of the project. He possesses excellent communication skills and is able to work effectively with people from diverse backgrounds and cultures.",
-                image: "assets/img/sudarshan.jpg",
+                image: SudarshanProfileImage,
                 name: "Sudarshan Sahare",
                 role: "Data Integrity Specialist - Supply Chain Intelligence/Digital Solutions",
             },
             {
                 quote: "I've known Nachiket since we were both students at MIT. Nachiket was always enthusiastic to broaden his horizons by learning new things. He was always keen to add value to every project he worked on. Going forward, I believe Nachiket will be a valuable asset to organisation he works for. I wish you best of luck for your future endeavours Nachiket",
-                image: "assets/img/abhishek.jpg",
+                image: AbhishekProfileImage,
                 name: "Abhishek Golhar",
                 role: "Business Development Team - Nippon Steel Trading India Pvt Ltd | Ex - Confederation of Indian Industry B20 G20 India Secretariat | G20YEA - Yi Executive Member | International Affairs",
             },
