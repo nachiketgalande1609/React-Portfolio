@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./../styles/Header.css";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import LinksModal from "./LinksModal";
+import UsesModal from "./UsesModal";
 
 const Header: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
     const [isHovering, setIsHovering] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [isMoreOpen, setIsMoreOpen] = useState(false);
+    const [isLinksModalOpen, setIsLinksModalOpen] = useState(false);
+    const [isUsesModalOpen, setIsUsesModalOpen] = useState(false);
 
     useEffect(() => {
         const checkMobile = () => {
@@ -46,7 +53,40 @@ const Header: React.FC = () => {
             element.scrollIntoView({ behavior: "smooth" });
         }
         setActiveSection(sectionId);
+        setIsMoreOpen(false); // Close dropdown when navigating
     };
+
+    const handleMoreClick = () => {
+        setIsMoreOpen(!isMoreOpen);
+    };
+
+    const handleLinksClick = () => {
+        setIsLinksModalOpen(true);
+        setIsMoreOpen(false);
+    };
+
+    const handleUsesClick = () => {
+        setIsUsesModalOpen(true);
+        setIsMoreOpen(false);
+    };
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            const moreWrapper = document.querySelector(".more-wrapper");
+            if (moreWrapper && !moreWrapper.contains(event.target as Node)) {
+                setIsMoreOpen(false);
+            }
+        };
+
+        if (isMoreOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isMoreOpen]);
 
     const navItems = [
         {
@@ -80,9 +120,9 @@ const Header: React.FC = () => {
         const activeIndex = navItems.findIndex((item) => item.id === activeSection);
 
         if (isMobile) {
-            const itemWidth = 60; // mobile nav-item width
-            const gap = 2; // reduced gap for mobile
-            const indicatorWidth = 40; // smaller indicator for mobile
+            const itemWidth = 60;
+            const gap = 2;
+            const indicatorWidth = 40;
 
             return activeIndex * (itemWidth + gap) + (itemWidth - indicatorWidth) / 2;
         } else {
@@ -95,33 +135,72 @@ const Header: React.FC = () => {
     };
 
     return (
-        <header className={`header ${isScrolled ? "scrolled" : ""} ${isMobile ? "mobile" : ""}`}>
-            <nav className="nav-dock" onMouseEnter={() => !isMobile && setIsHovering(true)} onMouseLeave={() => !isMobile && setIsHovering(false)}>
-                {/* Active indicator bar */}
-                <div
-                    className="active-indicator"
-                    style={{
-                        transform: `translateX(${getActiveIndicatorPosition()}px)`,
-                    }}
-                />
+        <>
+            <header className={`header ${isScrolled ? "scrolled" : ""} ${isMobile ? "mobile" : ""}`}>
+                <nav
+                    className="nav-dock"
+                    onMouseEnter={() => !isMobile && setIsHovering(true)}
+                    onMouseLeave={() => !isMobile && setIsHovering(false)}
+                >
+                    {/* Active indicator bar */}
+                    <div
+                        className="active-indicator"
+                        style={{
+                            transform: `translateX(${getActiveIndicatorPosition()}px)`,
+                        }}
+                    />
 
-                {navItems.map((item) => (
-                    <div key={item.id} className="nav-item-wrapper">
+                    {navItems.map((item) => (
+                        <div key={item.id} className="nav-item-wrapper">
+                            <button
+                                className={`nav-item ${activeSection === item.id ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
+                                onClick={() => scrollToSection(item.id)}
+                                aria-label={item.label}
+                            >
+                                <span className="nav-text">{item.label}</span>
+                                <span className="nav-tooltip">{item.label}</span>
+                            </button>
+                        </div>
+                    ))}
+
+                    {/* More Tab with Dropdown - Click only */}
+                    <div className="nav-item-wrapper more-wrapper">
                         <button
-                            className={`nav-item ${activeSection === item.id ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
-                            onClick={() => scrollToSection(item.id)}
-                            aria-label={item.label}
+                            className={`nav-item more-tab ${isMoreOpen ? "open" : ""}`}
+                            onClick={handleMoreClick}
+                            aria-label="More options"
+                            aria-expanded={isMoreOpen}
                         >
-                            <span className="nav-text">{item.label}</span>
-                            <span className="nav-tooltip">{item.label}</span>
+                            <span className="nav-text">More</span>
+                            <span className="chevron-icon">
+                                {isMoreOpen ? <ExpandLessIcon fontSize="small" /> : <ExpandMoreIcon fontSize="small" />}
+                            </span>
+                            <span className="nav-tooltip">More Options</span>
                         </button>
-                    </div>
-                ))}
 
-                {/* Glass morphism background */}
-                <div className="glass-overlay" />
-            </nav>
-        </header>
+                        {/* Dropdown Menu */}
+                        {isMoreOpen && (
+                            <div className="dropdown-menu">
+                                <button className="dropdown-item" onClick={handleUsesClick}>
+                                    <span>Uses</span>
+                                </button>
+                                <button className="dropdown-item" onClick={handleLinksClick}>
+                                    <span>Links</span>
+                                </button>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Glass morphism background */}
+                    <div className="glass-overlay" />
+                </nav>
+            </header>
+
+            {/* Links Modal */}
+            <LinksModal isOpen={isLinksModalOpen} onClose={() => setIsLinksModalOpen(false)} />
+            {/* Uses Modal */}
+            <UsesModal isOpen={isUsesModalOpen} onClose={() => setIsUsesModalOpen(false)} />
+        </>
     );
 };
 
