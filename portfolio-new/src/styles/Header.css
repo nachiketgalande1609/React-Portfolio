@@ -30,7 +30,23 @@
     gap: 4px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: visible;
-    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Enhanced Glass overlay for dock */
+.nav-dock::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.15) 100%);
+    border-radius: 28px;
+    pointer-events: none;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-item-wrapper {
@@ -137,18 +153,9 @@
     transform: translateX(-50%) translateY(0);
 }
 
-/* Enhanced Glass overlay */
+/* Remove old glass-overlay since we're using ::before on nav-dock */
 .glass-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.15) 100%);
-    border-radius: 30px;
-    pointer-events: none;
-    z-index: 1;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: none;
 }
 
 /* Tablet Responsive */
@@ -167,6 +174,10 @@
         padding: 6px;
         border-radius: 20px;
         gap: 2px;
+    }
+
+    .nav-dock::before {
+        border-radius: 18px;
     }
 
     .nav-item {
@@ -215,6 +226,10 @@
         -webkit-backdrop-filter: blur(15px) saturate(160%);
     }
 
+    .nav-dock::before {
+        border-radius: 14px;
+    }
+
     .nav-item {
         width: 60px;
         height: 44px;
@@ -254,6 +269,10 @@
         border-radius: 14px;
     }
 
+    .nav-dock::before {
+        border-radius: 12px;
+    }
+
     .nav-item {
         width: 55px;
         height: 40px;
@@ -275,6 +294,10 @@
     .nav-dock {
         padding: 2px;
         border-radius: 12px;
+    }
+
+    .nav-dock::before {
+        border-radius: 10px;
     }
 
     .nav-item {
@@ -311,8 +334,6 @@
         visibility: hidden;
     }
 }
-
-/* Modal */
 
 /* More Tab Styles */
 .more-wrapper {
@@ -438,6 +459,10 @@
         padding: 6px;
     }
 
+    .dropdown-menu::before {
+        border-radius: 16px;
+    }
+
     .dropdown-item {
         padding: 10px 12px;
         font-size: 0.8rem;
@@ -459,44 +484,13 @@
         padding: 6px;
     }
 
+    .dropdown-menu::before {
+        border-radius: 14px;
+    }
+
     .dropdown-item {
         padding: 8px 10px;
         font-size: 0.75rem;
         border-radius: 8px;
-    }
-}
-
-/* Mobile adjustments for dropdown */
-@media (max-width: 768px) {
-    .more-tab {
-        width: 70px;
-        height: 48px;
-    }
-
-    .dropdown-menu {
-        min-width: 110px;
-        right: -5px;
-    }
-
-    .dropdown-item {
-        padding: 8px 10px;
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .more-tab {
-        width: 60px;
-        height: 44px;
-    }
-
-    .dropdown-menu {
-        min-width: 100px;
-        right: -8px;
-    }
-
-    .dropdown-item {
-        padding: 8px;
-        font-size: 0.75rem;
     }
 }
