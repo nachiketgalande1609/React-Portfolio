@@ -5,11 +5,17 @@
     transform: translateX(-50%);
     z-index: 1000;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: auto;
+    max-width: 95vw;
 }
 
 .header.scrolled {
     top: 10px;
     transform: translateX(-50%) scale(0.95);
+}
+
+.header.scrolled.mobile {
+    transform: translateX(-50%) scale(0.92);
 }
 
 .nav-dock {
@@ -49,6 +55,7 @@
     color: rgba(255, 255, 255, 0.8);
     border-radius: 28px;
     overflow: hidden;
+    padding: 0 12px;
 }
 
 .nav-item::before {
@@ -68,24 +75,19 @@
     opacity: 1;
 }
 
-.nav-item.active {
-    color: white;
-}
-
 .nav-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1;
     font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    text-align: center;
 }
 
-/* Active indicator bar - positioned above the dock */
+/* Active indicator bar */
 .active-indicator {
     position: absolute;
     top: -5px;
-    width: 50px; /* Fixed width as requested */
+    width: 50px;
     height: 6px;
     background: #ffffff;
     border-radius: 4px 4px 0 0;
@@ -93,8 +95,6 @@
     z-index: 4;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
 }
-
-/* REMOVE all the data-active-index styles - we'll handle positioning via JavaScript */
 
 .nav-tooltip {
     position: absolute;
@@ -151,51 +151,41 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Responsive Design */
+/* Tablet Responsive */
 @media (max-width: 768px) {
     .header {
         top: 15px;
+        max-width: 90vw;
     }
 
     .header.scrolled {
         top: 8px;
-        transform: translateX(-50%) scale(0.9);
+        transform: translateX(-50%) scale(0.92);
     }
 
     .nav-dock {
         padding: 6px;
-        border-radius: 14px;
+        border-radius: 20px;
+        gap: 2px;
     }
 
     .nav-item {
-        width: 50px;
-        height: 44px;
+        width: 70px;
+        height: 48px;
+        border-radius: 16px;
+        padding: 0 8px;
     }
 
     .nav-text {
-        font-size: 1.2rem;
+        font-size: 0.8rem;
+        font-weight: 500;
     }
 
     .active-indicator {
-        height: 3px;
-        top: -6px;
-        width: 40px; /* Adjusted for mobile */
-    }
-}
-
-@media (max-width: 480px) {
-    .nav-dock {
-        padding: 4px;
-        border-radius: 12px;
-    }
-
-    .nav-item {
-        width: 44px;
-        height: 40px;
-    }
-
-    .nav-text {
-        font-size: 1.1rem;
+        height: 4px;
+        top: -4px;
+        width: 45px;
+        border-radius: 2px 2px 0 0;
     }
 
     .nav-tooltip {
@@ -203,10 +193,121 @@
         padding: 6px 10px;
         bottom: -35px;
     }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .header {
+        top: 10px;
+        max-width: 95vw;
+    }
+
+    .header.scrolled {
+        top: 5px;
+        transform: translateX(-50%) scale(0.9);
+    }
+
+    .nav-dock {
+        padding: 4px;
+        border-radius: 16px;
+        gap: 1px;
+        backdrop-filter: blur(15px) saturate(160%);
+        -webkit-backdrop-filter: blur(15px) saturate(160%);
+    }
+
+    .nav-item {
+        width: 60px;
+        height: 44px;
+        border-radius: 14px;
+        padding: 0 6px;
+    }
+
+    .nav-text {
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
 
     .active-indicator {
         height: 3px;
-        top: -5px;
-        width: 36px; /* Adjusted for smaller mobile */
+        top: -3px;
+        width: 40px;
+        border-radius: 2px 2px 0 0;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 15px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .nav-tooltip {
+        font-size: 0.65rem;
+        padding: 5px 8px;
+        bottom: -30px;
+    }
+
+    .nav-item:hover .nav-tooltip {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 360px) {
+    .nav-dock {
+        padding: 3px;
+        border-radius: 14px;
+    }
+
+    .nav-item {
+        width: 55px;
+        height: 40px;
+        padding: 0 4px;
+    }
+
+    .nav-text {
+        font-size: 0.7rem;
+        font-weight: 500;
+    }
+
+    .active-indicator {
+        width: 35px;
+    }
+}
+
+/* Extra Small Mobile Devices */
+@media (max-width: 320px) {
+    .nav-dock {
+        padding: 2px;
+        border-radius: 12px;
+    }
+
+    .nav-item {
+        width: 50px;
+        height: 38px;
+        padding: 0 3px;
+    }
+
+    .nav-text {
+        font-size: 0.65rem;
+    }
+
+    .active-indicator {
+        width: 32px;
+    }
+}
+
+/* Touch device improvements */
+@media (hover: none) and (pointer: coarse) {
+    .nav-item:hover::before {
+        opacity: 0;
+    }
+
+    .nav-item:active::before {
+        opacity: 1;
+    }
+
+    .nav-item:active {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .nav-item:hover .nav-tooltip {
+        opacity: 0;
+        visibility: hidden;
     }
 }

@@ -5,8 +5,16 @@ const Header: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
     const [isHovering, setIsHovering] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
 
@@ -26,7 +34,10 @@ const Header: React.FC = () => {
         };
 
         window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", checkMobile);
+        };
     }, []);
 
     const scrollToSection = (sectionId: string) => {
@@ -41,50 +52,51 @@ const Header: React.FC = () => {
         {
             id: "home",
             label: "Home",
-            icon: "Home",
         },
         {
             id: "about",
             label: "About",
-            icon: "About",
         },
         {
             id: "skills",
             label: "Skills",
-            icon: "Skills",
         },
         {
             id: "experience",
             label: "Experience",
-            icon: "Experience",
         },
         {
             id: "projects",
             label: "Projects",
-            icon: "Work",
         },
         {
             id: "contact",
             label: "Contact",
-            icon: "Contact",
         },
     ];
 
     // Calculate active indicator position
     const getActiveIndicatorPosition = () => {
         const activeIndex = navItems.findIndex((item) => item.id === activeSection);
-        const itemWidth = 80; // nav-item width
-        const gap = 4; // gap between items
-        const indicatorWidth = 50; // active-indicator width
 
-        // Calculate the position for the active indicator to be centered
-        const position = activeIndex * (itemWidth + gap) + (itemWidth - indicatorWidth) / 2;
-        return position;
+        if (isMobile) {
+            const itemWidth = 60; // mobile nav-item width
+            const gap = 2; // reduced gap for mobile
+            const indicatorWidth = 40; // smaller indicator for mobile
+
+            return activeIndex * (itemWidth + gap) + (itemWidth - indicatorWidth) / 2;
+        } else {
+            const itemWidth = 80;
+            const gap = 4;
+            const indicatorWidth = 50;
+
+            return activeIndex * (itemWidth + gap) + (itemWidth - indicatorWidth) / 2;
+        }
     };
 
     return (
-        <header className={`header ${isScrolled ? "scrolled" : ""}`}>
-            <nav className="nav-dock" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+        <header className={`header ${isScrolled ? "scrolled" : ""} ${isMobile ? "mobile" : ""}`}>
+            <nav className="nav-dock" onMouseEnter={() => !isMobile && setIsHovering(true)} onMouseLeave={() => !isMobile && setIsHovering(false)}>
                 {/* Active indicator bar */}
                 <div
                     className="active-indicator"
@@ -100,7 +112,7 @@ const Header: React.FC = () => {
                             onClick={() => scrollToSection(item.id)}
                             aria-label={item.label}
                         >
-                            <span className="nav-text">{item.icon}</span>
+                            <span className="nav-text">{item.label}</span>
                             <span className="nav-tooltip">{item.label}</span>
                         </button>
                     </div>
