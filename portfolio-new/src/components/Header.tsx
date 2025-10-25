@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./../styles/Header.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import LinksModal from "./LinksModal";
 import UsesModal from "./UsesModal";
 
@@ -173,7 +172,7 @@ const Header: React.FC = () => {
                         >
                             <span className="nav-text">More</span>
                             <span className="chevron-icon">
-                                {isMoreOpen ? <ExpandLessIcon fontSize="small" /> : <ExpandMoreIcon fontSize="small" />}
+                                <ExpandMoreIcon fontSize="small" />
                             </span>
                             <span className="nav-tooltip">More Options</span>
                         </button>

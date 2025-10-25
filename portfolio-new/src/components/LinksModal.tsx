@@ -68,19 +68,31 @@ const LinksModal: React.FC<LinksModalProps> = ({ isOpen, onClose }) => {
 
     // Enhanced social links data structure
     const enhancedSocialLinks = [
-        { name: "LinkedIn", icon: "linkedin", url: "https://linkedin.com/in/yourprofile" },
-        { name: "GitHub", icon: "github", url: "https://github.com/yourusername" },
-        { name: "CodePen", icon: "codepen", url: "https://codepen.io/yourprofile" },
+        { name: "LinkedIn", icon: "linkedin", url: "https://www.linkedin.com/in/nachiketgalande/", description: "@nachiketgalande" },
+        { name: "GitHub", icon: "github", url: "https://github.com/nachiketgalande1609", description: "@nachiketgalande1609" },
+        { name: "CodePen", icon: "codepen", url: "https://codepen.io/Nachiket-Galande", description: "@Nachiket-Galande" },
         { name: "Twitter", icon: "twitter", url: "https://twitter.com/yourhandle" },
-        { name: "Unsplash", icon: "unsplash", url: "https://unsplash.com/@yourprofile" },
-        { name: "Email", icon: "email", url: "mailto:your.email@example.com" },
+        { name: "Unsplash", icon: "unsplash", url: "https://unsplash.com/@nachiketgalande", description: "@nachiketgalande" },
+        { name: "Email", icon: "email", url: "mailto:nachiketgalande1609@gmail.com", description: "nachiketgalande1609@gmail.com" },
     ];
 
     // Active projects data
     const activeProjects = [
-        { name: "Ripple", description: "Design System & Component Library", url: "https://ripple.example.com" },
-        { name: "Streamline", description: "Workflow Automation Platform", url: "https://streamline.example.com" },
-        { name: "Livo", description: "Live Streaming Application", url: "https://livo.example.com" },
+        {
+            name: "Ripple",
+            description: "Social media platform",
+            url: "https://ripple.nachiketgalande.site/",
+        },
+        {
+            name: "Streamline",
+            description: "Enterprise management app",
+            url: "https://streamline.nachiketgalande.site/",
+        },
+        {
+            name: "Livo",
+            description: "Lifestyle tracker",
+            url: "https://livo.nachiketgalande.site/",
+        },
     ];
 
     return (
@@ -100,15 +112,6 @@ const LinksModal: React.FC<LinksModalProps> = ({ isOpen, onClose }) => {
                     {/* Social Links Section - Left Column */}
                     <section className="links-column">
                         <div className="column-header">
-                            <div className="column-icon social-column-icon">
-                                <div className="icon-bubble">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M18 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                                        <rect x="2" y="9" width="4" height="12"></rect>
-                                        <circle cx="4" cy="4" r="2"></circle>
-                                    </svg>
-                                </div>
-                            </div>
                             <h3 className="column-title">Social & Platforms</h3>
                             <p className="column-subtitle">Connect with me across the web</p>
                         </div>
@@ -123,7 +126,7 @@ const LinksModal: React.FC<LinksModalProps> = ({ isOpen, onClose }) => {
                                     <div className="link-icon-column">{getSocialIcon(link.icon)}</div>
                                     <div className="link-text-column">
                                         <span className="link-name-column">{link.name}</span>
-                                        <span className="link-hint-column">Visit profile</span>
+                                        <span className="link-hint-column">{link.description}</span>
                                     </div>
                                     <div className="link-arrow-column">
                                         <OpenInNewIcon fontSize="small" />
@@ -136,15 +139,6 @@ const LinksModal: React.FC<LinksModalProps> = ({ isOpen, onClose }) => {
                     {/* Projects Section - Right Column */}
                     <section className="links-column">
                         <div className="column-header">
-                            <div className="column-icon project-column-icon">
-                                <div className="icon-bubble">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                                        <polyline points="2 17 12 22 22 17"></polyline>
-                                        <polyline points="2 12 12 17 22 12"></polyline>
-                                    </svg>
-                                </div>
-                            </div>
                             <h3 className="column-title">Active Projects</h3>
                             <p className="column-subtitle">Explore my latest work</p>
                         </div>
@@ -168,12 +162,6 @@ const LinksModal: React.FC<LinksModalProps> = ({ isOpen, onClose }) => {
                             ))}
                         </div>
                     </section>
-                </div>
-
-                <div className="modal-footer-wide">
-                    <button className="done-button-wide" onClick={onClose}>
-                        Done Exploring
-                    </button>
                 </div>
             </div>
         </div>
