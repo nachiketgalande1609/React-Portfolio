@@ -12,6 +12,7 @@ import AnimatedBackground from "./components/AnimatedBackground";
 import "./styles/globals.css";
 import Experience from "./components/Experience";
 import Testimonials from "./components/Testimonials";
+import Certificates from "./components/Certificates";
 
 const App: React.FC = () => {
     return (
@@ -24,6 +25,7 @@ const App: React.FC = () => {
             <Skills />
             <Experience />
             <Projects />
+            <Certificates />
             <Testimonials />
             <Contact />
             <Footer />

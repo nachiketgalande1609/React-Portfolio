@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
                     </div>
 
                     <div className="footer-links">
-                        {["Home", "About", "Skills", "Experience", "Projects", "Testimonials", "Contact"].map((link) => (
+                        {["Home", "About", "Skills", "Experience", "Projects", "Certificates", "Testimonials", "Contact"].map((link) => (
                             <a key={link} href={`#${link.toLowerCase()}`} className="footer-link">
                                 {link}
                             </a>

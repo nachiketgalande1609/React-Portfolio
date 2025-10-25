@@ -28,7 +28,7 @@ const Header: React.FC = () => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
 
-            const sections = ["home", "about", "skills", "experience", "projects", "testimonials", "contact"];
+            const sections = ["home", "about", "skills", "experience", "projects", "certificates", "testimonials", "contact"];
             const viewportMiddle = window.innerHeight / 2;
             let currentSection = sections[0];
 
@@ -118,6 +118,10 @@ const Header: React.FC = () => {
     ];
 
     const dropdownNavItems = [
+        {
+            id: "certificates",
+            label: "Certificates",
+        },
         {
             id: "testimonials",
             label: "Testimonials",
