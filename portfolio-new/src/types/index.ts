@@ -29,3 +29,14 @@ export interface Experience {
     description: string[];
     technologies: string[];
 }
+
+export interface Testimonial {
+    quote: string;
+    image: string;
+    name: string;
+    role: string;
+}
+
+export interface TestimonialsData {
+    testimonials: Testimonial[];
+}
