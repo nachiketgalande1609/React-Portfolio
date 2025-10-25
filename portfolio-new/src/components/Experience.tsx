@@ -133,7 +133,7 @@ const Experience: React.FC = () => {
                                                     {experience.technologies.map((tech, techIndex) => {
                                                         const iconSrc = getTechIcon(tech);
                                                         return (
-                                                            <span key={techIndex} className="tech-tag">
+                                                            <span key={techIndex} className="tech-tag-exp">
                                                                 {iconSrc && <img src={iconSrc} alt={tech} className="tech-icon" />}
                                                                 <span className="tech-text">{tech}</span>
                                                             </span>
@@ -152,9 +152,6 @@ const Experience: React.FC = () => {
                                     <div className="work-card">
                                         <div className="card-corner"></div>
 
-                                        <div className="role-section">
-                                            <h4 className="role-title">{experience.role}</h4>
-                                        </div>
                                         <div className="experience-description">
                                             <ul className="description-list">
                                                 {experience.description.map((item, itemIndex) => (
