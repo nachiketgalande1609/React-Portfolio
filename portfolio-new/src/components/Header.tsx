@@ -25,18 +25,21 @@ const Header: React.FC = () => {
             setIsScrolled(window.scrollY > 50);
 
             const sections = ["home", "about", "skills", "experience", "projects", "contact"];
-            const current = sections.find((section) => {
+            const viewportMiddle = window.innerHeight / 2;
+            let currentSection = sections[0];
+
+            sections.forEach((section) => {
                 const element = document.getElementById(section);
                 if (element) {
                     const rect = element.getBoundingClientRect();
-                    return rect.top <= 100 && rect.bottom >= 100;
+                    // Check if viewport middle is within this section
+                    if (rect.top <= viewportMiddle && rect.bottom >= viewportMiddle) {
+                        currentSection = section;
+                    }
                 }
-                return false;
             });
 
-            if (current) {
-                setActiveSection(current);
-            }
+            setActiveSection(currentSection);
         };
 
         window.addEventListener("scroll", handleScroll);
