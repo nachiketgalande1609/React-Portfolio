@@ -10,6 +10,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import EmailIcon from "@mui/icons-material/Email";
 import ArticleIcon from "@mui/icons-material/Article";
 import WavingHandIcon from "@mui/icons-material/WavingHand";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
 // Import your images
 import profileImage from "../assets/profile.png";
@@ -53,7 +54,10 @@ const Hero: React.FC = () => {
             <div className="container">
                 {/* Centered Job Seeking Badge */}
                 <div className="job-seeking-badge">
-                    <span>Actively Seeking Job Opportunities</span>
+                    <span>
+                        <AutoAwesomeIcon style={{ color: "gold" }} />
+                        Actively Seeking Job Opportunities
+                    </span>
                 </div>
 
                 <div className="hero-content">

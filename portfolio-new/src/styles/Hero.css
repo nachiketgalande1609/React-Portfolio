@@ -7,24 +7,134 @@
     padding-top: 80px;
 }
 
-/* Job Seeking Badge */
+/* Job Seeking Badge - Enhanced with 3D and Shine Effects */
 .job-seeking-badge {
     position: relative;
     text-align: center;
     margin-bottom: 3rem;
     z-index: 2;
+    perspective: 1000px; /* Added for 3D perspective */
 }
 
 .job-seeking-badge span {
-    background: rgba(0, 0, 0, 1);
-    backdrop-filter: blur(10px);
-    padding: 12px 24px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
+    backdrop-filter: blur(15px);
+    padding: 14px 28px 14px 20px; /* Reduced left padding to accommodate icon */
     border-radius: 30px;
-    font-size: 1rem;
-    font-weight: normal;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.4);
     color: white;
-    display: inline-block;
+    display: inline-flex; /* Changed to flex for better icon alignment */
+    align-items: center; /* Center items vertically */
+    gap: 8px; /* Space between icon and text */
+    margin-top: 100px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+    /* Initial 3D tilt */
+    transform: rotateX(5deg) translateZ(0);
+}
+
+/* Icon styling */
+.job-seeking-badge span .MuiSvgIcon-root {
+    font-size: 1rem; /* Adjust icon size */
+    transition: transform 0.3s ease; /* Add transition for icon */
+}
+
+/* Shine effect overlay */
+.job-seeking-badge span::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+/* Gradient border effect */
+.job-seeking-badge span::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ffd89b, #19547b, #ff6b6b, #4ecdc4);
+    border-radius: 32px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    filter: blur(8px);
+}
+
+/* Hover Effects - Applied directly to the span */
+.job-seeking-badge span:hover {
+    transform: rotateX(0deg) translateZ(20px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 0 30px rgba(255, 216, 155, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(30, 30, 30, 0.95));
+}
+
+.job-seeking-badge span:hover::before {
+    left: 100%;
+}
+
+.job-seeking-badge span:hover::after {
+    opacity: 1;
+}
+
+/* Icon animation on hover */
+.job-seeking-badge span:hover .MuiSvgIcon-root {
+    transform: scale(1.2) rotate(15deg); /* Slight scale and rotation on hover */
+}
+
+/* Pulsing animation for attention */
+@keyframes badgePulse {
+    0%,
+    100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3),
+            0 0 20px rgba(255, 216, 155, 0.2);
+    }
+}
+
+.job-seeking-badge span {
+    animation: badgePulse 3s ease-in-out infinite;
+}
+
+/* Icon specific pulse animation */
+@keyframes iconTwinkle {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    25% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    75% {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+}
+
+.job-seeking-badge span .MuiSvgIcon-root {
+    animation: iconTwinkle 3s ease-in-out infinite;
 }
 
 /* Animations */
@@ -133,25 +243,32 @@
     flex-wrap: wrap;
 }
 
+/* Enhanced Button Styles with 3D and Shine Effects */
 .btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    transition: all 0.3s ease;
     backdrop-filter: blur(10px);
-    background: rgba(0, 0, 0, 1);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
     color: #ffffff;
     padding: 12px 24px;
     border-radius: 30px !important;
     font-size: 1rem;
-    font-weight: normal !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    font-weight: 600 !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
     position: relative;
     overflow: hidden;
-    /* cursor: none removed - now handled globally */
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+    /* Initial 3D tilt */
+    transform: rotateX(5deg) translateZ(0);
 }
 
+/* Button shine effect overlay */
 .btn::before {
     content: "";
     position: absolute;
@@ -159,12 +276,93 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+/* Button gradient border effect */
+.btn::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ffd89b, #19547b, #ff6b6b, #4ecdc4);
+    border-radius: 32px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    filter: blur(8px);
+}
+
+/* Button hover effects */
+.btn:hover {
+    transform: rotateX(0deg) translateZ(20px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 0 30px rgba(255, 216, 155, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(30, 30, 30, 0.95));
 }
 
 .btn:hover::before {
     left: 100%;
+}
+
+.btn:hover::after {
+    opacity: 1;
+}
+
+/* Button icon animation */
+.btn .MuiSvgIcon-root {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover .MuiSvgIcon-root {
+    transform: scale(1.2) rotate(15deg);
+}
+
+/* Button pulse animation */
+@keyframes buttonPulse {
+    0%,
+    100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3),
+            0 0 20px rgba(255, 216, 155, 0.2);
+    }
+}
+
+.btn {
+    animation: buttonPulse 3s ease-in-out infinite;
+}
+
+/* Button icon twinkle animation */
+@keyframes buttonIconTwinkle {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    25% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    75% {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+}
+
+.btn .MuiSvgIcon-root {
+    animation: buttonIconTwinkle 3s ease-in-out infinite;
 }
 
 .social-links {
@@ -189,7 +387,7 @@
     justify-content: center;
     width: 60px;
     height: 60px;
-    /* cursor: none removed - now handled globally */
+    cursor: pointer;
 }
 
 .social-link:hover {
@@ -224,7 +422,7 @@
     backdrop-filter: blur(10px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
-    /* cursor: pointer removed - now handled globally */
+    cursor: pointer;
 }
 
 .profile-image {
@@ -266,7 +464,11 @@
 
     .job-seeking-badge span {
         font-size: 0.9rem;
-        padding: 10px 20px;
+        padding: 12px 20px 12px 16px; /* Adjusted padding for mobile */
+    }
+
+    .job-seeking-badge span .MuiSvgIcon-root {
+        font-size: 1.1rem; /* Slightly smaller icon on mobile */
     }
 
     .hero-title {
@@ -276,6 +478,15 @@
     .hero-buttons {
         justify-content: center;
         flex-wrap: wrap;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+
+    .btn .MuiSvgIcon-root {
+        font-size: 1.1rem;
     }
 
     .social-links {
@@ -308,12 +519,21 @@
 
     .job-seeking-badge span {
         font-size: 0.8rem;
-        padding: 8px 16px;
+        padding: 10px 16px 10px 14px; /* Further adjusted padding for small mobile */
+        gap: 6px; /* Reduced gap for small screens */
+    }
+
+    .job-seeking-badge span .MuiSvgIcon-root {
+        font-size: 1rem; /* Smaller icon for small mobile */
     }
 
     .btn {
-        padding: 10px 20px;
+        padding: 10px 18px;
         font-size: 0.9rem;
+    }
+
+    .btn .MuiSvgIcon-root {
+        font-size: 1rem;
     }
 
     .social-link {
@@ -336,7 +556,9 @@
     .social-link,
     .image-wrapper,
     .image-glow,
-    .job-seeking-badge span {
+    .job-seeking-badge span,
+    .job-seeking-badge span .MuiSvgIcon-root,
+    .btn .MuiSvgIcon-root {
         animation: none;
     }
 
@@ -346,6 +568,18 @@
     }
 
     .image-wrapper:hover .profile-image {
+        transform: none;
+    }
+
+    .job-seeking-badge span:hover {
+        transform: none;
+    }
+
+    .job-seeking-badge span:hover .MuiSvgIcon-root {
+        transform: none;
+    }
+
+    .btn:hover .MuiSvgIcon-root {
         transform: none;
     }
 }
