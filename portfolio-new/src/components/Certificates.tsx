@@ -38,7 +38,7 @@ const Certificates: React.FC = () => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1,
+                staggerChildren: 0.05,
             },
         },
     };
@@ -46,13 +46,11 @@ const Certificates: React.FC = () => {
     const cardVariants = {
         hidden: {
             opacity: 0,
-            y: 50,
-            scale: 0.9,
+            y: 30,
         },
         visible: {
             opacity: 1,
             y: 0,
-            scale: 1,
             transition: {
                 type: "spring",
                 stiffness: 100,
@@ -60,7 +58,7 @@ const Certificates: React.FC = () => {
             },
         },
         hover: {
-            y: -10,
+            y: -5,
             scale: 1.02,
             transition: {
                 type: "spring",
@@ -107,36 +105,36 @@ const Certificates: React.FC = () => {
             <div className="container">
                 <div className="certificates-header">
                     <motion.div
-                        className="header-decoration animate-on-scroll"
-                        initial={{ opacity: 0, y: 30 }}
+                        className="header-decoration"
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
+                        transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
                     >
                         <h2 className="section-title">Certifications</h2>
                     </motion.div>
                     <motion.p
-                        className="section-subtitle animate-on-scroll"
-                        initial={{ opacity: 0, y: 20 }}
+                        className="section-subtitle"
+                        initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
                         viewport={{ once: true }}
                     >
-                        Professional certifications and achievements that validate my skills
+                        Professional certifications and achievements
                     </motion.p>
                 </div>
 
                 {/* Filter Buttons */}
                 <motion.div
                     className="certificate-filters"
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
                     viewport={{ once: true }}
                 >
                     {organizations.map((org) => (
                         <button key={org} className={`filter-btn ${filter === org ? "active" : ""}`} onClick={() => setFilter(org)}>
-                            {org === "all" ? "All Certificates" : org}
+                            {org === "all" ? "All" : org}
                         </button>
                     ))}
                 </motion.div>
@@ -147,7 +145,7 @@ const Certificates: React.FC = () => {
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-50px" }}
+                    viewport={{ once: true, margin: "-30px" }}
                 >
                     <AnimatePresence>
                         {filteredCertificates.map((certificate, index) => (
@@ -162,27 +160,25 @@ const Certificates: React.FC = () => {
                                 layout
                                 onClick={() => setSelectedCertificate(certificate)}
                             >
-                                <div className="card-corner"></div>
-
                                 <div className="certificate-content">
-                                    <div className="certificate-logo">
-                                        <img
-                                            src={certificate.logo}
-                                            alt={certificate.organization}
-                                            onError={(e) => {
-                                                (e.target as HTMLImageElement).src = "/fallback-logo.png";
-                                            }}
-                                        />
-                                        <div className="logo-shine"></div>
+                                    <div className="certificate-header">
+                                        <div className="certificate-logo">
+                                            <img
+                                                src={certificate.logo}
+                                                alt={certificate.organization}
+                                                onError={(e) => {
+                                                    (e.target as HTMLImageElement).src = "/fallback-logo.png";
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="certificate-info">
+                                            <h3 className="certificate-title">{certificate.title}</h3>
+                                            <p className="certificate-organization">{certificate.organization}</p>
+                                        </div>
                                     </div>
 
-                                    <div className="certificate-info">
-                                        <h3 className="certificate-title">{certificate.title}</h3>
-                                        <p className="certificate-organization">{certificate.organization}</p>
+                                    <div className="certificate-footer">
                                         <p className="certificate-date">{certificate.date}</p>
-                                    </div>
-
-                                    <div className="certificate-actions">
                                         <a
                                             href={certificate.credential_url}
                                             target="_blank"
@@ -190,16 +186,10 @@ const Certificates: React.FC = () => {
                                             className="certificate-link"
                                             onClick={(e) => e.stopPropagation()}
                                         >
-                                            <div className="link-content">
-                                                <LaunchIcon className="link-icon" />
-                                                <span>Verify</span>
-                                            </div>
-                                            <div className="link-hover-effect"></div>
+                                            <LaunchIcon className="link-icon" />
                                         </a>
                                     </div>
                                 </div>
-
-                                <div className="card-glow"></div>
                             </motion.div>
                         ))}
                     </AnimatePresence>
@@ -210,10 +200,10 @@ const Certificates: React.FC = () => {
                     className="certificates-count"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
                     viewport={{ once: true }}
                 >
-                    Showing {filteredCertificates.length} of {certificatesData.length} certificates
+                    {filteredCertificates.length} of {certificatesData.length} certificates
                 </motion.div>
 
                 {/* Modal */}
