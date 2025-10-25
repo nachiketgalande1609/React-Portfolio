@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { personalInfo, socialLinks } from "../data/portfolioData";
+import { personalInfo } from "../data/portfolioData";
 import "../styles/Contact.css";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";

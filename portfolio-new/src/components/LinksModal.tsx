@@ -1,5 +1,4 @@
 import React from "react";
-import { socialLinks, projects } from "../data/portfolioData";
 import "./../styles/LinksModal.css";
 
 // Import MUI icons
