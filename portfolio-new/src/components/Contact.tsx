@@ -52,9 +52,7 @@ const Contact: React.FC = () => {
             <div className="container">
                 <div className="contact-header">
                     <div className="header-decoration animate-on-scroll">
-                        <div className="decoration-line"></div>
                         <h2 className="section-title">Get In Touch</h2>
-                        <div className="decoration-line"></div>
                     </div>
                     <p className="section-subtitle animate-on-scroll">Let's create something amazing together</p>
                 </div>

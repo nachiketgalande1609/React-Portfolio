@@ -1,4 +1,4 @@
-import type { Project, Skill, SocialLink } from "../types";
+import type { Experience, Project, Skill, SocialLink } from "../types";
 
 // Import project images
 import livoImage from "../assets/projects/livo.png";
@@ -23,7 +23,7 @@ import typescriptIcon from "../assets/icons/typescript.png";
 import nodejsIcon from "../assets/icons/node.png";
 import webrtcIcon from "../assets/icons/webrtc.svg";
 import expressIcon from "../assets/icons/express.png";
-import openaiIcon from "../assets/icons/openai.svg";
+import openaiIcon from "../assets/icons/openai.webp";
 import azureIcon from "../assets/icons/azure.png";
 import bootstrapIcon from "../assets/icons/bootstrap.svg";
 import socketioIcon from "../assets/icons/socketio.webp";
@@ -217,3 +217,37 @@ export const techIcons: { [key: string]: string } = {
     pyttsx3: pyttsx3Icon,
     SQLite: sqliteIcon,
 };
+
+export const experienceData: Experience[] = [
+    {
+        id: 1,
+        company: "AB InBev (Via Accenture)",
+        location: "",
+        role: "Full Stack Software Developer",
+        period: "May 2022 - Present",
+        description: [
+            "Collaborated directly with AB InBev’s product team to develop a financial management solution that automated key workflows, reducing manual work by 30% and operational costs by 10–15%.",
+            "Optimized database query performance by 15% on 10M+ records datasets through database optimization techniques.",
+            "Reduced frontend load time by 20% using code splitting and lazy loading techniques.",
+            "Scaled application performance by over 30% with a microservice architecture, supporting 1500+ concurrent users.",
+            "Improved user experience by implementing asynchronous data export actions with Azure Function Apps.",
+            "Engineered a 20% performance uplift by migrating large SQL datasets to Azure Databricks for efficient processing and analysis.",
+            "Designed CI/CD pipelines on Azure DevOps, enabling automated builds and deployments",
+            "Collaborated with stakeholders and UI/UX teams, conducted code reviews, supported UAT and Go-Live activities.",
+        ],
+        technologies: ["React.js", "Redux", "TypeScript", "Flask", "Databricks", "Azure SQL Server", "Azure DevOps"],
+    },
+    {
+        id: 2,
+        company: "Accenture",
+        location: "",
+        role: "Packaged Application Developer",
+        period: "Jul 2021 - May 2022",
+        description: [
+            "Automated Oracle ERP user provisioning, reducing time from 5–10 hours to under 5 minutes.",
+            "Utilized Dash and Plotly to create interactive dashboards for visualizing B2B EDI X12 transactions.",
+            "Streamlined employee onboarding by developing a generative AI-powered tool, reducing training time by 30%.",
+        ],
+        technologies: ["Oracle OCI", "Oracle OIC", "Python", "OpenAI", "Azure"],
+    },
+];

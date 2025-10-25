@@ -22,11 +22,6 @@ const Footer: React.FC = () => {
                         ))}
                     </div>
                 </div>
-
-                <div className="footer-decoration">
-                    <div className="decoration-line"></div>
-                </div>
-
                 <div className="footer-bottom">
                     <p className="footer-copyright">
                         &copy; {currentYear} {personalInfo.name}. All rights reserved.

@@ -121,9 +121,7 @@ const Projects: React.FC = () => {
             <div className="container">
                 <div className="projects-header">
                     <div className="header-decoration animate-on-scroll">
-                        <div className="decoration-line"></div>
                         <h2 className="section-title">My Projects</h2>
-                        <div className="decoration-line"></div>
                     </div>
                     <p className="section-subtitle animate-on-scroll">A collection of my recent work and creative solutions</p>
                 </div>

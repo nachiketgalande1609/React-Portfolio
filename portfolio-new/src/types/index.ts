@@ -19,3 +19,13 @@ export interface SocialLink {
     url: string;
     icon: string;
 }
+
+export interface Experience {
+    id: number;
+    company: string;
+    location: string;
+    role: string;
+    period: string;
+    description: string[];
+    technologies: string[];
+}

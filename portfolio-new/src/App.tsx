@@ -11,6 +11,7 @@ import GlobalCursor from "./components/GlobalCursor";
 import ScrollProgress from "./components/ScrollProgress";
 import AnimatedBackground from "./components/AnimatedBackground"; // Add this import
 import "./styles/globals.css";
+import Experience from "./components/Experience";
 
 const App: React.FC = () => {
     return (
@@ -22,6 +23,7 @@ const App: React.FC = () => {
             <Hero />
             <About />
             <Skills />
+            <Experience />
             <Projects />
             <Contact />
             <Footer />

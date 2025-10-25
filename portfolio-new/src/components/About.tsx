@@ -38,9 +38,7 @@ const About: React.FC = () => {
                 {/* Enhanced Header with Floating Animation */}
                 <div className="about-header">
                     <div className="header-decoration animate-on-scroll">
-                        <div className="decoration-line"></div>
                         <h2 className="section-title">About Me</h2>
-                        <div className="decoration-line"></div>
                     </div>
                 </div>
 

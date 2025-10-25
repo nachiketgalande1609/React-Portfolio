@@ -109,29 +109,6 @@
     transform: translateY(-2px);
 }
 
-.footer-decoration {
-    margin: 2rem 0;
-}
-
-.decoration-line {
-    width: 100%;
-    height: 1px;
-    background: #ffffff;
-    position: relative;
-    overflow: hidden;
-    opacity: 0.1;
-}
-
-.decoration-line::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, #ffffff, transparent);
-}
-
 .footer-bottom {
     display: flex;
     justify-content: space-between;

@@ -163,9 +163,7 @@ const Skills: React.FC = () => {
             <div className="container">
                 <div className="skills-header">
                     <div className="header-decoration animate-on-scroll">
-                        <div className="decoration-line"></div>
                         <h2 className="section-title">My Stack</h2>
-                        <div className="decoration-line"></div>
                     </div>
                     <p className="section-subtitle animate-on-scroll">Technologies I work with to create amazing experiences</p>
                 </div>

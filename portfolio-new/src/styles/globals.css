@@ -365,28 +365,92 @@ body.cursor-click .global-cursor-follower {
     font-weight: 800;
     text-align: center;
     margin-bottom: 3rem;
-    background: linear-gradient(135deg, #ffffff, var(--primary-color), #ffffff);
+    font-family: "Story Script", sans-serif;
+    letter-spacing: -0.02em;
+    width: 100%;
+    position: relative;
+
+    /* Gradient setup */
+    background: linear-gradient(135deg, #ffb700, #5020be, #b20059);
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    position: relative;
-    text-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
-    letter-spacing: -0.02em;
-    width: 100%;
-    font-family: "Story Script", sans-serif;
+
+    /* Animations */
+    animation: gradientShift 8s ease-in-out infinite, softPulse 4s ease-in-out infinite alternate;
+}
+
+/* Gradient movement */
+@keyframes gradientShift {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Soft pulsing effect */
+@keyframes softPulse {
+    0% {
+        filter: brightness(1);
+    }
+    100% {
+        filter: brightness(1.15);
+    }
 }
 
 .section-title::after {
     content: "";
     position: absolute;
-    bottom: -15px;
+    bottom: -12px;
     left: 50%;
     transform: translateX(-50%);
     width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--primary-color), var(--accent-color), transparent);
-    transition: width 1.2s ease 0.5s;
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    height: 4px;
+    border-radius: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: width 1.5s ease 0.3s;
+    animation: underlineFlow 3s ease-in-out infinite;
+}
+
+@keyframes underlineFlow {
+    0%,
+    100% {
+        width: 55%;
+        opacity: 0.6;
+    }
+    50% {
+        width: 60%;
+        opacity: 1;
+    }
+}
+
+/* Add subtle character animation */
+.section-title span {
+    display: inline-block;
+    animation: gentleReveal 0.8s ease-out both;
+    animation-delay: calc(var(--char-index) * 0.05s);
+}
+
+@keyframes gentleReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.5rem;
+    }
 }
 
 .animate-in .section-title::after {
