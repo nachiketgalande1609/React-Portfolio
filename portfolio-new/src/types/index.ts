@@ -44,6 +44,6 @@ export interface TestimonialsData {
 export interface ReconmendationCardProps {
     testimonial: Testimonial;
     index: number;
-    currentCard: number;
+    currentCard?: number;
     totalCards: number;
 }

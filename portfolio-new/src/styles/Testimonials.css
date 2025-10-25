@@ -19,25 +19,20 @@
 .testimonials-cards {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center cards horizontally */
 }
 
 .testimonials-card {
     min-height: 300px;
-    height: 385px; /* Fixed height for all cards */
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     will-change: transform, opacity;
-    width: 100%; /* Ensure full width */
-    margin: 20px 0; /* Add consistent spacing */
 }
 
 .testimonials-content {
-    max-width: 700px;
+    max-width: 500px;
     width: 100%;
-    height: 100%; /* Take full height of parent */
     background: rgb(0, 0, 0);
     border: 1px solid rgb(255, 255, 255, 0.3);
     border-radius: 12px;
@@ -45,9 +40,6 @@
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Distribute content evenly */
 }
 
 .card-counter {
@@ -65,9 +57,6 @@
 /* Quote section styles */
 .quote-section {
     margin-bottom: 1.5rem;
-    flex: 1; /* Allow quote section to grow */
-    display: flex;
-    flex-direction: column;
 }
 
 .quote-icon {
@@ -106,17 +95,12 @@
     color: #ffffff;
     font-style: italic;
     margin: 0;
-    flex: 1; /* Allow quote to take available space */
-    display: flex;
-    align-items: center; /* Center quote vertically */
 }
 
 .testimonials-author {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-top: auto; /* Push author to bottom */
-    flex-shrink: 0; /* Prevent author section from shrinking */
 }
 
 .author-image {
@@ -145,15 +129,9 @@
     font-size: 0.85rem;
 }
 
-.testimonials-card .testimonials-content {
-    transition: all 0.5s ease;
-    transform: scale(0.75);
-}
-
 /* Active card highlight */
 .testimonials-card.active .testimonials-content {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
 }
 
 @media (max-width: 768px) {
@@ -166,8 +144,7 @@
     }
 
     .testimonials-card {
-        min-height: 280px;
-        height: 280px; /* Adjusted for mobile */
+        min-height: 250px;
     }
 
     .testimonials-content {
@@ -194,11 +171,6 @@
     .testimonials-content {
         padding: 1.25rem;
         max-width: 350px;
-    }
-
-    .testimonials-card {
-        min-height: 260px;
-        height: 260px; /* Smaller fixed height for very small screens */
     }
 
     .card-counter {
