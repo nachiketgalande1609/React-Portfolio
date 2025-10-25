@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import "../styles/Recommendations.css";
 import { testimonialsData } from "../data/portfolioData";
 import type { Testimonial } from "../types";
@@ -6,14 +6,32 @@ import type { Testimonial } from "../types";
 const Recommendations: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
     const [currentCard, setCurrentCard] = useState(0);
-    const [isAnimating, setIsAnimating] = useState(true); // True when cards are actively unstacking
-    const [isScrollEnabled, setIsScrollEnabled] = useState(false); // True when all cards are unstacked and normal scroll resumes
+    // isHandlingScroll: true when the component controls scroll, false when normal page scroll is enabled
+    const [isHandlingScroll, setIsHandlingScroll] = useState(true);
 
-    useEffect(() => {
-        const handleScroll = (event: WheelEvent) => {
-            if (!isAnimating) return; // Only process scroll if animating
+    const handleScroll = useCallback(
+        (event: WheelEvent) => {
+            if (!sectionRef.current) return;
 
-            event.preventDefault(); // Prevent default page scroll
+            // Check if the section is in the viewport
+            const rect = sectionRef.current.getBoundingClientRect();
+            const inView = rect.top <= window.innerHeight && rect.bottom >= 0;
+
+            if (!inView && isHandlingScroll) {
+                // If not in view and we are handling scroll, release control
+                setIsHandlingScroll(false);
+                return;
+            } else if (inView && !isHandlingScroll && currentCard < testimonialsData.testimonials.length - 1 && event.deltaY > 0) {
+                // If entering view and trying to scroll down, re-engage handling
+                setIsHandlingScroll(true);
+            } else if (inView && !isHandlingScroll && currentCard > 0 && event.deltaY < 0) {
+                // If entering view and trying to scroll up past the last card, re-engage handling
+                setIsHandlingScroll(true);
+            }
+
+            if (!isHandlingScroll) return; // If not handling scroll, let default behavior happen
+
+            event.preventDefault(); // Prevent default page scroll when handling
 
             if (event.deltaY > 0) {
                 // Scrolling down
@@ -21,46 +39,54 @@ const Recommendations: React.FC = () => {
                     setCurrentCard((prev) => prev + 1);
                 } else {
                     // Last card revealed, enable normal scrolling
-                    setIsAnimating(false);
-                    setIsScrollEnabled(true);
+                    setIsHandlingScroll(false);
                 }
             } else if (event.deltaY < 0) {
                 // Scrolling up
                 if (currentCard > 0) {
                     setCurrentCard((prev) => prev - 1);
                 } else {
-                    // Back to first card, disable scroll if it was enabled
-                    setIsScrollEnabled(false);
-                    setIsAnimating(true); // Re-enable animating if we scroll back to start
+                    // Back to first card, release scroll control
+                    setIsHandlingScroll(false);
                 }
             }
-        };
+        },
+        [currentCard, testimonialsData.testimonials.length, isHandlingScroll]
+    );
 
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (!isAnimating && event.key !== "ArrowUp") return; // Allow arrow up even when scroll is enabled to go back
-
+    const handleKeyDown = useCallback(
+        (event: KeyboardEvent) => {
             if (event.key === "ArrowDown" || event.key === " ") {
-                event.preventDefault();
                 if (currentCard < testimonialsData.testimonials.length - 1) {
+                    event.preventDefault();
                     setCurrentCard((prev) => prev + 1);
-                } else {
-                    setIsAnimating(false);
-                    setIsScrollEnabled(true);
+                    setIsHandlingScroll(true); // Ensure we're handling scroll when using keyboard
+                } else if (isHandlingScroll) {
+                    // If at last card and still handling, release
+                    event.preventDefault(); // Prevent page scroll if trying to go further down
+                    setIsHandlingScroll(false);
                 }
             } else if (event.key === "ArrowUp") {
-                event.preventDefault();
                 if (currentCard > 0) {
+                    event.preventDefault();
                     setCurrentCard((prev) => prev - 1);
-                } else {
-                    setIsScrollEnabled(false);
-                    setIsAnimating(true);
+                    setIsHandlingScroll(true); // Ensure we're handling scroll when using keyboard
+                } else if (!isHandlingScroll) {
+                    // If at first card and released scroll, re-engage to handle arrow up
+                    event.preventDefault(); // Prevent page scroll if trying to go further up
+                    setIsHandlingScroll(true);
                 }
             }
-        };
+        },
+        [currentCard, testimonialsData.testimonials.length, isHandlingScroll]
+    );
 
+    useEffect(() => {
         const section = sectionRef.current;
-        if (section && !isScrollEnabled) {
-            // Add scroll listener only if not scroll-enabled
+        if (section) {
+            // We always add/remove the wheel listener on the section
+            // The `isHandlingScroll` state inside `handleScroll` will determine
+            // if `preventDefault` is called and if state changes.
             section.addEventListener("wheel", handleScroll, { passive: false });
         }
         document.addEventListener("keydown", handleKeyDown);
@@ -71,23 +97,49 @@ const Recommendations: React.FC = () => {
             }
             document.removeEventListener("keydown", handleKeyDown);
         };
-    }, [isAnimating, currentCard, testimonialsData.testimonials.length, isScrollEnabled]);
+    }, [handleScroll, handleKeyDown]); // Depend on memoized handlers
+
+    // Reset currentCard to 0 if we scroll past this section and then back up
+    // This is a common pattern for "scroll-jacking" sections.
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry.isIntersecting && isHandlingScroll) {
+                    // If section is not visible and we were handling scroll, reset state
+                    setCurrentCard(0);
+                    setIsHandlingScroll(true); // Reset to true to be ready for re-entry
+                }
+            },
+            { threshold: 0.1 } // Trigger when 10% of the section is visible
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => {
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    }, [isHandlingScroll]);
 
     const getCardTransform = (index: number) => {
-        const stackOffset = 10; // Pixels offset for cards in the stack
-        const unstackOffset = 300; // Pixels offset for unstacked cards to move right
+        const stackOffset = 15; // Pixels offset for cards in the stack (increased slightly for more visual depth)
+        const unstackOffset = 280; // Pixels offset for unstacked cards to move right (adjusted for aesthetic)
+        const pastCardOffset = 80; // Offset for cards that have already been unstacked
 
         if (index > currentCard) {
             // Cards still in the stack (left side)
             const offsetMultiplier = testimonialsData.testimonials.length - 1 - index; // Deeper cards are further left
-            return `translateX(${offsetMultiplier * -stackOffset}px) rotateY(-5deg)`;
+            return `translateX(${offsetMultiplier * -stackOffset}px) rotateY(-5deg) scale(${1 - offsetMultiplier * 0.02})`;
         } else if (index === currentCard) {
             // Current active card (unstacking to the right of the stack)
-            return `translateX(${unstackOffset}px) rotateY(0deg)`;
+            return `translateX(${unstackOffset}px) rotateY(0deg) scale(1)`;
         } else {
             // Cards that have already been unstacked (further right)
             const previousCardsCount = currentCard - index;
-            return `translateX(${unstackOffset + previousCardsCount * 100}px) rotateY(0deg)`;
+            return `translateX(${unstackOffset + previousCardsCount * pastCardOffset}px) rotateY(0deg) scale(${1 - previousCardsCount * 0.05})`;
         }
     };
 
@@ -101,8 +153,8 @@ const Recommendations: React.FC = () => {
     const getCardOpacity = (index: number) => {
         if (index > currentCard) {
             // Cards in the stack are partially transparent, becoming more opaque as they get closer to active
-            const transparencyFactor = (index - currentCard) * 0.15; // Adjust this for desired transparency
-            return 1 - transparencyFactor;
+            const transparencyFactor = (index - currentCard) * 0.2; // Adjusted for better visibility
+            return Math.max(0.4, 1 - transparencyFactor); // Ensure minimum opacity
         }
         return 1; // Active and unstacked cards are fully opaque
     };
@@ -114,7 +166,6 @@ const Recommendations: React.FC = () => {
                 zIndex: getCardZIndex(index),
                 transform: getCardTransform(index),
                 opacity: getCardOpacity(index),
-                // pointerEvents: index === currentCard ? 'auto' : 'none', // Only active card is interactive
             }}
         >
             <div className="card-corner"></div>
@@ -131,7 +182,6 @@ const Recommendations: React.FC = () => {
                             src={testimonial.image}
                             alt={testimonial.name}
                             onError={(e) => {
-                                // Fallback for missing images
                                 (e.target as HTMLImageElement).src =
                                     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23333'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='14'%3E👤%3C/text%3E%3C/svg%3E";
                             }}
@@ -150,14 +200,14 @@ const Recommendations: React.FC = () => {
     );
 
     return (
-        <section ref={sectionRef} id="recommendations" className={`section recommendations-section ${isScrollEnabled ? "scroll-enabled" : ""}`}>
+        <section ref={sectionRef} id="recommendations" className={`section recommendations-section ${!isHandlingScroll ? "scroll-enabled" : ""}`}>
             <div className="container">
                 <div className="recommendations-header">
                     <div className="header-decoration">
                         <h2 className="section-title">Recommendations</h2>
                     </div>
                     <p className="section-subtitle">
-                        {isAnimating ? "Scroll or use arrow keys to reveal recommendations" : "What colleagues say about working with me"}
+                        {isHandlingScroll ? "Scroll or use arrow keys to reveal recommendations" : "What colleagues say about working with me"}
                     </p>
                 </div>
 
@@ -169,7 +219,7 @@ const Recommendations: React.FC = () => {
                     </div>
                 </div>
 
-                {isAnimating && (
+                {isHandlingScroll && (
                     <div className="scroll-indicator">
                         <div className="scroll-arrow"></div>
                         <span>
