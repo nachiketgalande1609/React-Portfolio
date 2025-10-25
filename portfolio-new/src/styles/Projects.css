@@ -176,47 +176,81 @@
     border-top: 90px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Project Links - Modern Design */
+/* Enhanced Project Links with 3D and Shine Effects */
 .project-links {
     display: flex;
     gap: 1.2rem;
     margin-top: 2rem;
     flex-wrap: wrap;
+    perspective: 1000px;
 }
 
 .project-link {
-    background: rgba(255, 255, 255, 0.05);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
     color: white;
     text-decoration: none;
-    font-weight: 500;
-    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 30px;
+    backdrop-filter: blur(15px);
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     letter-spacing: 0.5px;
-    height: 42px;
-    padding: 0 18px;
+    height: 48px;
+    padding: 0 22px;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+    /* Initial 3D tilt */
+    transform: rotateX(5deg) translateZ(0);
 }
 
+/* Button shine effect overlay */
 .project-link::before {
     content: "";
     position: absolute;
     top: 0;
-    left: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+/* Button gradient border effect */
+.project-link::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ffd89b, #19547b, #ff6b6b, #4ecdc4);
+    border-radius: 18px;
+    z-index: -1;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
+    filter: blur(8px);
+}
+
+/* Button hover effects */
+.project-link:hover {
+    transform: rotateX(0deg) translateZ(20px) scale(1.05);
+    border-color: rgba(255, 255, 255, 0.6);
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(30, 30, 30, 0.95));
 }
 
 .project-link:hover::before {
+    left: 100%;
+}
+
+.project-link:hover::after {
     opacity: 1;
 }
 
@@ -234,7 +268,7 @@
 }
 
 .project-link:hover .link-icon {
-    transform: scale(1.1) translateY(-1px);
+    transform: scale(1.2) rotate(15deg);
 }
 
 .link-hover-effect {
@@ -251,33 +285,73 @@
     left: 100%;
 }
 
+/* Specific styles for GitHub button */
 .project-link.github {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
 }
 
 .project-link.github:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 0 30px rgba(255, 216, 155, 0.3);
 }
 
+/* Specific styles for Live Demo button */
 .project-link.live {
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    border: 1px solid rgba(16, 185, 129, 0.4);
     color: #10b981;
 }
 
 .project-link.live:hover {
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0.15));
-    border-color: rgba(16, 185, 129, 0.5);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 0 30px rgba(16, 185, 129, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+
+    color: #ffffff;
 }
 
-.project-link:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+/* Button pulse animation */
+@keyframes buttonPulse {
+    0%,
+    100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3),
+            0 0 20px rgba(255, 216, 155, 0.2);
+    }
+}
+
+.project-link {
+    animation: buttonPulse 3s ease-in-out infinite;
+}
+
+/* Button icon twinkle animation */
+@keyframes buttonIconTwinkle {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    25% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    75% {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+}
+
+.project-link .link-icon {
+    animation: buttonIconTwinkle 3s ease-in-out infinite;
 }
 
 /* Project Title */
@@ -317,7 +391,7 @@
     background: rgba(255, 255, 255, 0.05);
     color: rgba(255, 255, 255, 0.9);
     padding: 10px 18px;
-    border-radius: 12px;
+    border-radius: 30px;
     font-size: 0.9rem;
     font-weight: 400;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -460,6 +534,7 @@
         text-align: center;
         padding: 14px 24px;
         justify-content: center;
+        height: 52px;
     }
 
     .project-technologies {
@@ -510,6 +585,7 @@
     .project-link {
         padding: 12px 20px;
         font-size: 0.9rem;
+        height: 48px;
     }
 }
 
@@ -536,5 +612,22 @@
     .project-link {
         padding: 10px 16px;
         font-size: 0.85rem;
+        height: 44px;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .project-link,
+    .project-link .link-icon {
+        animation: none;
+    }
+
+    .project-link:hover {
+        transform: none;
+    }
+
+    .project-link:hover .link-icon {
+        transform: none;
     }
 }
