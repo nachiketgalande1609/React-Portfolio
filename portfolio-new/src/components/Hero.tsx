@@ -57,25 +57,7 @@ const Hero: React.FC = () => {
                 </div>
 
                 <div className="hero-content">
-                    <div className="hero-text">
-                        <h1 className="hero-title">
-                            Hi, I'm <span className="highlight">{personalInfo.name}</span>
-                        </h1>
-                        <h2 className="hero-subtitle">{personalInfo.title}</h2>
-                        <p className="hero-description">{personalInfo.about}</p>
-
-                        <div className="hero-buttons">
-                            <button className="btn" onClick={handleResumeOpen}>
-                                <span>My Resume</span>
-                                <ArticleIcon />
-                            </button>
-                            <button className="btn" onClick={handleConnect}>
-                                <span>Let's Connect</span>
-                                <WavingHandIcon />
-                            </button>
-                        </div>
-                    </div>
-
+                    {/* Image Section - Centered vertically */}
                     <div className="hero-image">
                         <div className="image-container">
                             <div className="main-image">
@@ -86,7 +68,30 @@ const Hero: React.FC = () => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Text Content Section */}
+                    <div className="hero-text">
+                        <h1 className="hero-title">
+                            Hi, I'm <span className="highlight">{personalInfo.name}</span>
+                        </h1>
+                        <h2 className="hero-subtitle">{personalInfo.title}</h2>
+                        <p className="hero-description">{personalInfo.about}</p>
+                    </div>
                 </div>
+
+                {/* Action Buttons - Outside the grid, centered */}
+                <div className="hero-action-buttons">
+                    <button className="action-btn" onClick={handleResumeOpen}>
+                        <ArticleIcon className="btn-icon" />
+                        <span>Resume</span>
+                    </button>
+                    <button className="action-btn" onClick={handleConnect}>
+                        <WavingHandIcon className="btn-icon" />
+                        <span>Connect</span>
+                    </button>
+                </div>
+
+                {/* Social Links */}
                 <div className="social-links">
                     {socialLinks.map((link, index) => (
                         <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className="social-link" aria-label={link.name}>
