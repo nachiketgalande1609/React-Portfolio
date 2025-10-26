@@ -6,12 +6,6 @@
     padding: 6rem 0;
 }
 
-.skills-header {
-    text-align: center;
-    margin-bottom: 6rem;
-    position: relative;
-}
-
 .header-decoration {
     display: flex;
     align-items: center;
@@ -309,10 +303,6 @@
         padding: 4rem 1rem; /* Adjusted padding for better mobile fit */
     }
 
-    .skills-header {
-        margin-bottom: 3rem; /* Slightly reduced header margin */
-    }
-
     .header-decoration {
         gap: 1.5rem;
     }
@@ -398,20 +388,8 @@
         padding: 3rem 0.5rem; /* More compact padding for smaller phones */
     }
 
-    .skills-header {
-        margin-bottom: 2.5rem;
-    }
-
     .header-decoration {
         gap: 1rem;
-    }
-
-    .section-title {
-        font-size: 2rem; /* Smaller title */
-    }
-
-    .section-subtitle {
-        font-size: 0.9rem; /* Smaller subtitle */
     }
 
     .two-column-layout {

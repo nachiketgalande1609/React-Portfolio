@@ -9,11 +9,6 @@
     min-height: 100vh;
 }
 
-.certificates-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
 .header-decoration {
     opacity: 0;
     transform: translateY(30px);
@@ -239,10 +234,6 @@
 @media (min-width: 768px) {
     .certificates-section {
         padding: 4rem 0;
-    }
-
-    .certificates-header {
-        margin-bottom: 3rem;
     }
 
     .certificate-filters {

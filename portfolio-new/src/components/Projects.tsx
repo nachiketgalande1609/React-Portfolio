@@ -119,7 +119,7 @@ const Projects: React.FC = () => {
     return (
         <section ref={sectionRef} id="projects" className="section projects-section">
             <div className="container">
-                <div className="projects-header">
+                <div className="section-header">
                     <div className="header-decoration animate-on-scroll">
                         <h2 className="section-title">My Projects</h2>
                     </div>

@@ -103,7 +103,7 @@ const Certificates: React.FC = () => {
         <section ref={sectionRef} id="certificates" className="section certificates-section">
             <div className="background-glow"></div>
             <div className="container">
-                <div className="certificates-header">
+                <div className="section-header">
                     <div className="header-decoration">
                         <h2 className="section-title">Certifications</h2>
                     </div>

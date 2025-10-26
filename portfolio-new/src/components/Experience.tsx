@@ -95,7 +95,7 @@ const Experience: React.FC = () => {
     return (
         <section ref={sectionRef} id="experience" className="section experience-section">
             <div className="container">
-                <div className="experience-header">
+                <div className="section-header">
                     <div className="header-decoration animate-on-scroll">
                         <h2 className="section-title">Professional Experience</h2>
                     </div>

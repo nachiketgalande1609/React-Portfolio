@@ -35,17 +35,6 @@
     transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-.section-subtitle {
-    font-size: 1.2rem;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.7);
-    margin: 0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease 0.4s;
-    letter-spacing: 0.05em;
-}
-
 /* Projects Grid */
 .projects-grid {
     position: relative;

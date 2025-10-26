@@ -161,7 +161,7 @@ const Skills: React.FC = () => {
     return (
         <section ref={sectionRef} id="skills" className="section skills-section">
             <div className="container">
-                <div className="skills-header">
+                <div className="section-header">
                     <div className="header-decoration animate-on-scroll">
                         <h2 className="section-title">My Stack</h2>
                     </div>
