@@ -15,8 +15,6 @@ const Header: React.FC = () => {
     const [isLinksModalOpen, setIsLinksModalOpen] = useState(false);
     const [isUsesModalOpen, setIsUsesModalOpen] = useState(false);
 
-    console.log("xxx", activeSection);
-
     // State to hold the dynamic style for the indicator
     const [indicatorStyle, setIndicatorStyle] = useState({});
 
@@ -43,6 +41,9 @@ const Header: React.FC = () => {
                 const element = document.getElementById(section);
                 if (element) {
                     const rect = element.getBoundingClientRect();
+                    // Check if the middle of the section is within the viewport middle
+                    // OR if the entire section is visible and its top is within the viewport.
+                    // This creates a more robust active section detection.
                     if (rect.top <= viewportMiddle && rect.bottom >= viewportMiddle) {
                         currentSection = section;
                     }
@@ -53,6 +54,9 @@ const Header: React.FC = () => {
         };
 
         window.addEventListener("scroll", handleScroll);
+        // Also trigger on load in case the page is already scrolled
+        handleScroll();
+
         return () => {
             window.removeEventListener("scroll", handleScroll);
             window.removeEventListener("resize", checkMobile);
@@ -64,7 +68,7 @@ const Header: React.FC = () => {
         if (element) {
             element.scrollIntoView({ behavior: "smooth" });
         }
-        setActiveSection(sectionId);
+        // setActiveSection(sectionId); // Let scroll handler update this to avoid flicker
         setIsMoreOpen(false);
     };
 
@@ -74,17 +78,18 @@ const Header: React.FC = () => {
 
     const handleLinksClick = () => {
         setIsLinksModalOpen(true);
-        setIsMoreOpen(false);
+        setIsMoreOpen(false); // Close dropdown when modal opens
     };
 
     const handleUsesClick = () => {
         setIsUsesModalOpen(true);
-        setIsMoreOpen(false);
+        setIsMoreOpen(false); // Close dropdown when modal opens
     };
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             const moreWrapper = document.querySelector(".more-wrapper");
+            // If the clicked element is not inside the more-wrapper, close the dropdown
             if (moreWrapper && !moreWrapper.contains(event.target as Node)) {
                 setIsMoreOpen(false);
             }
@@ -115,6 +120,7 @@ const Header: React.FC = () => {
         { id: "links", label: "Links", action: handleLinksClick },
     ];
 
+    // Determine if any dropdown item is the active section
     const isDropdownActive = dropdownNavItems.some((item) => item.id === activeSection);
 
     // NEW: useEffect to calculate indicator position dynamically
@@ -133,23 +139,29 @@ const Header: React.FC = () => {
 
             if (activeElement) {
                 const { offsetLeft, offsetWidth } = activeElement;
-                const indicatorWidth = isMobile ? 40 : 50; // Match CSS widths
-                const newPosition = offsetLeft + offsetWidth / 2 - indicatorWidth / 2;
 
                 setIndicatorStyle({
-                    transform: `translateX(${newPosition}px)`,
-                    width: `${indicatorWidth}px`,
+                    transform: `translateX(${offsetLeft}px)`,
+                    width: `${offsetWidth - (20 / 100) * offsetWidth}px`,
+                });
+            } else {
+                // If no active element is found (e.g., on initial render before scroll update),
+                // you might want to hide the indicator or place it at a default position.
+                // For now, we'll ensure it has a default state or is hidden.
+                setIndicatorStyle({
+                    width: "0px",
+                    transform: "translateX(0px)",
                 });
             }
         };
 
-        // Calculate on activeSection change, mobile state change, or scroll (for initial load)
+        // Recalculate on activeSection change, mobile state change, or dropdown activation
         calculateIndicatorPosition();
 
         // Recalculate on resize
         window.addEventListener("resize", calculateIndicatorPosition);
         return () => window.removeEventListener("resize", calculateIndicatorPosition);
-    }, [activeSection, isMobile, isDropdownActive, mainNavItems]);
+    }, [activeSection, isMobile, isDropdownActive, mainNavItems]); // Dependencies ensure this runs when relevant state changes
 
     return (
         <>
@@ -212,7 +224,7 @@ const Header: React.FC = () => {
                             </div>
                         )}
                     </div>
-                    <div className="glass-overlay" />
+                    {/* Removed the extra glass-overlay div as it's now handled by ::before on .nav-dock */}
                 </nav>
             </header>
 

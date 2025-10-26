@@ -29,7 +29,7 @@
     padding: 8px;
     gap: 4px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: visible;
+    overflow: visible; /* Ensure dropdowns are visible */
     box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.1),
         0 0 0 1px rgba(255, 255, 255, 0.05);
 }
@@ -50,11 +50,11 @@
 }
 
 .nav-item-wrapper {
-    /* position: relative; <-- REMOVE THIS LINE */
+    /* position: relative; <-- REMOVE THIS LINE, done */
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 2;
+    z-index: 2; /* Keep nav items above the glass overlay */
 }
 
 .nav-item {
@@ -70,8 +70,9 @@
     font-family: "Raleway", "Segoe UI", "Roboto", sans-serif !important;
     color: rgba(255, 255, 255, 0.8);
     border-radius: 28px;
-    overflow: hidden;
+    overflow: hidden; /* For the ::before hover effect */
     padding: 0 12px;
+    flex-shrink: 0; /* Prevent items from shrinking unnecessarily */
 }
 
 .nav-item::before {
@@ -84,7 +85,7 @@
     background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
     opacity: 0;
     transition: opacity 0.3s ease;
-    border-radius: 12px;
+    border-radius: 12px; /* Adjusted for better visual */
 }
 
 .nav-item:hover::before {
@@ -102,13 +103,14 @@
 /* Active indicator bar */
 .active-indicator {
     position: absolute;
-    top: -5px;
+    top: -5px; /* Position above the nav items */
     height: 6px;
     background: #ffffff;
     border-radius: 4px 4px 0 0;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 4;
+    z-index: 4; /* Ensure it's above other elements */
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+    /* REMOVED: width property as it's now set dynamically by JS */
 }
 
 .nav-tooltip {
@@ -193,7 +195,7 @@
     .active-indicator {
         height: 4px;
         top: -4px;
-        /* REMOVED: width: 45px; */
+        /* REMOVED: width: 45px; - Now dynamic */
         border-radius: 2px 2px 0 0;
     }
 
@@ -218,14 +220,14 @@
 
     .nav-dock {
         padding: 4px;
-        border-radius: 30px;
+        border-radius: 16px;
         gap: 1px;
         backdrop-filter: blur(15px) saturate(160%);
         -webkit-backdrop-filter: blur(15px) saturate(160%);
     }
 
     .nav-dock::before {
-        border-radius: 30px;
+        border-radius: 14px;
     }
 
     .nav-item {
@@ -242,7 +244,7 @@
     .active-indicator {
         height: 3px;
         top: -3px;
-        /* REMOVED: width: 40px; */
+        /* REMOVED: width: 40px; - Now dynamic */
         border-radius: 2px 2px 0 0;
         box-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 15px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
     }
@@ -263,11 +265,11 @@
 @media (max-width: 360px) {
     .nav-dock {
         padding: 3px;
-        border-radius: 30px;
+        border-radius: 14px;
     }
 
     .nav-dock::before {
-        border-radius: 30px;
+        border-radius: 12px;
     }
 
     .nav-item {
@@ -280,20 +282,18 @@
         font-weight: 500;
     }
 
-    .active-indicator {
-        width: 35px;
-    }
+    /* REMOVED: .active-indicator fixed width */
 }
 
 /* Extra Small Mobile Devices */
 @media (max-width: 320px) {
     .nav-dock {
         padding: 2px;
-        border-radius: 30px;
+        border-radius: 12px;
     }
 
     .nav-dock::before {
-        border-radius: 30px;
+        border-radius: 10px;
     }
 
     .nav-item {
@@ -305,9 +305,7 @@
         font-size: 0.65rem;
     }
 
-    .active-indicator {
-        width: 32px;
-    }
+    /* REMOVED: .active-indicator fixed width */
 }
 
 /* Touch device improvements */
@@ -332,7 +330,7 @@
 
 /* More Tab Styles */
 .more-wrapper {
-    position: relative;
+    position: relative; /* Keep this for dropdown positioning */
 }
 
 .more-tab {
@@ -360,7 +358,7 @@
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    right: 0;
+    right: 0; /* Align to the right of the "More" button */
     margin-top: 12px;
     background: rgba(0, 0, 0, 1);
     backdrop-filter: blur(20px) saturate(180%);
@@ -404,6 +402,9 @@
     font-weight: 500;
     position: relative;
     overflow: hidden;
+    display: flex; /* Allow content and chevron to align */
+    align-items: center;
+    justify-content: space-between; /* Push chevron to the right */
 }
 
 .dropdown-item::before {
@@ -442,13 +443,13 @@
 /* Mobile adjustments for dropdown */
 @media (max-width: 768px) {
     .more-tab {
-        width: 70px;
+        width: 70px; /* Fixed width for consistency */
         height: 48px;
     }
 
     .dropdown-menu {
         min-width: 130px;
-        right: -2px;
+        right: -2px; /* Adjust dropdown position for mobile */
         margin-top: 10px;
         border-radius: 18px;
         padding: 6px;
@@ -467,13 +468,13 @@
 
 @media (max-width: 480px) {
     .more-tab {
-        width: 60px;
+        width: 60px; /* Fixed width for consistency */
         height: 44px;
     }
 
     .dropdown-menu {
         min-width: 120px;
-        right: -4px;
+        right: -4px; /* Adjust dropdown position for mobile */
         margin-top: 8px;
         border-radius: 16px;
         padding: 6px;
@@ -537,27 +538,25 @@
 }
 
 .dropdown-chevron {
-    position: absolute;
-    right: 6px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 6px;
-    height: 6px;
+    /* Removed absolute positioning and top/transform */
+    /* It's now handled by flexbox on .dropdown-item */
+    width: 18px; /* Standardize size for consistency */
+    height: 18px;
+    color: rgba(255, 255, 255, 0.6); /* Softer color */
+    margin-left: 8px; /* Space between text and chevron */
 }
 
 /* Mobile adjustments for dropdown active states */
 @media (max-width: 768px) {
     .dropdown-chevron {
-        width: 5px;
-        height: 5px;
-        right: 10px;
+        width: 16px;
+        height: 16px;
     }
 }
 
 @media (max-width: 480px) {
     .dropdown-chevron {
-        width: 4px;
-        height: 4px;
-        right: 8px;
+        width: 14px;
+        height: 14px;
     }
 }
