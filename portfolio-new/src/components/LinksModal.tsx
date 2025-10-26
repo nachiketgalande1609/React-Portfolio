@@ -80,17 +80,17 @@ const LinksModal: React.FC<LinksModalProps> = ({ isOpen, onClose }) => {
         {
             name: "Ripple",
             description: "Social media platform",
-            url: "https://ripple.nachiketgalande.site/",
+            url: "https://ripple.nachiketgalande.com/",
         },
         {
             name: "Streamline",
             description: "Enterprise management app",
-            url: "https://streamline.nachiketgalande.site/",
+            url: "https://streamline.nachiketgalande.com/",
         },
         {
             name: "Livo",
             description: "Lifestyle tracker",
-            url: "https://livo.nachiketgalande.site/",
+            url: "https://livo.nachiketgalande.com/",
         },
     ];
 

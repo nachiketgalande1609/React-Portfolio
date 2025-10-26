@@ -112,7 +112,7 @@ export const projectsData = {
                 "A fitness tracking web application that allows users to manage workouts and diet plans. Features include progress tracking, workout scheduling, meal logging, and personalized dashboards. Backend APIs are built with Flask, while MongoDB stores user activity and nutrition data.",
             techStack: ["React", "Flask", "Python", "MongoDB", "AWS", "Material UI"],
             image: livoImage,
-            liveLink: "https://livo.nachiketgalande.site/",
+            liveLink: "https://livo.nachiketgalande.com/",
             githubLink: "https://github.com/nachiketgalande1609/dietplanner",
         },
         {
@@ -122,7 +122,7 @@ export const projectsData = {
                 "A scalable social media platform with real-time messaging, video calls, and expiring stories. Features include push notifications, media sharing, and end-to-end encryption. Deployed on AWS with containerized architecture using Docker.",
             techStack: ["React", "React Native", "TypeScript", "Node.js", "WebRTC", "AWS"],
             image: rippleImage,
-            liveLink: "https://ripple.nachiketgalande.site/",
+            liveLink: "https://ripple.nachiketgalande.com/",
             githubLink: "https://nachiketgalande1609.github.io/ripple-links/",
         },
         {
@@ -132,7 +132,7 @@ export const projectsData = {
                 "Comprehensive ERP system with modules for users, inventory, orders, warehouses, customers, and sales. Provides a unified solution for business management with modern UI and efficient data handling.",
             techStack: ["React", "Node.js", "Express.js", "MongoDB", "Material UI"],
             image: streamlineImage,
-            liveLink: "https://streamline.nachiketgalande.site/",
+            liveLink: "https://streamline.nachiketgalande.com/",
             githubLink: "https://github.com/nachiketgalande1609/Streamline",
         },
         {

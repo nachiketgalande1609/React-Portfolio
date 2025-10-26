@@ -234,7 +234,6 @@
 .link-content {
     display: flex;
     align-items: center;
-    gap: 8px;
     position: relative;
     z-index: 2;
 }
@@ -242,6 +241,8 @@
 .link-icon {
     font-size: 1.3rem !important;
     transition: transform 0.3s ease;
+    background: transparent;
+    margin-right: 0.5rem;
 }
 
 .project-link:hover .link-icon {

@@ -34,28 +34,6 @@
     transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 300;
-    background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 0;
-    letter-spacing: -0.02em;
-}
-
-.section-subtitle {
-    font-size: 1.1rem;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.7);
-    margin: 0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease 0.3s;
-    letter-spacing: 0.02em;
-}
-
 /* Enhanced Filter Buttons with Glass Effect */
 .certificate-filters {
     display: flex;
@@ -557,10 +535,6 @@
         margin-bottom: 2.5rem;
     }
 
-    .section-title {
-        font-size: 2rem;
-    }
-
     .certificates-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -602,14 +576,6 @@
 @media (max-width: 480px) {
     .certificates-section {
         padding: 2rem 0;
-    }
-
-    .section-title {
-        font-size: 1.75rem;
-    }
-
-    .section-subtitle {
-        font-size: 1rem;
     }
 
     .certificate-card {
