@@ -1,51 +1,72 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import "../styles/About.css";
 import CakeIcon from "@mui/icons-material/Cake";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import CallRoundedIcon from "@mui/icons-material/CallRounded";
 import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const About: React.FC = () => {
-    const sectionRef = useRef<HTMLElement>(null);
+    const { scrollYProgress } = useScroll();
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("animate-in");
-                    }
-                });
+    // Header animation: float + fade-in
+    const headerY = useTransform(scrollYProgress, [0, 0.1], ["0%", "-5%"]);
+    const headerOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0.3]);
+
+    // Animation variants for staggered appearance
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
             },
-            {
-                threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px",
-            }
-        );
+        },
+    };
 
-        const animateElements = document.querySelectorAll(".animate-on-scroll");
-        animateElements.forEach((el) => observer.observe(el));
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    };
 
-        return () => {
-            animateElements.forEach((el) => observer.unobserve(el));
-        };
-    }, []);
+    const slideInLeftVariants = {
+        hidden: { opacity: 0, x: -50 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    };
+
+    const slideInRightVariants = {
+        hidden: { opacity: 0, x: 50 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    };
 
     return (
-        <section ref={sectionRef} id="about" className="section about-section">
+        <motion.section
+            id="about"
+            className="section about-section"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={containerVariants}
+        >
             <div className="container">
                 {/* Enhanced Header with Floating Animation */}
-                <div className="about-header">
-                    <div className="header-decoration animate-on-scroll">
+                <motion.div
+                    className="about-header"
+                    style={{ y: headerY, opacity: headerOpacity }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                >
+                    <motion.div className="header-decoration">
                         <h2 className="section-title">About Me</h2>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
 
                 <div className="about-content">
-                    <div className="about-main">
+                    <motion.div className="about-main" variants={itemVariants}>
                         {/* Personal Info with Enhanced Typography */}
-                        <div className="personal-info-compact animate-on-scroll">
+                        <motion.div className="personal-info-compact" variants={itemVariants}>
                             <div className="name-role-compact">
                                 <div className="name-glow"></div>
                                 <h3 className="name-title">Nachiket Galande</h3>
@@ -56,14 +77,14 @@ const About: React.FC = () => {
                                 high-performance web applications. Proficient in frontend and backend technologies with expertise in database
                                 architecture.
                             </p>
-                        </div>
+                        </motion.div>
 
                         {/* Combined Details Grid with Enhanced Cards */}
                         <div className="combined-details-grid">
                             {/* Personal Details */}
-                            <div className="details-group">
+                            <motion.div className="details-group" variants={slideInLeftVariants}>
                                 <h4 className="details-group-title">Personal Details</h4>
-                                <div className="details-grid">
+                                <motion.div className="details-grid" variants={containerVariants}>
                                     {[
                                         { label: "Year of Birth", value: "1999", icon: <CalendarMonthRoundedIcon /> },
                                         { label: "Phone", value: "+91 97649 93023", icon: <CallRoundedIcon /> },
@@ -71,10 +92,12 @@ const About: React.FC = () => {
                                         { label: "Age", value: "26", icon: <CakeIcon /> },
                                         { label: "Email", value: "nachiketgalande1609@gmail.com", icon: <EmailRoundedIcon /> },
                                     ].map((detail, index) => (
-                                        <div
+                                        <motion.div
                                             key={detail.label}
-                                            className="detail-item animate-on-scroll"
-                                            style={{ animationDelay: `${index * 0.05}s` }}
+                                            className="detail-item"
+                                            variants={itemVariants}
+                                            transition={{ delay: index * 0.05 }}
+                                            whileHover={{ scale: 1.02, boxShadow: "0 10px 25px rgba(0,0,0,0.4)", zIndex: 10 }}
                                         >
                                             <div className="detail-icon">{detail.icon}</div>
                                             <div className="detail-content">
@@ -82,15 +105,15 @@ const About: React.FC = () => {
                                                 <span>{detail.value}</span>
                                             </div>
                                             <div className="detail-hover-effect"></div>
-                                        </div>
+                                        </motion.div>
                                     ))}
-                                </div>
-                            </div>
+                                </motion.div>
+                            </motion.div>
 
                             {/* Education Timeline with Enhanced Markers */}
-                            <div className="timeline-group">
+                            <motion.div className="timeline-group" variants={slideInRightVariants}>
                                 <h4 className="details-group-title">Education Timeline</h4>
-                                <div className="timeline">
+                                <motion.div className="timeline" variants={containerVariants}>
                                     {[
                                         {
                                             degree: "Bachelor of Technology in Computer Science & Engineering",
@@ -111,13 +134,19 @@ const About: React.FC = () => {
                                             institution: "St. Xavier's English High School",
                                         },
                                     ].map((edu, index) => (
-                                        <div
+                                        <motion.div
                                             key={edu.degree}
-                                            className="timeline-item animate-on-scroll"
-                                            style={{ animationDelay: `${index * 0.1}s` }}
+                                            className="timeline-item"
+                                            variants={itemVariants}
+                                            transition={{ delay: index * 0.08 }}
+                                            whileHover={{ x: 10, boxShadow: "0 10px 25px rgba(0,0,0,0.4)", zIndex: 5 }}
                                         >
                                             <div className="timeline-marker">
-                                                <div className="marker-pulse"></div>
+                                                <motion.div
+                                                    className="marker-pulse"
+                                                    animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
+                                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                                ></motion.div>
                                             </div>
                                             <div className="timeline-content">
                                                 <div className="timeline-glow"></div>
@@ -130,16 +159,16 @@ const About: React.FC = () => {
                                                     <span className="timeline-institution">{edu.institution}</span>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </motion.div>
                                     ))}
-                                </div>
-                            </div>
+                                </motion.div>
+                            </motion.div>
                         </div>
 
                         {/* Enhanced Achievements Section */}
-                        <div className="achievements-section animate-on-scroll">
+                        <motion.div className="achievements-section" variants={itemVariants}>
                             <h3 className="achievements-title">Achievements</h3>
-                            <div className="achievements-grid">
+                            <motion.div className="achievements-grid" variants={containerVariants}>
                                 {[
                                     {
                                         number: "4+",
@@ -160,10 +189,12 @@ const About: React.FC = () => {
                                         gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
                                     },
                                 ].map((achievement, index) => (
-                                    <div
+                                    <motion.div
                                         key={achievement.label}
-                                        className="achievement-card animate-on-scroll"
-                                        style={{ animationDelay: `${index * 0.1}s` }}
+                                        className="achievement-card"
+                                        variants={itemVariants}
+                                        transition={{ delay: index * 0.1 }}
+                                        whileHover={{ y: -10, scale: 1.03, boxShadow: "0 25px 50px rgba(0,0,0,0.5)", zIndex: 10 }}
                                     >
                                         <div className="achievement-bg" style={{ background: achievement.gradient }}></div>
                                         <div className="achievement-main">
@@ -174,14 +205,14 @@ const About: React.FC = () => {
                                             </div>
                                         </div>
                                         <div className="achievement-glow"></div>
-                                    </div>
+                                    </motion.div>
                                 ))}
-                            </div>
-                        </div>
-                    </div>
+                            </motion.div>
+                        </motion.div>
+                    </motion.div>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 
