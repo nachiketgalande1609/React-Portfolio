@@ -18,7 +18,7 @@ const Header: React.FC = () => {
     // State to hold the dynamic style for the indicator
     const [indicatorStyle, setIndicatorStyle] = useState({});
 
-    // Refs for nav items
+    // Refs for nav items - fixed type definition
     const mainNavRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const moreTabRef = useRef<HTMLButtonElement | null>(null);
 
@@ -189,8 +189,10 @@ const Header: React.FC = () => {
                     {mainNavItems.map((item, index) => (
                         <div key={item.id} className="nav-item-wrapper">
                             <button
-                                // Assign ref to each button
-                                ref={(el) => (mainNavRefs.current[index] = el)}
+                                // Fixed ref callback - returns void instead of the element
+                                ref={(el) => {
+                                    mainNavRefs.current[index] = el;
+                                }}
                                 className={`nav-item ${activeSection === item.id ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
                                 onClick={() => scrollToSection(item.id)}
                                 aria-label={item.label}
@@ -203,8 +205,10 @@ const Header: React.FC = () => {
 
                     <div className="nav-item-wrapper more-wrapper">
                         <button
-                            // Assign ref to the "More" tab
-                            ref={moreTabRef}
+                            // Fixed ref callback
+                            ref={(el) => {
+                                moreTabRef.current = el;
+                            }}
                             className={`nav-item more-tab ${isMoreOpen ? "open" : ""} ${isDropdownActive ? "active" : ""}`}
                             onClick={handleMoreClick}
                             aria-label="More options"
