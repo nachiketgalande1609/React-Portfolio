@@ -218,14 +218,14 @@
 
     .nav-dock {
         padding: 4px;
-        border-radius: 16px;
+        border-radius: 30px;
         gap: 1px;
         backdrop-filter: blur(15px) saturate(160%);
         -webkit-backdrop-filter: blur(15px) saturate(160%);
     }
 
     .nav-dock::before {
-        border-radius: 14px;
+        border-radius: 30px;
     }
 
     .nav-item {
@@ -263,11 +263,11 @@
 @media (max-width: 360px) {
     .nav-dock {
         padding: 3px;
-        border-radius: 14px;
+        border-radius: 30px;
     }
 
     .nav-dock::before {
-        border-radius: 12px;
+        border-radius: 30px;
     }
 
     .nav-item {
@@ -289,11 +289,11 @@
 @media (max-width: 320px) {
     .nav-dock {
         padding: 2px;
-        border-radius: 12px;
+        border-radius: 30px;
     }
 
     .nav-dock::before {
-        border-radius: 10px;
+        border-radius: 30px;
     }
 
     .nav-item {
