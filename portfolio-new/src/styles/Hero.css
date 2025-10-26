@@ -1,19 +1,65 @@
-/* Hero.css (updated version) */
+/* Hero.css (updated for single viewport centering) */
 .hero {
     position: relative;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     overflow: hidden;
-    padding-top: 80px;
+    padding: 20px;
+    box-sizing: border-box;
+
+    /* Adjust padding-top for a fixed/sticky navbar height (e.g., 60px) */
+    /* You'll need to set this to the actual height of your navbar */
+    padding-top: 60px; /* Example: If your navbar is 60px tall */
+}
+
+/* Background Elements */
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden; /* Ensure background elements don't go outside */
+}
+
+@keyframes backgroundShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Main container for all hero content to keep it within a max-width and center it */
+.hero .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    flex-grow: 1; /* Allow container to grow */
+    /* Also account for padding in flex item if it's the main container */
+    padding-top: 20px; /* Add some space if the badge is now absolute */
 }
 
 /* Job Seeking Badge - Enhanced with 3D and Shine Effects */
 .job-seeking-badge {
-    position: relative;
-    text-align: center;
-    margin-bottom: 2rem;
-    z-index: 2;
+    position: absolute; /* Make it position absolute */
+    top: 20px; /* Adjust this value to clear your navbar + desired spacing */
+    /* Example: If navbar is 60px, and you want 20px gap, set top: 80px */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for its own width */
+    margin-bottom: 0; /* Remove margin as it's now absolute positioned */
+    z-index: 10; /* Give it a high z-index, higher than other hero content, but lower than navbar if navbar has like 999 */
     perspective: 1000px;
 }
 
@@ -29,7 +75,8 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-top: 80px;
+    /* Removed margin-top from here as well */
+    margin-top: 0;
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -105,17 +152,18 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    align-items: center;
+    align-items: center; /* Center items horizontally in column layout */
     position: relative;
     z-index: 2;
     width: 100%;
+    text-align: center; /* Default for mobile text content */
 }
 
 /* Hero Text Styling */
 .hero-text {
-    text-align: center;
+    text-align: center; /* Ensures text is centered on mobile */
     width: 100%;
-    max-width: 600px;
+    max-width: 600px; /* Limits text width */
 }
 
 .hero-title {
@@ -156,7 +204,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    order: -1; /* Ensures image comes first on mobile */
+    order: -1; /* Ensures image comes first on mobile (above text) */
 }
 
 .image-container {
@@ -210,7 +258,7 @@
 .hero-action-buttons {
     display: flex;
     gap: 1rem;
-    margin: 2rem 0;
+    margin: 2rem 0; /* Add top/bottom margin for spacing from other elements */
     flex-wrap: wrap;
     justify-content: center;
     z-index: 2;
@@ -251,7 +299,7 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-top: 1rem;
+    margin-top: 1rem; /* Add top margin for spacing */
     flex-wrap: wrap;
 }
 
@@ -264,7 +312,7 @@
     border-radius: 50%;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
-    background: rgba(0, 0, 0, 1);
+    background: rgba(0, 0, 0, 0.6); /* Slightly more transparent background for social links */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -306,23 +354,26 @@
 @media (min-width: 769px) {
     .hero-content {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr; /* Two columns for text and image */
         gap: 4rem;
-        align-items: center;
-        text-align: left;
-        min-height: 60vh;
+        align-items: center; /* Vertically align items in their grid row */
+        text-align: left; /* Reset text alignment for desktop grid */
+        min-height: 60vh; /* Allow content to dictate some height within the grid */
+        justify-items: start; /* Align grid items to the start of their column */
     }
 
+    /* Reverse order of text and image for desktop to put text on the left */
     .hero-text {
         text-align: left;
-        order: 0;
+        order: 0; /* Keep text as first item in grid for left column */
     }
 
     .hero-image {
-        order: 0;
-        justify-content: center;
+        order: 1;
+        justify-content: flex-start; /* Align image content to the left */
         align-items: center;
         height: 100%;
+        justify-self: center; /* Push image container to the start of its grid cell (left side) */
     }
 
     .hero-title {
@@ -344,10 +395,12 @@
 
     .job-seeking-badge {
         margin-bottom: 3rem;
+        margin-top: 0; /* Ensure no extra top margin here either */
+        top: 50px; /* Maybe a bit more space on larger screens */
     }
 
     .job-seeking-badge span {
-        margin-top: 100px;
+        margin-top: 0; /* Remove top margin on desktop as well */
         padding: 14px 28px 14px 20px;
     }
 
@@ -367,13 +420,13 @@
 }
 
 /* Tablet Styles */
-@media (max-width: 768px) and (min-width: 481px) {
+@media (max-width: 768px) and (min-width: 630px) {
     .hero-title {
-        font-size: 2.8rem;
+        font-size: 2rem;
     }
 
     .hero-subtitle {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
 
     .image-wrapper {
@@ -381,8 +434,12 @@
         height: 240px;
     }
 
+    .job-seeking-badge {
+        top: 30px;
+    }
+
     .job-seeking-badge span {
-        margin-top: 90px;
+        margin-top: 0; /* Ensure no extra top margin here */
     }
 
     .action-btn {
@@ -408,7 +465,7 @@
     .job-seeking-badge span {
         font-size: 0.8rem;
         padding: 10px 20px 10px 16px;
-        margin-top: 70px;
+        margin-top: 0; /* Ensure no extra top margin here */
     }
 
     .action-btn {
@@ -440,7 +497,7 @@
 }
 
 /* Extra Small Mobile */
-@media (max-width: 360px) {
+@media (max-width: 630px) {
     .hero-title {
         font-size: 1.8rem;
     }
@@ -448,6 +505,10 @@
     .image-wrapper {
         width: 180px;
         height: 180px;
+    }
+
+    .job-seeking-badge {
+        top: 40px;
     }
 
     .job-seeking-badge span {
@@ -461,6 +522,42 @@
     }
 
     .hero-action-buttons {
+        gap: 0.6rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .hero-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .image-wrapper {
+        width: 180px;
+        height: 180px;
+    }
+
+    .job-seeking-badge {
+        top: 20px;
+    }
+
+    .job-seeking-badge span {
+        font-size: 0.65rem;
+        padding: 8px 16px 8px 14px;
+    }
+
+    .action-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+
+    .hero-action-buttons {
+        margin: 0.2rem;
         gap: 0.6rem;
     }
 }

@@ -65,7 +65,7 @@ const About: React.FC = () => {
                                 <h4 className="details-group-title">Personal Details</h4>
                                 <div className="details-grid">
                                     {[
-                                        { label: "Date of Birth", value: "16 Sept 1999", icon: <CalendarMonthRoundedIcon /> },
+                                        { label: "Year of Birth", value: "1999", icon: <CalendarMonthRoundedIcon /> },
                                         { label: "Phone", value: "+91 97649 93023", icon: <CallRoundedIcon /> },
                                         { label: "Location", value: "Mumbai, India", icon: <PersonPinCircleRoundedIcon /> },
                                         { label: "Age", value: "26", icon: <CakeIcon /> },

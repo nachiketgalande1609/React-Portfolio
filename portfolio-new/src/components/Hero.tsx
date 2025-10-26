@@ -1,4 +1,3 @@
-// Hero.tsx (updated version)
 import React from "react";
 import { personalInfo, socialLinks } from "../data/portfolioData";
 import "../styles/Hero.css";
@@ -57,7 +56,16 @@ const Hero: React.FC = () => {
                 </div>
 
                 <div className="hero-content">
-                    {/* Image Section - Centered vertically */}
+                    {/* Text Content Section */}
+                    <div className="hero-text">
+                        <h1 className="hero-title">
+                            Hi, I'm <span className="highlight">{personalInfo.name}</span>
+                        </h1>
+                        <h2 className="hero-subtitle">{personalInfo.title}</h2>
+                        <p className="hero-description">{personalInfo.about}</p>
+                    </div>
+
+                    {/* Image Section - Centered vertically and potentially horizontally in its grid cell */}
                     <div className="hero-image">
                         <div className="image-container">
                             <div className="main-image">
@@ -67,15 +75,6 @@ const Hero: React.FC = () => {
                                 <div className="image-glow"></div>
                             </div>
                         </div>
-                    </div>
-
-                    {/* Text Content Section */}
-                    <div className="hero-text">
-                        <h1 className="hero-title">
-                            Hi, I'm <span className="highlight">{personalInfo.name}</span>
-                        </h1>
-                        <h2 className="hero-subtitle">{personalInfo.title}</h2>
-                        <p className="hero-description">{personalInfo.about}</p>
                     </div>
                 </div>
 
