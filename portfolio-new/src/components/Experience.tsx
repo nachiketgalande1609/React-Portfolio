@@ -160,6 +160,7 @@ const Experience: React.FC = () => {
                                         <div className="card-corner"></div>
 
                                         <div className="experience-description">
+                                            <h3>{experience.role}</h3>
                                             <ul className="description-list">
                                                 {experience.description.map((item, itemIndex) => (
                                                     <li key={itemIndex} className="description-item">

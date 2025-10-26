@@ -293,6 +293,10 @@
     transition: all 0.4s ease;
 }
 
+.work-card:hover {
+    transform: rotate(1deg);
+}
+
 .work-card:hover .card-corner {
     border-top: 70px solid rgba(255, 255, 255, 0.08);
 }
@@ -314,6 +318,20 @@
 /* Experience Description */
 .experience-description {
     margin: 0;
+}
+
+.experience-description h3 {
+    color: #999999;
+    font-size: 1.8rem; /* Make it a bit larger */
+    font-weight: 700;
+    margin-bottom: 1.5rem; /* Add some space below */
+    line-height: 1.3;
+    transition: all 0.3s ease-in-out;
+}
+
+.experience-description h3:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+    letter-spacing: 0.5px; /* Subtle letter spacing change */
 }
 
 .description-list {
@@ -446,6 +464,11 @@
         padding: 4rem 0;
     }
 
+    .experience-description h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
     .experience-header {
         margin-bottom: 4rem;
     }
@@ -484,6 +507,11 @@
 @media (max-width: 480px) {
     .experience-section {
         padding: 3rem 0;
+    }
+
+    .experience-description h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
     }
 
     .header-decoration {
