@@ -23,7 +23,7 @@
     transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-/* Two Column Layout */
+/* Two Column Layout (Desktop) */
 .two-column-layout {
     display: grid;
     grid-template-columns: 300px 1fr;
@@ -131,7 +131,7 @@
 
 .technologies-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, auto)); /* auto instead of 1fr */
+    grid-template-columns: repeat(auto-fill, minmax(180px, auto)); /* auto instead of 1fr for desktop */
     gap: 0.5rem;
     justify-items: start;
 }
@@ -304,21 +304,23 @@
 
 @media (max-width: 768px) {
     .skills-section {
-        padding: 4rem 0;
+        padding: 4rem 1rem; /* Adjusted padding for better mobile fit */
     }
 
     .skills-header {
-        margin-bottom: 4rem;
+        margin-bottom: 3rem; /* Slightly reduced header margin */
     }
 
     .header-decoration {
         gap: 1.5rem;
     }
 
+    /* Main layout becomes single column for categories */
     .two-column-layout {
         grid-template-columns: 1fr;
-        gap: 3rem;
-        max-width: 500px;
+        gap: 2rem; /* Reduced gap */
+        max-width: 600px; /* Allow wider on tablets, but still single column */
+        padding: 0 1rem; /* Add horizontal padding to the main layout */
     }
 
     .headers-column {
@@ -327,55 +329,60 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 1.5rem;
+        gap: 1rem; /* Reduced gap between category headers */
     }
 
     .category-header-item {
-        flex: 1;
-        min-width: 200px;
-        padding: 1.5rem;
+        flex: 1 1 calc(50% - 1rem); /* Two columns for category headers if space allows */
+        min-width: 160px; /* Allow them to shrink more */
+        padding: 1rem; /* Reduced padding */
         justify-content: center;
         text-align: center;
-        border: 1px solid white !important;
+        /* border: 1px solid white !important; */
     }
 
     .category-header-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 1.6rem;
+        width: 40px; /* Reduced icon size */
+        height: 40px;
+        font-size: 1.4rem;
     }
 
     .category-header-title {
-        font-size: 1.2rem;
+        font-size: 1.1rem; /* Reduced font size */
     }
 
     .technologies-group {
-        padding: 2rem 0;
-        margin-bottom: 2rem;
+        padding: 0; /* Reduced padding */
+        margin-bottom: 1.5rem; /* Reduced margin */
     }
 
+    /* ********************************************** */
+    /* NEW: 2 columns for tech tags on mobile */
     .technologies-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr); /* Force 2 columns for skill items */
+        gap: 0.8rem; /* Slightly reduced gap */
+        justify-items: stretch; /* Stretch items to fill columns */
     }
+    /* ********************************************** */
 
     .skill-item {
-        padding: 1.2rem;
-        gap: 1rem;
+        padding: 0.8rem; /* Reduced padding */
+        gap: 0.8rem; /* Reduced gap */
+        justify-content: flex-start; /* Align text to start */
     }
 
     .skill-icon {
-        width: 35px;
-        height: 35px;
+        width: 30px; /* Smaller icon */
+        height: 30px;
     }
 
     .skill-icon img {
-        width: 20px;
-        height: 20px;
+        width: 18px; /* Smaller image inside icon */
+        height: 18px;
     }
 
     .skill-name {
-        font-size: 1rem;
+        font-size: 0.95rem; /* Slightly smaller font for skill names */
     }
 
     /* Reduce particles on mobile */
@@ -386,35 +393,77 @@
 
 @media (max-width: 480px) {
     .skills-section {
-        padding: 3rem 0;
+        padding: 3rem 0.5rem; /* More compact padding for smaller phones */
+    }
+
+    .skills-header {
+        margin-bottom: 2.5rem;
     }
 
     .header-decoration {
         gap: 1rem;
     }
 
+    .section-title {
+        font-size: 2rem; /* Smaller title */
+    }
+
+    .section-subtitle {
+        font-size: 0.9rem; /* Smaller subtitle */
+    }
+
     .two-column-layout {
-        gap: 2.5rem;
+        gap: 1rem; /* Reduced gap */
+        padding: 0 0.5rem; /* More compact padding */
+        grid-template-columns: 1fr;
+    }
+
+    .category-header-item {
+        margin-top: 1rem;
     }
 
     .headers-column {
-        flex-direction: column;
+        flex-direction: column; /* Stack category headers again on very small screens */
+        gap: 0.8rem;
     }
 
     .category-header-item {
         min-width: auto;
+        padding: 0rem; /* Further reduced padding */
+        flex: none; /* Don't force flex grow */
+    }
+
+    .category-header-title {
+        font-size: 1rem; /* Even smaller font */
     }
 
     .technologies-group {
-        padding: 1.5rem 0;
-        margin-bottom: 1.5rem;
+        padding: 0; /* Further reduced padding */
+        margin-bottom: 1rem;
     }
 
+    /* Maintain 2 columns for tech tags on very small phones */
     .technologies-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem; /* Even more compact gap */
     }
 
     .skill-item {
-        padding: 1rem;
+        padding: 0.6rem; /* Very compact padding */
+        gap: 0.6rem;
+    }
+
+    .skill-icon {
+        width: 28px; /* Even smaller icon */
+        height: 28px;
+    }
+
+    .skill-icon img {
+        width: 16px; /* Even smaller image */
+        height: 16px;
+    }
+
+    .skill-name {
+        font-size: 0.85rem; /* Very compact font size for skill names */
     }
 }
