@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import "../styles/Certificates.css";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { certificatesData } from "../data/portfolioData";
+import { Modal, Box, Typography, IconButton, Backdrop, Fade } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface Certificate {
     title: string;
@@ -41,50 +43,34 @@ const Certificates: React.FC = () => {
         setVisibleCount(filteredCertificates.length);
     };
 
+    const handleOpenModal = (certificate: Certificate) => {
+        setSelectedCertificate(certificate);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedCertificate(null);
+    };
+
     const visibleCertificates = filteredCertificates.slice(0, visibleCount);
     const hasMoreCertificates = visibleCount < filteredCertificates.length;
 
-    const CertificateModal: React.FC<{ certificate: Certificate; onClose: () => void }> = ({ certificate, onClose }) => (
-        <div className="certificate-modal-overlay" onClick={onClose}>
-            <div className="certificate-modal" onClick={(e) => e.stopPropagation()}>
-                <div className="modal-header">
-                    <h3>{certificate.title}</h3>
-                    <button className="modal-close" onClick={onClose}>
-                        ×
-                    </button>
-                </div>
-                <div className="modal-content">
-                    {/* Certificate Image */}
-                    {certificate.image && (
-                        <div className="certificate-image-container">
-                            <img
-                                src={certificate.image}
-                                alt={`${certificate.title} Certificate`}
-                                className="certificate-image"
-                                onError={(e) => {
-                                    (e.target as HTMLImageElement).style.display = "none";
-                                }}
-                            />
-                        </div>
-                    )}
-
-                    <div className="modal-details-section">
-                        <div className="modal-logo">
-                            <img src={certificate.logo} alt={certificate.organization} />
-                        </div>
-                        <div className="modal-details">
-                            <p className="organization">{certificate.organization}</p>
-                            <p className="date">Issued: {certificate.date}</p>
-                            <a href={certificate.credential_url} target="_blank" rel="noopener noreferrer" className="modal-link">
-                                <span>View Credential</span>
-                                <LaunchIcon className="link-icon" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+    const modalStyle = {
+        position: "absolute" as "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: "90%",
+        maxWidth: 900,
+        maxHeight: "90vh",
+        overflowY: "auto",
+        bgcolor: "rgba(255, 255, 255, 0.1)",
+        border: "1px solid rgba(255, 255, 255, 0.2)",
+        borderRadius: "24px",
+        p: 1.5,
+        backdropFilter: "blur(30px) saturate(180%)",
+        boxShadow: "0 25px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1)",
+        color: "white",
+    };
 
     return (
         <section ref={sectionRef} id="certificates" className="section certificates-section">
@@ -108,7 +94,7 @@ const Certificates: React.FC = () => {
                 {/* Certificates Grid */}
                 <div className="certificates-grid">
                     {visibleCertificates.map((certificate, index) => (
-                        <div key={`${certificate.title}-${index}`} className="certificate-card" onClick={() => setSelectedCertificate(certificate)}>
+                        <div key={`${certificate.title}-${index}`} className="certificate-card" onClick={() => handleOpenModal(certificate)}>
                             <div className="certificate-content">
                                 <div className="certificate-header">
                                     <div className="certificate-logo">
@@ -158,8 +144,127 @@ const Certificates: React.FC = () => {
                     {filter !== "all" && ` for ${filter}`}
                 </div>
 
-                {/* Modal */}
-                {selectedCertificate && <CertificateModal certificate={selectedCertificate} onClose={() => setSelectedCertificate(null)} />}
+                {/* MUI Modal */}
+                <Modal
+                    open={selectedCertificate !== null}
+                    onClose={handleCloseModal}
+                    aria-labelledby="certificate-modal-title"
+                    aria-describedby="certificate-modal-description"
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                        sx: { backdropFilter: "blur(10px)" },
+                    }}
+                >
+                    <Fade in={selectedCertificate !== null}>
+                        <Box sx={modalStyle}>
+                            {selectedCertificate && (
+                                <>
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 2 }}>
+                                        <Typography
+                                            id="certificate-modal-title"
+                                            variant="h6"
+                                            component="h2"
+                                            sx={{
+                                                background: "linear-gradient(135deg, #ffffff 0%, #cccccc 100%)",
+                                                WebkitBackgroundClip: "text",
+                                                WebkitTextFillColor: "transparent",
+                                                flex: 1,
+                                                mr: 1,
+                                                lineHeight: 1.4,
+                                                fontSize: "1.4rem",
+                                            }}
+                                        >
+                                            {selectedCertificate.title}
+                                        </Typography>
+                                        <IconButton
+                                            aria-label="close"
+                                            onClick={handleCloseModal}
+                                            sx={{
+                                                color: "rgba(255, 255, 255, 0.8)",
+                                                bgcolor: "rgba(255, 255, 255, 0.1)",
+                                                border: "1px solid rgba(255, 255, 255, 0.2)",
+                                                transition: "all 0.3s ease",
+                                                "&:hover": {
+                                                    color: "white",
+                                                    background: "rgba(255, 255, 255, 0.2)",
+                                                    borderColor: "rgba(255, 255, 255, 0.3)",
+                                                    transform: "scale(1.1)",
+                                                },
+                                            }}
+                                        >
+                                            <CloseIcon />
+                                        </IconButton>
+                                    </Box>
+                                    <Box>
+                                        {selectedCertificate.image && (
+                                            <Box sx={{ width: "100%", display: "flex", justifyContent: "center", mb: 2 }}>
+                                                <img
+                                                    src={selectedCertificate.image}
+                                                    alt={`${selectedCertificate.title} Certificate`}
+                                                    style={{
+                                                        width: "100%",
+                                                        maxHeight: "500px",
+                                                        borderRadius: "16px",
+                                                        border: "1px solid rgba(255, 255, 255, 0.15)",
+                                                        background: "rgba(255, 255, 255, 0.05)",
+                                                        backdropFilter: "blur(15px)",
+                                                        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
+                                                        objectFit: "contain",
+                                                    }}
+                                                    onError={(e) => {
+                                                        (e.target as HTMLImageElement).style.display = "none";
+                                                    }}
+                                                />
+                                            </Box>
+                                        )}
+                                        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+                                            <Box
+                                                sx={{
+                                                    width: 80,
+                                                    height: 80,
+                                                    borderRadius: "16px",
+                                                    border: "1px solid rgba(255, 255, 255, 0.15)",
+                                                    background: "rgba(255, 255, 255, 0.08)",
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    p: 0.75,
+                                                    backdropFilter: "blur(15px)",
+                                                    flexShrink: 0,
+                                                }}
+                                            >
+                                                <img
+                                                    src={selectedCertificate.logo}
+                                                    alt={selectedCertificate.organization}
+                                                    style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                                                />
+                                            </Box>
+                                            <Box sx={{ flex: 1 }}>
+                                                <Typography sx={{ color: "#10b981", fontSize: "1.2rem", fontWeight: 600, letterSpacing: "0.02em" }}>
+                                                    {selectedCertificate.organization}
+                                                </Typography>
+                                                <Typography sx={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "1rem", mb: 2 }}>
+                                                    Issued: {selectedCertificate.date}
+                                                </Typography>
+                                                <a
+                                                    href={selectedCertificate.credential_url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="modal-link"
+                                                >
+                                                    <span>View Credential</span>
+                                                    <LaunchIcon className="link-icon" />
+                                                </a>
+                                            </Box>
+                                        </Box>
+                                    </Box>
+                                </>
+                            )}
+                        </Box>
+                    </Fade>
+                </Modal>
             </div>
         </section>
     );
