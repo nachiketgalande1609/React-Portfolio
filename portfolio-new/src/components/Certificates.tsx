@@ -36,13 +36,13 @@ const Certificates: React.FC = () => {
         );
 
         if (sectionRef.current) {
-            const elementsToAnimate = sectionRef.current.querySelectorAll(".section-title, .section-subtitle, .filter-btn, .certificate-card");
+            // Target the header-decoration directly for the animation
+            const elementsToAnimate = sectionRef.current.querySelectorAll(".header-decoration, .section-subtitle, .filter-btn, .certificate-card");
             elementsToAnimate.forEach((el) => observer.observe(el));
         }
 
         return () => observer.disconnect();
-    }, [filteredCertificates, visibleCount]);
-
+    }, [filteredCertificates, visibleCount]); // Keep dependencies as they are
     // Extract unique organizations for filter
     const organizations = React.useMemo(() => {
         const orgs = certificatesData.map((cert) => cert.organization);

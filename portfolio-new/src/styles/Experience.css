@@ -6,17 +6,6 @@
     min-height: 100vh;
 }
 
-.experience-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, #ffffff 50%, transparent 100%);
-    opacity: 0.1;
-}
-
 .experience-header {
     text-align: center;
     margin-bottom: 6rem;
@@ -47,76 +36,57 @@
     position: relative;
 }
 
-/* Modern Animated Timeline Line */
+/* Redesigned Timeline Line */
 .timeline-line-main {
     position: absolute;
     left: 40%;
     top: 0;
     bottom: 0;
-    width: 2px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.1) 100%);
+    width: 1px; /* Thinner line */
+    background: rgba(255, 255, 255, 0.1); /* Solid, low opacity color */
     transform: translateX(-50%);
     z-index: 1;
+    /* Adding a subtle, diffused glow */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
-/* Timeline Node */
+/* Redesigned Timeline Node */
 .timeline-node {
     position: absolute;
     left: 40%;
-    top: 50px;
+    /* Note: Top position will be handled by JavaScript for each item's relative position */
+    top: 20px;
     transform: translateX(-50%);
-    width: 24px;
-    height: 24px;
-    z-index: 2;
+    width: 20px; /* Slightly smaller */
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Light background for the circle */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
+    transition: all 0.3s ease-in-out;
 }
 
-.timeline-node-inner {
-    width: 16px;
-    height: 16px;
-    background: #ffffff;
+.timeline-node::before {
+    content: "";
+    width: 8px; /* Inner solid circle */
+    height: 8px;
+    background-color: #ffffff; /* White inner circle */
     border-radius: 50%;
-    position: relative;
-    animation: pulse 2s ease-in-out infinite;
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease-in-out;
 }
 
-.timeline-node-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 24px;
-    height: 24px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: glow 2s ease-in-out infinite;
+/* No more glow or pulse animations on the node itself, but we can add hover effects */
+.experience-item:hover .timeline-node {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
-@keyframes pulse {
-    0%,
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
-    }
-    50% {
-        transform: scale(1.1);
-        box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.3);
-    }
-}
-
-@keyframes glow {
-    0%,
-    100% {
-        opacity: 0.5;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-        opacity: 0.8;
-        transform: translate(-50%, -50%) scale(1.2);
-    }
+.experience-item:hover .timeline-node::before {
+    transform: scale(1.2); /* Inner circle scales up on hover */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4); /* Glow for the inner circle */
 }
 
 .experience-item {
@@ -141,8 +111,9 @@
 /* Left Side - Compact Company Details */
 .company-details {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end; /* Changed to flex-end for better alignment with the timeline */
     padding-right: 2rem;
+    text-align: right; /* Align text right for the company card */
 }
 
 .company-card {
@@ -153,7 +124,7 @@
     max-width: 300px;
     width: 100%;
     z-index: 2;
-    text-align: left;
+    /* text-align: left; REMOVED - NOW IN PARENT */
 }
 
 /* Period Header */
@@ -175,7 +146,7 @@
 }
 
 .company-info {
-    text-align: left;
+    text-align: right; /* Align company info to the right */
 }
 
 .company-name {
@@ -213,7 +184,7 @@
 
 /* Technologies and Skills */
 .tech-skills-section {
-    text-align: left;
+    text-align: right; /* Align tech skills to the right */
 }
 
 .technologies-section {
@@ -228,7 +199,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    justify-content: flex-start;
+    justify-content: flex-end; /* Align tags to the right */
     padding: 2px 0;
 }
 
@@ -377,10 +348,6 @@
     box-shadow: 0 0 10px rgba(255, 183, 0, 0.5);
 }
 
-.description-text {
-    flex: 1;
-}
-
 .card-glow {
     position: absolute;
     top: 0;
@@ -433,12 +400,13 @@
 
     .timeline-node {
         left: 30px;
-        top: 40px;
+        top: 40px; /* Adjust top for single column layout */
     }
 
     .company-details {
-        justify-content: flex-start;
+        justify-content: flex-start; /* Revert to start for single column */
         padding-right: 0;
+        text-align: left; /* Revert text alignment */
     }
 
     .company-card {
@@ -451,7 +419,7 @@
     }
 
     .tags-container {
-        justify-content: flex-start;
+        justify-content: flex-start; /* Revert tags alignment */
     }
 
     .work-details {
@@ -551,13 +519,6 @@
         height: 20px;
     }
 
-    .timeline-node-inner {
-        width: 12px;
-        height: 12px;
-    }
-
-    .timeline-node-glow {
-        width: 20px;
-        height: 20px;
-    }
+    /* .timeline-node-inner is no longer used, removed if it was present */
+    /* .timeline-node-glow is no longer used, removed if it was present */
 }

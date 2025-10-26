@@ -1,21 +1,9 @@
 /* Skills Section - 2 Column Layout with Headers & Technologies */
 .skills-section {
-    background: #000000;
     color: #ffffff;
     position: relative;
     overflow: hidden;
     padding: 6rem 0;
-}
-
-.skills-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, #ffffff 50%, transparent 100%);
-    opacity: 0.1;
 }
 
 .skills-header {

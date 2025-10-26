@@ -3,21 +3,10 @@
    ========================================================================== */
 
 .certificates-section {
-    color: #ffffff;
+    color: #d6d5d5;
     position: relative;
     padding: 3rem 0;
     min-height: 100vh;
-}
-
-.certificates-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, #ffffff 50%, transparent 100%);
-    opacity: 0.1;
 }
 
 .certificates-header {
