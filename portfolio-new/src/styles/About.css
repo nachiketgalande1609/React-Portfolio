@@ -1,4 +1,4 @@
-/* About Section - Enhanced Aesthetic Design */
+/* About Section - Enhanced Aesthetic Design with Glass Effects */
 .about-section {
     background: #000000;
     color: #ffffff;
@@ -49,16 +49,7 @@
     }
 }
 
-@keyframes shimmer {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(200%);
-    }
-}
-
-/* Enhanced Personal Info */
+/* Enhanced Personal Info with Glass Effect */
 .personal-info-compact {
     text-align: center;
     margin-bottom: 3rem;
@@ -101,16 +92,35 @@
     position: relative;
 }
 
+/* Enhanced Role Badge with Glass Effect */
 .role-badge {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
     padding: 0.5rem 1.5rem;
     border-radius: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     font-size: 0.9rem;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     animation: pulse 2s ease-in-out infinite alternate;
+    position: relative;
+    overflow: hidden;
+}
+
+.role-badge::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.role-badge:hover::before {
+    left: 100%;
 }
 
 @keyframes pulse {
@@ -163,7 +173,7 @@
     background: linear-gradient(90deg, transparent, #ffffff, transparent);
 }
 
-/* Enhanced Details Grid */
+/* Enhanced Details Grid with Glass Effect */
 .details-grid {
     display: flex;
     flex-direction: column;
@@ -174,9 +184,11 @@
     display: flex;
     align-items: center;
     padding: 1.2rem 1.5rem;
-    border-radius: 12px;
+    border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
     transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
     opacity: 0;
     transform: translateX(-20px);
@@ -194,14 +206,15 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
     transition: left 0.6s ease;
 }
 
 .detail-item:hover {
     transform: translateX(10px);
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .detail-item:hover .detail-hover-effect {
@@ -212,6 +225,7 @@
     font-size: 1.2rem;
     margin-right: 1rem;
     min-width: 30px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .detail-content {
@@ -235,7 +249,7 @@
     font-weight: 400;
 }
 
-/* Enhanced Timeline Styles */
+/* Enhanced Timeline Styles with Glass Effect */
 .timeline-group {
     position: relative;
 }
@@ -274,7 +288,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #000000;
+    background: rgba(0, 0, 0, 0.5);
     border: 2px solid rgba(255, 255, 255, 0.5);
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
     transition: all 0.4s ease;
@@ -282,6 +296,8 @@
     align-items: center;
     justify-content: center;
     z-index: 2;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .marker-pulse {
@@ -310,11 +326,14 @@
     box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
 }
 
+/* Enhanced Timeline Content with Glass Effect */
 .timeline-content {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.05);
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
     transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
@@ -326,7 +345,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
     transition: left 0.6s ease;
 }
 
@@ -335,9 +354,10 @@
 }
 
 .timeline-item:hover .timeline-content {
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
     transform: translateX(8px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .timeline-header {
@@ -364,9 +384,10 @@
     background: rgba(255, 255, 255, 0.1);
     padding: 0.4rem 1rem;
     border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     white-space: nowrap;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 }
 
 .timeline-details {
@@ -383,6 +404,8 @@
     background: rgba(255, 255, 255, 0.1);
     padding: 0.3rem 0.8rem;
     border-radius: 10px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .timeline-institution {
@@ -392,7 +415,7 @@
     flex: 1;
 }
 
-/* Enhanced Achievements Section */
+/* Enhanced Achievements Section with Glass Effect */
 .achievements-section {
     margin-top: 2rem;
     opacity: 0;
@@ -431,11 +454,14 @@
     gap: 2rem;
 }
 
+/* Enhanced Achievement Cards with Glass Effect */
 .achievement-card {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.05);
     padding: 2.5rem 2rem;
-    border-radius: 16px;
+    border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
     position: relative;
     overflow: hidden;
@@ -455,17 +481,18 @@
     height: 100%;
     opacity: 0;
     transition: opacity 0.4s ease;
+    border-radius: 20px;
 }
 
 .achievement-card:hover .achievement-bg {
-    opacity: 0.1;
+    opacity: 0.15;
 }
 
 .achievement-card:hover {
     transform: translateY(-12px) scale(1.02);
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 80px rgba(255, 255, 255, 0.05);
 }
 
 .achievement-glow {
@@ -620,6 +647,18 @@
 
     .achievement-number {
         font-size: 2.5rem;
+    }
+
+    /* Reduce blur on mobile for better performance */
+    .detail-item,
+    .timeline-content,
+    .achievement-card,
+    .role-badge,
+    .timeline-period,
+    .timeline-grade,
+    .timeline-marker {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
 }
 

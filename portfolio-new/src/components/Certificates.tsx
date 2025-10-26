@@ -16,6 +16,7 @@ const Certificates: React.FC = () => {
     const [filter, setFilter] = useState<string>("all");
     const [filteredCertificates, setFilteredCertificates] = useState<Certificate[]>(certificatesData);
     const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
+    const [visibleCount, setVisibleCount] = useState<number>(9);
 
     // Extract unique organizations for filter
     const organizations = React.useMemo(() => {
@@ -30,7 +31,17 @@ const Certificates: React.FC = () => {
         } else {
             setFilteredCertificates(certificatesData.filter((cert) => cert.organization === filter));
         }
+        // Reset visible count when filter changes
+        setVisibleCount(9);
     }, [filter]);
+
+    const handleViewMore = () => {
+        // Load all remaining certificates immediately
+        setVisibleCount(filteredCertificates.length);
+    };
+
+    const visibleCertificates = filteredCertificates.slice(0, visibleCount);
+    const hasMoreCertificates = visibleCount < filteredCertificates.length;
 
     const CertificateModal: React.FC<{ certificate: Certificate; onClose: () => void }> = ({ certificate, onClose }) => (
         <div className="certificate-modal-overlay" onClick={onClose}>
@@ -79,7 +90,7 @@ const Certificates: React.FC = () => {
 
                 {/* Certificates Grid */}
                 <div className="certificates-grid">
-                    {filteredCertificates.map((certificate, index) => (
+                    {visibleCertificates.map((certificate, index) => (
                         <div key={`${certificate.title}-${index}`} className="certificate-card" onClick={() => setSelectedCertificate(certificate)}>
                             <div className="certificate-content">
                                 <div className="certificate-header">
@@ -115,9 +126,19 @@ const Certificates: React.FC = () => {
                     ))}
                 </div>
 
+                {/* View More Button */}
+                {hasMoreCertificates && (
+                    <div className="view-more-container">
+                        <button className="view-more-btn" onClick={handleViewMore}>
+                            View More ({filteredCertificates.length - visibleCount} remaining)
+                        </button>
+                    </div>
+                )}
+
                 {/* Count Display */}
                 <div className="certificates-count">
-                    {filteredCertificates.length} of {certificatesData.length} certificates
+                    Showing {visibleCertificates.length} of {filteredCertificates.length} certificates
+                    {filter !== "all" && ` for ${filter}`}
                 </div>
 
                 {/* Modal */}
