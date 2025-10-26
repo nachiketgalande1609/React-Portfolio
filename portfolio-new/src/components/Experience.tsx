@@ -107,8 +107,15 @@ const Experience: React.FC = () => {
                         {/* Continuous Timeline Line */}
                         <div className="timeline-line-main"></div>
 
-                        {experienceData.map((experience) => (
+                        {experienceData.map((experience, index) => (
                             <div key={experience.id} className="experience-item">
+                                {/* Timeline Node */}
+                                <div className="timeline-node">
+                                    <div className="timeline-node-inner">
+                                        <div className="timeline-node-glow"></div>
+                                    </div>
+                                </div>
+
                                 {/* Left Side - Company Details */}
                                 <div className="company-details">
                                     <div className="company-card">

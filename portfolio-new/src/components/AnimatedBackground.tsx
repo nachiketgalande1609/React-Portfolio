@@ -57,7 +57,7 @@ const AnimatedBackground: React.FC = () => {
 
     return (
         <div className="animated-background" ref={backgroundRef}>
-            <div className="particles-container"></div>
+            {/* <div className="particles-container"></div> */}
         </div>
     );
 };

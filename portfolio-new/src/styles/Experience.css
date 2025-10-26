@@ -59,6 +59,66 @@
     z-index: 1;
 }
 
+/* Timeline Node */
+.timeline-node {
+    position: absolute;
+    left: 40%;
+    top: 50px;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timeline-node-inner {
+    width: 16px;
+    height: 16px;
+    background: #ffffff;
+    border-radius: 50%;
+    position: relative;
+    animation: pulse 2s ease-in-out infinite;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+.timeline-node-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.3);
+    }
+}
+
+@keyframes glow {
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
 .experience-item {
     display: grid;
     grid-template-columns: 35% auto 65%;
@@ -286,7 +346,7 @@
 .bullet {
     width: 6px;
     height: 6px;
-    background: linear-gradient(135deg, #ffb700, #7147d3);
+    background: #ffffff;
     border-radius: 50%;
     margin-top: 0.5rem;
     flex-shrink: 0;
@@ -334,13 +394,15 @@
         gap: 1.5rem;
     }
 
-    .timeline-line-main {
+    .timeline-line-main,
+    .timeline-node {
         left: 40%;
     }
 }
 
 @media (max-width: 968px) {
-    .timeline-line-main {
+    .timeline-line-main,
+    .timeline-node {
         left: 30px;
     }
 
@@ -349,6 +411,11 @@
         gap: 2rem;
         padding-left: 60px;
         position: relative;
+    }
+
+    .timeline-node {
+        left: 30px;
+        top: 40px;
     }
 
     .company-details {
@@ -371,11 +438,6 @@
 
     .work-details {
         padding-left: 0;
-    }
-
-    .timeline-node {
-        right: auto;
-        left: -45px;
     }
 }
 
@@ -405,12 +467,17 @@
         font-size: 1.2rem;
     }
 
-    .timeline-line-main {
+    .timeline-line-main,
+    .timeline-node {
         left: 20px;
     }
 
     .experience-item {
         padding-left: 40px;
+    }
+
+    .timeline-node {
+        left: 20px;
     }
 }
 
@@ -441,11 +508,28 @@
         padding: 3px 8px;
     }
 
-    .timeline-line-main {
+    .timeline-line-main,
+    .timeline-node {
         left: 15px;
     }
 
     .experience-item {
         padding-left: 30px;
+    }
+
+    .timeline-node {
+        left: 15px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .timeline-node-inner {
+        width: 12px;
+        height: 12px;
+    }
+
+    .timeline-node-glow {
+        width: 20px;
+        height: 20px;
     }
 }
