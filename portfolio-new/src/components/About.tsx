@@ -5,7 +5,7 @@ import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import CallRoundedIcon from "@mui/icons-material/CallRounded";
 import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion"; // Import Variants
 
 const About: React.FC = () => {
     const { scrollYProgress } = useScroll();
@@ -15,7 +15,8 @@ const About: React.FC = () => {
     const headerOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0.3]);
 
     // Animation variants for staggered appearance
-    const containerVariants = {
+    const containerVariants: Variants = {
+        // Explicitly type as Variants
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -25,17 +26,20 @@ const About: React.FC = () => {
         },
     };
 
-    const itemVariants = {
+    const itemVariants: Variants = {
+        // Explicitly type as Variants
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
     };
 
-    const slideInLeftVariants = {
+    const slideInLeftVariants: Variants = {
+        // Explicitly type as Variants
         hidden: { opacity: 0, x: -50 },
         visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
     };
 
-    const slideInRightVariants = {
+    const slideInRightVariants: Variants = {
+        // Explicitly type as Variants
         hidden: { opacity: 0, x: 50 },
         visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
     };
@@ -192,7 +196,10 @@ const About: React.FC = () => {
                                     <motion.div
                                         key={achievement.label}
                                         className="achievement-card"
-                                        variants={itemVariants}
+                                        // Removed `variants={itemVariants}` here as it's already on the parent `achievements-section`
+                                        // and `itemVariants` for `achievements-grid` might be creating an issue with staggerChildren
+                                        // Instead, we ensure the parent `motion.div` for the grid has `containerVariants` and children `motion.div` have `itemVariants`
+                                        variants={itemVariants} // Re-added if each card needs its own animation
                                         transition={{ delay: index * 0.1 }}
                                         whileHover={{ y: -10, scale: 1.03, boxShadow: "0 25px 50px rgba(0,0,0,0.5)", zIndex: 10 }}
                                     >
