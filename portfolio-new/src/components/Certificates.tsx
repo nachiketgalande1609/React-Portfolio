@@ -9,6 +9,7 @@ interface Certificate {
     date: string;
     credential_url: string;
     logo: string;
+    image?: string;
 }
 
 const Certificates: React.FC = () => {
@@ -53,16 +54,32 @@ const Certificates: React.FC = () => {
                     </button>
                 </div>
                 <div className="modal-content">
-                    <div className="modal-logo">
-                        <img src={certificate.logo} alt={certificate.organization} />
-                    </div>
-                    <div className="modal-details">
-                        <p className="organization">{certificate.organization}</p>
-                        <p className="date">Issued: {certificate.date}</p>
-                        <a href={certificate.credential_url} target="_blank" rel="noopener noreferrer" className="modal-link">
-                            <span>View Credential</span>
-                            <LaunchIcon className="link-icon" />
-                        </a>
+                    {/* Certificate Image */}
+                    {certificate.image && (
+                        <div className="certificate-image-container">
+                            <img
+                                src={certificate.image}
+                                alt={`${certificate.title} Certificate`}
+                                className="certificate-image"
+                                onError={(e) => {
+                                    (e.target as HTMLImageElement).style.display = "none";
+                                }}
+                            />
+                        </div>
+                    )}
+
+                    <div className="modal-details-section">
+                        <div className="modal-logo">
+                            <img src={certificate.logo} alt={certificate.organization} />
+                        </div>
+                        <div className="modal-details">
+                            <p className="organization">{certificate.organization}</p>
+                            <p className="date">Issued: {certificate.date}</p>
+                            <a href={certificate.credential_url} target="_blank" rel="noopener noreferrer" className="modal-link">
+                                <span>View Credential</span>
+                                <LaunchIcon className="link-icon" />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

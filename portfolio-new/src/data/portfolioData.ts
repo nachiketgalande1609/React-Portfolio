@@ -45,6 +45,48 @@ import OracleLogo from "../assets/certificates/oracle.png";
 import SimpliLearnLogo from "../assets/certificates/simplilearn.svg";
 import StudySectionLogo from "../assets/certificates/studySection-logo.png";
 
+// Certificate Images
+import AzureAZ900Image from "../assets/certificates/certificate_photos/az900.jpg";
+import MongoDBImage from "../assets/certificates/certificate_photos/mongodb.jpg";
+import GoogleDataAnalyticsImage from "../assets/certificates/certificate_photos/google-data-analytics.jpeg";
+import OracleGenAIImage from "../assets/certificates/certificate_photos/oracle-gen-ai.png";
+// import OracleAppIntegrationImage from "../assets/certificates/certificate_photos/oracle-app-integration.jpg";
+// import OracleDataManagementImage from "../assets/certificates/certificate_photos/oracle-data-management.jpg";
+import OracleAIImage from "../assets/certificates/certificate_photos/oracle-ai.png";
+import OracleFoundationsImage from "../assets/certificates/certificate_photos/oracle-foundations.png";
+// import OracleOCIFoundationsImage from "../assets/certificates/certificate_photos/oracle-oci-foundations.jpg";
+import OraclePlatformIntegrationImage from "../assets/certificates/certificate_photos/oracle-platform-integration.png";
+// import OracleArchitectImage from "../assets/certificates/certificate_photos/oracle-architect.jpg";
+import AnalyzeDataImage from "../assets/certificates/certificate_photos/analyze-data.jpeg";
+import DataDrivenDecisionsImage from "../assets/certificates/certificate_photos/data-driven-decisions.jpeg";
+import DataAnalysisRImage from "../assets/certificates/certificate_photos/data-analysis-r.jpeg";
+import PrepareDataImage from "../assets/certificates/certificate_photos/prepare-data.jpeg";
+import ProcessDataImage from "../assets/certificates/certificate_photos/process-data.jpeg";
+import DataVisualizationImage from "../assets/certificates/certificate_photos/data-visualization.jpeg";
+import GoogleCapstoneImage from "../assets/certificates/certificate_photos/google-capstone.jpeg";
+import DataFoundationsImage from "../assets/certificates/certificate_photos/data-foundations.jpeg";
+import SQLFoundationImage from "../assets/certificates/certificate_photos/sql-foundation.png";
+import PythonDataScienceImage from "../assets/certificates/certificate_photos/python-data-science.jpg";
+import MachineLearningPythonImage from "../assets/certificates/certificate_photos/machine-learning-python.jpg";
+import Python101Image from "../assets/certificates/certificate_photos/python-101.jpg";
+import SQLDatabasesImage from "../assets/certificates/certificate_photos/sql-databases.jpg";
+import DataAnalysisPythonImage from "../assets/certificates/certificate_photos/data-analysis-python.jpg";
+import SimpliLearnDataScienceImage from "../assets/certificates/certificate_photos/simplilearn-data-science.jpg";
+import JavaScriptBasicImage from "../assets/certificates/certificate_photos/javascript-basic.png";
+import PythonBasicImage from "../assets/certificates/certificate_photos/python-basic.png";
+import SinglePageWebsiteImage from "../assets/certificates/certificate_photos/single-page-website.jpeg";
+import JavaScriptInteractivityImage from "../assets/certificates/certificate_photos/javascript-interactivity.jpeg";
+import MongoDBIntroImage from "../assets/certificates/certificate_photos/mongodb-intro.jpg";
+import SQLDataScienceImage from "../assets/certificates/certificate_photos/sql-data-science.jpeg";
+import AIForEveryoneImage from "../assets/certificates/certificate_photos/ai-for-everyone.jpeg";
+import GraphicDesignImage from "../assets/certificates/certificate_photos/graphic-design.jpeg";
+import WebDevelopmentImage from "../assets/certificates/certificate_photos/web-development.jpeg";
+import MeteorJSImage from "../assets/certificates/certificate_photos/meteor-js.jpeg";
+import ResponsiveWebDesignImage from "../assets/certificates/certificate_photos/responsive-web-design.jpeg";
+import WebsiteBasicsImage from "../assets/certificates/certificate_photos/website-basics.jpeg";
+import WebsiteTutorialImage from "../assets/certificates/certificate_photos/website-tutorial.jpeg";
+import WebAppDevelopmentImage from "../assets/certificates/certificate_photos/web-app-development.jpeg";
+
 export const projects: Project[] = [
     {
         id: 1,
@@ -239,7 +281,7 @@ export const experienceData: Experience[] = [
         role: "Full Stack Software Developer",
         period: "May 2022 - Present",
         description: [
-            "Collaborated directly with AB InBev’s product team to develop a financial management solution that automated key workflows, reducing manual work by 30% and operational costs by 10–15%.",
+            "Collaborated directly with AB InBev's product team to develop a financial management solution that automated key workflows, reducing manual work by 30% and operational costs by 10–15%.",
             "Optimized database query performance by 15% on 10M+ records datasets through database optimization techniques.",
             "Reduced frontend load time by 20% using code splitting and lazy loading techniques.",
             "Scaled application performance by over 30% with a microservice architecture, supporting 1500+ concurrent users.",
@@ -301,6 +343,7 @@ export const certificatesData = [
         date: "Sep 30, 2023",
         credential_url: "https://www.credly.com/badges/bc8344bd-4101-48cf-b607-f81a26399582/public_url",
         logo: azureIcon,
+        image: AzureAZ900Image,
     },
     {
         title: "MongoDB SI Associate Certification",
@@ -308,6 +351,7 @@ export const certificatesData = [
         date: "Jul 16, 2024",
         credential_url: "https://learn.mongodb.com/c/PwfBrtmvQXO9wzmB5-Z7fQ",
         logo: mongodbIcon,
+        image: MongoDBImage,
     },
     {
         title: "Google Data Analytics Professional Certificate",
@@ -315,6 +359,7 @@ export const certificatesData = [
         date: "Apr 5, 2023",
         credential_url: "https://www.coursera.org/account/accomplishments/professional-cert/LPWZUM8BQEAG",
         logo: CourseraLogo,
+        image: GoogleDataAnalyticsImage,
     },
     {
         title: "Oracle Cloud Infrastructure 2024 Generative AI Certified Professional",
@@ -323,6 +368,7 @@ export const certificatesData = [
         credential_url:
             "https://catalog-education.oracle.com/pls/certview/sharebadge?id=2145D90D0C304757F1B43473E4EC1A43BDECCFAD36D798E5C0DE748C388FD61D",
         logo: OracleLogo,
+        image: OracleGenAIImage,
     },
     {
         title: "Oracle Cloud Infrastructure 2024 Certified Application Integration Professional",
@@ -331,6 +377,7 @@ export const certificatesData = [
         credential_url:
             "https://catalog-education.oracle.com/pls/certview/sharebadge?id=C2F30ED8123DA1CAB971E4FF371EF9D77BDCF25BE1C55357AFB91C0CA6976944",
         logo: OracleLogo,
+        // image: OracleAppIntegrationImage
     },
     {
         title: "Oracle Cloud Data Management 2023 Certified Foundations Associate",
@@ -339,6 +386,7 @@ export const certificatesData = [
         credential_url:
             "https://catalog-education.oracle.com/pls/certview/sharebadge?id=6C197560DA45C3B71F7136D58A16C74FEA541507DD3C394EA338C740CB0CEAB4",
         logo: OracleLogo,
+        // image: OracleDataManagementImage,
     },
     {
         title: "Oracle Cloud Infrastructure 2023 AI Certified Foundations Associate",
@@ -347,6 +395,7 @@ export const certificatesData = [
         credential_url:
             "https://catalog-education.oracle.com/pls/certview/sharebadge?id=16B0D775DB8BA87C75850CB6A0B10A854A2EF7C9B0F9BAB3BC4B95AFC2EE176A",
         logo: OracleLogo,
+        image: OracleAIImage,
     },
     {
         title: "Oracle Cloud Infrastructure 2023 Certified Foundations Associate",
@@ -355,6 +404,7 @@ export const certificatesData = [
         credential_url:
             "https://catalog-education.oracle.com/pls/certview/sharebadge?id=426E14A2281CDA79977F2514577123561471D093120D1FD97BB1A7637F081737",
         logo: OracleLogo,
+        image: OracleFoundationsImage,
     },
     {
         title: "Oracle Cloud Infrastructure Foundations 2021 Certified Associate",
@@ -363,6 +413,7 @@ export const certificatesData = [
         credential_url:
             "https://catalog-education.oracle.com/pls/certview/sharebadge?id=7B8D1021641B3EE84501970624D69B1E6E42DC73BD3307AFC930A0A61F31374E",
         logo: OracleLogo,
+        // image: OracleOCIFoundationsImage,
     },
     {
         title: "Oracle Cloud Platform Application Integration 2021 Certified Specialist",
@@ -371,6 +422,7 @@ export const certificatesData = [
         credential_url:
             "https://catalog-education.oracle.com/pls/certview/sharebadge?id=E024D36A0627065FC6F4D9D54D785E1B26162076602130366AC1F8F30C614FD3",
         logo: OracleLogo,
+        image: OraclePlatformIntegrationImage,
     },
     {
         title: "Oracle Cloud Infrastructure 2022 Certified Architect Associate",
@@ -379,6 +431,7 @@ export const certificatesData = [
         credential_url:
             "https://catalog-education.oracle.com/pls/certview/sharebadge?id=2145D90D0C304757F1B43473E4EC1A43560BCBC8CF24DC4E80D5359E4E5A696E",
         logo: OracleLogo,
+        // image: OracleArchitectImage,
     },
     {
         title: "Analyze Data to Answer Questions",
@@ -386,6 +439,7 @@ export const certificatesData = [
         date: "Mar 27, 2023",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/P5LPNYV49ZL5",
         logo: CourseraLogo,
+        image: AnalyzeDataImage,
     },
     {
         title: "Ask Questions to Make Data-Driven Decisions",
@@ -393,6 +447,7 @@ export const certificatesData = [
         date: "Mar 17, 2023",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/Z7XV29ARSD47",
         logo: CourseraLogo,
+        image: DataDrivenDecisionsImage,
     },
     {
         title: "Data Analysis with R Programming",
@@ -400,6 +455,7 @@ export const certificatesData = [
         date: "Mar 31, 2023",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/UMSMYGRCHARL",
         logo: CourseraLogo,
+        image: DataAnalysisRImage,
     },
     {
         title: "Prepare Data for Exploration",
@@ -407,6 +463,7 @@ export const certificatesData = [
         date: "Mar 18, 2023",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/4JXFWMKFLWKH",
         logo: CourseraLogo,
+        image: PrepareDataImage,
     },
     {
         title: "Process Data from Dirty to Clean",
@@ -414,6 +471,7 @@ export const certificatesData = [
         date: "Mar 20, 2023",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/NE669VELC2SB",
         logo: CourseraLogo,
+        image: ProcessDataImage,
     },
     {
         title: "Share Data Through the Art of Visualization",
@@ -421,6 +479,7 @@ export const certificatesData = [
         date: "Mar 31, 2023",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/TLVGMSSE9SP4",
         logo: CourseraLogo,
+        image: DataVisualizationImage,
     },
     {
         title: "Google Data Analytics Capstone: Complete a Case Study",
@@ -428,6 +487,7 @@ export const certificatesData = [
         date: "Mar 31, 2023",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/8XEPB5LXNTQT",
         logo: CourseraLogo,
+        image: GoogleCapstoneImage,
     },
     {
         title: "Foundations: Data, Data, Everywhere",
@@ -435,6 +495,7 @@ export const certificatesData = [
         date: "Mar 1, 2023",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/XXHS9U9Z9KRA",
         logo: CourseraLogo,
+        image: DataFoundationsImage,
     },
     {
         title: "StudySection - Structured Query Language (SQL) (Foundation)",
@@ -442,6 +503,7 @@ export const certificatesData = [
         date: "Mar 20, 2023",
         credential_url: "https://www.studysection.com/Users/socialMedia/NjQ0NTc2/bmFjaGlrZXQ0MjUxQGdtYWlsLmNvbQ%3D%3D",
         logo: StudySectionLogo,
+        image: SQLFoundationImage,
     },
     {
         title: "Great Learning - Python for Data Science",
@@ -449,6 +511,7 @@ export const certificatesData = [
         date: "Feb 01, 2023",
         credential_url: "https://olympus1.mygreatlearning.com/course_certificate/HCPGUAIK",
         logo: GreatLearningLogo,
+        image: PythonDataScienceImage,
     },
     {
         title: "Cognitive Class - Machine Learning with Python",
@@ -456,6 +519,7 @@ export const certificatesData = [
         date: "Feb 03, 2023",
         credential_url: "https://courses.cognitiveclass.ai/certificates/7cbef69a8a384d74a0229a3a15c5ca26",
         logo: CognitiveClassLogo,
+        image: MachineLearningPythonImage,
     },
     {
         title: "Cognitive Class - Python 101 for Data Science",
@@ -463,6 +527,7 @@ export const certificatesData = [
         date: "Feb 03, 2023",
         credential_url: "https://courses.cognitiveclass.ai/certificates/755a17778d704809a1317692b3bae079",
         logo: CognitiveClassLogo,
+        image: Python101Image,
     },
     {
         title: "Cognitive Class - SQL and Relational Databases 101",
@@ -470,6 +535,7 @@ export const certificatesData = [
         date: "Feb 03, 2023",
         credential_url: "https://courses.cognitiveclass.ai/certificates/36b6172490ea4b15a2e0286a82e4e938",
         logo: CognitiveClassLogo,
+        image: SQLDatabasesImage,
     },
     {
         title: "Cognitive Class - Data Analysis with Python",
@@ -477,13 +543,15 @@ export const certificatesData = [
         date: "Jan 29, 2023",
         credential_url: "https://courses.cognitiveclass.ai/certificates/22747ab313a04e43a32c1064d45cff67",
         logo: CognitiveClassLogo,
+        image: DataAnalysisPythonImage,
     },
     {
         title: "SimpliLearn - Data Science with Python",
         organization: "SimpliLearn",
         date: "Jan 01, 2023",
-        credential_url: "https://simpli-web.app.link/e/M73WLcPB4wb",
+        credential_url: "https://simpli-web.app.link/e/OAiLzfsvMXb",
         logo: SimpliLearnLogo,
+        image: SimpliLearnDataScienceImage,
     },
     {
         title: "HackerRank - JavaScript (Basic) Certificate",
@@ -491,6 +559,7 @@ export const certificatesData = [
         date: "Oct 14, 2020",
         credential_url: "https://www.hackerrank.com/certificates/305cdf8f6ccf",
         logo: HackerRankLogo,
+        image: JavaScriptBasicImage,
     },
     {
         title: "HackerRank - Python (Basic) Certificate",
@@ -498,6 +567,7 @@ export const certificatesData = [
         date: "Oct 14, 2020",
         credential_url: "https://www.hackerrank.com/certificates/287468fb067f",
         logo: HackerRankLogo,
+        image: PythonBasicImage,
     },
     {
         title: "HTML and CSS: Building a Single-Page Website",
@@ -505,6 +575,7 @@ export const certificatesData = [
         date: "Sep 5, 2020",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/PFRAGQE24ULC",
         logo: CourseraLogo,
+        image: SinglePageWebsiteImage,
     },
     {
         title: "Interactivity with JavaScript",
@@ -512,6 +583,7 @@ export const certificatesData = [
         date: "Sep 6, 2020",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/X5L667WRXSN4",
         logo: CourseraLogo,
+        image: JavaScriptInteractivityImage,
     },
     {
         title: "Introduction to MongoDB",
@@ -519,6 +591,7 @@ export const certificatesData = [
         date: "Sep 4, 2020",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/MD7S5FKLDRZA",
         logo: CourseraLogo,
+        image: MongoDBIntroImage,
     },
     {
         title: "SQL for Data Science",
@@ -526,6 +599,7 @@ export const certificatesData = [
         date: "Sep 1, 2020",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/VMFZ3JXKCAMD",
         logo: CourseraLogo,
+        image: SQLDataScienceImage,
     },
     {
         title: "AI For Everyone",
@@ -533,6 +607,7 @@ export const certificatesData = [
         date: "Aug 15, 2020",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/EMSWP73PWT3D",
         logo: CourseraLogo,
+        image: AIForEveryoneImage,
     },
     {
         title: "Graphic Design",
@@ -540,6 +615,7 @@ export const certificatesData = [
         date: "Aug 17, 2020",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/QZ2S53FRLJ22",
         logo: CourseraLogo,
+        image: GraphicDesignImage,
     },
     {
         title: "HTML, CSS, and Javascript for Web Developers",
@@ -547,6 +623,7 @@ export const certificatesData = [
         date: "Aug 16, 2020",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/GBZF82CUZPG8",
         logo: CourseraLogo,
+        image: WebDevelopmentImage,
     },
     {
         title: "Introduction to Meteor.js Development",
@@ -554,6 +631,7 @@ export const certificatesData = [
         date: "Aug 29, 2020",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/ZNS6SC6SSGC9",
         logo: CourseraLogo,
+        image: MeteorJSImage,
     },
     {
         title: "Responsive Web Design",
@@ -561,6 +639,7 @@ export const certificatesData = [
         date: "Aug 24, 2020",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/EEUK842BG4T8",
         logo: CourseraLogo,
+        image: ResponsiveWebDesignImage,
     },
     {
         title: "Responsive Website Basics: Code with HTML, CSS, and JavaScript",
@@ -568,6 +647,7 @@ export const certificatesData = [
         date: "Aug 23, 2020",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/GEWQD398PABX",
         logo: CourseraLogo,
+        image: WebsiteBasicsImage,
     },
     {
         title: "Responsive Website Tutorial and Examples",
@@ -575,6 +655,7 @@ export const certificatesData = [
         date: "Aug 30, 2020",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/5FVKAKEEJR27",
         logo: CourseraLogo,
+        image: WebsiteTutorialImage,
     },
     {
         title: "Web Application Development with JavaScript and MongoDB",
@@ -582,5 +663,6 @@ export const certificatesData = [
         date: "Aug 29, 2020",
         credential_url: "https://www.coursera.org/account/accomplishments/verify/RX6X84T2ZS4F",
         logo: CourseraLogo,
+        image: WebAppDevelopmentImage,
     },
 ];
