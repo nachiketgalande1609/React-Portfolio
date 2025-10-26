@@ -20,6 +20,28 @@ const Certificates: React.FC = () => {
     const [filteredCertificates, setFilteredCertificates] = useState<Certificate[]>(certificatesData);
     const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
     const [visibleCount, setVisibleCount] = useState<number>(9);
+    const [isAnimating, setIsAnimating] = useState(false);
+
+    // Observer for scroll animations
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("animate-in");
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        if (sectionRef.current) {
+            const elementsToAnimate = sectionRef.current.querySelectorAll(".section-title, .section-subtitle, .filter-btn, .certificate-card");
+            elementsToAnimate.forEach((el) => observer.observe(el));
+        }
+
+        return () => observer.disconnect();
+    }, [filteredCertificates, visibleCount]);
 
     // Extract unique organizations for filter
     const organizations = React.useMemo(() => {
@@ -29,17 +51,21 @@ const Certificates: React.FC = () => {
 
     // Filter certificates
     useEffect(() => {
-        if (filter === "all") {
-            setFilteredCertificates(certificatesData);
-        } else {
-            setFilteredCertificates(certificatesData.filter((cert) => cert.organization === filter));
-        }
-        // Reset visible count when filter changes
-        setVisibleCount(9);
+        setIsAnimating(true);
+        const timer = setTimeout(() => {
+            if (filter === "all") {
+                setFilteredCertificates(certificatesData);
+            } else {
+                setFilteredCertificates(certificatesData.filter((cert) => cert.organization === filter));
+            }
+            setVisibleCount(9);
+            setIsAnimating(false);
+        }, 500);
+
+        return () => clearTimeout(timer);
     }, [filter]);
 
     const handleViewMore = () => {
-        // Load all remaining certificates immediately
         setVisibleCount(filteredCertificates.length);
     };
 
@@ -59,30 +85,31 @@ const Certificates: React.FC = () => {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: "90%",
+        width: { xs: "calc(100% - 24px)", sm: "90%" },
         maxWidth: 900,
         maxHeight: "90vh",
         overflowY: "auto",
-        bgcolor: "rgba(255, 255, 255, 0.1)",
-        border: "1px solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "24px",
-        p: 1.5,
-        backdropFilter: "blur(30px) saturate(180%)",
-        boxShadow: "0 25px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1)",
+        bgcolor: "rgba(25, 25, 30, 0.7)",
+        border: "1px solid rgba(255, 255, 255, 0.1)",
+        borderRadius: "20px",
+        p: { xs: "12px", sm: 3 },
+        backdropFilter: "blur(20px) saturate(180%)",
+        boxShadow: "0 25px 50px rgba(0, 0, 0, 0.5)",
         color: "white",
+        outline: "none",
     };
 
     return (
         <section ref={sectionRef} id="certificates" className="section certificates-section">
+            <div className="background-glow"></div>
             <div className="container">
                 <div className="certificates-header">
                     <div className="header-decoration">
                         <h2 className="section-title">Certifications</h2>
                     </div>
-                    <p className="section-subtitle">Professional certifications and achievements</p>
+                    <p className="section-subtitle">A collection of my professional certifications and achievements.</p>
                 </div>
 
-                {/* Filter Buttons */}
                 <div className="certificate-filters">
                     {organizations.map((org) => (
                         <button key={org} className={`filter-btn ${filter === org ? "active" : ""}`} onClick={() => setFilter(org)}>
@@ -91,8 +118,7 @@ const Certificates: React.FC = () => {
                     ))}
                 </div>
 
-                {/* Certificates Grid */}
-                <div className="certificates-grid">
+                <div className={`certificates-grid ${isAnimating ? "animating-out" : ""}`}>
                     {visibleCertificates.map((certificate, index) => (
                         <div key={`${certificate.title}-${index}`} className="certificate-card" onClick={() => handleOpenModal(certificate)}>
                             <div className="certificate-content">
@@ -100,7 +126,7 @@ const Certificates: React.FC = () => {
                                     <div className="certificate-logo">
                                         <img
                                             src={certificate.logo}
-                                            alt={certificate.organization}
+                                            alt={`${certificate.organization} logo`}
                                             onError={(e) => {
                                                 (e.target as HTMLImageElement).src = "/fallback-logo.png";
                                             }}
@@ -120,6 +146,7 @@ const Certificates: React.FC = () => {
                                         rel="noopener noreferrer"
                                         className="certificate-link"
                                         onClick={(e) => e.stopPropagation()}
+                                        aria-label="View Credential"
                                     >
                                         <LaunchIcon className="link-icon" />
                                     </a>
@@ -129,7 +156,6 @@ const Certificates: React.FC = () => {
                     ))}
                 </div>
 
-                {/* View More Button */}
                 {hasMoreCertificates && (
                     <div className="view-more-container">
                         <button className="view-more-btn" onClick={handleViewMore}>
@@ -138,13 +164,11 @@ const Certificates: React.FC = () => {
                     </div>
                 )}
 
-                {/* Count Display */}
                 <div className="certificates-count">
                     Showing {visibleCertificates.length} of {filteredCertificates.length} certificates
                     {filter !== "all" && ` for ${filter}`}
                 </div>
 
-                {/* MUI Modal */}
                 <Modal
                     open={selectedCertificate !== null}
                     onClose={handleCloseModal}
@@ -161,7 +185,7 @@ const Certificates: React.FC = () => {
                         <Box sx={modalStyle}>
                             {selectedCertificate && (
                                 <>
-                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 2 }}>
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 1.5 }}>
                                         <Typography
                                             id="certificate-modal-title"
                                             variant="h6"
@@ -172,8 +196,8 @@ const Certificates: React.FC = () => {
                                                 WebkitTextFillColor: "transparent",
                                                 flex: 1,
                                                 mr: 1,
-                                                lineHeight: 1.4,
-                                                fontSize: "1.4rem",
+                                                lineHeight: 1.3,
+                                                fontSize: { xs: "1.1rem", sm: "1.4rem" },
                                             }}
                                         >
                                             {selectedCertificate.title}
@@ -186,6 +210,7 @@ const Certificates: React.FC = () => {
                                                 bgcolor: "rgba(255, 255, 255, 0.1)",
                                                 border: "1px solid rgba(255, 255, 255, 0.2)",
                                                 transition: "all 0.3s ease",
+                                                p: { xs: 0.5, sm: 1 },
                                                 "&:hover": {
                                                     color: "white",
                                                     background: "rgba(255, 255, 255, 0.2)",
@@ -194,7 +219,7 @@ const Certificates: React.FC = () => {
                                                 },
                                             }}
                                         >
-                                            <CloseIcon />
+                                            <CloseIcon sx={{ fontSize: { xs: "1.2rem", sm: "1.5rem" } }} />
                                         </IconButton>
                                     </Box>
                                     <Box>
@@ -208,9 +233,6 @@ const Certificates: React.FC = () => {
                                                         maxHeight: "500px",
                                                         borderRadius: "16px",
                                                         border: "1px solid rgba(255, 255, 255, 0.15)",
-                                                        background: "rgba(255, 255, 255, 0.05)",
-                                                        backdropFilter: "blur(15px)",
-                                                        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
                                                         objectFit: "contain",
                                                     }}
                                                     onError={(e) => {
@@ -219,33 +241,43 @@ const Certificates: React.FC = () => {
                                                 />
                                             </Box>
                                         )}
-                                        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+                                        <Box
+                                            sx={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                gap: 1.5,
+                                                flexDirection: { xs: "column", sm: "row" },
+                                                textAlign: { xs: "center", sm: "left" },
+                                            }}
+                                        >
                                             <Box
                                                 sx={{
-                                                    width: 80,
-                                                    height: 80,
-                                                    borderRadius: "16px",
+                                                    width: { xs: 50, sm: 80 },
+                                                    height: { xs: 50, sm: 80 },
+                                                    borderRadius: "12px",
                                                     border: "1px solid rgba(255, 255, 255, 0.15)",
                                                     background: "rgba(255, 255, 255, 0.08)",
                                                     display: "flex",
                                                     alignItems: "center",
                                                     justifyContent: "center",
-                                                    p: 0.75,
+                                                    p: 1,
                                                     backdropFilter: "blur(15px)",
                                                     flexShrink: 0,
                                                 }}
                                             >
                                                 <img
                                                     src={selectedCertificate.logo}
-                                                    alt={selectedCertificate.organization}
+                                                    alt={`${selectedCertificate.organization} logo`}
                                                     style={{ width: "100%", height: "100%", objectFit: "contain" }}
                                                 />
                                             </Box>
-                                            <Box sx={{ flex: 1 }}>
-                                                <Typography sx={{ color: "#10b981", fontSize: "1.2rem", fontWeight: 600, letterSpacing: "0.02em" }}>
+                                            <Box sx={{ flex: 1, width: "100%" }}>
+                                                <Typography sx={{ color: "#10b981", fontSize: { xs: "1rem", sm: "1.2rem" }, fontWeight: 600 }}>
                                                     {selectedCertificate.organization}
                                                 </Typography>
-                                                <Typography sx={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "1rem", mb: 2 }}>
+                                                <Typography
+                                                    sx={{ color: "rgba(255, 255, 255, 0.8)", fontSize: { xs: "0.85rem", sm: "1rem" }, mb: 1.5 }}
+                                                >
                                                     Issued: {selectedCertificate.date}
                                                 </Typography>
                                                 <a

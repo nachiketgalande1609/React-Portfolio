@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
                 <div className="job-seeking-badge">
                     <span>
                         <AutoAwesomeIcon style={{ color: "gold" }} />
-                        Actively Seeking Job Opportunities
+                        Open to Work
                     </span>
                 </div>
 
