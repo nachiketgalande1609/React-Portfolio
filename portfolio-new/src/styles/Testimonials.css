@@ -50,7 +50,7 @@
     font-size: 1.6rem;
     font-weight: 300;
     color: #999999;
-    font-family: "Story Script", sans-serif;
+    font-family: "Story Script", sans-serif !important;
     z-index: 1;
     will-change: transform;
 }

@@ -68,6 +68,7 @@
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: "Raleway", "Segoe UI", "Roboto", sans-serif !important;
     color: rgba(255, 255, 255, 0.8);
     border-radius: 28px;
     overflow: hidden;

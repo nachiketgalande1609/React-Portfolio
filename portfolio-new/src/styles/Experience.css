@@ -123,9 +123,9 @@
     font-weight: 800;
     margin: 0 0 0.5rem 0;
     line-height: 1.2;
-    font-family: "Story Script", sans-serif;
+    font-family: "Story Script", sans-serif !important;
 
-    background: linear-gradient(135deg, #ffb700, #7147d3, #b20059);
+    background: linear-gradient(288deg, rgb(255, 128, 0), rgb(255, 0, 204) 53.2394%, rgb(0, 68, 255)) 0.00175927% 50% / 200% 200% text;
     background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
