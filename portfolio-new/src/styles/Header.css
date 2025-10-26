@@ -491,11 +491,6 @@
     }
 }
 
-/* Active state for More tab when dropdown items are active */
-.more-tab.active {
-    background: rgba(255, 255, 255, 0.15);
-}
-
 /* Active state for dropdown items */
 .dropdown-item.active {
     color: white;

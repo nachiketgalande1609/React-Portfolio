@@ -127,6 +127,18 @@ const Header: React.FC = () => {
     useEffect(() => {
         const calculateIndicatorPosition = () => {
             let activeElement: HTMLButtonElement | null = null;
+            const sectionsWithoutMainIndicator = ["certificates", "testimonials", "contact", "uses", "links"];
+
+            const shouldHideMainIndicator = sectionsWithoutMainIndicator.includes(activeSection);
+
+            if (shouldHideMainIndicator) {
+                // If it's one of these sections, hide the main indicator
+                setIndicatorStyle({
+                    width: "0px",
+                    transform: "translateX(0px)",
+                });
+                return; // Exit early
+            }
 
             if (isDropdownActive) {
                 activeElement = moreTabRef.current;
