@@ -173,12 +173,12 @@
 
     .nav-dock {
         padding: 6px;
-        border-radius: 20px;
+        border-radius: 30px;
         gap: 2px;
     }
 
     .nav-dock::before {
-        border-radius: 18px;
+        border-radius: 30px;
     }
 
     .nav-item {
@@ -219,15 +219,15 @@
     }
 
     .nav-dock {
-        padding: 4px;
-        border-radius: 16px;
+        padding: 4px 8px;
+        border-radius: 20px;
         gap: 1px;
         backdrop-filter: blur(15px) saturate(160%);
         -webkit-backdrop-filter: blur(15px) saturate(160%);
     }
 
     .nav-dock::before {
-        border-radius: 14px;
+        border-radius: 20px;
     }
 
     .nav-item {

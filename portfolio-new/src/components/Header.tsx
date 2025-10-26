@@ -142,7 +142,7 @@ const Header: React.FC = () => {
 
                 setIndicatorStyle({
                     transform: `translateX(${offsetLeft}px)`,
-                    width: `${offsetWidth - (20 / 100) * offsetWidth}px`,
+                    width: `${offsetWidth - (25 / 100) * offsetWidth}px`,
                 });
             } else {
                 // If no active element is found (e.g., on initial render before scroll update),
