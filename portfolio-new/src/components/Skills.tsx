@@ -56,7 +56,7 @@ const skills: Skill[] = [
     { name: "Next.Js", category: "frontend", icon: nextjsIcon },
     { name: "Redux", category: "frontend", icon: reduxIcon },
     { name: "Material UI", category: "frontend", icon: muiIcon },
-    { name: "mantine UI", category: "frontend", icon: mantineIcon },
+    { name: "Mantine UI", category: "frontend", icon: mantineIcon },
     { name: "Tailwind CSS", category: "frontend", icon: tailwindIcon },
     { name: "Sass", category: "frontend", icon: sassIcon },
     { name: "Bootstrap", category: "frontend", icon: bootstrapIcon },
@@ -170,9 +170,12 @@ const Skills: React.FC = () => {
 
                 <div className="two-column-layout">
                     {(Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>).map((category, categoryIndex) => (
+                        // Each category now gets its own grid row within two-column-layout
                         <React.Fragment key={category}>
                             {/* Header Column */}
-                            <div className="headers-column">
+                            <div className="category-header-item-wrapper">
+                                {" "}
+                                {/* New wrapper for sticky behavior */}
                                 <div className="category-header-item animate-on-scroll" style={{ animationDelay: `${categoryIndex * 0.15}s` }}>
                                     <div className="category-glow"></div>
                                     <h3 className="category-header-title">{categoryConfig[category].title}</h3>
@@ -180,7 +183,9 @@ const Skills: React.FC = () => {
                             </div>
 
                             {/* Technologies Column */}
-                            <div className="technologies-column">
+                            <div className="technologies-group-wrapper">
+                                {" "}
+                                {/* New wrapper to manage padding/borders */}
                                 <div className="technologies-group animate-on-scroll" style={{ animationDelay: `${categoryIndex * 0.15}s` }}>
                                     <div className="technologies-grid">
                                         {getSkillsByCategory(category).map((skill) => (

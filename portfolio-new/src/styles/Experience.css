@@ -374,9 +374,10 @@
 
 /* Responsive Design */
 @media (max-width: 1200px) {
+    /* Desktop layout remains largely unchanged */
     .experience-item {
-        grid-template-columns: 40% auto 60%;
-        gap: 1.5rem;
+        grid-template-columns: 35% auto 65%; /* Adjusted back to original ratio */
+        gap: 2rem;
     }
 
     .timeline-line-main,
@@ -386,32 +387,33 @@
 }
 
 @media (max-width: 968px) {
+    /* Tablet Portrait and smaller */
     .timeline-line-main,
     .timeline-node {
-        left: 30px;
+        left: 30px; /* Shift timeline closer to the left edge */
     }
 
     .experience-item {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        padding-left: 60px;
+        grid-template-columns: 1fr; /* Stack items vertically */
+        gap: 1rem;
+        padding-left: 60px; /* Make space for the timeline */
         position: relative;
     }
 
     .timeline-node {
         left: 30px;
-        top: 40px; /* Adjust top for single column layout */
+        top: 40px; /* Adjust top for single column layout, aligns better with the card */
     }
 
     .company-details {
-        justify-content: flex-start; /* Revert to start for single column */
+        justify-content: flex-start; /* Align company details to the left */
         padding-right: 0;
-        text-align: left; /* Revert text alignment */
+        text-align: left; /* Align text left */
     }
 
     .company-card {
         text-align: left;
-        max-width: 100%;
+        max-width: 100%; /* Allow cards to take full width available */
     }
 
     .company-info {
@@ -419,67 +421,34 @@
     }
 
     .tags-container {
-        justify-content: flex-start; /* Revert tags alignment */
+        justify-content: flex-start; /* Align tags to the left */
     }
 
     .work-details {
         padding-left: 0;
     }
+
+    .experience-description h3 {
+        font-size: 1.6rem; /* Slightly reduce heading size for tablets */
+    }
 }
 
 @media (max-width: 768px) {
+    /* Smaller Tablets and larger Phones */
     .experience-section {
-        padding: 4rem 0;
-    }
-
-    .experience-description h3 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
+        padding: 4rem 1rem; /* Add horizontal padding to the section */
     }
 
     .experience-header {
-        margin-bottom: 4rem;
+        margin-bottom: 3rem; /* Reduce header margin */
     }
 
-    .header-decoration {
-        gap: 1.5rem;
+    .section-title {
+        font-size: 2rem; /* Ensure title scales down */
     }
 
-    .company-card,
-    .work-card {
-        padding: 1.5rem;
-    }
-
-    .company-name {
-        font-size: 1.3rem;
-    }
-
-    .role-title {
-        font-size: 1.2rem;
-    }
-
-    .timeline-line-main,
-    .timeline-node {
-        left: 20px;
-    }
-
-    .experience-item {
-        padding-left: 40px;
-    }
-
-    .timeline-node {
-        left: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .experience-section {
-        padding: 3rem 0;
-    }
-
-    .experience-description h3 {
-        font-size: 1.3rem;
-        margin-bottom: 0.8rem;
+    .section-subtitle {
+        font-size: 0.9rem; /* Adjust subtitle size */
     }
 
     .header-decoration {
@@ -488,25 +457,173 @@
 
     .company-card,
     .work-card {
-        padding: 1.25rem;
+        padding: 1.5rem; /* Reduce card padding */
     }
 
     .company-name {
-        font-size: 1.2rem;
+        font-size: 1.4rem; /* Scale down company name */
+    }
+
+    .experience-description h3 {
+        font-size: 1.4rem; /* Further reduce heading size */
+        margin-bottom: 1rem;
     }
 
     .description-item {
-        font-size: 0.9rem;
+        font-size: 0.9rem; /* Adjust list item font size */
+        gap: 0.8rem; /* Reduce gap */
+    }
+
+    .bullet {
+        margin-top: 0.4rem; /* Adjust bullet alignment */
     }
 
     .tech-tag-exp {
-        font-size: 0.7rem;
-        padding: 3px 8px;
+        font-size: 0.8rem; /* Adjust tech tag font size */
+        padding: 4px 10px;
+    }
+
+    .tech-icon {
+        width: 10px;
+        height: 10px;
     }
 
     .timeline-line-main,
     .timeline-node {
+        left: 20px; /* Further shift timeline to the left */
+    }
+
+    .experience-item {
+        padding-left: 45px; /* Adjust padding for timeline */
+        margin-bottom: 3rem; /* Reduce item spacing */
+        gap: 0rem;
+    }
+
+    .timeline-node {
+        left: 20px;
+        width: 18px; /* Slightly smaller node */
+        height: 18px;
+        top: 30px; /* Adjust node position */
+    }
+
+    .timeline-node::before {
+        width: 7px;
+        height: 7px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Mobile Phones */
+    .experience-section {
+        padding: 3rem 0.75rem; /* More snug padding */
+    }
+
+    .experience-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem; /* Smaller title for compact screens */
+    }
+
+    .section-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .company-card,
+    .work-card {
+        padding: 1.2rem; /* Even smaller card padding */
+    }
+
+    .company-name {
+        font-size: 1.2rem; /* Smaller company name */
+    }
+
+    .experience-description h3 {
+        font-size: 1.2rem; /* Heading for role */
+        margin-bottom: 0.8rem;
+    }
+
+    .description-item {
+        font-size: 0.85rem; /* Smaller list items */
+        gap: 0.6rem;
+    }
+
+    .bullet {
+        width: 5px;
+        height: 5px;
+        margin-top: 0.35rem;
+    }
+
+    .tech-tag-exp {
+        font-size: 0.7rem; /* Smallest tech tags */
+        padding: 3px 8px;
+    }
+
+    .tech-icon {
+        width: 9px;
+        height: 9px;
+    }
+
+    .timeline-line-main,
+    .timeline-node {
+        left: 15px; /* Closest to edge for very small screens */
+    }
+
+    .experience-item {
+        padding-left: 35px; /* Adjust padding */
+        margin-bottom: 2.5rem;
+        gap: 0rem;
+    }
+
+    .timeline-node {
         left: 15px;
+        width: 16px; /* Smallest node */
+        height: 16px;
+        top: 25px; /* Adjust node position */
+    }
+
+    .timeline-node::before {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* Optional: Further refinement for very narrow screens (e.g., iPhone 5/SE) */
+@media (max-width: 375px) {
+    .experience-section {
+        padding: 2.5rem 0.5rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .company-card,
+    .work-card {
+        padding: 1rem;
+    }
+
+    .company-name {
+        font-size: 1.1rem;
+    }
+
+    .experience-description h3 {
+        font-size: 1.1rem;
+    }
+
+    .description-item {
+        font-size: 0.8rem;
+    }
+
+    .tech-tag-exp {
+        font-size: 0.65rem;
+        padding: 2px 6px;
+    }
+
+    .timeline-line-main,
+    .timeline-node {
+        left: 10px;
     }
 
     .experience-item {
@@ -514,11 +631,14 @@
     }
 
     .timeline-node {
-        left: 15px;
-        width: 20px;
-        height: 20px;
+        left: 10px;
+        width: 14px;
+        height: 14px;
+        top: 20px;
     }
 
-    /* .timeline-node-inner is no longer used, removed if it was present */
-    /* .timeline-node-glow is no longer used, removed if it was present */
+    .timeline-node::before {
+        width: 5px;
+        height: 5px;
+    }
 }
