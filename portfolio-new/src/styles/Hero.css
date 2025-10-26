@@ -1,4 +1,3 @@
-/* Hero.css (updated for single viewport centering) */
 .hero {
     position: relative;
     height: 100vh;
@@ -9,13 +8,9 @@
     overflow: hidden;
     padding: 20px;
     box-sizing: border-box;
-
-    /* Adjust padding-top for a fixed/sticky navbar height (e.g., 60px) */
-    /* You'll need to set this to the actual height of your navbar */
-    padding-top: 60px; /* Example: If your navbar is 60px tall */
+    padding-top: 60px;
 }
 
-/* Background Elements */
 .hero-bg {
     position: absolute;
     top: 0;
@@ -23,7 +18,7 @@
     width: 100%;
     height: 100%;
     z-index: 0;
-    overflow: hidden; /* Ensure background elements don't go outside */
+    overflow: hidden;
 }
 
 @keyframes backgroundShift {
@@ -35,7 +30,6 @@
     }
 }
 
-/* Main container for all hero content to keep it within a max-width and center it */
 .hero .container {
     display: flex;
     flex-direction: column;
@@ -46,20 +40,17 @@
     text-align: center;
     position: relative;
     z-index: 2;
-    flex-grow: 1; /* Allow container to grow */
-    /* Also account for padding in flex item if it's the main container */
-    padding-top: 20px; /* Add some space if the badge is now absolute */
+    flex-grow: 1;
+    padding-top: 20px;
 }
 
-/* Job Seeking Badge - Enhanced with 3D and Shine Effects */
 .job-seeking-badge {
-    position: absolute; /* Make it position absolute */
-    top: 20px; /* Adjust this value to clear your navbar + desired spacing */
-    /* Example: If navbar is 60px, and you want 20px gap, set top: 80px */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Adjust for its own width */
-    margin-bottom: 0; /* Remove margin as it's now absolute positioned */
-    z-index: 10; /* Give it a high z-index, higher than other hero content, but lower than navbar if navbar has like 999 */
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 0;
+    z-index: 10;
     perspective: 1000px;
 }
 
@@ -75,7 +66,6 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    /* Removed margin-top from here as well */
     margin-top: 0;
     position: relative;
     overflow: hidden;
@@ -85,7 +75,6 @@
     transform: rotateX(5deg) translateZ(0);
 }
 
-/* Shine effect overlay */
 .job-seeking-badge span::before {
     content: "";
     position: absolute;
@@ -98,7 +87,6 @@
     z-index: 1;
 }
 
-/* Gradient border effect */
 .job-seeking-badge span::after {
     content: "";
     position: absolute;
@@ -114,7 +102,6 @@
     filter: blur(8px);
 }
 
-/* Hover Effects */
 .job-seeking-badge span:hover {
     transform: rotateX(0deg) translateZ(20px) scale(1.05);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3),
@@ -131,7 +118,6 @@
     opacity: 1;
 }
 
-/* Pulsing animation */
 @keyframes badgePulse {
     0%,
     100% {
@@ -147,23 +133,21 @@
     animation: badgePulse 3s ease-in-out infinite;
 }
 
-/* Hero Content - Mobile First Approach */
 .hero-content {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    align-items: center; /* Center items horizontally in column layout */
+    align-items: center;
     position: relative;
     z-index: 2;
     width: 100%;
-    text-align: center; /* Default for mobile text content */
+    text-align: center;
 }
 
-/* Hero Text Styling */
 .hero-text {
-    text-align: center; /* Ensures text is centered on mobile */
+    text-align: center;
     width: 100%;
-    max-width: 600px; /* Limits text width */
+    max-width: 600px;
 }
 
 .hero-title {
@@ -199,12 +183,11 @@
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Hero Image Section */
 .hero-image {
     display: flex;
     justify-content: center;
     align-items: center;
-    order: -1; /* Ensures image comes first on mobile (above text) */
+    order: -1;
 }
 
 .image-container {
@@ -254,11 +237,10 @@
     animation: glowPulse 3s ease-in-out infinite;
 }
 
-/* Minimal Action Buttons */
 .hero-action-buttons {
     display: flex;
     gap: 1rem;
-    margin: 2rem 0; /* Add top/bottom margin for spacing from other elements */
+    margin: 2rem 0;
     flex-wrap: wrap;
     justify-content: center;
     z-index: 2;
@@ -294,12 +276,11 @@
     font-size: 1.1rem !important;
 }
 
-/* Social Links */
 .social-links {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-top: 1rem; /* Add top margin for spacing */
+    margin-top: 1rem;
     flex-wrap: wrap;
 }
 
@@ -312,7 +293,7 @@
     border-radius: 50%;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
-    background: rgba(0, 0, 0, 0.6); /* Slightly more transparent background for social links */
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -327,7 +308,6 @@
     transform: translateY(-2px);
 }
 
-/* Animations */
 @keyframes shine {
     0%,
     100% {
@@ -350,30 +330,28 @@
     }
 }
 
-/* Desktop Styles */
 @media (min-width: 769px) {
     .hero-content {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* Two columns for text and image */
+        grid-template-columns: 1fr 1fr;
         gap: 4rem;
-        align-items: center; /* Vertically align items in their grid row */
-        text-align: left; /* Reset text alignment for desktop grid */
-        min-height: 60vh; /* Allow content to dictate some height within the grid */
-        justify-items: start; /* Align grid items to the start of their column */
+        align-items: center;
+        text-align: left;
+        min-height: 60vh;
+        justify-items: start;
     }
 
-    /* Reverse order of text and image for desktop to put text on the left */
     .hero-text {
         text-align: left;
-        order: 0; /* Keep text as first item in grid for left column */
+        order: 0;
     }
 
     .hero-image {
         order: 1;
-        justify-content: flex-start; /* Align image content to the left */
+        justify-content: flex-start;
         align-items: center;
         height: 100%;
-        justify-self: center; /* Push image container to the start of its grid cell (left side) */
+        justify-self: center;
     }
 
     .hero-title {
@@ -395,12 +373,12 @@
 
     .job-seeking-badge {
         margin-bottom: 3rem;
-        margin-top: 0; /* Ensure no extra top margin here either */
-        top: 50px; /* Maybe a bit more space on larger screens */
+        margin-top: 0;
+        top: 50px;
     }
 
     .job-seeking-badge span {
-        margin-top: 0; /* Remove top margin on desktop as well */
+        margin-top: 0;
         padding: 14px 28px 14px 20px;
     }
 
@@ -419,7 +397,6 @@
     }
 }
 
-/* Tablet Styles */
 @media (max-width: 768px) and (min-width: 630px) {
     .hero-title {
         font-size: 2rem;
@@ -439,7 +416,7 @@
     }
 
     .job-seeking-badge span {
-        margin-top: 0; /* Ensure no extra top margin here */
+        margin-top: 0;
     }
 
     .action-btn {
@@ -448,7 +425,6 @@
     }
 }
 
-/* Mobile Styles */
 @media (max-width: 480px) {
     .hero-title {
         font-size: 2rem;
@@ -465,7 +441,7 @@
     .job-seeking-badge span {
         font-size: 0.8rem;
         padding: 10px 20px 10px 16px;
-        margin-top: 0; /* Ensure no extra top margin here */
+        margin-top: 0;
     }
 
     .action-btn {
@@ -496,7 +472,6 @@
     }
 }
 
-/* Extra Small Mobile */
 @media (max-width: 630px) {
     .hero-title {
         font-size: 1.8rem;
@@ -562,7 +537,6 @@
     }
 }
 
-/* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
     .bg-gradient,
     .highlight,
