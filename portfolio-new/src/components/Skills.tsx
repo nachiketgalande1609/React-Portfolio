@@ -39,8 +39,6 @@ import oracleCloudIcon from "../assets/icons/Oracle-Symbol.png";
 import jestIcon from "../assets/icons/jest.svg";
 import postmanIcon from "../assets/icons/postman.svg";
 
-import ScrollVelocity from "./ScrollVelocity";
-
 interface Skill {
     name: string;
     category: "frontend" | "backend" | "database" | "tools" | "programmingLanguages" | "cloud";
@@ -170,18 +168,14 @@ const Skills: React.FC = () => {
                     <p className="section-subtitle animate-on-scroll">Technologies I work with to create amazing experiences</p>
                 </div>
 
-                <ScrollVelocity
-                    texts={[
-                        "React, TypeScript, JavaScript, React Native, Zustand, Next.Js, Redux, Material UI, Mantine UI, Tailwind CSS, Sass, Bootstrap, CSS3, HTML5",
-                    ]}
-                    velocity={100}
-                    className="custom-scroll-text"
-                />
-
                 <div className="two-column-layout">
                     {(Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>).map((category, categoryIndex) => (
+                        // Each category now gets its own grid row within two-column-layout
                         <React.Fragment key={category}>
+                            {/* Header Column */}
                             <div className="category-header-item-wrapper">
+                                {" "}
+                                {/* New wrapper for sticky behavior */}
                                 <div className="category-header-item animate-on-scroll" style={{ animationDelay: `${categoryIndex * 0.15}s` }}>
                                     <div className="category-glow"></div>
                                     <h3 className="category-header-title">{categoryConfig[category].title}</h3>
