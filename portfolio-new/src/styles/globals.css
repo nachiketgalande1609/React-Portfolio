@@ -76,6 +76,22 @@ body {
     position: relative;
 }
 
+.true-focus {
+    margin-bottom: 0 !important;
+}
+
+.true-focus span {
+    font-size: 6rem;
+    padding: 0 6px;
+    font-family: "Story Script", sans-serif !important;
+    background: linear-gradient(288deg, rgb(255, 128, 0), rgb(255, 0, 204) 53.2394%, rgb(0, 68, 255)) 0.00175927% 50% / 200% 200% text;
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientMove 14s ease infinite;
+}
+
 @keyframes gradientMove {
     0% {
         background-position: 0% 50%;
@@ -131,6 +147,12 @@ body {
     animation-delay: calc(var(--char-index) * 0.05s);
 }
 
+.true-focus span {
+    display: inline-block;
+    animation: gentleReveal 0.8s ease-out both;
+    animation-delay: calc(var(--char-index) * 0.05s);
+}
+
 @keyframes gentleReveal {
     0% {
         opacity: 0;
@@ -146,6 +168,15 @@ body {
 @media (max-width: 768px) {
     .section-title {
         font-size: 2.5rem;
+    }
+
+    .true-focus {
+        margin-bottom: 0 !important;
+    }
+
+    .true-focus span {
+        font-size: 3rem;
+        margin-bottom: 0 !important;
     }
 
     .section-header {
