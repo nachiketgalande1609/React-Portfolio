@@ -13,9 +13,7 @@ import "./styles/globals.css";
 import Experience from "./pages/Experience";
 import Testimonials from "./pages/Testimonials";
 import Certificates from "./pages/Certificates";
-import LightRays from "./components/LightRays";
 import LiquidEther from "./components/LiquidEther";
-import Orb from "./components/Orb";
 
 const App: React.FC = () => {
     const [isMobile, setIsMobile] = useState(false);

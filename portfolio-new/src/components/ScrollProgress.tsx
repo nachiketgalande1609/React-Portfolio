@@ -4,18 +4,6 @@ import "./../styles/ScrollProgress.css";
 
 const ScrollProgress: React.FC = () => {
     const [scrollProgress, setScrollProgress] = useState(0);
-    const [activeSection, setActiveSection] = useState("home");
-
-    const sections = [
-        { id: "home", label: "Home" },
-        { id: "about", label: "About" },
-        { id: "skills", label: "Skills" },
-        { id: "experience", label: "Experience" },
-        { id: "projects", label: "Projects" },
-        { id: "certificates", label: "Certificates" },
-        { id: "testimonials", label: "Testimonials" },
-        { id: "contact", label: "Contact" },
-    ];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -23,20 +11,6 @@ const ScrollProgress: React.FC = () => {
             const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
             const progress = (window.scrollY / totalHeight) * 100;
             setScrollProgress(progress);
-
-            // Determine active section
-            const currentSection = sections.find((section) => {
-                const element = document.getElementById(section.id);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    return rect.top <= 100 && rect.bottom >= 100;
-                }
-                return false;
-            });
-
-            if (currentSection) {
-                setActiveSection(currentSection.id);
-            }
         };
 
         // Throttle scroll events for better performance
@@ -70,13 +44,6 @@ const ScrollProgress: React.FC = () => {
             top: targetScroll,
             behavior: "smooth",
         });
-    };
-
-    const handleSectionClick = (sectionId: string) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-        }
     };
 
     return (
