@@ -20,11 +20,10 @@
 /* Two Column Layout (Desktop) */
 .two-column-layout {
     display: grid;
-    /* Now we define columns, and rows will be created implicitly for each pair */
     grid-template-columns: 300px 1fr;
     gap: 2rem; /* Gap between columns */
     margin: 0 auto;
-    /* Use align-items on the grid container to align content within each implicitly created row */
+    margin-top: 7rem;
     align-items: start;
 }
 
