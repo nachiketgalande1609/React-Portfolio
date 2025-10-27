@@ -282,3 +282,12 @@ body {
     height: 100%;
     touch-action: none;
 }
+
+.light-rays-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+}
