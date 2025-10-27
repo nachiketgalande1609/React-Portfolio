@@ -6,6 +6,7 @@ import CallRoundedIcon from "@mui/icons-material/CallRounded";
 import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import { motion, type Variants } from "framer-motion"; // Import Variants
+import TiltedCard from "./TiltedCards";
 
 const About: React.FC = () => {
     // Animation variants for staggered appearance
@@ -181,26 +182,42 @@ const About: React.FC = () => {
                                         gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
                                     },
                                 ].map((achievement, index) => (
-                                    <motion.div
-                                        key={achievement.label}
-                                        className="achievement-card"
-                                        // Removed `variants={itemVariants}` here as it's already on the parent `achievements-section`
-                                        // and `itemVariants` for `achievements-grid` might be creating an issue with staggerChildren
-                                        // Instead, we ensure the parent `motion.div` for the grid has `containerVariants` and children `motion.div` have `itemVariants`
-                                        variants={itemVariants} // Re-added if each card needs its own animation
-                                        transition={{ delay: index * 0.1 }}
-                                        whileHover={{ y: -10, scale: 1.03, boxShadow: "0 25px 50px rgba(0,0,0,0.5)", zIndex: 10 }}
-                                    >
-                                        <div className="achievement-bg" style={{ background: achievement.gradient }}></div>
-                                        <div className="achievement-main">
-                                            <div className="achievement-number">{achievement.number}</div>
-                                            <div className="achievement-content">
-                                                <h4 className="achievement-label">{achievement.label}</h4>
-                                                <p className="achievement-description">{achievement.description}</p>
-                                            </div>
-                                        </div>
-                                        <div className="achievement-glow"></div>
-                                    </motion.div>
+                                    <TiltedCard
+                                        imageSrc=""
+                                        altText=""
+                                        captionText=""
+                                        containerHeight="300px"
+                                        containerWidth="300px"
+                                        imageHeight="300px"
+                                        imageWidth="300px"
+                                        rotateAmplitude={12}
+                                        scaleOnHover={1.2}
+                                        showMobileWarning={false}
+                                        showTooltip={true}
+                                        displayOverlayContent={true}
+                                        overlayContent={
+                                            <motion.div
+                                                key={achievement.label}
+                                                className="achievement-card"
+                                                // Removed `variants={itemVariants}` here as it's already on the parent `achievements-section`
+                                                // and `itemVariants` for `achievements-grid` might be creating an issue with staggerChildren
+                                                // Instead, we ensure the parent `motion.div` for the grid has `containerVariants` and children `motion.div` have `itemVariants`
+                                                variants={itemVariants} // Re-added if each card needs its own animation
+                                                transition={{ delay: index * 0.1 }}
+                                                whileHover={{ y: -10, scale: 1.03, boxShadow: "0 25px 50px rgba(0,0,0,0.5)", zIndex: 10 }}
+                                            >
+                                                <div className="achievement-bg" style={{ background: achievement.gradient }}></div>
+                                                <div className="achievement-main">
+                                                    <div className="achievement-number">{achievement.number}</div>
+                                                    <div className="achievement-content">
+                                                        <h4 className="achievement-label">{achievement.label}</h4>
+                                                        <p className="achievement-description">{achievement.description}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="achievement-glow"></div>
+                                            </motion.div>
+                                        }
+                                    />
                                 ))}
                             </motion.div>
                         </motion.div>

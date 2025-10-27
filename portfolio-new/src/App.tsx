@@ -103,7 +103,7 @@ const App: React.FC = () => {
                 style={{
                     position: "relative",
                     zIndex: 1,
-                    pointerEvents: isMobile ? "auto" : "none",
+                    pointerEvents: "auto",
                 }}
             >
                 <ScrollProgress />
