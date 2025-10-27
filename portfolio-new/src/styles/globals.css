@@ -92,6 +92,10 @@ body {
     animation: gradientMove 14s ease infinite;
 }
 
+.glitch {
+    font-size: 6rem !important;
+}
+
 @keyframes gradientMove {
     0% {
         background-position: 0% 50%;
@@ -153,6 +157,12 @@ body {
     animation-delay: calc(var(--char-index) * 0.05s);
 }
 
+.glitch {
+    display: inline-block;
+    animation: gentleReveal 0.8s ease-out both;
+    animation-delay: calc(var(--char-index) * 0.05s);
+}
+
 @keyframes gentleReveal {
     0% {
         opacity: 0;
@@ -175,6 +185,11 @@ body {
     }
 
     .true-focus span {
+        font-size: 3rem;
+        margin-bottom: 0 !important;
+    }
+
+    .glitch {
         font-size: 3rem;
         margin-bottom: 0 !important;
     }
