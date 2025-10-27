@@ -5,10 +5,12 @@ interface FuzzyTextProps {
     fontSize?: number | string;
     fontWeight?: string | number;
     fontFamily?: string;
-    color?: string;
+    color?: string; // This prop will now be ignored if a gradient is used
     enableHover?: boolean;
     baseIntensity?: number;
     hoverIntensity?: number;
+    // New prop for gradient
+    gradientColors?: { stop: number; color: string }[];
 }
 
 const FuzzyText: React.FC<FuzzyTextProps> = ({
@@ -16,10 +18,16 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
     fontSize = "clamp(2rem, 8vw, 8rem)",
     fontWeight = 900,
     fontFamily = "inherit",
-    color = "#fff",
+    // color = "#fff", // Default color will be overridden if gradientColors are provided
     enableHover = true,
     baseIntensity = 0.18,
     hoverIntensity = 0.5,
+    gradientColors = [
+        // Default gradient from your request
+        { stop: 0, color: "rgb(255, 128, 0)" },
+        { stop: 0.532394, color: "rgb(255, 0, 204)" },
+        { stop: 1, color: "rgb(0, 68, 255)" },
+    ],
 }) => {
     const canvasRef = useRef<HTMLCanvasElement & { cleanupFuzzyText?: () => void }>(null);
 
@@ -80,7 +88,15 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
             const xOffset = extraWidthBuffer / 2;
             offCtx.font = `${fontWeight} ${fontSizeStr} ${computedFontFamily}`;
             offCtx.textBaseline = "alphabetic";
-            offCtx.fillStyle = color;
+
+            // --- Apply Gradient Here ---
+            const textGradient = offCtx.createLinearGradient(0, 0, offscreenWidth, 0); // Horizontal gradient across the text width
+            gradientColors.forEach(({ stop, color }) => {
+                textGradient.addColorStop(stop, color);
+            });
+            offCtx.fillStyle = textGradient;
+            // --- End Gradient Application ---
+
             offCtx.fillText(text, xOffset - actualLeft, actualAscent);
 
             const horizontalMargin = 50;
@@ -99,10 +115,13 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 
             const run = () => {
                 if (isCancelled) return;
-                ctx.clearRect(-fuzzRange, -fuzzRange, offscreenWidth + 2 * fuzzRange, tightHeight + 2 * fuzzRange);
+                // Clear the main canvas area, ensuring enough space for fuzz
+                ctx.clearRect(-fuzzRange, -fuzzRange, canvas.width + 2 * fuzzRange, canvas.height + 2 * fuzzRange);
+
                 const intensity = isHovering ? hoverIntensity : baseIntensity;
                 for (let j = 0; j < tightHeight; j++) {
                     const dx = Math.floor(intensity * (Math.random() - 0.5) * fuzzRange);
+                    // Draw a single line from the offscreen canvas with displacement
                     ctx.drawImage(offscreen, 0, j, offscreenWidth, 1, dx, j, offscreenWidth, 1);
                 }
                 animationFrameId = window.requestAnimationFrame(run);
@@ -170,7 +189,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
                 canvas.cleanupFuzzyText();
             }
         };
-    }, [children, fontSize, fontWeight, fontFamily, color, enableHover, baseIntensity, hoverIntensity]);
+    }, [children, fontSize, fontWeight, fontFamily, gradientColors, enableHover, baseIntensity, hoverIntensity]); // Added gradientColors to dependency array
 
     return <canvas ref={canvasRef} />;
 };
