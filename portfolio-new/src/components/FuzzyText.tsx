@@ -11,6 +11,7 @@ interface FuzzyTextProps {
     hoverIntensity?: number;
     // New prop for gradient
     gradientColors?: { stop: number; color: string }[];
+    fontStyle?: "normal" | "italic" | "oblique"; // New prop for font style
 }
 
 const FuzzyText: React.FC<FuzzyTextProps> = ({
@@ -28,6 +29,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
         { stop: 0.532394, color: "rgb(255, 0, 204)" },
         { stop: 1, color: "rgb(0, 68, 255)" },
     ],
+    fontStyle = "italic", // Default to italic as per your request
 }) => {
     const canvasRef = useRef<HTMLCanvasElement & { cleanupFuzzyText?: () => void }>(null);
 
@@ -67,7 +69,10 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
             const offCtx = offscreen.getContext("2d");
             if (!offCtx) return;
 
-            offCtx.font = `${fontWeight} ${fontSizeStr} ${computedFontFamily}`;
+            // Construct the font string with fontStyle
+            const canvasFont = `${fontStyle} ${fontWeight} ${fontSizeStr} ${computedFontFamily}`;
+
+            offCtx.font = canvasFont;
             offCtx.textBaseline = "alphabetic";
             const metrics = offCtx.measureText(text);
 
@@ -86,7 +91,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
             offscreen.height = tightHeight;
 
             const xOffset = extraWidthBuffer / 2;
-            offCtx.font = `${fontWeight} ${fontSizeStr} ${computedFontFamily}`;
+            offCtx.font = canvasFont; // Use the constructed font string here as well
             offCtx.textBaseline = "alphabetic";
 
             // --- Apply Gradient Here ---
@@ -189,7 +194,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
                 canvas.cleanupFuzzyText();
             }
         };
-    }, [children, fontSize, fontWeight, fontFamily, gradientColors, enableHover, baseIntensity, hoverIntensity]); // Added gradientColors to dependency array
+    }, [children, fontSize, fontWeight, fontFamily, gradientColors, enableHover, baseIntensity, hoverIntensity, fontStyle]); // Added fontStyle to dependency array
 
     return <canvas ref={canvasRef} />;
 };
