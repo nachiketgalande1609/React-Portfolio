@@ -86,27 +86,6 @@ const ScrollProgress: React.FC = () => {
                     <div className="progress-glow" />
                     <div className="progress-dot" />
                 </div>
-
-                <div className="section-markers">
-                    {sections.map((section, index) => {
-                        const position = (index / (sections.length - 1)) * 100;
-                        return (
-                            <div
-                                key={section.id}
-                                className={`section-marker ${activeSection === section.id ? "active" : ""}`}
-                                style={{ top: `${position}%` }}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleSectionClick(section.id);
-                                }}
-                                title={section.label}
-                            >
-                                <div className="marker-dot" />
-                                <div className="marker-label">{section.label}</div>
-                            </div>
-                        );
-                    })}
-                </div>
             </div>
         </div>
     );

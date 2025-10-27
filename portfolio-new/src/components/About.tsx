@@ -54,18 +54,11 @@ const About: React.FC = () => {
             variants={containerVariants}
         >
             <div className="container">
-                {/* Enhanced Header with Floating Animation */}
-                <motion.div
-                    className="about-header"
-                    style={{ y: headerY, opacity: headerOpacity }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                >
-                    <motion.div className="header-decoration">
+                <div className="section-header">
+                    <div className="header-decoration animate-on-scroll">
                         <h2 className="section-title">About Me</h2>
-                    </motion.div>
-                </motion.div>
+                    </div>
+                </div>
 
                 <div className="about-content">
                     <motion.div className="about-main" variants={itemVariants}>

@@ -1,14 +1,16 @@
 /* styles/ScrollProgress.css */
 .scroll-progress {
-    position: fixed;
+    position: absolute;
     right: 20px;
     top: 50%;
     z-index: 10000;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0.7;
-    /* Debug border to see the actual element boundaries */
     border: 1px solid rgba(255, 255, 255, 0.3);
+    top: calc(50% - 250px) !important;
+    transform: none !important;
+    left: auto !important;
 }
 
 .scroll-progress:hover,
@@ -18,7 +20,7 @@
 
 .progress-track {
     width: 8px;
-    height: 200px;
+    height: 500px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     position: relative;
@@ -91,84 +93,6 @@
     opacity: 1;
 }
 
-/* Section Markers */
-.section-markers {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-}
-
-.section-marker {
-    position: absolute;
-    left: -20px;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    pointer-events: all;
-    transition: all 0.3s ease;
-    z-index: 2;
-}
-
-.section-marker:hover .marker-label {
-    opacity: 1;
-    transform: translateX(-10px);
-    pointer-events: auto;
-}
-
-.section-marker.active .marker-dot {
-    background: white;
-    transform: scale(1.2);
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.8), 0 0 10px rgba(59, 130, 246, 0.6);
-}
-
-.marker-dot {
-    width: 8px;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.section-marker:hover .marker-dot {
-    background: white;
-    transform: scale(1.1);
-}
-
-.marker-label {
-    position: absolute;
-    right: 20px; /* Changed from left to right to position on left side */
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    opacity: 0;
-    transform: translateX(10px); /* Changed from -10px to 10px */
-    transition: all 0.3s ease;
-    pointer-events: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Tooltip arrow on the right side pointing to the dot */
-.marker-label::before {
-    content: "";
-    position: absolute;
-    left: 100%; /* Changed from right to left */
-    top: 50%;
-    transform: translateY(-50%);
-    border: 5px solid transparent;
-    border-left-color: rgba(0, 0, 0, 0.8); /* Changed from border-right-color to border-left-color */
-}
-
 /* Hide browser scrollbar */
 html {
     scrollbar-width: none;
@@ -194,28 +118,6 @@ body {
     }
 }
 
-/* Section transition animations */
-@keyframes markerPulse {
-    0%,
-    100% {
-        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0);
-    }
-}
-
-.section-marker.active .marker-dot {
-    animation: markerPulse 2s infinite;
-}
-
-/* Adjustments for fixed positioning */
-.scroll-progress {
-    top: calc(50% - 100px) !important; /* Half of 200px height */
-    transform: none !important;
-    left: auto !important;
-}
-
 /* Responsive design - Hide scroll progress completely on mobile */
 @media (max-width: 768px) {
     .scroll-progress {
@@ -235,34 +137,5 @@ body {
 
     .progress-track {
         height: 150px;
-    }
-
-    .section-marker {
-        left: -15px;
-    }
-
-    .section-marker:hover {
-        left: -18px;
-    }
-
-    .marker-label {
-        font-size: 10px;
-        padding: 4px 8px;
-        right: 18px;
-    }
-
-    .marker-label::before {
-        border-width: 4px;
-    }
-}
-
-/* Reduced motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-    .scroll-progress,
-    .progress-fill,
-    .section-marker,
-    .marker-label {
-        transition: none;
-        animation: none;
     }
 }
