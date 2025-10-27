@@ -185,12 +185,12 @@ body {
     }
 
     .true-focus span {
-        font-size: 3rem;
+        font-size: 3rem !important;
         margin-bottom: 0 !important;
     }
 
     .glitch {
-        font-size: 3rem;
+        font-size: 3rem !important;
         margin-bottom: 0 !important;
     }
 

@@ -3,6 +3,7 @@ import "../styles/Projects.css";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import { projectsData, techIcons } from "../data/portfolioData";
+import FuzzyText from "../components/FuzzyText";
 
 // Tech stack icons mapping
 
@@ -121,7 +122,9 @@ const Projects: React.FC = () => {
             <div className="container">
                 <div className="section-header">
                     <div className="header-decoration animate-on-scroll">
-                        <h2 className="section-title">My Projects</h2>
+                        <FuzzyText baseIntensity={0.1} hoverIntensity={0.5} enableHover={true}>
+                            My Projects
+                        </FuzzyText>
                     </div>
                     <p className="section-subtitle animate-on-scroll">A collection of my recent work and creative solutions</p>
                 </div>
