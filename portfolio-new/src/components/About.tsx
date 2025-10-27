@@ -5,15 +5,9 @@ import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import CallRoundedIcon from "@mui/icons-material/CallRounded";
 import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
-import { motion, useScroll, useTransform, type Variants } from "framer-motion"; // Import Variants
+import { motion, type Variants } from "framer-motion"; // Import Variants
 
 const About: React.FC = () => {
-    const { scrollYProgress } = useScroll();
-
-    // Header animation: float + fade-in
-    const headerY = useTransform(scrollYProgress, [0, 0.1], ["0%", "-5%"]);
-    const headerOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0.3]);
-
     // Animation variants for staggered appearance
     const containerVariants: Variants = {
         // Explicitly type as Variants
@@ -66,6 +60,7 @@ const About: React.FC = () => {
                         <motion.div className="personal-info-compact" variants={itemVariants}>
                             <div className="name-role-compact">
                                 <div className="name-glow"></div>
+
                                 <h3 className="name-title">Nachiket Galande</h3>
                                 <div className="role-badge">Senior Full Stack Developer</div>
                             </div>
