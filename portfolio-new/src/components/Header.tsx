@@ -1,10 +1,27 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react"; // Added useMemo
 import "./../styles/Header.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import LinksModal from "./LinksModal";
 import UsesModal from "./UsesModal";
+
+// Define static navigation items outside the component to prevent re-creation on every render
+const mainNavItemsConfig = [
+    { id: "home", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "skills", label: "Skills" },
+    { id: "experience", label: "Experience" },
+    { id: "projects", label: "Projects" },
+];
+
+const dropdownNavItemsConfig = (handleUsesClick: () => void, handleLinksClick: () => void) => [
+    { id: "certificates", label: "Certificates" },
+    { id: "testimonials", label: "Testimonials" },
+    { id: "contact", label: "Contact" },
+    { id: "uses", label: "Uses", action: handleUsesClick },
+    { id: "links", label: "Links", action: handleLinksClick },
+];
 
 const Header: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -104,21 +121,10 @@ const Header: React.FC = () => {
         };
     }, [isMoreOpen]);
 
-    const mainNavItems = [
-        { id: "home", label: "Home" },
-        { id: "about", label: "About" },
-        { id: "skills", label: "Skills" },
-        { id: "experience", label: "Experience" },
-        { id: "projects", label: "Projects" },
-    ];
-
-    const dropdownNavItems = [
-        { id: "certificates", label: "Certificates" },
-        { id: "testimonials", label: "Testimonials" },
-        { id: "contact", label: "Contact" },
-        { id: "uses", label: "Uses", action: handleUsesClick },
-        { id: "links", label: "Links", action: handleLinksClick },
-    ];
+    // Use memoized versions of the navigation items inside the component
+    // This ensures they are not re-created unless their dependencies change
+    const mainNavItems = useMemo(() => mainNavItemsConfig, []);
+    const dropdownNavItems = useMemo(() => dropdownNavItemsConfig(handleUsesClick, handleLinksClick), [handleUsesClick, handleLinksClick]);
 
     // Determine if any dropdown item is the active section
     const isDropdownActive = dropdownNavItems.some((item) => item.id === activeSection);
