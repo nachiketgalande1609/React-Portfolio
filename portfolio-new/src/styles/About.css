@@ -52,18 +52,6 @@
     position: relative;
 }
 
-.section-title {
-    font-size: clamp(2.5rem, 6vw, 3.8rem);
-    font-weight: 700;
-    background: linear-gradient(135deg, #e0e0e0 0%, #ffffff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 0;
-    letter-spacing: -0.05em;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-}
-
 /* Enhanced Personal Info with Glass Effect */
 .personal-info-compact {
     text-align: center;
@@ -560,10 +548,6 @@
         padding: clamp(2rem, 5vw, 3rem) 0; /* Reduced overall padding */
     }
 
-    .section-title {
-        font-size: clamp(1.8rem, 4.5vw, 2.5rem); /* Even smaller */
-    }
-
     .name-title {
         font-size: clamp(1.6rem, 4vw, 2.2rem); /* Even smaller */
     }
@@ -715,10 +699,6 @@
 }
 
 @media (max-width: 380px) {
-    /* Even smaller screens */
-    .section-title {
-        font-size: clamp(1.6rem, 4vw, 2rem);
-    }
     .name-title {
         font-size: clamp(1.4rem, 3.5vw, 1.8rem);
     }
