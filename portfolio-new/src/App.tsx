@@ -1,18 +1,18 @@
 // App.tsx
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
+import Hero from "./pages/Hero";
+import About from "./pages/About";
+import Skills from "./pages/Skills";
+import Projects from "./pages/Projects";
+import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
 import ScrollProgress from "./components/ScrollProgress";
 // import AnimatedBackground from "./components/AnimatedBackground";
 import "./styles/globals.css";
-import Experience from "./components/Experience";
-import Testimonials from "./components/Testimonials";
-import Certificates from "./components/Certificates";
+import Experience from "./pages/Experience";
+import Testimonials from "./pages/Testimonials";
+import Certificates from "./pages/Certificates";
 import LightRays from "./components/LightRays";
 import LiquidEther from "./components/LiquidEther";
 import Orb from "./components/Orb";
