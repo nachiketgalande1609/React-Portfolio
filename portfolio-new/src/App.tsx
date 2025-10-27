@@ -15,6 +15,7 @@ import Testimonials from "./components/Testimonials";
 import Certificates from "./components/Certificates";
 import LightRays from "./components/LightRays";
 import LiquidEther from "./components/LiquidEther";
+import Orb from "./components/Orb";
 
 const App: React.FC = () => {
     const [isMobile, setIsMobile] = useState(false);
@@ -34,7 +35,17 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
-            <div style={{ width: "100%", height: "100vh", position: "fixed" }}>
+            {/* Background with interactive canvas */}
+            <div
+                style={{
+                    width: "100%",
+                    height: "100vh",
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    zIndex: 0,
+                }}
+            >
                 {isMobile ? (
                     <LiquidEther
                         colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
@@ -54,32 +65,42 @@ const App: React.FC = () => {
                         autoRampDuration={0.6}
                     />
                 ) : (
-                    <LightRays
-                        raysOrigin="top-center"
-                        raysColor="#00ffff"
-                        raysSpeed={1.5}
-                        lightSpread={0.8}
-                        rayLength={1.2}
-                        followMouse={true}
-                        mouseInfluence={0.1}
-                        noiseAmount={0.1}
-                        distortion={0.05}
-                        className="custom-rays"
-                    />
+                    <Orb hoverIntensity={0.5} rotateOnHover={true} hue={0} forceHoverState={false} />
+                    //  <LightRays
+                    //     raysOrigin="top-center"
+                    //     raysColor="#00ffff"
+                    //     raysSpeed={1.5}
+                    //     lightSpread={0.8}
+                    //     rayLength={1.2}
+                    //     followMouse={true}
+                    //     mouseInfluence={0.1}
+                    //     noiseAmount={0.1}
+                    //     distortion={0.05}
+                    //     className="custom-rays"
+                    // />
                 )}
             </div>
-            {/* <AnimatedBackground /> */}
-            <ScrollProgress />
-            <Header />
-            <Hero />
-            <About />
-            <Skills />
-            <Experience />
-            <Projects />
-            <Certificates />
-            <Testimonials />
-            <Contact />
-            <Footer />
+
+            {/* Content layer */}
+            <div
+                style={{
+                    position: "relative",
+                    zIndex: 1,
+                    pointerEvents: "none",
+                }}
+            >
+                <ScrollProgress />
+                <Header />
+                <Hero />
+                <About />
+                <Skills />
+                <Experience />
+                <Projects />
+                <Certificates />
+                <Testimonials />
+                <Contact />
+                <Footer />
+            </div>
         </div>
     );
 };
