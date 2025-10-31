@@ -1,4 +1,4 @@
-import type { Experience, Project, Skill, SocialLink, TestimonialsData } from "../types";
+import type { Experience, Skill, SocialLink, TestimonialsData } from "../types";
 
 // Import project images
 import livoImage from "../assets/projects/livo.png";
