@@ -17,12 +17,6 @@
     opacity: 0.1;
 }
 
-.projects-header {
-    text-align: center;
-    margin-bottom: 6rem;
-    position: relative;
-}
-
 .header-decoration {
     display: flex;
     align-items: center;
@@ -32,16 +26,6 @@
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-
-/* Projects Grid */
-.projects-grid {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 /* Animation classes */
@@ -56,16 +40,8 @@
         padding: 4rem 0;
     }
 
-    .projects-header {
-        margin-bottom: 4rem;
-    }
-
     .header-decoration {
         gap: 1.5rem;
-    }
-
-    .projects-grid {
-        gap: 0rem;
     }
 }
 

@@ -5,6 +5,7 @@ import "../styles/CardsCarousel.css";
 import { projectsData } from "../data/portfolioData";
 import ProjectCard, { type Project } from "./ProjectCard";
 
+// src/components/CardsCarousel.tsx
 export default function CardsCarousel() {
     const targetRef = useRef(null);
     const { scrollYProgress } = useScroll({ target: targetRef });
@@ -14,7 +15,7 @@ export default function CardsCarousel() {
         <div className="carousel" ref={targetRef}>
             <div className="contentContainer">
                 <motion.div className="images" style={{ x }}>
-                    {projectsData.projects.map((project: Project, index: number) => (
+                    {projectsData.projects.map((project: Project) => (
                         <motion.div
                             key={project.id}
                             initial={{ opacity: 0, y: 150 }}
@@ -22,7 +23,7 @@ export default function CardsCarousel() {
                             transition={{ duration: 0.5, ease: "easeOut" }}
                             viewport={{ once: true, amount: 0.5 }}
                         >
-                            <ProjectCard project={project} index={index} />
+                            <ProjectCard project={project} />
                         </motion.div>
                     ))}
                 </motion.div>
