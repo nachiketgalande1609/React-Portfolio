@@ -165,7 +165,7 @@ const Skills: React.FC = () => {
                 <div className="section-header">
                     <div className="header-decoration animate-on-scroll">
                         <GlitchText speed={3} enableShadows={true} enableOnHover={false} className="custom-class">
-                            My Stack
+                            My Skills
                         </GlitchText>
                     </div>
                     <p className="section-subtitle animate-on-scroll">Technologies I work with to create amazing experiences</p>

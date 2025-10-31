@@ -87,36 +87,6 @@ import WebsiteBasicsImage from "../assets/certificates/certificate_photos/websit
 import WebsiteTutorialImage from "../assets/certificates/certificate_photos/website-tutorial.jpeg";
 import WebAppDevelopmentImage from "../assets/certificates/certificate_photos/web-app-development.jpeg";
 
-export const projects: Project[] = [
-    {
-        id: 1,
-        title: "E-Commerce Platform",
-        description: "A full-stack e-commerce solution with React, Node.js, and MongoDB",
-        technologies: ["React", "Node.js", "MongoDB", "Express", "Stripe"],
-        githubUrl: "https://github.com/yourusername/ecommerce",
-        liveUrl: "https://yourapp.com",
-        image: "/project1.jpg",
-    },
-    {
-        id: 2,
-        title: "Task Management App",
-        description: "A collaborative task management application with real-time updates",
-        technologies: ["React", "Firebase", "TypeScript", "Tailwind CSS"],
-        githubUrl: "https://github.com/yourusername/taskapp",
-        liveUrl: "https://taskapp.com",
-        image: "/project2.jpg",
-    },
-    {
-        id: 3,
-        title: "Weather Dashboard",
-        description: "Real-time weather application with location-based forecasts",
-        technologies: ["React", "OpenWeather API", "Chart.js", "CSS3"],
-        githubUrl: "https://github.com/yourusername/weather",
-        liveUrl: "https://weather-app.com",
-        image: "/project3.jpg",
-    },
-];
-
 export const skills: Skill[] = [
     { name: "React", level: 90, category: "frontend" },
     { name: "TypeScript", level: 85, category: "frontend" },
@@ -133,7 +103,7 @@ export const skills: Skill[] = [
 export const socialLinks: SocialLink[] = [
     { name: "GitHub", url: "https://github.com/nachiketgalande1609", icon: "github" },
     { name: "LinkedIn", url: "https://linkedin.com/in/nachiketgalande", icon: "linkedin" },
-    { name: "Email", url: "mailto:your.email@example.com", icon: "email" },
+    { name: "Email", url: "mailto:nachiketgalande1609@gmail.com", icon: "email" },
 ];
 
 export const personalInfo = {

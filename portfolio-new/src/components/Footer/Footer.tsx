@@ -15,10 +15,10 @@ const Footer: React.FC = () => {
                         <h3 className="footer-name">{personalInfo.name}</h3>
                         <p className="footer-role">Senior Full Stack Developer</p>
                         <div className="social-links">
-                            <a href="https://github.com/yourprofile" target="_blank" rel="noopener noreferrer" className="social-link">
+                            <a href="https://github.com/nachiketgalande1609" target="_blank" rel="noopener noreferrer" className="social-link">
                                 <GitHub />
                             </a>
-                            <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="social-link">
+                            <a href="https://www.linkedin.com/in/nachiketgalande/" target="_blank" rel="noopener noreferrer" className="social-link">
                                 <LinkedIn />
                             </a>
                             <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener noreferrer" className="social-link">

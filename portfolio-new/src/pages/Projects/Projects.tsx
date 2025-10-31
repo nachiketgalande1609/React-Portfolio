@@ -32,7 +32,7 @@ const Projects: React.FC = () => {
                 <div className="section-header">
                     <div className="header-decoration true-focus animate-on-scroll">
                         <TrueFocus
-                            sentence="My Projets"
+                            sentence="My Projects"
                             manualMode={false}
                             blurAmount={5}
                             borderColor="#ff8000"
