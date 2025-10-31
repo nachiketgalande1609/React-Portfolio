@@ -21,6 +21,7 @@
     padding: 0 4rem;
     width: max-content;
     background: none;
+    margin-top: 150px;
     align-items: center;
 }
 
@@ -35,6 +36,7 @@
     .images {
         gap: 2.5rem;
         padding: 0 2rem;
+        margin-top: 50px;
     }
 }
 

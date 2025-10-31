@@ -78,7 +78,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
             className="card-container"
             initial="offscreen"
             whileInView="onscreen"
-            viewport={{ once: true, amount: 0.1 }} // Reduced amount for mobile
+            viewport={{ once: true, amount: 0.1 }}
             variants={cardVariants}
         >
             <motion.div
@@ -91,48 +91,53 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                 }}
             >
                 <div className="card-glow" />
+
+                {/* Image positioned to stick out from the top */}
+                <motion.div
+                    className="project-image-container"
+                    variants={itemVariants}
+                    style={{
+                        rotateX: window.innerWidth > 768 ? rotateX : 0,
+                        rotateY: window.innerWidth > 768 ? rotateY : 0,
+                    }}
+                >
+                    <img src={project.image} alt={project.name} className="project-img" />
+                </motion.div>
+
                 <div className="project-content-wrapper">
                     <motion.div className="project-content" variants={itemVariants}>
-                        <h3 className="project-title">{project.name}</h3>
-                        <p className="project-description">{project.description}</p>
+                        <div>
+                            <h3 className="project-title">{project.name}</h3>
+                            <p className="project-description">{project.description}</p>
+                        </div>
 
-                        <motion.div className="project-technologies" variants={itemVariants}>
-                            {project.techStack.map((tech) => (
-                                <div key={tech} className="tech-tag">
-                                    <img src={techIcons[tech]} alt={tech} className="tech-icon" />
-                                    <span className="tech-name">{tech}</span>
-                                </div>
-                            ))}
-                        </motion.div>
+                        <div>
+                            <motion.div className="project-technologies" variants={itemVariants}>
+                                {project.techStack.map((tech) => (
+                                    <div key={tech} className="tech-tag">
+                                        <img src={techIcons[tech]} alt={tech} className="tech-icon" />
+                                        <span className="tech-name">{tech}</span>
+                                    </div>
+                                ))}
+                            </motion.div>
 
-                        <motion.div className="project-links" variants={itemVariants}>
-                            {project.githubLink && (
-                                <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="project-link github">
-                                    <GitHubIcon className="link-icon" />
-                                    <span>Code</span>
-                                    <div className="link-shine"></div>
-                                </a>
-                            )}
-                            {project.liveLink && (
-                                <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="project-link live">
-                                    <LaunchIcon className="link-icon" />
-                                    <span>Live Demo</span>
-                                    <div className="link-shine"></div>
-                                </a>
-                            )}
-                        </motion.div>
-                    </motion.div>
-
-                    <motion.div
-                        className="project-image-container"
-                        variants={itemVariants}
-                        style={{
-                            rotateX: window.innerWidth > 768 ? rotateX : 0,
-                            rotateY: window.innerWidth > 768 ? rotateY : 0,
-                            // Remove the scale transform entirely
-                        }}
-                    >
-                        <img src={project.image} alt={project.name} className="project-img" />
+                            <motion.div className="project-links" variants={itemVariants}>
+                                {project.githubLink && (
+                                    <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="project-link github">
+                                        <GitHubIcon className="link-icon" />
+                                        <span>Code</span>
+                                        <div className="link-shine"></div>
+                                    </a>
+                                )}
+                                {project.liveLink && (
+                                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="project-link live">
+                                        <LaunchIcon className="link-icon" />
+                                        <span>Live Demo</span>
+                                        <div className="link-shine"></div>
+                                    </a>
+                                )}
+                            </motion.div>
+                        </div>
                     </motion.div>
                 </div>
             </motion.div>
