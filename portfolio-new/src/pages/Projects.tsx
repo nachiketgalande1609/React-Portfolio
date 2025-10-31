@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import "../styles/Projects.css";
 import FuzzyText from "../components/FuzzyText";
 import CardsCarousel from "../components/CardsCarousel";
+import TrueFocus from "../components/TrueFocus";
 
 const Projects: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
@@ -30,12 +31,16 @@ const Projects: React.FC = () => {
         <section ref={sectionRef} id="projects" className="section projects-section">
             <div className="container">
                 <div className="section-header">
-                    <div className="header-decoration animate-on-scroll">
-                        <FuzzyText baseIntensity={0.1} hoverIntensity={0.5} enableHover={true}>
-                            My Projects
-                        </FuzzyText>
+                    <div className="header-decoration true-focus animate-on-scroll">
+                        <TrueFocus
+                            sentence="My Projets"
+                            manualMode={false}
+                            blurAmount={5}
+                            borderColor="#ff8000"
+                            animationDuration={2}
+                            pauseBetweenAnimations={1}
+                        />
                     </div>
-                    <p className="section-subtitle animate-on-scroll">A collection of my recent work and creative solutions</p>
                 </div>
                 <CardsCarousel />
             </div>
