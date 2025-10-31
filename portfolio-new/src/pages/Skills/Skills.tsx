@@ -1,44 +1,44 @@
 import React, { useEffect, useRef } from "react";
-import "../styles/Skill.css";
+import "./Skill.css";
 
 // ===== Import all icons =====
-import javascriptIcon from "../assets/icons/javascript.png";
-import typescriptIcon from "../assets/icons/typescript.png";
-import reactIcon from "../assets/icons/react.png";
-import nextjsIcon from "../assets/icons/nextjs.webp";
-import reduxIcon from "../assets/icons/redux.png";
-import tailwindIcon from "../assets/icons/tailwind.png";
-import sassIcon from "../assets/icons/sass.webp";
-import bootstrapIcon from "../assets/icons/bootstrap.svg";
+import javascriptIcon from "../../assets/icons/javascript.png";
+import typescriptIcon from "../../assets/icons/typescript.png";
+import reactIcon from "../../assets/icons/react.png";
+import nextjsIcon from "../../assets/icons/nextjs.webp";
+import reduxIcon from "../../assets/icons/redux.png";
+import tailwindIcon from "../../assets/icons/tailwind.png";
+import sassIcon from "../../assets/icons/sass.webp";
+import bootstrapIcon from "../../assets/icons/bootstrap.svg";
 
-import nodejsIcon from "../assets/icons/node.png";
-import expressIcon from "../assets/icons/express.png";
+import nodejsIcon from "../../assets/icons/node.png";
+import expressIcon from "../../assets/icons/express.png";
 
-import mysqlIcon from "../assets/icons/mysql.svg";
-import postgresqlIcon from "../assets/icons/postgreSQL.webp";
-import mongodbIcon from "../assets/icons/mongodb.svg";
+import mysqlIcon from "../../assets/icons/mysql.svg";
+import postgresqlIcon from "../../assets/icons/postgreSQL.webp";
+import mongodbIcon from "../../assets/icons/mongodb.svg";
 
-import gitIcon from "../assets/icons/git.png";
-import dockerIcon from "../assets/icons/docker.svg";
-import awsIcon from "../assets/icons/aws.webp";
-import zustandIcon from "../assets/icons/zustand.svg";
-import muiIcon from "../assets/icons/mui.png";
-import mantineIcon from "../assets/icons/mantine-logo.svg";
-import css3Icon from "../assets/icons/css3.png";
-import html5Icon from "../assets/icons/html-5.png";
-import flaskIcon from "../assets/icons/flask.png";
-import fastifyIcon from "../assets/icons/fastify.png";
-import graphQLIcon from "../assets/icons/GraphQL.svg";
-import azureSQLIcon from "../assets/icons/azure-sql.svg";
-import plsqlIcon from "../assets/icons/plsql.svg";
-import pythonIcon from "../assets/icons/python.svg";
-import javaIcon from "../assets/icons/java.svg";
-import azureIcon from "../assets/icons/azure.png";
-import googleCloudIcon from "../assets/icons/google-cloud.png";
-import oracleCloudIcon from "../assets/icons/Oracle-Symbol.png";
-import jestIcon from "../assets/icons/jest.svg";
-import postmanIcon from "../assets/icons/postman.svg";
-import GlitchText from "../components/GlitchText";
+import gitIcon from "../../assets/icons/git.png";
+import dockerIcon from "../../assets/icons/docker.svg";
+import awsIcon from "../../assets/icons/aws.webp";
+import zustandIcon from "../../assets/icons/zustand.svg";
+import muiIcon from "../../assets/icons/mui.png";
+import mantineIcon from "../../assets/icons/mantine-logo.svg";
+import css3Icon from "../../assets/icons/css3.png";
+import html5Icon from "../../assets/icons/html-5.png";
+import flaskIcon from "../../assets/icons/flask.png";
+import fastifyIcon from "../../assets/icons/fastify.png";
+import graphQLIcon from "../../assets/icons/GraphQL.svg";
+import azureSQLIcon from "../../assets/icons/azure-sql.svg";
+import plsqlIcon from "../../assets/icons/plsql.svg";
+import pythonIcon from "../../assets/icons/python.svg";
+import javaIcon from "../../assets/icons/java.svg";
+import azureIcon from "../../assets/icons/azure.png";
+import googleCloudIcon from "../../assets/icons/google-cloud.png";
+import oracleCloudIcon from "../../assets/icons/Oracle-Symbol.png";
+import jestIcon from "../../assets/icons/jest.svg";
+import postmanIcon from "../../assets/icons/postman.svg";
+import GlitchText from "../../components/GlitchText/GlitchText";
 
 interface Skill {
     name: string;

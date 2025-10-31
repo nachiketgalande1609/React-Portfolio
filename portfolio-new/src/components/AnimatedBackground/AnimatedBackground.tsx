@@ -1,6 +1,6 @@
 // components/AnimatedBackground.tsx
 import React, { useEffect, useRef } from "react";
-import "../styles/AnimatedBackground.css";
+import "./AnimatedBackground.css";
 
 const AnimatedBackground: React.FC = () => {
     const backgroundRef = useRef<HTMLDivElement>(null);

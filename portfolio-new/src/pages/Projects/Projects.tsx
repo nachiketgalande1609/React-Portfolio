@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import "../styles/Projects.css";
-import FuzzyText from "../components/FuzzyText";
-import CardsCarousel from "../components/CardsCarousel";
-import TrueFocus from "../components/TrueFocus";
+import "./Projects.css";
+import CardsCarousel from "./CardsCarousel/CardsCarousel";
+import TrueFocus from "../../components/TrueFocus/TrueFocus";
 
 const Projects: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);

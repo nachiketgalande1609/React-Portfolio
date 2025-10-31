@@ -1,8 +1,8 @@
 import React from "react";
-import { personalInfo } from "../data/portfolioData"; // Assuming personalInfo is available
+import { personalInfo } from "../../data/portfolioData"; // Assuming personalInfo is available
 import { GitHub, LinkedIn, X } from "@mui/icons-material";
 
-import "../styles/Footer.css";
+import "./Footer.css";
 
 const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../styles/Certificates.css";
+import "./Certificates.css";
 import LaunchIcon from "@mui/icons-material/Launch";
-import { certificatesData } from "../data/portfolioData";
+import { certificatesData } from "../../data/portfolioData";
 import { Modal, Box, Typography, IconButton, Backdrop, Fade } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 

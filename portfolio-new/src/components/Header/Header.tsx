@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, useMemo } from "react"; // Added useMemo
-import "./../styles/Header.css";
+import "./Header.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-import LinksModal from "./LinksModal";
-import UsesModal from "./UsesModal";
+import LinksModal from "./LinksModal/LinksModal";
+import UsesModal from "./UsesModal/UsesModal";
 
 // Define static navigation items outside the component to prevent re-creation on every render
 const mainNavItemsConfig = [

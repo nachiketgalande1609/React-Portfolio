@@ -1,12 +1,12 @@
 import React from "react";
-import "../styles/About.css";
+import "./About.css";
 import CakeIcon from "@mui/icons-material/Cake";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import CallRoundedIcon from "@mui/icons-material/CallRounded";
 import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
-import { motion, type Variants } from "framer-motion"; // Import Variants
-import TrueFocus from "../components/TrueFocus";
+import { motion, type Variants } from "framer-motion";
+import TrueFocus from "../../components/TrueFocus/TrueFocus";
 
 const About: React.FC = () => {
     // Animation variants for staggered appearance

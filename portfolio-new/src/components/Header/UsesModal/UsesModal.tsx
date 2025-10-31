@@ -1,6 +1,6 @@
 import React from "react";
-import { socialLinks } from "../data/portfolioData";
-import "./../styles/UsesModal.css";
+import { socialLinks } from "../../../data/portfolioData";
+import "./UsesModal.css";
 
 // Import MUI icons
 import GitHubIcon from "@mui/icons-material/GitHub";

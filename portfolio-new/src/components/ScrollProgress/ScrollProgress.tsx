@@ -1,6 +1,6 @@
 // components/ScrollProgress.tsx
 import React, { useState, useEffect } from "react";
-import "./../styles/ScrollProgress.css";
+import "./ScrollProgress.css";
 
 const ScrollProgress: React.FC = () => {
     const [scrollProgress, setScrollProgress] = useState(0);

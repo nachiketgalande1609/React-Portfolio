@@ -2,8 +2,8 @@ import React from "react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
-import { techIcons } from "../data/portfolioData";
-import "../styles/ProjectCard.css";
+import { techIcons } from "../../../data/portfolioData";
+import "./ProjectCard.css";
 
 // Type definition for Project
 export interface Project {

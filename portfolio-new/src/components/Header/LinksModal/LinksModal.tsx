@@ -1,5 +1,5 @@
 import React from "react";
-import "./../styles/LinksModal.css";
+import "./LinksModal.css";
 
 // Import MUI icons
 import GitHubIcon from "@mui/icons-material/GitHub";

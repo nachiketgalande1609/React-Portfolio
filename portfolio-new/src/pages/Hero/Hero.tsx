@@ -1,6 +1,6 @@
 import React from "react";
-import { personalInfo, socialLinks } from "../data/portfolioData";
-import "../styles/Hero.css";
+import { personalInfo, socialLinks } from "../../data/portfolioData";
+import "./Hero.css";
 
 // Import MUI icons
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -11,8 +11,8 @@ import ArticleIcon from "@mui/icons-material/Article";
 import WavingHandIcon from "@mui/icons-material/WavingHand";
 
 // Import your images
-import profileImage from "../assets/profile.png";
-import resumeFile from "../assets/resume.pdf";
+import profileImage from "../../assets/profile.png";
+import resumeFile from "../../assets/resume.pdf";
 
 const Hero: React.FC = () => {
     const scrollToContact = () => {

@@ -1,9 +1,9 @@
 // src/components/CardsCarousel.tsx
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import "../styles/CardsCarousel.css";
-import { projectsData } from "../data/portfolioData";
-import ProjectCard, { type Project } from "./ProjectCard";
+import "./CardsCarousel.css";
+import { projectsData } from "../../../data/portfolioData";
+import ProjectCard, { type Project } from "../ProjectCard/ProjectCard";
 
 // src/components/CardsCarousel.tsx
 export default function CardsCarousel() {

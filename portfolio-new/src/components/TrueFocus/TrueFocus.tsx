@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
-import "../styles/TrueFocus.css";
+import "./TrueFocus.css";
 
 interface TrueFocusProps {
     sentence?: string;

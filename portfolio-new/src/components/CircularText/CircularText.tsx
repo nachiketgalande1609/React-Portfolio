@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { motion, useAnimation, useMotionValue, MotionValue, type Transition } from "motion/react";
 
-import "../styles/CircularText.css";
+import "./CircularText.css";
 
 interface CircularTextProps {
     text: string;

@@ -1,31 +1,31 @@
 import React, { useEffect, useRef } from "react";
-import "../styles/Experience.css";
-import { experienceData } from "../data/portfolioData";
+import "./Experience.css";
+import { experienceData } from "../../data/portfolioData";
 
-import reactIcon from "../assets/icons/react.png";
-import flaskIcon from "../assets/icons/flask.png";
-import pythonIcon from "../assets/icons/python.svg";
-import mongodbIcon from "../assets/icons/mongodb.svg";
-import awsIcon from "../assets/icons/aws.webp";
-import materialuiIcon from "../assets/icons/mui.png";
-import reactnativeIcon from "../assets/icons/react.png";
-import typescriptIcon from "../assets/icons/typescript.png";
-import nodejsIcon from "../assets/icons/node.png";
-import webrtcIcon from "../assets/icons/webrtc.svg";
-import expressIcon from "../assets/icons/express.png";
-import openaiIcon from "../assets/icons/openai.webp";
-import azureIcon from "../assets/icons/azure.png";
-import bootstrapIcon from "../assets/icons/bootstrap.svg";
-import socketioIcon from "../assets/icons/socketio.webp";
-import streamlitIcon from "../assets/icons/Streamlit.svg";
-import pygameIcon from "../assets/icons/python.svg";
-import pyttsx3Icon from "../assets/icons/python.svg";
-import sqliteIcon from "../assets/icons/SQLite.svg";
-import reduxIcon from "../assets/icons/redux.png";
-import databricksIcon from "../assets/icons/databricks.svg";
-import azureSqlIcon from "../assets/icons/azure-sql.svg";
-import azureDevOpsIcon from "../assets/icons/azure-devops.svg";
-import oracleIcon from "../assets/icons/Oracle-Symbol.png";
+import reactIcon from "../../assets/icons/react.png";
+import flaskIcon from "../../assets/icons/flask.png";
+import pythonIcon from "../../assets/icons/python.svg";
+import mongodbIcon from "../../assets/icons/mongodb.svg";
+import awsIcon from "../../assets/icons/aws.webp";
+import materialuiIcon from "../../assets/icons/mui.png";
+import reactnativeIcon from "../../assets/icons/react.png";
+import typescriptIcon from "../../assets/icons/typescript.png";
+import nodejsIcon from "../../assets/icons/node.png";
+import webrtcIcon from "../../assets/icons/webrtc.svg";
+import expressIcon from "../../assets/icons/express.png";
+import openaiIcon from "../../assets/icons/openai.webp";
+import azureIcon from "../../assets/icons/azure.png";
+import bootstrapIcon from "../../assets/icons/bootstrap.svg";
+import socketioIcon from "../../assets/icons/socketio.webp";
+import streamlitIcon from "../../assets/icons/Streamlit.svg";
+import pygameIcon from "../../assets/icons/python.svg";
+import pyttsx3Icon from "../../assets/icons/python.svg";
+import sqliteIcon from "../../assets/icons/SQLite.svg";
+import reduxIcon from "../../assets/icons/redux.png";
+import databricksIcon from "../../assets/icons/databricks.svg";
+import azureSqlIcon from "../../assets/icons/azure-sql.svg";
+import azureDevOpsIcon from "../../assets/icons/azure-devops.svg";
+import oracleIcon from "../../assets/icons/Oracle-Symbol.png";
 
 // Create a mapping object for technology icons
 const techIcons: { [key: string]: string } = {

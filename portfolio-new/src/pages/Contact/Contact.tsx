@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { personalInfo } from "../data/portfolioData";
-import "../styles/Contact.css";
+import { personalInfo } from "../../data/portfolioData";
+import "./Contact.css";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";

@@ -2,9 +2,9 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import "../styles/Testimonials.css";
-import { testimonialsData } from "../data/portfolioData";
-import type { ReconmendationCardProps } from "../types";
+import "./Testimonials.css";
+import { testimonialsData } from "../../data/portfolioData";
+import type { ReconmendationCardProps } from "../../types";
 
 const Testimonials: React.FC = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
