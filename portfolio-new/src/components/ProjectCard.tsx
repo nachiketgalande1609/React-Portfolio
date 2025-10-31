@@ -17,25 +17,30 @@ export interface Project {
 }
 
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
-    // For 3D tilt effect
+    // For 3D tilt effect - disable on mobile
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 
     const mouseX = useSpring(x, { stiffness: 300, damping: 30, restDelta: 0.001 });
     const mouseY = useSpring(y, { stiffness: 300, damping: 30, restDelta: 0.001 });
 
-    const rotateX = useTransform(mouseY, [-150, 150], [3, -3]); // Very subtle
-    const rotateY = useTransform(mouseX, [-150, 150], [-3, 3]); // Very subtle
+    const rotateX = useTransform(mouseY, [-150, 150], [3, -3]);
+    const rotateY = useTransform(mouseX, [-150, 150], [-3, 3]);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        x.set(e.clientX - rect.left - rect.width / 2);
-        y.set(e.clientY - rect.top - rect.height / 2);
+        // Only apply tilt effect on non-touch devices
+        if (window.innerWidth > 768) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            x.set(e.clientX - rect.left - rect.width / 2);
+            y.set(e.clientY - rect.top - rect.height / 2);
+        }
     };
 
     const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
+        if (window.innerWidth > 768) {
+            x.set(0);
+            y.set(0);
+        }
     };
 
     // Staggered animation variants with proper TypeScript types
@@ -73,11 +78,18 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
             className="card-container"
             initial="offscreen"
             whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.1 }} // Reduced amount for mobile
             variants={cardVariants}
         >
-            <div className="animated-border"></div>
-            <motion.div className="project-card" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} style={{ rotateX, rotateY }}>
+            <motion.div
+                className="project-card"
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                style={{
+                    rotateX: window.innerWidth > 768 ? rotateX : 0,
+                    rotateY: window.innerWidth > 768 ? rotateY : 0,
+                }}
+            >
                 <div className="card-glow" />
                 <div className="project-content-wrapper">
                     <motion.div className="project-content" variants={itemVariants}>
@@ -111,7 +123,15 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                         </motion.div>
                     </motion.div>
 
-                    <motion.div className="project-image-container" variants={itemVariants} style={{ rotateX, rotateY, scale: 1.1 }}>
+                    <motion.div
+                        className="project-image-container"
+                        variants={itemVariants}
+                        style={{
+                            rotateX: window.innerWidth > 768 ? rotateX : 0,
+                            rotateY: window.innerWidth > 768 ? rotateY : 0,
+                            // Remove the scale transform entirely
+                        }}
+                    >
                         <img src={project.image} alt={project.name} className="project-img" />
                     </motion.div>
                 </div>

@@ -15,80 +15,16 @@
 }
 
 .images {
-    display: flex; /* Change from grid to flex for single row */
+    display: flex;
     flex-direction: row;
     gap: 1rem;
     padding: 0 4rem;
-    width: max-content; /* Allow horizontal expansion */
+    width: max-content;
     background: none;
+    align-items: center;
 }
 
-.images .project-card {
-    width: 800px; /* Wider cards */
-    /* height: 500px; Fixed height */
-    min-width: 600px;
-    min-height: 500px;
-    flex-shrink: 0; /* Prevent cards from shrinking */
-}
-
-/* Adjust card content layout for wider cards */
-.images .project-content-wrapper {
-    grid-template-columns: 1fr 1fr; /* Use two columns again since cards are wider */
-    gap: 2rem;
-    height: 100%;
-}
-
-.images .project-image {
-    height: 100%;
-    min-height: auto;
-}
-
-.images .project-img {
-    height: 100%;
-    object-fit: cover;
-}
-
-.images .project-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-}
-
-.images .project-title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.images .project-description {
-    flex-grow: 1;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-.images .project-links {
-    margin-top: auto;
-}
-
-.images .project-technologies {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-}
-
-/* Update the scroll transformation in your TSX for better movement */
-/* In CardsCarousel.tsx, you might want to adjust this:
-   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-85%"]);
-*/
-
-/* Responsive adjustments */
 @media (max-width: 1200px) {
-    .images .project-card {
-        width: 550px;
-        height: 480px;
-        min-width: 550px;
-        min-height: 480px;
-    }
-
     .images {
         gap: 3rem;
         padding: 0 3rem;
@@ -96,23 +32,6 @@
 }
 
 @media (max-width: 768px) {
-    .images .project-card {
-        width: 450px;
-        height: 420px;
-        min-width: 450px;
-        min-height: 420px;
-    }
-
-    .images .project-content-wrapper {
-        grid-template-columns: 1fr; /* Stack on mobile */
-        gap: 1.5rem;
-    }
-
-    .images .project-image {
-        height: 200px;
-        min-height: 200px;
-    }
-
     .images {
         gap: 2.5rem;
         padding: 0 2rem;
@@ -120,20 +39,8 @@
 }
 
 @media (max-width: 480px) {
-    .images .project-card {
-        width: 350px;
-        height: 380px;
-        min-width: 350px;
-        min-height: 380px;
-    }
-
     .images {
         gap: 2rem;
         padding: 0 1.5rem;
-    }
-
-    .images .project-image {
-        height: 180px;
-        min-height: 180px;
     }
 }
