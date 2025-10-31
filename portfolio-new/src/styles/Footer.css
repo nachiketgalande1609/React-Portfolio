@@ -20,12 +20,6 @@
     background: linear-gradient(90deg, transparent 0%, rgba(100, 100, 100, 0.3) 50%, transparent 100%);
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
 .footer-top {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr; /* More flexible column distribution */
@@ -220,9 +214,6 @@
 @media (max-width: 480px) {
     .footer {
         padding: 3rem 0 1.5rem;
-    }
-    .container {
-        padding: 0 1rem;
     }
     .footer-top {
         grid-template-columns: 1fr; /* Single column on mobile */
