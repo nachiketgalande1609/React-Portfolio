@@ -1,0 +1,236 @@
+/* Card Container & Animated Border */
+.card-container {
+    position: relative;
+    padding: 20px; /* Controls the thickness of the border */
+    border-radius: 26px;
+    background: transparent;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.animated-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    padding: 50px;
+    animation: rotate-border 6s linear infinite;
+}
+
+@keyframes rotate-border {
+    from {
+        transform: translate(-25%, -25%) rotate(0deg);
+    }
+    to {
+        transform: translate(-25%, -25%) rotate(360deg);
+    }
+}
+
+/* Main Project Card Styling */
+.project-card {
+    background: rgba(255, 0, 187, 0.09);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2.5rem;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out; /* Smooths out mouse leave transition */
+}
+
+/* Aurora Glow Effect */
+.card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.06), transparent 30%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.project-card:hover .card-glow {
+    opacity: 1;
+}
+
+/* Layout */
+.project-content-wrapper {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.project-content {
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+
+/* Typography */
+.project-title {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #f0f0f0;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.5px;
+}
+
+.project-description {
+    color: #999;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+/* Technologies */
+.project-technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.tech-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ccc;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 500;
+    cursor: default;
+    transition: all 0.2s ease;
+}
+
+.tech-tag:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.tech-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Links & Buttons */
+.project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.project-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.link-icon {
+    margin-right: 0.5rem;
+    font-size: 1.2rem !important;
+}
+
+.project-link.github {
+    background: rgba(30, 30, 30, 0.8);
+    color: #e0e0e0;
+}
+
+.project-link.github:hover {
+    background: #222;
+    border-color: #fff;
+    color: #fff;
+}
+
+.project-link.live {
+    background: rgba(255, 255, 255, 0.9);
+    color: #111;
+    border-color: transparent;
+}
+
+.project-link.live:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Button Shine Effect */
+.link-shine {
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s ease;
+}
+
+.project-link:hover .link-shine {
+    left: 150%;
+}
+
+/* Image Styling */
+.project-image-container {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    aspect-ratio: 16 / 10;
+    transform-style: preserve-3d;
+    z-index: 1;
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .project-content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .project-image-container {
+        order: -1; /* Moves image to the top */
+    }
+
+    .project-title {
+        font-size: 1.8rem;
+    }
+
+    .project-description {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-card {
+        padding: 1.5rem;
+    }
+    .project-links {
+        flex-direction: column;
+    }
+    .project-link {
+        width: 100%;
+    }
+}

@@ -17,7 +17,7 @@
 .images {
     display: flex; /* Change from grid to flex for single row */
     flex-direction: row;
-    gap: 4rem;
+    gap: 1rem;
     padding: 0 4rem;
     width: max-content; /* Allow horizontal expansion */
     background: none;
