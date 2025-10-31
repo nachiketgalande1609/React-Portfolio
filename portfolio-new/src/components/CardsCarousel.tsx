@@ -8,7 +8,7 @@ import ProjectCard, { type Project } from "./ProjectCard";
 export default function CardsCarousel() {
     const targetRef = useRef(null);
     const { scrollYProgress } = useScroll({ target: targetRef });
-    const x = useTransform(scrollYProgress, [0, 1], ["25%", "-100%"]);
+    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-100%"]);
 
     return (
         <div className="carousel" ref={targetRef}>
