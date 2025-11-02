@@ -6,6 +6,7 @@ import javascriptIcon from "../../assets/icons/javascript.png";
 import typescriptIcon from "../../assets/icons/typescript.png";
 import reactIcon from "../../assets/icons/react.png";
 import nextjsIcon from "../../assets/icons/nextjs.webp";
+import nestjsIcon from "../../assets/icons/nestjs.png";
 import reduxIcon from "../../assets/icons/redux.png";
 import tailwindIcon from "../../assets/icons/tailwind.png";
 import sassIcon from "../../assets/icons/sass.webp";
@@ -17,6 +18,7 @@ import expressIcon from "../../assets/icons/express.png";
 import mysqlIcon from "../../assets/icons/mysql.svg";
 import postgresqlIcon from "../../assets/icons/postgreSQL.webp";
 import mongodbIcon from "../../assets/icons/mongodb.svg";
+import redisIcon from "../../assets/icons/Redis.svg";
 
 import gitIcon from "../../assets/icons/git.png";
 import dockerIcon from "../../assets/icons/docker.svg";
@@ -50,12 +52,12 @@ interface Skill {
 const skills: Skill[] = [
     // Frontend
     { name: "React", category: "frontend", icon: reactIcon },
+    { name: "Next.Js", category: "frontend", icon: nextjsIcon },
+    { name: "Redux", category: "frontend", icon: reduxIcon },
     { name: "TypeScript", category: "frontend", icon: typescriptIcon },
     { name: "JavaScript", category: "frontend", icon: javascriptIcon },
     { name: "React Native", category: "frontend", icon: reactIcon },
     { name: "Zustand", category: "frontend", icon: zustandIcon },
-    { name: "Next.Js", category: "frontend", icon: nextjsIcon },
-    { name: "Redux", category: "frontend", icon: reduxIcon },
     { name: "Material UI", category: "frontend", icon: muiIcon },
     { name: "Mantine UI", category: "frontend", icon: mantineIcon },
     { name: "Tailwind CSS", category: "frontend", icon: tailwindIcon },
@@ -66,15 +68,16 @@ const skills: Skill[] = [
 
     // Backend
     { name: "Node.Js", category: "backend", icon: nodejsIcon },
+    { name: "NestJS", category: "backend", icon: nestjsIcon },
     { name: "Flask", category: "backend", icon: flaskIcon },
-    { name: "NextJS", category: "backend", icon: nextjsIcon },
     { name: "Express.Js", category: "backend", icon: expressIcon },
     { name: "GraphQL", category: "backend", icon: graphQLIcon },
     { name: "Fastify", category: "backend", icon: fastifyIcon },
 
     // Database
-    { name: "MySQL", category: "database", icon: mysqlIcon },
     { name: "PostgreSQL", category: "database", icon: postgresqlIcon },
+    { name: "Redis", category: "database", icon: redisIcon },
+    { name: "MySQL", category: "database", icon: mysqlIcon },
     { name: "MongoDB", category: "database", icon: mongodbIcon },
     { name: "Azure SQL", category: "database", icon: azureSQLIcon },
     { name: "PL/SQL", category: "database", icon: plsqlIcon },
