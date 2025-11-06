@@ -446,3 +446,8 @@
         font-size: 0.85rem; /* Very compact font size for skill names */
     }
 }
+
+.skill-item-link {
+    text-decoration: none;
+    color: inherit;
+}

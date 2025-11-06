@@ -62,21 +62,21 @@ body {
 }
 
 .section-title {
-    font-size: 6rem;
+    font-size: 4rem;
     font-weight: 800;
     text-align: center;
     margin-bottom: 3rem;
-    font-family: "Story Script", sans-serif !important;
+    font-family: "Special Gothic Expanded One", sans-serif !important;
     width: 100%;
     position: relative;
 
     /* Gradient setup */
-    background: linear-gradient(288deg, rgb(255, 128, 0), rgb(255, 0, 204) 53.2394%, rgb(0, 68, 255)) 0.00175927% 50% / 200% 200% text;
+    /* background: linear-gradient(288deg, rgb(255, 128, 0), rgb(255, 0, 204) 53.2394%, rgb(0, 68, 255)) 0.00175927% 50% / 200% 200% text;
     background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: gradientMove 14s ease infinite;
+    animation: gradientMove 14s ease infinite; */
 }
 
 .section-header {

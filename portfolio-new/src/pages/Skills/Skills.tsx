@@ -40,63 +40,70 @@ import googleCloudIcon from "../../assets/icons/google-cloud.png";
 import oracleCloudIcon from "../../assets/icons/Oracle-Symbol.png";
 import jestIcon from "../../assets/icons/jest.svg";
 import postmanIcon from "../../assets/icons/postman.svg";
-import GlitchText from "../../components/GlitchText/GlitchText";
+// import GlitchText from "../../components/GlitchText/GlitchText";
+import ShinyText from "../../components/ShinyText/ShinyText";
 
 interface Skill {
     name: string;
     category: "frontend" | "backend" | "database" | "tools" | "programmingLanguages" | "cloud";
     icon: string;
+    website: string;
 }
 
 // ===== Skill data =====
 const skills: Skill[] = [
     // Frontend
-    { name: "React", category: "frontend", icon: reactIcon },
-    { name: "Next.Js", category: "frontend", icon: nextjsIcon },
-    { name: "Redux", category: "frontend", icon: reduxIcon },
-    { name: "TypeScript", category: "frontend", icon: typescriptIcon },
-    { name: "JavaScript", category: "frontend", icon: javascriptIcon },
-    { name: "React Native", category: "frontend", icon: reactIcon },
-    { name: "Zustand", category: "frontend", icon: zustandIcon },
-    { name: "Material UI", category: "frontend", icon: muiIcon },
-    { name: "Mantine UI", category: "frontend", icon: mantineIcon },
-    { name: "Tailwind CSS", category: "frontend", icon: tailwindIcon },
-    { name: "Sass", category: "frontend", icon: sassIcon },
-    { name: "Bootstrap", category: "frontend", icon: bootstrapIcon },
-    { name: "CSS3", category: "frontend", icon: css3Icon },
-    { name: "HTML5", category: "frontend", icon: html5Icon },
+    { name: "React", category: "frontend", icon: reactIcon, website: "https://react.dev/" },
+    { name: "Next.Js", category: "frontend", icon: nextjsIcon, website: "https://nextjs.org/" },
+    { name: "Redux", category: "frontend", icon: reduxIcon, website: "https://redux.js.org/" },
+    { name: "TypeScript", category: "frontend", icon: typescriptIcon, website: "https://www.typescriptlang.org/" },
+    { name: "JavaScript", category: "frontend", icon: javascriptIcon, website: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+    { name: "React Native", category: "frontend", icon: reactIcon, website: "https://reactnative.dev/" },
+    { name: "Zustand", category: "frontend", icon: zustandIcon, website: "https://zustand-demo.pmnd.rs/" },
+    { name: "Material UI", category: "frontend", icon: muiIcon, website: "https://mui.com/" },
+    { name: "Mantine UI", category: "frontend", icon: mantineIcon, website: "https://mantine.dev/" },
+    { name: "Tailwind CSS", category: "frontend", icon: tailwindIcon, website: "https://tailwindcss.com/" },
+    { name: "Sass", category: "frontend", icon: sassIcon, website: "https://sass-lang.com/" },
+    { name: "Bootstrap", category: "frontend", icon: bootstrapIcon, website: "https://getbootstrap.com/" },
+    { name: "CSS3", category: "frontend", icon: css3Icon, website: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+    { name: "HTML5", category: "frontend", icon: html5Icon, website: "https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5" },
 
     // Backend
-    { name: "Node.Js", category: "backend", icon: nodejsIcon },
-    { name: "NestJS", category: "backend", icon: nestjsIcon },
-    { name: "Flask", category: "backend", icon: flaskIcon },
-    { name: "Express.Js", category: "backend", icon: expressIcon },
-    { name: "GraphQL", category: "backend", icon: graphQLIcon },
-    { name: "Fastify", category: "backend", icon: fastifyIcon },
+    { name: "Node.Js", category: "backend", icon: nodejsIcon, website: "https://nodejs.org/" },
+    { name: "NestJS", category: "backend", icon: nestjsIcon, website: "https://nestjs.com/" },
+    { name: "Flask", category: "backend", icon: flaskIcon, website: "https://flask.palletsprojects.com/" },
+    { name: "Express.Js", category: "backend", icon: expressIcon, website: "https://expressjs.com/" },
+    { name: "GraphQL", category: "backend", icon: graphQLIcon, website: "https://graphql.org/" },
+    { name: "Fastify", category: "backend", icon: fastifyIcon, website: "https://www.fastify.io/" },
 
     // Database
-    { name: "PostgreSQL", category: "database", icon: postgresqlIcon },
-    { name: "Redis", category: "database", icon: redisIcon },
-    { name: "MySQL", category: "database", icon: mysqlIcon },
-    { name: "MongoDB", category: "database", icon: mongodbIcon },
-    { name: "Azure SQL", category: "database", icon: azureSQLIcon },
-    { name: "PL/SQL", category: "database", icon: plsqlIcon },
+    { name: "PostgreSQL", category: "database", icon: postgresqlIcon, website: "https://www.postgresql.org/" },
+    { name: "Redis", category: "database", icon: redisIcon, website: "https://redis.io/" },
+    { name: "MySQL", category: "database", icon: mysqlIcon, website: "https://www.mysql.com/" },
+    { name: "MongoDB", category: "database", icon: mongodbIcon, website: "https://www.mongodb.com/" },
+    { name: "Azure SQL", category: "database", icon: azureSQLIcon, website: "https://azure.microsoft.com/en-us/products/azure-sql/database/" },
+    { name: "PL/SQL", category: "database", icon: plsqlIcon, website: "https://www.oracle.com/database/technologies/appdev/plsql.html" },
 
-    { name: "Python", category: "programmingLanguages", icon: pythonIcon },
-    { name: "JavaScript", category: "programmingLanguages", icon: javascriptIcon },
-    { name: "Java", category: "programmingLanguages", icon: javaIcon },
+    { name: "Python", category: "programmingLanguages", icon: pythonIcon, website: "https://www.python.org/" },
+    {
+        name: "JavaScript",
+        category: "programmingLanguages",
+        icon: javascriptIcon,
+        website: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    },
+    { name: "Java", category: "programmingLanguages", icon: javaIcon, website: "https://www.java.com/" },
 
-    { name: "Azure", category: "cloud", icon: azureIcon },
-    { name: "AWS", category: "cloud", icon: awsIcon },
-    { name: "Google Cloud", category: "cloud", icon: googleCloudIcon },
-    { name: "OCI", category: "cloud", icon: oracleCloudIcon },
-    { name: "OIC", category: "cloud", icon: oracleCloudIcon },
+    { name: "Azure", category: "cloud", icon: azureIcon, website: "https://azure.microsoft.com/" },
+    { name: "AWS", category: "cloud", icon: awsIcon, website: "https://aws.amazon.com/" },
+    { name: "Google Cloud", category: "cloud", icon: googleCloudIcon, website: "https://cloud.google.com/" },
+    { name: "OCI", category: "cloud", icon: oracleCloudIcon, website: "https://www.oracle.com/cloud/" },
+    { name: "OIC", category: "cloud", icon: oracleCloudIcon, website: "https://www.oracle.com/integration/what-is-oic/" },
 
     // Tools
-    { name: "Jest", category: "tools", icon: jestIcon },
-    { name: "Git", category: "tools", icon: gitIcon },
-    { name: "Docker", category: "tools", icon: dockerIcon },
-    { name: "Postman", category: "tools", icon: postmanIcon },
+    { name: "Jest", category: "tools", icon: jestIcon, website: "https://jestjs.io/" },
+    { name: "Git", category: "tools", icon: gitIcon, website: "https://git-scm.com/" },
+    { name: "Docker", category: "tools", icon: dockerIcon, website: "https://www.docker.com/" },
+    { name: "Postman", category: "tools", icon: postmanIcon, website: "https://www.postman.com/" },
 ];
 
 const Skills: React.FC = () => {
@@ -134,23 +141,25 @@ const Skills: React.FC = () => {
     const getSkillsByCategory = (category: Skill["category"]) => skills.filter((skill) => skill.category === category);
 
     const SkillItem: React.FC<{ skill: Skill }> = ({ skill }) => (
-        <div className="skill-item animate-on-scroll">
-            <div className="skill-icon">
-                <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = "none";
-                        const fallback = target.nextElementSibling as HTMLElement;
-                        if (fallback) fallback.style.display = "flex";
-                    }}
-                />
-                <span className="fallback-icon">{skill.name.charAt(0)}</span>
+        <a href={skill.website} target="_blank" rel="noopener noreferrer" className="skill-item-link">
+            <div className="skill-item animate-on-scroll">
+                <div className="skill-icon">
+                    <img
+                        src={skill.icon}
+                        alt={skill.name}
+                        onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = "none";
+                            const fallback = target.nextElementSibling as HTMLElement;
+                            if (fallback) fallback.style.display = "flex";
+                        }}
+                    />
+                    <span className="fallback-icon">{skill.name.charAt(0)}</span>
+                </div>
+                <span className="skill-name">{skill.name}</span>
+                <div className="skill-hover-effect"></div>
             </div>
-            <span className="skill-name">{skill.name}</span>
-            <div className="skill-hover-effect"></div>
-        </div>
+        </a>
     );
 
     const categoryConfig = {
@@ -167,9 +176,10 @@ const Skills: React.FC = () => {
             <div className="container">
                 <div className="section-header">
                     <div className="header-decoration animate-on-scroll">
-                        <GlitchText speed={3} enableShadows={true} enableOnHover={false} className="custom-class">
+                        {/* <GlitchText speed={2} enableShadows={true} enableOnHover={false} className="custom-class">
                             My Skills
-                        </GlitchText>
+                        </GlitchText> */}
+                        <ShinyText text="My Skill" disabled={false} speed={2} className="section-title" />
                     </div>
                     <p className="section-subtitle animate-on-scroll">Technologies I work with to create amazing experiences</p>
                 </div>

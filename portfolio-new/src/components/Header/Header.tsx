@@ -16,7 +16,7 @@ const mainNavItemsConfig = [
 ];
 
 const dropdownNavItemsConfig = (handleUsesClick: () => void, handleLinksClick: () => void) => [
-    { id: "certificates", label: "Certificates" },
+    { id: "certificates", label: "Certifications" },
     { id: "testimonials", label: "Testimonials" },
     { id: "contact", label: "Contact" },
     { id: "uses", label: "Uses", action: handleUsesClick },

@@ -4,6 +4,7 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import { certificatesData } from "../../data/portfolioData";
 import { Modal, Box, Typography, IconButton, Backdrop, Fade } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import ShinyText from "../../components/ShinyText/ShinyText";
 
 interface Certificate {
     title: string;
@@ -105,7 +106,8 @@ const Certificates: React.FC = () => {
             <div className="container">
                 <div className="section-header">
                     <div className="header-decoration">
-                        <h2 className="section-title">Certifications</h2>
+                        {/* <h2 className="section-title">Certifications</h2> */}
+                        <ShinyText text="Certifications" disabled={false} speed={2} className="section-title" />
                     </div>
                     <p className="section-subtitle">A collection of my professional certifications and achievements.</p>
                 </div>

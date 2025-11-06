@@ -6,6 +6,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CheckIcon from "@mui/icons-material/Check";
+import ShinyText from "../../components/ShinyText/ShinyText";
 
 const Contact: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
@@ -70,7 +71,8 @@ const Contact: React.FC = () => {
             <div className="container">
                 <div className="contact-header">
                     <div className="header-decoration animate-on-scroll">
-                        <h2 className="section-title">Get In Touch</h2>
+                        {/* <h2 className="section-title">Get In Touch</h2> */}
+                        <ShinyText text="Get in Touch" disabled={false} speed={2} className="section-title" />
                     </div>
                     <p className="section-subtitle animate-on-scroll">Let's create something amazing together</p>
                 </div>

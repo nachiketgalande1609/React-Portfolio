@@ -26,6 +26,7 @@ import databricksIcon from "../../assets/icons/databricks.svg";
 import azureSqlIcon from "../../assets/icons/azure-sql.svg";
 import azureDevOpsIcon from "../../assets/icons/azure-devops.svg";
 import oracleIcon from "../../assets/icons/Oracle-Symbol.png";
+import ShinyText from "../../components/ShinyText/ShinyText";
 
 // Create a mapping object for technology icons
 const techIcons: { [key: string]: string } = {
@@ -97,7 +98,8 @@ const Experience: React.FC = () => {
             <div className="container">
                 <div className="section-header">
                     <div className="header-decoration animate-on-scroll">
-                        <h2 className="section-title">Professional Experience</h2>
+                        {/* <h2 className="section-title">Professional Experience</h2> */}
+                        <ShinyText text="Professional Experience" disabled={false} speed={2} className="section-title" />
                     </div>
                     <p className="section-subtitle animate-on-scroll">My journey through the tech industry</p>
                 </div>

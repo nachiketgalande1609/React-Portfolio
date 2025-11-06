@@ -6,7 +6,8 @@ import CallRoundedIcon from "@mui/icons-material/CallRounded";
 import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import { motion, type Variants } from "framer-motion";
-import TrueFocus from "../../components/TrueFocus/TrueFocus";
+import ShinyText from "../../components/ShinyText/ShinyText";
+// import TrueFocus from "../../components/TrueFocus/TrueFocus";
 
 const About: React.FC = () => {
     // Animation variants for staggered appearance
@@ -51,14 +52,15 @@ const About: React.FC = () => {
             <div className="container">
                 <div className="section-header">
                     <div className="header-decoration true-focus animate-on-scroll">
-                        <TrueFocus
+                        {/* <TrueFocus
                             sentence="About Me"
                             manualMode={false}
                             blurAmount={5}
                             borderColor="#ff8000"
                             animationDuration={2}
                             pauseBetweenAnimations={1}
-                        />
+                        /> */}
+                        <ShinyText text="About Me" disabled={false} speed={2} className="section-title" />
                     </div>
                 </div>
 

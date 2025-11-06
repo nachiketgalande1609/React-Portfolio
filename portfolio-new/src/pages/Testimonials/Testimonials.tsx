@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import "./Testimonials.css";
 import { testimonialsData } from "../../data/portfolioData";
 import type { ReconmendationCardProps } from "../../types";
+import ShinyText from "../../components/ShinyText/ShinyText";
 
 const Testimonials: React.FC = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -64,7 +65,8 @@ const Testimonials: React.FC = () => {
         <section ref={sectionRef} id="testimonials" className="testimonials-section">
             <div className="testimonials-container">
                 <div className="testimonials-header">
-                    <h2 className="section-title">Testimonials</h2>
+                    {/* <h2 className="section-title">Testimonials</h2> */}
+                    <ShinyText text="Testimonials" disabled={false} speed={2} className="section-title" />
                     <p className="section-subtitle">What colleagues say about working with me</p>
                 </div>
 

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import "./Projects.css";
 import CardsCarousel from "./CardsCarousel/CardsCarousel";
-import TrueFocus from "../../components/TrueFocus/TrueFocus";
+// import TrueFocus from "../../components/TrueFocus/TrueFocus";
+import ShinyText from "../../components/ShinyText/ShinyText";
 
 const Projects: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
@@ -31,14 +32,15 @@ const Projects: React.FC = () => {
             <div className="container">
                 <div className="section-header">
                     <div className="header-decoration true-focus animate-on-scroll">
-                        <TrueFocus
+                        {/* <TrueFocus
                             sentence="My Projects"
                             manualMode={false}
                             blurAmount={5}
                             borderColor="#ff8000"
                             animationDuration={2}
                             pauseBetweenAnimations={1}
-                        />
+                        /> */}
+                        <ShinyText text="My Projects" disabled={false} speed={2} className="section-title" />
                     </div>
                 </div>
                 <CardsCarousel />
