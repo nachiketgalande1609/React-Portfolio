@@ -5,41 +5,59 @@ import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import CallRoundedIcon from "@mui/icons-material/CallRounded";
 import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
+import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
 import { motion, type Variants } from "framer-motion";
 import ShinyText from "../../components/ShinyText/ShinyText";
-// import TrueFocus from "../../components/TrueFocus/TrueFocus";
+
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.08 },
+    },
+};
+
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.215, 0.61, 0.355, 1] } },
+};
+
+const personalDetails = [
+    { label: "Year of Birth", value: "1999", icon: <CalendarMonthRoundedIcon /> },
+    { label: "Phone", value: "+91 97649 93023", icon: <CallRoundedIcon /> },
+    { label: "Location", value: "Mumbai, India", icon: <PersonPinCircleRoundedIcon /> },
+    { label: "Age", value: "26", icon: <CakeIcon /> },
+    { label: "Email", value: "nachiketgalande1609@gmail.com", icon: <EmailRoundedIcon /> },
+];
+
+const education = [
+    {
+        degree: "Bachelor of Technology, Computer Science & Engineering",
+        period: "2017 – 2021",
+        grade: "7.0 CGPA",
+        institution: "MIT ADT University, Pune",
+    },
+    {
+        degree: "Class XII (HSC)",
+        period: "2015 – 2017",
+        grade: "82%",
+        institution: "Shubham Raje Jr. College",
+    },
+    {
+        degree: "Class X (SSC)",
+        period: "2015",
+        grade: "88.40%",
+        institution: "St. Xavier's English High School",
+    },
+];
+
+const stats = [
+    { value: "4+", label: "Years Experience", description: "Shipping production systems across industries." },
+    { value: "20+", label: "Projects Shipped", description: "From side experiments to enterprise platforms." },
+    { value: "40+", label: "Certifications", description: "Cloud, data, AI/ML and engineering credentials." },
+];
 
 const About: React.FC = () => {
-    // Animation variants for staggered appearance
-    const containerVariants: Variants = {
-        // Explicitly type as Variants
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-            },
-        },
-    };
-
-    const itemVariants: Variants = {
-        // Explicitly type as Variants
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-    };
-
-    const slideInLeftVariants: Variants = {
-        // Explicitly type as Variants
-        hidden: { opacity: 0, x: -50 },
-        visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
-    };
-
-    const slideInRightVariants: Variants = {
-        // Explicitly type as Variants
-        hidden: { opacity: 0, x: 50 },
-        visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
-    };
-
     return (
         <motion.section
             id="about"
@@ -49,172 +67,86 @@ const About: React.FC = () => {
             viewport={{ once: true, amount: 0.1 }}
             variants={containerVariants}
         >
-            <div className="container">
-                <div className="section-header">
-                    <div className="header-decoration true-focus animate-on-scroll">
-                        {/* <TrueFocus
-                            sentence="About Me"
-                            manualMode={false}
-                            blurAmount={5}
-                            borderColor="#ff8000"
-                            animationDuration={2}
-                            pauseBetweenAnimations={1}
-                        /> */}
-                        <ShinyText text="About Me" disabled={false} speed={2} className="section-title" />
-                    </div>
-                </div>
+            <div className="container about-container">
+                <motion.div className="about-header" variants={itemVariants}>
+                    <span className="about-eyebrow">
+                        <span className="about-eyebrow-dot" aria-hidden="true" />
+                        <span>Get to know me</span>
+                    </span>
+                    <ShinyText text="About Me" disabled={false} speed={2} className="section-title" />
+                    <p className="about-subtitle">A quick look at who I am, what I've built, and where I've learned.</p>
+                </motion.div>
 
-                <div className="about-content">
-                    <motion.div className="about-main" variants={itemVariants}>
-                        {/* Personal Info with Enhanced Typography */}
-                        <motion.div className="personal-info-compact" variants={itemVariants}>
-                            <div className="name-role-compact">
-                                <div className="name-glow"></div>
+                <motion.div className="about-lead" variants={itemVariants}>
+                    <p className="about-lead-text">
+                        Senior Full Stack Software Developer with <strong>4+ years</strong> of experience designing, developing, and deploying
+                        scalable, high-performance web applications — strong across frontend, backend, and database architecture.
+                    </p>
+                </motion.div>
 
-                                <h3 className="name-title">Nachiket Galande</h3>
-                                <div className="role-badge">Senior Full Stack Developer</div>
-                            </div>
-                            <p className="about-description">
-                                Senior Full Stack Software Developer with 4+ years of experience in designing, developing, and deploying scalable,
-                                high-performance web applications. Proficient in frontend and backend technologies with expertise in database
-                                architecture.
-                            </p>
+                <motion.div className="about-stats" variants={containerVariants}>
+                    {stats.map((stat) => (
+                        <motion.div key={stat.label} className="about-stat" variants={itemVariants}>
+                            <div className="about-stat-value">{stat.value}</div>
+                            <div className="about-stat-label">{stat.label}</div>
+                            <p className="about-stat-description">{stat.description}</p>
                         </motion.div>
+                    ))}
+                </motion.div>
 
-                        {/* Combined Details Grid with Enhanced Cards */}
-                        <div className="combined-details-grid">
-                            {/* Personal Details */}
-                            <motion.div className="details-group" variants={slideInLeftVariants}>
-                                <h4 className="details-group-title">Personal Details</h4>
-                                <motion.div className="details-grid" variants={containerVariants}>
-                                    {[
-                                        { label: "Year of Birth", value: "1999", icon: <CalendarMonthRoundedIcon /> },
-                                        { label: "Phone", value: "+91 97649 93023", icon: <CallRoundedIcon /> },
-                                        { label: "Location", value: "Mumbai, India", icon: <PersonPinCircleRoundedIcon /> },
-                                        { label: "Age", value: "26", icon: <CakeIcon /> },
-                                        { label: "Email", value: "nachiketgalande1609@gmail.com", icon: <EmailRoundedIcon /> },
-                                    ].map((detail, index) => (
-                                        <motion.div
-                                            key={detail.label}
-                                            className="detail-item"
-                                            variants={itemVariants}
-                                            transition={{ delay: index * 0.05 }}
-                                            whileHover={{ scale: 1.02, boxShadow: "0 10px 25px rgba(0,0,0,0.4)", zIndex: 10 }}
-                                        >
-                                            <div className="detail-icon">{detail.icon}</div>
-                                            <div className="detail-content">
-                                                <strong>{detail.label}</strong>
-                                                <span>{detail.value}</span>
-                                            </div>
-                                            <div className="detail-hover-effect"></div>
-                                        </motion.div>
-                                    ))}
-                                </motion.div>
-                            </motion.div>
+                <div className="about-columns">
+                    <motion.section className="about-card" variants={itemVariants} aria-labelledby="about-details-heading">
+                        <header className="about-card-header">
+                            <h3 id="about-details-heading" className="about-card-title">
+                                Personal Details
+                            </h3>
+                            <span className="about-card-meta">At a glance</span>
+                        </header>
 
-                            {/* Education Timeline with Enhanced Markers */}
-                            <motion.div className="timeline-group" variants={slideInRightVariants}>
-                                <h4 className="details-group-title">Education Timeline</h4>
-                                <motion.div className="timeline" variants={containerVariants}>
-                                    {[
-                                        {
-                                            degree: "Bachelor of Technology in Computer Science & Engineering",
-                                            period: "2017 - 2021",
-                                            grade: "7.0 CGPA",
-                                            institution: "MIT ADT University, Pune",
-                                        },
-                                        {
-                                            degree: "Class XII (HSC)",
-                                            period: "2015 - 2017",
-                                            grade: "82%",
-                                            institution: "Shubham Raje Jr. College",
-                                        },
-                                        {
-                                            degree: "Class X (SSC)",
-                                            period: "2015",
-                                            grade: "88.40%",
-                                            institution: "St. Xavier's English High School",
-                                        },
-                                    ].map((edu, index) => (
-                                        <motion.div
-                                            key={edu.degree}
-                                            className="timeline-item"
-                                            variants={itemVariants}
-                                            transition={{ delay: index * 0.08 }}
-                                            whileHover={{ x: 10, boxShadow: "0 10px 25px rgba(0,0,0,0.4)", zIndex: 5 }}
-                                        >
-                                            <div className="timeline-marker">
-                                                <motion.div
-                                                    className="marker-pulse"
-                                                    animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
-                                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                                                ></motion.div>
-                                            </div>
-                                            <div className="timeline-content">
-                                                <div className="timeline-glow"></div>
-                                                <div className="timeline-header">
-                                                    <h5 className="timeline-degree">{edu.degree}</h5>
-                                                    <span className="timeline-period">{edu.period}</span>
-                                                </div>
-                                                <div className="timeline-details">
-                                                    <span className="timeline-grade">{edu.grade}</span>
-                                                    <span className="timeline-institution">{edu.institution}</span>
-                                                </div>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </motion.div>
-                            </motion.div>
-                        </div>
+                        <ul className="about-detail-list">
+                            {personalDetails.map((detail) => (
+                                <li key={detail.label} className="about-detail-item">
+                                    <span className="about-detail-icon" aria-hidden="true">
+                                        {detail.icon}
+                                    </span>
+                                    <span className="about-detail-text">
+                                        <span className="about-detail-label">{detail.label}</span>
+                                        <span className="about-detail-value">{detail.value}</span>
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.section>
 
-                        {/* Enhanced Achievements Section */}
-                        <motion.div className="achievements-section" variants={itemVariants}>
-                            <h3 className="achievements-title">Achievements</h3>
-                            <motion.div className="achievements-grid" variants={containerVariants}>
-                                {[
-                                    {
-                                        number: "4+",
-                                        label: "Years Experience",
-                                        description: "Full stack development across multiple industries",
-                                        gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                                    },
-                                    {
-                                        number: "20+",
-                                        label: "Projects Completed",
-                                        description: "From personal projects to enterprise applications",
-                                        gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-                                    },
-                                    {
-                                        number: "40+",
-                                        label: "Certifications",
-                                        description: "Recognized courses in various technologies",
-                                        gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-                                    },
-                                ].map((achievement, index) => (
-                                    <motion.div
-                                        key={achievement.label}
-                                        className="achievement-card"
-                                        // Removed `variants={itemVariants}` here as it's already on the parent `achievements-section`
-                                        // and `itemVariants` for `achievements-grid` might be creating an issue with staggerChildren
-                                        // Instead, we ensure the parent `motion.div` for the grid has `containerVariants` and children `motion.div` have `itemVariants`
-                                        variants={itemVariants} // Re-added if each card needs its own animation
-                                        transition={{ delay: index * 0.1 }}
-                                        whileHover={{ y: -10, scale: 1.03, boxShadow: "0 25px 50px rgba(0,0,0,0.5)", zIndex: 10 }}
-                                    >
-                                        <div className="achievement-bg" style={{ background: achievement.gradient }}></div>
-                                        <div className="achievement-main">
-                                            <div className="achievement-number">{achievement.number}</div>
-                                            <div className="achievement-content">
-                                                <h4 className="achievement-label">{achievement.label}</h4>
-                                                <p className="achievement-description">{achievement.description}</p>
-                                            </div>
+                    <motion.section className="about-card" variants={itemVariants} aria-labelledby="about-education-heading">
+                        <header className="about-card-header">
+                            <h3 id="about-education-heading" className="about-card-title">
+                                Education
+                            </h3>
+                            <span className="about-card-meta">
+                                <SchoolRoundedIcon fontSize="inherit" /> Academic background
+                            </span>
+                        </header>
+
+                        <ol className="about-timeline">
+                            {education.map((edu, idx) => (
+                                <li key={edu.degree} className="about-timeline-item">
+                                    <span className="about-timeline-marker" aria-hidden="true">
+                                        <span className="about-timeline-marker-dot" />
+                                    </span>
+                                    <div className="about-timeline-content">
+                                        <div className="about-timeline-meta">
+                                            <span className="about-timeline-period">{edu.period}</span>
+                                            <span className="about-timeline-grade">{edu.grade}</span>
                                         </div>
-                                        <div className="achievement-glow"></div>
-                                    </motion.div>
-                                ))}
-                            </motion.div>
-                        </motion.div>
-                    </motion.div>
+                                        <h4 className="about-timeline-degree">{edu.degree}</h4>
+                                        <p className="about-timeline-institution">{edu.institution}</p>
+                                    </div>
+                                    {idx < education.length - 1 && <span className="about-timeline-connector" aria-hidden="true" />}
+                                </li>
+                            ))}
+                        </ol>
+                    </motion.section>
                 </div>
             </div>
         </motion.section>

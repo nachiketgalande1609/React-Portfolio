@@ -1,4 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
+import { motion, type Variants } from "framer-motion";
+import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import "./Experience.css";
 import { experienceData } from "../../data/portfolioData";
 
@@ -28,7 +31,6 @@ import azureDevOpsIcon from "../../assets/icons/azure-devops.svg";
 import oracleIcon from "../../assets/icons/Oracle-Symbol.png";
 import ShinyText from "../../components/ShinyText/ShinyText";
 
-// Create a mapping object for technology icons
 const techIcons: { [key: string]: string } = {
     "React.js": reactIcon,
     TypeScript: typescriptIcon,
@@ -57,131 +59,103 @@ const techIcons: { [key: string]: string } = {
     "Oracle OIC": oracleIcon,
 };
 
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+};
+
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.215, 0.61, 0.355, 1] } },
+};
+
+const isCurrentRole = (period: string) => /present|current/i.test(period);
+
 const Experience: React.FC = () => {
-    const sectionRef = useRef<HTMLElement>(null);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("animate-in");
-
-                        // Add staggered animation for timeline items
-                        if (entry.target.classList.contains("experience-content")) {
-                            const experienceItems = entry.target.querySelectorAll(".experience-item");
-                            experienceItems.forEach((item, index) => {
-                                (item as HTMLElement).style.animationDelay = `${index * 0.15}s`;
-                            });
-                        }
-                    }
-                });
-            },
-            { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-        );
-
-        const animateElements = document.querySelectorAll(".animate-on-scroll");
-        animateElements.forEach((el) => observer.observe(el));
-
-        return () => {
-            animateElements.forEach((el) => observer.unobserve(el));
-        };
-    }, []);
-
-    // Function to get icon for a technology - returns undefined if not found
-    const getTechIcon = (tech: string): string | undefined => {
-        return techIcons[tech];
-    };
-
     return (
-        <section ref={sectionRef} id="experience" className="section experience-section">
-            <div className="container">
-                <div className="section-header">
-                    <div className="header-decoration animate-on-scroll">
-                        {/* <h2 className="section-title">Professional Experience</h2> */}
-                        <ShinyText text="Professional Experience" disabled={false} speed={2} className="section-title" />
-                    </div>
-                    <p className="section-subtitle animate-on-scroll">My journey through the tech industry</p>
-                </div>
+        <motion.section
+            id="experience"
+            className="section experience-section"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+            variants={containerVariants}
+        >
+            <div className="container experience-container">
+                <motion.header className="experience-header" variants={itemVariants}>
+                    <span className="experience-eyebrow">
+                        <span className="experience-eyebrow-dot" aria-hidden="true" />
+                        <span>Career</span>
+                        <span className="experience-eyebrow-count">
+                            {experienceData.length} {experienceData.length === 1 ? "role" : "roles"}
+                        </span>
+                    </span>
+                    <ShinyText text="Professional Experience" disabled={false} speed={2} className="section-title" />
+                    <p className="experience-subtitle">My journey through the tech industry — roles, teams, and the impact I've delivered.</p>
+                </motion.header>
 
-                <div className="experience-content animate-on-scroll">
-                    <div className="timeline-container">
-                        {/* Continuous Timeline Line */}
-                        <div className="timeline-line-main"></div>
+                <div className="experience-timeline">
+                    <span className="experience-rail" aria-hidden="true" />
 
-                        {experienceData.map((experience) => (
-                            <div key={experience.id} className="experience-item">
-                                {/* Timeline Node */}
-                                <div className="timeline-node">
-                                    <div className="timeline-node-inner">
-                                        <div className="timeline-node-glow"></div>
+                    {experienceData.map((exp) => {
+                        const current = isCurrentRole(exp.period);
+                        return (
+                            <motion.article key={exp.id} className="experience-card" variants={itemVariants}>
+                                <span className="experience-marker" aria-hidden="true">
+                                    <WorkRoundedIcon fontSize="inherit" />
+                                </span>
+
+                                <header className="experience-card-header">
+                                    <div className="experience-card-meta">
+                                        <span className="experience-period">{exp.period}</span>
+                                        {current && (
+                                            <span className="experience-current-badge">
+                                                <span className="experience-current-dot" aria-hidden="true" />
+                                                Current
+                                            </span>
+                                        )}
                                     </div>
-                                </div>
 
-                                {/* Left Side - Company Details */}
-                                <div className="company-details">
-                                    <div className="company-card">
-                                        <div className="period-header">
-                                            <span className="period-text">{experience.period}</span>
-                                        </div>
-
-                                        <div className="company-main">
-                                            <div className="company-info">
-                                                <h3 className="company-name">{experience.company}</h3>
-                                                {experience.location && (
-                                                    <div className="company-location">
-                                                        <span>{experience.location}</span>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </div>
-
-                                        <div className="tech-skills-section">
-                                            <div className="technologies-section">
-                                                <div className="tags-container">
-                                                    {experience.technologies.map((tech, techIndex) => {
-                                                        const iconSrc = getTechIcon(tech);
-                                                        return (
-                                                            <span key={techIndex} className="tech-tag-exp">
-                                                                {iconSrc && <img src={iconSrc} alt={tech} className="tech-icon" />}
-                                                                <span className="tech-text">{tech}</span>
-                                                            </span>
-                                                        );
-                                                    })}
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div className="experience-titles">
+                                        <h3 className="experience-role">{exp.role}</h3>
+                                        <p className="experience-company">
+                                            <span className="experience-company-name">{exp.company}</span>
+                                            {exp.location && <span className="experience-company-location"> · {exp.location}</span>}
+                                        </p>
                                     </div>
-                                </div>
+                                </header>
 
-                                <div className="timeline-section"></div>
+                                <ul className="experience-bullets">
+                                    {exp.description.map((item, idx) => (
+                                        <li key={idx} className="experience-bullet">
+                                            <CheckCircleRoundedIcon className="experience-bullet-icon" fontSize="inherit" />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
 
-                                {/* Right Side - Work Details */}
-                                <div className="work-details">
-                                    <div className="work-card">
-                                        <div className="card-corner"></div>
-
-                                        <div className="experience-description">
-                                            <h3>{experience.role}</h3>
-                                            <ul className="description-list">
-                                                {experience.description.map((item, itemIndex) => (
-                                                    <li key={itemIndex} className="description-item">
-                                                        <span className="bullet"></span>
-                                                        <span className="description-text">{item}</span>
+                                {exp.technologies.length > 0 && (
+                                    <footer className="experience-tech">
+                                        <span className="experience-tech-label">Stack</span>
+                                        <ul className="experience-tech-list">
+                                            {exp.technologies.map((tech) => {
+                                                const iconSrc = techIcons[tech];
+                                                return (
+                                                    <li key={tech} className="experience-tech-chip">
+                                                        {iconSrc && <img src={iconSrc} alt="" className="experience-tech-icon" aria-hidden="true" />}
+                                                        <span>{tech}</span>
                                                     </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-
-                                        <div className="card-glow"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                                                );
+                                            })}
+                                        </ul>
+                                    </footer>
+                                )}
+                            </motion.article>
+                        );
+                    })}
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 
