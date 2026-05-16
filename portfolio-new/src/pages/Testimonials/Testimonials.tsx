@@ -1,167 +1,103 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
+import FormatQuoteRoundedIcon from "@mui/icons-material/FormatQuoteRounded";
+import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import "./Testimonials.css";
 import { testimonialsData } from "../../data/portfolioData";
-import type { ReconmendationCardProps } from "../../types";
+import type { Testimonial } from "../../types";
 import ShinyText from "../../components/ShinyText/ShinyText";
 
-const Testimonials: React.FC = () => {
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const [activeCard, setActiveCard] = useState(0);
+const trimRole = (role: string) => {
+    const firstSegment = role.split("|")[0].trim();
+    return firstSegment.length > 70 ? `${firstSegment.slice(0, 68)}…` : firstSegment;
+};
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (!sectionRef.current) return;
+interface TestimonialCardProps {
+    testimonial: Testimonial;
+    index: number;
+}
 
-            const cards = sectionRef.current.querySelectorAll(".testimonials-card");
-            const viewportCenter = window.innerHeight / 2;
-
-            let closestCard = activeCard;
-            let minDistance = Infinity;
-
-            cards.forEach((card, index) => {
-                const rect = card.getBoundingClientRect();
-                const cardCenter = rect.top + rect.height / 2;
-                const distanceFromCenter = Math.abs(cardCenter - viewportCenter);
-
-                if (distanceFromCenter < minDistance) {
-                    minDistance = distanceFromCenter;
-                    closestCard = index;
-                }
-            });
-
-            if (closestCard !== activeCard) {
-                setActiveCard(closestCard);
-            }
-        };
-
-        // Use requestAnimationFrame for smoother performance
-        let ticking = false;
-        const scrollHandler = () => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    handleScroll();
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        };
-
-        window.addEventListener("scroll", scrollHandler, { passive: true });
-        window.addEventListener("resize", scrollHandler, { passive: true });
-
-        // Initial check
-        handleScroll();
-
-        return () => {
-            window.removeEventListener("scroll", scrollHandler);
-            window.removeEventListener("resize", scrollHandler);
-        };
-    }, [activeCard]);
+const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index }) => {
+    const initials = testimonial.name
+        .split(" ")
+        .map((p) => p[0])
+        .slice(0, 2)
+        .join("");
 
     return (
-        <section ref={sectionRef} id="testimonials" className="testimonials-section">
+        <motion.article
+            className="testimonial-card"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: (index % 3) * 0.08, ease: [0.215, 0.61, 0.355, 1] }}
+            aria-label={`Testimonial from ${testimonial.name}`}
+        >
+            <div className="testimonial-card-glow" aria-hidden="true" />
+            <FormatQuoteRoundedIcon className="testimonial-quote-mark" aria-hidden="true" />
+
+            <header className="testimonial-meta">
+                <span className="testimonial-rating" aria-label="5 out of 5 stars">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                        <StarRoundedIcon key={i} fontSize="inherit" />
+                    ))}
+                </span>
+                <span className="testimonial-counter">{String(index + 1).padStart(2, "0")}</span>
+            </header>
+
+            <p className="testimonial-quote">{testimonial.quote}</p>
+
+            <footer className="testimonial-author">
+                <div className="testimonial-avatar">
+                    {testimonial.image ? (
+                        <img
+                            src={testimonial.image}
+                            alt=""
+                            onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = "none";
+                                target.parentElement?.classList.add("has-fallback");
+                            }}
+                        />
+                    ) : null}
+                    <div className="testimonial-avatar-fallback" aria-hidden="true">
+                        {initials}
+                    </div>
+                </div>
+                <div className="testimonial-author-info">
+                    <h4 className="testimonial-author-name">{testimonial.name}</h4>
+                    <p className="testimonial-author-role">{trimRole(testimonial.role)}</p>
+                </div>
+            </footer>
+        </motion.article>
+    );
+};
+
+const Testimonials: React.FC = () => {
+    const total = testimonialsData.testimonials.length;
+
+    return (
+        <section id="testimonials" className="testimonials-section">
             <div className="testimonials-container">
                 <div className="testimonials-header">
-                    {/* <h2 className="section-title">Testimonials</h2> */}
+                    <div className="testimonials-eyebrow">
+                        <span className="testimonials-eyebrow-dot" aria-hidden="true" />
+                        <span>Kind Words</span>
+                        <span className="testimonials-eyebrow-count">{total} testimonials</span>
+                    </div>
                     <ShinyText text="Testimonials" disabled={false} speed={2} className="section-title" />
-                    <p className="section-subtitle">What colleagues say about working with me</p>
+                    <p className="testimonials-subtitle">What colleagues and collaborators say about working with me.</p>
                 </div>
 
-                <div className="testimonials-cards">
+                <div className="testimonials-grid">
                     {testimonialsData.testimonials.map((testimonial, index) => (
-                        <RecommendationCard
-                            key={index}
-                            testimonial={testimonial}
-                            index={index}
-                            isActive={index === activeCard}
-                            totalCards={testimonialsData.testimonials.length}
-                        />
+                        <TestimonialCard key={index} testimonial={testimonial} index={index} />
                     ))}
                 </div>
             </div>
         </section>
-    );
-};
-
-const RecommendationCard: React.FC<ReconmendationCardProps & { isActive: boolean }> = ({ testimonial, index, isActive, totalCards }) => {
-    const cardRef = useRef<HTMLDivElement>(null);
-
-    const { scrollYProgress: cardProgress } = useScroll({
-        target: cardRef,
-        offset: ["start end", "end start"],
-    });
-
-    const y = useTransform(cardProgress, [0, 1], [80, -80]);
-    const opacity = useTransform(cardProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-    const scale = useTransform(cardProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
-
-    // Enhanced active state styling
-    const activeScale = useSpring(isActive ? 1.05 : 1, {
-        stiffness: 300,
-        damping: 30,
-    });
-
-    const activeShadow = useTransform(
-        cardProgress,
-        [0, 0.3, 0.5, 0.7, 1],
-        [
-            "0 4px 8px rgba(0,0,0,0.1)",
-            "0 8px 16px rgba(0,0,0,0.15)",
-            "0 12px 24px rgba(0,0,0,0.2)",
-            "0 8px 16px rgba(0,0,0,0.15)",
-            "0 4px 8px rgba(0,0,0,0.1)",
-        ]
-    );
-
-    const fallbackImage =
-        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23333'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='14'%3E👤%3C/text%3E%3C/svg%3E";
-
-    return (
-        <motion.div
-            ref={cardRef}
-            className={`testimonials-card ${isActive ? "active" : ""}`}
-            style={{
-                opacity,
-                scale: isActive ? activeScale : scale,
-                boxShadow: activeShadow,
-            }}
-        >
-            <div className="testimonials-content">
-                <div className="quote-section">
-                    <div className="quote-icon">"</div>
-                    <p className="testimonials-quote">{testimonial.quote}</p>
-                </div>
-
-                <div className="testimonials-author">
-                    <div className="author-image">
-                        <img
-                            src={testimonial.image}
-                            alt={testimonial.name}
-                            onError={(e) => {
-                                (e.target as HTMLImageElement).src = fallbackImage;
-                            }}
-                        />
-                    </div>
-                    <div className="author-info">
-                        <h4 className="author-name">{testimonial.name}</h4>
-                        <p className="author-role">{testimonial.role}</p>
-                    </div>
-                </div>
-            </div>
-
-            <motion.div
-                className="card-counter"
-                style={{
-                    y,
-                    opacity: useTransform(cardProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]),
-                }}
-            >
-                {index + 1}/{totalCards}
-            </motion.div>
-        </motion.div>
     );
 };
 
