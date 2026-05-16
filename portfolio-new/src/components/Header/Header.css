@@ -21,17 +21,16 @@
 .nav-dock {
     position: relative;
     display: flex;
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--bg-overlay);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 2px solid rgba(255, 255, 255, 0.048);
+    border: 2px solid var(--border-subtle);
     border-radius: 30px;
     padding: 8px;
     gap: 4px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: visible; /* Ensure dropdowns are visible */
-    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px var(--accent-soft), 0 0 0 1px var(--border-subtle);
 }
 
 /* Enhanced Glass overlay for dock */
@@ -42,11 +41,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.15) 100%);
+    background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg-tertiary) 50%, var(--accent-soft) 100%);
     border-radius: 28px;
     pointer-events: none;
     z-index: 1;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-subtle);
 }
 
 .nav-item-wrapper {
@@ -68,7 +67,7 @@
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-family: "Raleway", "Segoe UI", "Roboto", sans-serif !important;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-secondary);
     border-radius: 28px;
     overflow: hidden; /* For the ::before hover effect */
     padding: 0 12px;
@@ -82,7 +81,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle at center, var(--accent-soft) 0%, transparent 70%);
     opacity: 0;
     transition: opacity 0.3s ease;
     border-radius: 12px; /* Adjusted for better visual */
@@ -105,11 +104,11 @@
     position: absolute;
     top: -5px; /* Position above the nav items */
     height: 6px;
-    background: #ffffff;
+    background: var(--accent);
     border-radius: 4px 4px 0 0;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 4; /* Ensure it's above other elements */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow), 0 0 30px var(--accent-glow);
     /* REMOVED: width property as it's now set dynamically by JS */
 }
 
@@ -118,10 +117,10 @@
     bottom: -40px;
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--bg-secondary);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    color: white;
+    color: var(--text-primary);
     padding: 8px 12px;
     border-radius: 8px;
     font-size: 0.75rem;
@@ -131,7 +130,7 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
     font-weight: 500;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-subtle);
     z-index: 1000;
 }
 
@@ -145,7 +144,7 @@
     height: 0;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
-    border-bottom: 4px solid rgba(0, 0, 0, 0.8);
+    border-bottom: 4px solid var(--bg-secondary);
 }
 
 .nav-item:hover .nav-tooltip {
@@ -319,7 +318,7 @@
     }
 
     .nav-item:active {
-        background: rgba(255, 255, 255, 0.15);
+        background: var(--bg-card-hover);
     }
 
     .nav-item:hover .nav-tooltip {
@@ -341,7 +340,7 @@
 }
 
 .more-tab.open {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--bg-card-hover);
 }
 
 .chevron-icon {
@@ -360,16 +359,15 @@
     top: 100%;
     right: 0; /* Align to the right of the "More" button */
     margin-top: 12px;
-    background: rgba(0, 0, 0, 1);
+    background: var(--bg-secondary);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 2px solid rgba(255, 255, 255, 0.048);
+    border: 2px solid var(--border-subtle);
     border-radius: 20px;
     padding: 8px;
     min-width: 140px;
     z-index: 1001;
-    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px var(--accent-soft), 0 0 0 1px var(--border-subtle);
     animation: dropdownFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
 }
@@ -381,11 +379,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.15) 100%);
+    background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg-tertiary) 50%, var(--accent-soft) 100%);
     border-radius: 18px;
     pointer-events: none;
     z-index: -1;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-subtle);
 }
 
 .dropdown-item {
@@ -393,7 +391,7 @@
     padding: 12px 16px;
     border: none;
     background: transparent;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-secondary);
     text-align: left;
     cursor: pointer;
     border-radius: 12px;
@@ -414,7 +412,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle at center, var(--accent-soft) 0%, transparent 70%);
     opacity: 0;
     transition: opacity 0.3s ease;
     border-radius: 10px;
@@ -425,7 +423,7 @@
 }
 
 .dropdown-item:hover {
-    color: white;
+    color: var(--text-primary);
     transform: translateY(-1px);
 }
 
@@ -493,8 +491,8 @@
 
 /* Active state for dropdown items */
 .dropdown-item.active {
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    background: var(--bg-card-hover);
     position: relative;
 }
 
@@ -510,9 +508,9 @@
     transform: translateY(-50%);
     width: 6px;
     height: 6px;
-    background: #ffffff;
+    background: var(--accent);
     border-radius: 50%;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 8px var(--accent-glow);
 }
 
 /* Mobile adjustments for dropdown active states */
@@ -537,7 +535,7 @@
     /* It's now handled by flexbox on .dropdown-item */
     width: 18px; /* Standardize size for consistency */
     height: 18px;
-    color: rgba(255, 255, 255, 0.6); /* Softer color */
+    color: var(--text-tertiary); /* Softer color */
     margin-left: 8px; /* Space between text and chevron */
 }
 

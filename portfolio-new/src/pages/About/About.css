@@ -1,7 +1,7 @@
 /* About Section - Enhanced Aesthetic Design with Glass Effects */
 .about-section {
-    background: #000000;
-    color: #ffffff;
+    background: var(--bg-primary);
+    color: var(--text-primary);
     position: relative;
     overflow: hidden;
     padding: clamp(3rem, 7vw, 6rem) 0; /* Responsive padding */
@@ -16,7 +16,7 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, #ffffff 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, var(--text-primary) 50%, transparent 100%);
     opacity: 0.1;
 }
 
@@ -76,7 +76,7 @@
     transform: translate(-50%, -50%);
     width: 250px;
     height: 250px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
     filter: blur(25px);
     z-index: -1;
     animation: pulse-glow 3s ease-in-out infinite alternate;
@@ -96,10 +96,7 @@
 .name-title {
     font-size: clamp(2.2rem, 5vw, 3rem);
     font-weight: 300;
-    background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
     margin: 0;
     letter-spacing: -0.02em;
     position: relative;
@@ -107,18 +104,18 @@
 
 /* Enhanced Role Badge with Glass Effect */
 .role-badge {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-elevated);
     padding: 0.4rem 1.2rem;
     border-radius: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--border-default);
     font-size: clamp(0.8rem, 2vw, 0.9rem);
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-secondary);
     backdrop-filter: blur(15px) saturate(180%);
     -webkit-backdrop-filter: blur(15px) saturate(180%);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-soft);
 }
 
 .role-badge::before {
@@ -128,7 +125,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-soft), transparent);
     transition: left 0.6s ease;
 }
 
@@ -139,7 +136,7 @@
 .about-description {
     font-size: clamp(0.95rem, 2.5vw, 1.1rem);
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--text-tertiary);
     max-width: 800px;
     margin: 0 auto;
     font-weight: 300;
@@ -158,7 +155,7 @@
 .details-group-title {
     font-size: clamp(1rem, 2.8vw, 1.2rem);
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.12em;
     margin-bottom: clamp(1.5rem, 4vw, 2rem);
@@ -174,7 +171,7 @@
     transform: translateX(-50%);
     width: 40px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #ffffff, transparent);
+    background: linear-gradient(90deg, transparent, var(--text-primary), transparent);
     opacity: 0.7;
 }
 
@@ -190,14 +187,14 @@
     align-items: center;
     padding: 1rem 1.2rem; /* More compact padding */
     border-radius: 12px; /* Slightly smaller radius */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-card);
     backdrop-filter: blur(15px) saturate(180%);
     -webkit-backdrop-filter: blur(15px) saturate(180%);
     transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-soft);
 }
 
 .detail-hover-effect {
@@ -206,14 +203,14 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-soft), transparent);
     transition: left 0.6s ease;
 }
 
 .detail-item:hover {
-    border-color: rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    border-color: var(--border-strong);
+    background: var(--bg-card-hover);
+    box-shadow: var(--shadow-strong);
 }
 
 .detail-item:hover .detail-hover-effect {
@@ -224,7 +221,7 @@
     font-size: 1.1rem; /* Slightly smaller icon */
     margin-right: 0.8rem;
     min-width: 25px;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-secondary);
 }
 
 .detail-content {
@@ -235,7 +232,7 @@
 }
 
 .detail-item strong {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-tertiary);
     font-weight: 500;
     font-size: clamp(0.7rem, 1.8vw, 0.8rem);
     text-transform: uppercase;
@@ -243,7 +240,7 @@
 }
 
 .detail-item span {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-secondary);
     font-size: clamp(0.9rem, 2.2vw, 0.95rem);
     font-weight: 400;
 }
@@ -265,7 +262,7 @@
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+    background: linear-gradient(180deg, var(--border-strong) 0%, var(--border-subtle) 50%, transparent 100%);
 }
 
 .timeline-item {
@@ -285,9 +282,9 @@
     width: 18px; /* Slightly smaller */
     height: 18px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.6);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+    background: var(--bg-card);
+    border: 2px solid var(--border-strong);
+    box-shadow: 0 0 0 1px var(--border-subtle);
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -301,27 +298,27 @@
     width: 7px; /* Slightly smaller */
     height: 7px;
     border-radius: 50%;
-    background: #ffffff;
+    background: var(--accent);
 }
 
 .timeline-item:hover .timeline-marker {
     transform: scale(1.1);
-    border-color: rgba(255, 255, 255, 0.7);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 /* Enhanced Timeline Content with Glass Effect */
 .timeline-content {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-card);
     padding: 1.2rem 1.5rem; /* More compact */
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-subtle);
     backdrop-filter: blur(15px) saturate(180%);
     -webkit-backdrop-filter: blur(15px) saturate(180%);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-soft);
 }
 
 .timeline-glow {
@@ -330,7 +327,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-soft), transparent);
     transition: left 0.6s ease;
 }
 
@@ -339,9 +336,9 @@
 }
 
 .timeline-item:hover .timeline-content {
-    border-color: rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    border-color: var(--border-strong);
+    background: var(--bg-card-hover);
+    box-shadow: var(--shadow-strong);
 }
 
 .timeline-header {
@@ -355,7 +352,7 @@
 .timeline-degree {
     font-size: clamp(0.95rem, 2.5vw, 1.05rem);
     font-weight: 500;
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 0;
     line-height: 1.4;
     flex: 1;
@@ -363,12 +360,12 @@
 
 .timeline-period {
     font-size: clamp(0.75rem, 1.8vw, 0.85rem);
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-secondary);
     font-weight: 500;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-elevated);
     padding: 0.3rem 0.8rem; /* More compact */
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--border-default);
     white-space: nowrap;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -384,8 +381,8 @@
 .timeline-grade {
     font-size: clamp(0.8rem, 2vw, 0.9rem);
     font-weight: 600;
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    background: var(--bg-elevated);
     padding: 0.2rem 0.7rem; /* More compact */
     border-radius: 8px;
     backdrop-filter: blur(8px);
@@ -394,7 +391,7 @@
 
 .timeline-institution {
     font-size: clamp(0.75rem, 1.8vw, 0.85rem);
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-tertiary);
     text-align: right;
     flex: 1;
 }
@@ -407,16 +404,12 @@
 .achievements-title {
     font-size: clamp(1.5rem, 4vw, 2.2rem);
     font-weight: 300;
-    background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
     margin-bottom: clamp(2rem, 5vw, 3rem);
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     position: relative;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
 .achievements-title::after {
@@ -427,7 +420,7 @@
     transform: translateX(-50%);
     width: 60px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #ffffff, transparent);
+    background: linear-gradient(90deg, transparent, var(--text-primary), transparent);
     opacity: 0.7;
 }
 
@@ -439,16 +432,16 @@
 
 /* Enhanced Achievement Cards with Glass Effect */
 .achievement-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-card);
     padding: 2rem 1.5rem; /* More compact */
     border-radius: 16px; /* Slightly smaller radius */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-subtle);
     backdrop-filter: blur(18px) saturate(180%);
     -webkit-backdrop-filter: blur(18px) saturate(180%);
     transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    box-shadow: var(--shadow-soft);
 }
 
 .achievement-bg {
@@ -473,7 +466,7 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #ffffff, transparent);
+    background: linear-gradient(90deg, transparent, var(--text-primary), transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 2;
@@ -494,10 +487,10 @@
 .achievement-number {
     font-size: clamp(2.5rem, 5vw, 3rem);
     font-weight: 200;
-    color: #ffffff;
+    color: var(--text-primary);
     line-height: 1;
     min-width: 60px;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 15px var(--accent-glow);
 }
 
 .achievement-content {
@@ -507,7 +500,7 @@
 .achievement-label {
     font-size: clamp(1rem, 2.5vw, 1.1rem);
     font-weight: 600;
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 0 0 0.6rem 0;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -515,7 +508,7 @@
 
 .achievement-description {
     font-size: clamp(0.8rem, 2vw, 0.9rem);
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--text-tertiary);
     margin: 0;
     line-height: 1.5;
     font-weight: 300;

@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .certificates-section {
-    color: #d6d5d5;
+    color: var(--text-secondary);
     position: relative;
     padding: 3rem 0;
     min-height: 100vh;
@@ -25,9 +25,9 @@
 }
 
 .filter-btn {
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-default);
     padding: 8px 16px;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -38,8 +38,8 @@
 }
 
 .filter-btn:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.25);
+    background: var(--bg-card-hover);
+    border-color: var(--border-strong);
 }
 
 .filter-btn.active {
@@ -57,9 +57,9 @@
 }
 
 .certificate-card {
-    background: rgba(30, 30, 35, 0.5);
+    background: var(--bg-card);
     border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-subtle);
     padding: 1rem;
     cursor: pointer;
     backdrop-filter: blur(12px);
@@ -67,8 +67,8 @@
 }
 
 .certificate-card:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(40, 40, 45, 0.7);
+    border-color: var(--border-default);
+    background: var(--bg-card-hover);
     transform: translateY(-5px);
 }
 
@@ -90,8 +90,8 @@
     height: 48px;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-elevated);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,7 +112,7 @@
 .certificate-title {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 0 0 0.25rem 0;
     line-height: 1.4;
 }
@@ -132,14 +132,14 @@
 }
 
 .certificate-date {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-tertiary);
     font-size: 0.8rem;
     margin: 0;
 }
 
 .certificate-link {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+    background: var(--bg-elevated);
+    color: var(--text-primary);
     text-decoration: none;
     border-radius: 10px;
     padding: 6px;
@@ -147,11 +147,11 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--border-default);
 }
 
 .certificate-link:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--bg-card-hover);
     transform: scale(1.1);
 }
 
@@ -187,7 +187,7 @@
 
 .certificates-count {
     text-align: center;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-tertiary);
     font-size: 0.85rem;
     max-width: 90%;
     margin: 0 auto;
@@ -199,22 +199,22 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    color: #ffffff;
+    color: var(--text-primary);
     text-decoration: none;
     font-weight: 500;
     padding: 8px 16px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--border-strong);
     border-radius: 20px;
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-elevated);
     font-size: 0.85rem;
     backdrop-filter: blur(15px);
     width: 100%;
 }
 
 .modal-link:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.5);
+    background: var(--bg-card-hover);
+    border-color: var(--accent);
     transform: translateY(-2px);
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { personalInfo, socialLinks } from "../../data/portfolioData";
+import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 import "./Hero.css";
 
 // Import MUI icons
@@ -47,6 +48,10 @@ const Hero: React.FC = () => {
             {/* Background Elements */}
             <div className="hero-bg">
                 <div className="bg-gradient"></div>
+            </div>
+
+            <div className="hero-theme-toggle">
+                <ThemeToggle />
             </div>
 
             <div className="container">

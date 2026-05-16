@@ -1,5 +1,5 @@
 .testimonials-section {
-    color: #ffffff;
+    color: var(--text-primary);
     position: relative;
     overflow: hidden;
     padding: 100px 0;
@@ -34,11 +34,11 @@
 .testimonials-content {
     max-width: 500px;
     width: 100%;
-    background: rgb(0, 0, 0);
-    border: 1px solid rgb(255, 255, 255, 0.3);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
     border-radius: 12px;
     padding: 2rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-soft);
     position: relative;
     z-index: 2;
 }
@@ -49,7 +49,7 @@
     right: 1.5rem;
     font-size: 1.6rem;
     font-weight: 300;
-    color: #999999;
+    color: var(--text-tertiary);
     font-family: "Story Script", sans-serif !important;
     z-index: 1;
     will-change: transform;
@@ -93,7 +93,7 @@
 .testimonials-quote {
     font-size: 1rem;
     line-height: 1.5;
-    color: #ffffff;
+    color: var(--text-primary);
     font-style: italic;
     margin: 0;
 }
@@ -121,18 +121,18 @@
 .author-info h4 {
     margin: 0 0 0.2rem 0;
     font-size: 1rem;
-    color: #999999;
+    color: var(--text-tertiary);
 }
 
 .author-info p {
     margin: 0;
-    color: #999999;
+    color: var(--text-tertiary);
     font-size: 0.85rem;
 }
 
 /* Active card highlight */
 .testimonials-card.active .testimonials-content {
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px var(--accent-glow);
 }
 
 @media (max-width: 768px) {

@@ -1,6 +1,6 @@
 /* Skills Section - 2 Column Layout with Headers & Technologies */
 .skills-section {
-    color: #ffffff;
+    color: var(--text-primary);
     position: relative;
     overflow: hidden;
     padding: 6rem 0;
@@ -62,7 +62,7 @@
     transform: translateY(-50%);
     width: 4px;
     height: 0;
-    background: linear-gradient(180deg, #ffffff, transparent);
+    background: linear-gradient(180deg, var(--accent), transparent);
     border-radius: 2px;
     transition: all 0.4s ease;
 }
@@ -70,7 +70,7 @@
 .category-header-title {
     font-size: 1.4rem;
     font-weight: 300;
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 0;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -95,7 +95,7 @@
     /* Add minimal separation between categories */
     padding-bottom: 2rem !important;
     margin-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-bottom: 1px solid var(--border-default) !important;
 }
 
 /* Remove border from last category */
@@ -154,7 +154,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%, rgba(255, 255, 255, 0.05) 100%);
+    background: linear-gradient(135deg, var(--accent-soft) 0%, transparent 50%, var(--accent-soft) 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
 }
@@ -177,7 +177,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-soft), transparent);
     transition: left 0.6s ease;
 }
 
@@ -191,7 +191,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-card);
     border-radius: 6px;
     flex-shrink: 0;
     position: relative;
@@ -207,7 +207,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+    background: linear-gradient(135deg, var(--accent-soft) 0%, transparent 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -233,7 +233,7 @@
 .fallback-icon {
     display: none;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--text-primary);
     font-size: 0.9rem;
     width: 100%;
     height: 100%;
@@ -243,7 +243,7 @@
 
 .skill-name {
     font-weight: 400;
-    color: #ffffff;
+    color: var(--text-primary);
     font-size: 1.1rem;
     letter-spacing: 0.02em;
     transition: all 0.3s ease;
@@ -257,13 +257,13 @@
 
 /* Hover effects */
 .skill-item:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-card);
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--border-subtle);
 }
 
 .skill-item:hover .skill-icon {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-card-hover);
     transform: scale(1.1);
 }
 

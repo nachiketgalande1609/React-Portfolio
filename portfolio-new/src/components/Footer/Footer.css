@@ -1,11 +1,11 @@
 /* Footer Section - Modern & Dynamic Design */
 .footer {
-    background: #0a0a0a; /* Darker background for depth */
-    color: #f0f0f0;
+    background: var(--bg-secondary); /* Darker background for depth */
+    color: var(--text-secondary);
     position: relative;
     overflow: hidden;
     padding: 6rem 0 3rem; /* Taller padding */
-    border-top: 1px solid #1a1a1a;
+    border-top: 1px solid var(--border-subtle);
     font-family: "Inter", sans-serif; /* Modern font */
 }
 
@@ -17,7 +17,7 @@
     left: 0;
     right: 0;
     height: 2px; /* Slightly thicker line */
-    background: linear-gradient(90deg, transparent 0%, rgba(100, 100, 100, 0.3) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, var(--border-strong) 50%, transparent 100%);
 }
 
 .footer-top {
@@ -26,7 +26,7 @@
     gap: 3rem; /* Increased gap for better spacing */
     margin-bottom: 4rem;
     padding-bottom: 3rem;
-    border-bottom: 1px solid #1a1a1a;
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .footer-info {
@@ -38,7 +38,7 @@
 .footer-name {
     font-size: 2.5rem; /* Larger name */
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 0;
     letter-spacing: -0.05em;
     position: relative;
@@ -52,12 +52,12 @@
     left: 0;
     width: 60px; /* Shorter, modern underline */
     height: 3px; /* Thicker underline */
-    background: linear-gradient(90deg, #61dafb, #ffffff); /* Gradient for flair */
+    background: linear-gradient(90deg, #61dafb, var(--accent)); /* Gradient for flair */
     border-radius: 2px;
 }
 
 .footer-role {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-tertiary);
     font-weight: 400;
     font-size: 1rem;
     letter-spacing: 0.15em;
@@ -73,7 +73,7 @@
 }
 
 .social-link {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-tertiary);
     font-size: 1.5rem;
     transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
 }
@@ -84,7 +84,7 @@
 }
 
 .footer-links-group h4 {
-    color: #ffffff;
+    color: var(--text-primary);
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
@@ -109,7 +109,7 @@
 }
 
 .footer-link {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-tertiary);
     text-decoration: none;
     font-weight: 300;
     font-size: 0.95rem;
@@ -131,11 +131,11 @@
     align-items: center;
     padding-top: 2rem;
     margin-top: 1rem;
-    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    border-top: 1px dashed var(--border-subtle);
 }
 
 .footer-copyright {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
     font-weight: 300;
     font-size: 0.85rem;
     letter-spacing: 0.03em;
@@ -147,7 +147,7 @@
 }
 
 .footer-message span {
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--text-muted);
     font-weight: 300;
     font-size: 0.8rem;
     letter-spacing: 0.1em;
