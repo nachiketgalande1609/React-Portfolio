@@ -33,6 +33,8 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
+            <div className="site-background" aria-hidden="true" />
+
             {/* Content layer */}
             <div
                 style={{

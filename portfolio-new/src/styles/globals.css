@@ -105,6 +105,27 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* ===== Site-wide dot grid background ===== */
+.site-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: radial-gradient(var(--border-default) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: 0 0;
+    mask-image: radial-gradient(ellipse 85% 70% at center, #000 35%, transparent 92%);
+    -webkit-mask-image: radial-gradient(ellipse 85% 70% at center, #000 35%, transparent 92%);
+    opacity: 0.55;
+}
+
+@media (max-width: 768px) {
+    .site-background {
+        background-size: 22px 22px;
+        opacity: 0.45;
+    }
+}
+
 /* ===== BLACK ANIMATED BACKGROUND MASTERPIECE ===== */
 
 /* ===== ENHANCED SECTION STYLES ===== */
