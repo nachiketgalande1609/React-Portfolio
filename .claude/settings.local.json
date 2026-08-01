@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(npm run *)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(mv portfolio-new/.gitignore .)",
+      "Bash(mv portfolio-new/README.md .)",
+      "Bash(mv portfolio-new/eslint.config.js .)",
+      "Bash(mv portfolio-new/index.html .)",
+      "Bash(mv portfolio-new/package-lock.json .)"
     ]
   }
 }

@@ -21,19 +21,59 @@
 .nav-dock {
     position: relative;
     display: flex;
-    background: var(--bg-overlay);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 2px solid var(--border-subtle);
+    background: rgba(8, 8, 12, 0.22);
+    backdrop-filter: blur(8px) saturate(160%);
+    -webkit-backdrop-filter: blur(8px) saturate(160%);
+    border: none;
     border-radius: 30px;
     padding: 8px;
     gap: 4px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: visible; /* Ensure dropdowns are visible */
-    box-shadow: 0 8px 32px var(--accent-soft), 0 0 0 1px var(--border-subtle);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.45),
+        0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Enhanced Glass overlay for dock */
+/* Gradient glass border */
+.nav-dock::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 30px;
+    padding: 1.5px;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.65) 0%,
+        rgba(0, 0, 0, 0.9) 50%,
+        rgba(255, 255, 255, 0.65) 100%
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 5;
+}
+
+:root[data-theme="light"] .nav-dock {
+    background: rgba(255, 255, 255, 0.28);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme="light"] .nav-dock::after {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.3) 40%,
+        rgba(255, 255, 255, 0.6) 100%
+    );
+}
+
+/* Glass inner shimmer */
 .nav-dock::before {
     content: "";
     position: absolute;
@@ -41,11 +81,24 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg-tertiary) 50%, var(--accent-soft) 100%);
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.07) 0%,
+        transparent 55%,
+        rgba(255, 255, 255, 0.03) 100%
+    );
     border-radius: 28px;
     pointer-events: none;
     z-index: 1;
-    border: 1px solid var(--border-subtle);
+}
+
+:root[data-theme="light"] .nav-dock::before {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.5) 0%,
+        transparent 55%,
+        rgba(255, 255, 255, 0.15) 100%
+    );
 }
 
 .nav-item-wrapper {
@@ -359,17 +412,31 @@
     top: 100%;
     right: 0; /* Align to the right of the "More" button */
     margin-top: 12px;
-    background: var(--bg-secondary);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 2px solid var(--border-subtle);
+    background: rgba(8, 8, 12, 0.25);
+    backdrop-filter: blur(8px) saturate(160%);
+    -webkit-backdrop-filter: blur(8px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 20px;
     padding: 8px;
     min-width: 140px;
     z-index: 1001;
-    box-shadow: 0 8px 32px var(--accent-soft), 0 0 0 1px var(--border-subtle);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.5),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
     animation: dropdownFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
+}
+
+:root[data-theme="light"] .dropdown-menu {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-top: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .dropdown-menu::before {
@@ -379,11 +446,24 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg-tertiary) 50%, var(--accent-soft) 100%);
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.07) 0%,
+        transparent 55%,
+        rgba(255, 255, 255, 0.03) 100%
+    );
     border-radius: 18px;
     pointer-events: none;
     z-index: -1;
-    border: 1px solid var(--border-subtle);
+}
+
+:root[data-theme="light"] .dropdown-menu::before {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.5) 0%,
+        transparent 55%,
+        rgba(255, 255, 255, 0.15) 100%
+    );
 }
 
 .dropdown-item {
