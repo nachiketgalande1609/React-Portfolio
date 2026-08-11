@@ -99,6 +99,22 @@
     100% { transform: scale(3);   opacity: 0; }
 }
 
+/* ── View Transition ──
+   Suppress the browser's default cross-fade so only our JS clip-path
+   animation runs on ::view-transition-new(root).
+   The old-state layer keeps full opacity, showing the current page content
+   while the new-state circle expands over it.
+── */
+::view-transition-old(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
 /* ── Responsive ── */
 
 @media (max-width: 480px) {
