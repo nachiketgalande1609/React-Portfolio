@@ -112,7 +112,7 @@ export const personalInfo = {
     location: "Mumbai, India",
     email: "nachiketgalande1609@gmail.com",
     phone: "+91 97649 93023",
-    about: "Senior Full Stack Developer with 4.5 years of experience delivering scalable, high-performance web applications, specializing in system architecture, database design, performance optimization, and translating complex requirements into efficient solutions.",
+    about: "Senior Full Stack Developer with 5+ years of experience delivering scalable, high-performance web applications, specializing in system architecture, database design, performance optimization, and translating complex requirements into efficient solutions.",
 };
 
 export const projectsData = {

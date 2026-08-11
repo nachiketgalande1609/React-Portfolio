@@ -133,7 +133,13 @@ const Hero: React.FC = () => {
                             <div className="hero-portrait-ring hero-portrait-ring--inner" aria-hidden="true" />
                             <div className="hero-portrait-halo" aria-hidden="true" />
                             <div className="hero-portrait-frame">
-                                <img src={profileImage} alt={`${personalInfo.name} – ${personalInfo.title}`} className="hero-portrait-img" />
+                                <img
+                                    src={profileImage}
+                                    alt={`${personalInfo.name} – ${personalInfo.title}`}
+                                    className="hero-portrait-img"
+                                    fetchPriority="high"
+                                    decoding="async"
+                                />
                             </div>
                         </div>
                     </motion.div>

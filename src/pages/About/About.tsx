@@ -52,7 +52,7 @@ const education = [
 ];
 
 const stats = [
-    { value: "4+", label: "Years Experience", description: "Shipping production systems across industries." },
+    { value: "5+", label: "Years Experience", description: "Shipping production systems across industries." },
     { value: "20+", label: "Projects Shipped", description: "From side experiments to enterprise platforms." },
     { value: "40+", label: "Certifications", description: "Cloud, data, AI/ML and engineering credentials." },
 ];
@@ -79,7 +79,7 @@ const About: React.FC = () => {
 
                 <motion.div className="about-lead" variants={itemVariants}>
                     <p className="about-lead-text">
-                        Senior Full Stack Software Developer with <strong>4+ years</strong> of experience designing, developing, and deploying
+                        Senior Full Stack Software Developer with <strong>5+ years</strong> of experience designing, developing, and deploying
                         scalable, high-performance web applications — strong across frontend, backend, and database architecture.
                     </p>
                 </motion.div>
