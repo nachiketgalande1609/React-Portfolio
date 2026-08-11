@@ -147,6 +147,7 @@ const Skills: React.FC = () => {
                     <img
                         src={skill.icon}
                         alt={skill.name}
+                        loading="lazy"
                         onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             target.style.display = "none";

@@ -55,6 +55,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index })
                         <img
                             src={testimonial.image}
                             alt=""
+                            loading="lazy"
                             onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.style.display = "none";

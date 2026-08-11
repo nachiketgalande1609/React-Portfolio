@@ -129,6 +129,7 @@ const Certificates: React.FC = () => {
                                         <img
                                             src={certificate.logo}
                                             alt={`${certificate.organization} logo`}
+                                            loading="lazy"
                                             onError={(e) => {
                                                 (e.target as HTMLImageElement).src = "/fallback-logo.png";
                                             }}
