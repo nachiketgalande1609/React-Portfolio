@@ -7,7 +7,9 @@
       "Bash(mv portfolio-new/README.md .)",
       "Bash(mv portfolio-new/eslint.config.js .)",
       "Bash(mv portfolio-new/index.html .)",
-      "Bash(mv portfolio-new/package-lock.json .)"
+      "Bash(mv portfolio-new/package-lock.json .)",
+      "PowerShell(Get-ChildItem -Path 'src\\\\assets' -Recurse -File | Sort-Object Length -Descending | Select-Object -First 25 | ForEach-Object { \"{0,8:N0} KB  {1}\" -f \\($_.Length/1KB\\), $_.FullName })",
+      "PowerShell($size = \\(Get-ChildItem -Path 'src\\\\assets\\\\certificates\\\\certificate_photos' -Recurse -File | Measure-Object -Property Length -Sum\\).Sum; \"{0:N1} MB across {1} files\" -f \\($size/1MB\\), \\(Get-ChildItem -Path 'src\\\\assets\\\\certificates\\\\certificate_photos' -File\\).Count)"
     ]
   }
 }
