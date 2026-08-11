@@ -110,9 +110,34 @@
     mix-blend-mode: normal;
 }
 
+/* The new-state layer expands as a circle from the toggle button (origin/
+   radius set via --vt-x/--vt-y/--vt-r in ThemeToggle.tsx), revealing the
+   already-rendered new-theme page underneath. */
 ::view-transition-new(root) {
-    animation: none;
+    animation: tt-circle-reveal 0.6s ease-in-out both;
     mix-blend-mode: normal;
+}
+
+@keyframes tt-circle-reveal {
+    from { clip-path: circle(0px at var(--vt-x) var(--vt-y)); }
+    to   { clip-path: circle(var(--vt-r) at var(--vt-x) var(--vt-y)); }
+}
+
+/* Prevent the UA's default group size/transform interpolation — if the root
+   snapshot size changes even slightly (e.g. a scrollbar toggling), Chrome
+   scales the whole group, which shifts our clip-path circle off the button. */
+::view-transition-group(root) {
+    animation-duration: 0s !important;
+}
+
+/* ── Performance: strip backdrop blur during the spread animation ──
+   Re-sampling backdrop-filter across the whole page every frame while
+   the clip-path circle grows is what causes stutter. Dropping it for
+   the ~600ms transition keeps the animation smooth.
+── */
+html.vt-active * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
 }
 
 /* ── Responsive ── */

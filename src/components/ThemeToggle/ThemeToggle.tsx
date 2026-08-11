@@ -15,10 +15,16 @@ const ThemeToggle: React.FC = () => {
     const [rippleKey, setRippleKey] = useState(0);
     const [rippleBg, setRippleBg] = useState("");
     const buttonRef = useRef<HTMLButtonElement>(null);
+    // Tracks whether a transition (icon animation + view transition) is still
+    // in flight. Unlike `phase`, this isn't reset by a fixed timer — it only
+    // clears once the underlying view transition actually finishes, so a new
+    // click can never pile a second transition on top of an unfinished one.
+    const busyRef = useRef(false);
     const isDark = theme === "dark";
 
     const handleClick = () => {
-        if (phase !== "idle") return;
+        if (busyRef.current) return;
+        busyRef.current = true;
 
         const rect = buttonRef.current?.getBoundingClientRect();
         const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
@@ -36,6 +42,12 @@ const ThemeToggle: React.FC = () => {
         setRippleKey(k => k + 1);
         setRippleBg(newRippleBg);
 
+        const finish = () => {
+            setPhase("enter");
+            setTimeout(() => setPhase("idle"), 350);
+            busyRef.current = false;
+        };
+
         // After icon exits, start the page spread
         setTimeout(() => {
             const vt = (document as any).startViewTransition;
@@ -43,10 +55,22 @@ const ThemeToggle: React.FC = () => {
             // ── Fallback: no View Transition API support ──────────────────
             if (!vt) {
                 setTheme(newTheme);
-                setPhase("enter");
-                setTimeout(() => setPhase("idle"), 420);
+                finish();
                 return;
             }
+
+            // Drop backdrop-filter blur for the duration of the transition.
+            // Animating clip-path while dozens of blurred cards/navbar need to
+            // resample their backdrop every frame is what causes the stutter.
+            document.documentElement.classList.add("vt-active");
+
+            // Circle origin/radius, read live by ::view-transition-new(root)'s
+            // CSS keyframe animation (see ThemeToggle.css). Measured fresh on
+            // every click so the circle always starts at the button's current
+            // position, even if the layout shifted since the last toggle.
+            document.documentElement.style.setProperty("--vt-x", `${x}px`);
+            document.documentElement.style.setProperty("--vt-y", `${y}px`);
+            document.documentElement.style.setProperty("--vt-r", `${radius}px`);
 
             // ── View Transition ───────────────────────────────────────────
             // Minimal callback: only update the CSS-variable source attribute.
@@ -60,39 +84,24 @@ const ThemeToggle: React.FC = () => {
             // Sync React state after the DOM has been captured for the VT snapshot.
             // ::view-transition-new(root) is the live layer — it updates as React
             // re-renders with the new theme, so content is visible during the transition.
-            // Using .then(fn, fn) handles both resolve and reject without double-calling.
-            const syncReact = () => {
-                setTheme(newTheme);
-                setPhase("enter");
-                setTimeout(() => setPhase("idle"), 420);
+            transition.updateCallbackDone?.then(() => setTheme(newTheme), () => setTheme(newTheme));
+
+            const cleanup = () => {
+                document.documentElement.classList.remove("vt-active");
+                finish();
             };
-            transition.updateCallbackDone?.then(syncReact, syncReact);
 
-            // Suppress unhandled rejection on transition.finished
-            transition.finished?.catch(() => {});
+            // `finished` is the only promise guaranteed to settle after the whole
+            // transition (including our circle animation) is done — that's what
+            // clears busyRef, so the next click can never overlap this one.
+            transition.finished.then(cleanup, cleanup);
 
-            // Animate the new-state layer as a circle expanding from the button
-            transition.ready
-                .then(() => {
-                    document.documentElement.animate(
-                        {
-                            clipPath: [
-                                `circle(0px at ${x}px ${y}px)`,
-                                `circle(${radius}px at ${x}px ${y}px)`,
-                            ],
-                        },
-                        {
-                            duration: 600,
-                            easing: "ease-in-out",
-                            pseudoElement: "::view-transition-new(root)",
-                        }
-                    );
-                })
-                .catch(() => {
-                    // transition.ready rejected — VT was skipped.
-                    // Theme + React state already synced via updateCallbackDone handler.
-                });
-        }, 200);
+            // `ready` rejects when the browser skips the transition outright
+            // (e.g. reduced-motion, or another transition already active).
+            // Nothing to animate in that case — `finished` above still settles
+            // and drives cleanup — this just prevents an unhandled rejection.
+            transition.ready.catch(() => {});
+        }, 180);
     };
 
     return (
