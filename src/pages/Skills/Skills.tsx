@@ -40,7 +40,6 @@ import googleCloudIcon from "../../assets/icons/google-cloud.png";
 import oracleCloudIcon from "../../assets/icons/Oracle-Symbol.png";
 import jestIcon from "../../assets/icons/jest.svg";
 import postmanIcon from "../../assets/icons/postman.svg";
-// import GlitchText from "../../components/GlitchText/GlitchText";
 import ShinyText from "../../components/ShinyText/ShinyText";
 
 interface Skill {
@@ -177,9 +176,6 @@ const Skills: React.FC = () => {
             <div className="container">
                 <div className="section-header">
                     <div className="header-decoration animate-on-scroll">
-                        {/* <GlitchText speed={2} enableShadows={true} enableOnHover={false} className="custom-class">
-                            My Skills
-                        </GlitchText> */}
                         <ShinyText text="My Skill" disabled={false} speed={2} className="section-title" />
                     </div>
                     <p className="section-subtitle animate-on-scroll">Technologies I work with to create amazing experiences</p>

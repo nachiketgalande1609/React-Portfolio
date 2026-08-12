@@ -1,5 +1,5 @@
 // App.tsx
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Header from "./components/Header/Header";
 import Hero from "./pages/Hero/Hero";
 import About from "./pages/About/About";
@@ -14,21 +14,6 @@ import Testimonials from "./pages/Testimonials/Testimonials";
 import Certificates from "./pages/Certificates/Certificates";
 
 const App: React.FC = () => {
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 1200);
-        };
-
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-
-        return () => {
-            window.removeEventListener("resize", checkMobile);
-        };
-    }, []);
-
     return (
         <div className="App">
             <div className="site-background" aria-hidden="true" />
