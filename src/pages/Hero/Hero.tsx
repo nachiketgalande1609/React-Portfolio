@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { personalInfo, socialLinks } from "../../data/portfolioData";
 import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 import "./Hero.css";
@@ -19,6 +19,17 @@ import profileImage from "../../assets/profile.png";
 import resumeFile from "../../assets/resume.pdf";
 
 const Hero: React.FC = () => {
+    const heroRef = useRef<HTMLElement>(null);
+
+    const { scrollYProgress } = useScroll({
+        target: heroRef,
+        offset: ["start start", "end start"],
+    });
+
+    const heroOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
+    const heroY = useTransform(scrollYProgress, [0, 1], [0, 90]);
+    const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
+
     const scrollToContact = () => {
         document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
     };
@@ -50,7 +61,7 @@ const Hero: React.FC = () => {
     const lastName = rest.join(" ");
 
     return (
-        <section id="home" className="hero">
+        <section id="home" className="hero" ref={heroRef}>
             <div className="hero-bg" aria-hidden="true">
                 <div className="hero-grid-pattern" />
             </div>
@@ -59,7 +70,7 @@ const Hero: React.FC = () => {
                 <ThemeToggle />
             </div>
 
-            <div className="hero-container">
+            <motion.div className="hero-container" style={{ opacity: heroOpacity, y: heroY, scale: heroScale }}>
                 <div className="hero-grid">
                     <motion.div
                         className="hero-text"
@@ -144,7 +155,7 @@ const Hero: React.FC = () => {
                         </div>
                     </motion.div>
                 </div>
-            </div>
+            </motion.div>
 
             <button type="button" className="hero-scroll-hint" onClick={scrollToAbout} aria-label="Scroll to next section">
                 <span>Scroll</span>
