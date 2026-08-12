@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import "./Skill.css";
 
 // ===== Import all icons =====
@@ -108,6 +109,12 @@ const skills: Skill[] = [
 const Skills: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
 
+    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+    const sectionOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
+    const sectionY = useTransform(scrollYProgress, [0.65, 1], [0, 110]);
+    const sectionScale = useTransform(scrollYProgress, [0.65, 1], [1, 0.92]);
+    const sectionBlur = useTransform(scrollYProgress, [0.65, 1], ["blur(0px)", "blur(3px)"]);
+
     useEffect(() => {
         // Intersection Observer for scroll animations
         const observer = new IntersectionObserver(
@@ -172,7 +179,12 @@ const Skills: React.FC = () => {
     };
 
     return (
-        <section ref={sectionRef} id="skills" className="section skills-section">
+        <motion.section
+            ref={sectionRef}
+            id="skills"
+            className="section skills-section"
+            style={{ opacity: sectionOpacity, y: sectionY, scale: sectionScale, filter: sectionBlur }}
+        >
             <div className="container">
                 <div className="section-header">
                     <div className="header-decoration animate-on-scroll">
@@ -211,7 +223,7 @@ const Skills: React.FC = () => {
                     ))}
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { personalInfo } from "../../data/portfolioData";
 import "./Contact.css";
 import EmailIcon from "@mui/icons-material/Email";
@@ -11,6 +12,12 @@ import ShinyText from "../../components/ShinyText/ShinyText";
 const Contact: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
     const [copiedField, setCopiedField] = useState<string | null>(null);
+
+    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+    const sectionOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
+    const sectionY = useTransform(scrollYProgress, [0.65, 1], [0, 110]);
+    const sectionScale = useTransform(scrollYProgress, [0.65, 1], [1, 0.92]);
+    const sectionBlur = useTransform(scrollYProgress, [0.65, 1], ["blur(0px)", "blur(3px)"]);
 
     const copyToClipboard = async (text: string, field: string) => {
         try {
@@ -67,7 +74,12 @@ const Contact: React.FC = () => {
     ];
 
     return (
-        <section id="contact" className="section contact-section" ref={sectionRef}>
+        <motion.section
+            id="contact"
+            className="section contact-section"
+            ref={sectionRef}
+            style={{ opacity: sectionOpacity, y: sectionY, scale: sectionScale, filter: sectionBlur }}
+        >
             <div className="container">
                 <div className="contact-header">
                     <div className="header-decoration animate-on-scroll">
@@ -118,7 +130,7 @@ const Contact: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 

@@ -26,9 +26,10 @@ const Hero: React.FC = () => {
         offset: ["start start", "end start"],
     });
 
-    const heroOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
-    const heroY = useTransform(scrollYProgress, [0, 1], [0, 90]);
-    const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
+    const heroOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
+    const heroY = useTransform(scrollYProgress, [0.65, 1], [0, 110]);
+    const heroScale = useTransform(scrollYProgress, [0.65, 1], [1, 0.92]);
+    const heroBlur = useTransform(scrollYProgress, [0.65, 1], ["blur(0px)", "blur(3px)"]);
 
     const scrollToContact = () => {
         document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
@@ -70,7 +71,7 @@ const Hero: React.FC = () => {
                 <ThemeToggle />
             </div>
 
-            <motion.div className="hero-container" style={{ opacity: heroOpacity, y: heroY, scale: heroScale }}>
+            <motion.div className="hero-container" style={{ opacity: heroOpacity, y: heroY, scale: heroScale, filter: heroBlur }}>
                 <div className="hero-grid">
                     <motion.div
                         className="hero-text"

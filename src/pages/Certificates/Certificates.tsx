@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import "./Certificates.css";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { certificatesData } from "../../data/portfolioData";
@@ -22,6 +23,12 @@ const Certificates: React.FC = () => {
     const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
     const [visibleCount, setVisibleCount] = useState<number>(9);
     const [isAnimating, setIsAnimating] = useState(false);
+
+    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+    const sectionOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
+    const sectionY = useTransform(scrollYProgress, [0.65, 1], [0, 110]);
+    const sectionScale = useTransform(scrollYProgress, [0.65, 1], [1, 0.92]);
+    const sectionBlur = useTransform(scrollYProgress, [0.65, 1], ["blur(0px)", "blur(3px)"]);
 
     // Observer for scroll animations
     useEffect(() => {
@@ -101,7 +108,12 @@ const Certificates: React.FC = () => {
     };
 
     return (
-        <section ref={sectionRef} id="certificates" className="section certificates-section">
+        <motion.section
+            ref={sectionRef}
+            id="certificates"
+            className="section certificates-section"
+            style={{ opacity: sectionOpacity, y: sectionY, scale: sectionScale, filter: sectionBlur }}
+        >
             <div className="background-glow"></div>
             <div className="container">
                 <div className="section-header">
@@ -301,7 +313,7 @@ const Certificates: React.FC = () => {
                     </Fade>
                 </Modal>
             </div>
-        </section>
+        </motion.section>
     );
 };
 

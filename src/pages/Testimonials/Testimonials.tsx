@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import FormatQuoteRoundedIcon from "@mui/icons-material/FormatQuoteRounded";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import "./Testimonials.css";
@@ -78,9 +78,21 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index })
 
 const Testimonials: React.FC = () => {
     const total = testimonialsData.testimonials.length;
+    const sectionRef = useRef<HTMLElement>(null);
+
+    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+    const sectionOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
+    const sectionY = useTransform(scrollYProgress, [0.65, 1], [0, 110]);
+    const sectionScale = useTransform(scrollYProgress, [0.65, 1], [1, 0.92]);
+    const sectionBlur = useTransform(scrollYProgress, [0.65, 1], ["blur(0px)", "blur(3px)"]);
 
     return (
-        <section id="testimonials" className="testimonials-section">
+        <motion.section
+            id="testimonials"
+            className="testimonials-section"
+            ref={sectionRef}
+            style={{ opacity: sectionOpacity, y: sectionY, scale: sectionScale, filter: sectionBlur }}
+        >
             <div className="testimonials-container">
                 <div className="testimonials-header">
                     <div className="testimonials-eyebrow">
@@ -98,7 +110,7 @@ const Testimonials: React.FC = () => {
                     ))}
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 

@@ -1,5 +1,5 @@
-import React from "react";
-import { motion, type Variants } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import "./Experience.css";
@@ -72,16 +72,24 @@ const itemVariants: Variants = {
 const isCurrentRole = (period: string) => /present|current/i.test(period);
 
 const Experience: React.FC = () => {
+    const exitRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({ target: exitRef, offset: ["start start", "end start"] });
+    const exitOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
+    const exitY = useTransform(scrollYProgress, [0.65, 1], [0, 110]);
+    const exitScale = useTransform(scrollYProgress, [0.65, 1], [1, 0.92]);
+    const exitBlur = useTransform(scrollYProgress, [0.65, 1], ["blur(0px)", "blur(3px)"]);
+
     return (
-        <motion.section
-            id="experience"
-            className="section experience-section"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.05 }}
-            variants={containerVariants}
-        >
-            <div className="container experience-container">
+        <motion.div ref={exitRef} style={{ opacity: exitOpacity, y: exitY, scale: exitScale, filter: exitBlur }}>
+            <motion.section
+                id="experience"
+                className="section experience-section"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.05 }}
+                variants={containerVariants}
+            >
+                <div className="container experience-container">
                 <motion.header className="experience-header" variants={itemVariants}>
                     <span className="experience-eyebrow">
                         <span className="experience-eyebrow-dot" aria-hidden="true" />
@@ -155,7 +163,8 @@ const Experience: React.FC = () => {
                     })}
                 </div>
             </div>
-        </motion.section>
+            </motion.section>
+        </motion.div>
     );
 };
 

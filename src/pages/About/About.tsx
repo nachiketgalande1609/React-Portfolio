@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./About.css";
 import CakeIcon from "@mui/icons-material/Cake";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
@@ -6,7 +6,7 @@ import CallRoundedIcon from "@mui/icons-material/CallRounded";
 import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
-import { motion, type Variants } from "framer-motion";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import ShinyText from "../../components/ShinyText/ShinyText";
 
 const containerVariants: Variants = {
@@ -58,16 +58,24 @@ const stats = [
 ];
 
 const About: React.FC = () => {
+    const exitRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({ target: exitRef, offset: ["start start", "end start"] });
+    const exitOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
+    const exitY = useTransform(scrollYProgress, [0.65, 1], [0, 110]);
+    const exitScale = useTransform(scrollYProgress, [0.65, 1], [1, 0.92]);
+    const exitBlur = useTransform(scrollYProgress, [0.65, 1], ["blur(0px)", "blur(3px)"]);
+
     return (
-        <motion.section
-            id="about"
-            className="section about-section"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={containerVariants}
-        >
-            <div className="container about-container">
+        <motion.div ref={exitRef} style={{ opacity: exitOpacity, y: exitY, scale: exitScale, filter: exitBlur }}>
+            <motion.section
+                id="about"
+                className="section about-section"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.1 }}
+                variants={containerVariants}
+            >
+                <div className="container about-container">
                 <motion.div className="about-header" variants={itemVariants}>
                     <span className="about-eyebrow">
                         <span className="about-eyebrow-dot" aria-hidden="true" />
@@ -149,7 +157,8 @@ const About: React.FC = () => {
                     </motion.section>
                 </div>
             </div>
-        </motion.section>
+            </motion.section>
+        </motion.div>
     );
 };
 
