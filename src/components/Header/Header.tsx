@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef, useMemo } from "react"; // Added useMemo
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import "./Header.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import LinksModal from "./LinksModal/LinksModal";
-import UsesModal from "./UsesModal/UsesModal";
 
 // Define static navigation items outside the component to prevent re-creation on every render
 const mainNavItemsConfig = [
@@ -15,11 +15,10 @@ const mainNavItemsConfig = [
     { id: "projects", label: "Projects" },
 ];
 
-const dropdownNavItemsConfig = (handleUsesClick: () => void, handleLinksClick: () => void) => [
+const dropdownNavItemsConfig = (handleLinksClick: () => void) => [
     { id: "certificates", label: "Certifications" },
     { id: "testimonials", label: "Testimonials" },
     { id: "contact", label: "Contact" },
-    { id: "uses", label: "Uses", action: handleUsesClick },
     { id: "links", label: "Links", action: handleLinksClick },
 ];
 
@@ -30,7 +29,7 @@ const Header: React.FC = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isMoreOpen, setIsMoreOpen] = useState(false);
     const [isLinksModalOpen, setIsLinksModalOpen] = useState(false);
-    const [isUsesModalOpen, setIsUsesModalOpen] = useState(false);
+    const [dropdownPos, setDropdownPos] = useState({ top: 0, right: 0 });
 
     // State to hold the dynamic style for the indicator
     const [indicatorStyle, setIndicatorStyle] = useState({});
@@ -38,6 +37,7 @@ const Header: React.FC = () => {
     // Refs for nav items - fixed type definition
     const mainNavRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const moreTabRef = useRef<HTMLButtonElement | null>(null);
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         const checkMobile = () => {
@@ -95,19 +95,37 @@ const Header: React.FC = () => {
 
     const handleLinksClick = () => {
         setIsLinksModalOpen(true);
-        setIsMoreOpen(false); // Close dropdown when modal opens
+        setIsMoreOpen(false);
     };
 
-    const handleUsesClick = () => {
-        setIsUsesModalOpen(true);
-        setIsMoreOpen(false); // Close dropdown when modal opens
-    };
+    const updateDropdownPos = useCallback(() => {
+        if (moreTabRef.current) {
+            const rect = moreTabRef.current.getBoundingClientRect();
+            setDropdownPos({
+                top: rect.bottom + 12,
+                right: window.innerWidth - rect.right,
+            });
+        }
+    }, []);
+
+    useEffect(() => {
+        if (isMoreOpen) {
+            updateDropdownPos();
+            window.addEventListener("scroll", updateDropdownPos, { passive: true });
+            window.addEventListener("resize", updateDropdownPos);
+        }
+        return () => {
+            window.removeEventListener("scroll", updateDropdownPos);
+            window.removeEventListener("resize", updateDropdownPos);
+        };
+    }, [isMoreOpen, updateDropdownPos]);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             const moreWrapper = document.querySelector(".more-wrapper");
-            // If the clicked element is not inside the more-wrapper, close the dropdown
-            if (moreWrapper && !moreWrapper.contains(event.target as Node)) {
+            const insideWrapper = moreWrapper?.contains(event.target as Node);
+            const insideDropdown = dropdownRef.current?.contains(event.target as Node);
+            if (!insideWrapper && !insideDropdown) {
                 setIsMoreOpen(false);
             }
         };
@@ -124,7 +142,7 @@ const Header: React.FC = () => {
     // Use memoized versions of the navigation items inside the component
     // This ensures they are not re-created unless their dependencies change
     const mainNavItems = useMemo(() => mainNavItemsConfig, []);
-    const dropdownNavItems = useMemo(() => dropdownNavItemsConfig(handleUsesClick, handleLinksClick), [handleUsesClick, handleLinksClick]);
+    const dropdownNavItems = useMemo(() => dropdownNavItemsConfig(handleLinksClick), [handleLinksClick]);
 
     // Determine if any dropdown item is the active section
     const isDropdownActive = dropdownNavItems.some((item) => item.id === activeSection);
@@ -133,7 +151,7 @@ const Header: React.FC = () => {
     useEffect(() => {
         const calculateIndicatorPosition = () => {
             let activeElement: HTMLButtonElement | null = null;
-            const sectionsWithoutMainIndicator = ["certificates", "testimonials", "contact", "uses", "links"];
+            const sectionsWithoutMainIndicator = ["certificates", "testimonials", "contact", "links"];
 
             const shouldHideMainIndicator = sectionsWithoutMainIndicator.includes(activeSection);
 
@@ -227,8 +245,12 @@ const Header: React.FC = () => {
                             <span className="nav-tooltip">More Options</span>
                         </button>
 
-                        {isMoreOpen && (
-                            <div className="dropdown-menu">
+                        {isMoreOpen && createPortal(
+                            <div
+                                ref={dropdownRef}
+                                className="dropdown-menu"
+                                style={{ position: "fixed", top: dropdownPos.top, right: dropdownPos.right }}
+                            >
                                 {dropdownNavItems.map((item) => (
                                     <button
                                         key={item.id}
@@ -236,14 +258,12 @@ const Header: React.FC = () => {
                                         onClick={item.action ? item.action : () => scrollToSection(item.id)}
                                     >
                                         <span>{item.label} </span>
-                                        {(item.id === "uses" || item.id === "links") && (
-                                            <ChevronRightIcon className="dropdown-chevron" fontSize="small" />
-                                        )}
-
+                                        {item.id === "links" && <ChevronRightIcon className="dropdown-chevron" fontSize="small" />}
                                         {activeSection === item.id && <div className="dropdown-active-indicator" />}
                                     </button>
                                 ))}
-                            </div>
+                            </div>,
+                            document.body
                         )}
                     </div>
                     {/* Removed the extra glass-overlay div as it's now handled by ::before on .nav-dock */}
@@ -251,7 +271,6 @@ const Header: React.FC = () => {
             </header>
 
             <LinksModal isOpen={isLinksModalOpen} onClose={() => setIsLinksModalOpen(false)} />
-            <UsesModal isOpen={isUsesModalOpen} onClose={() => setIsUsesModalOpen(false)} />
         </>
     );
 };

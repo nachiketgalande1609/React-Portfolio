@@ -406,39 +406,63 @@
     transform: rotate(180deg);
 }
 
-/* Dropdown Menu Styles - Updated to match dock */
+/* Dropdown Menu Styles - Matches nav-dock glass look */
 .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0; /* Align to the right of the "More" button */
-    margin-top: 12px;
-    background: rgba(8, 8, 12, 0.25);
-    backdrop-filter: blur(8px) saturate(160%);
-    -webkit-backdrop-filter: blur(8px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    /* position/top/right set via inline style when rendered as portal */
+    background: rgba(8, 8, 12, 0.35);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: none;
     border-radius: 20px;
     padding: 8px;
     min-width: 140px;
-    z-index: 1001;
+    z-index: 9999;
     box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.5),
-        0 2px 8px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        0 8px 32px rgba(0, 0, 0, 0.45),
+        0 2px 8px rgba(0, 0, 0, 0.3);
     animation: dropdownFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
 }
 
 :root[data-theme="light"] .dropdown-menu {
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    border-top: 1px solid rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.28);
     box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.1),
-        0 2px 8px rgba(0, 0, 0, 0.06),
-        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+/* Gradient glass border - matches nav-dock::after */
+.dropdown-menu::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 3px;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.40) 0%,
+        rgba(0, 0, 0, 0.55) 50%,
+        rgba(255, 255, 255, 0.40) 100%
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 5;
+}
+
+:root[data-theme="light"] .dropdown-menu::after {
+    background: linear-gradient(
+        to bottom,
+        rgba(143, 143, 143, 0.25) 0%,
+        rgba(255, 0, 0, 0) 50%,
+        rgba(140, 140, 140, 0.25) 100%
+    );
+}
+
+/* Glass inner shimmer - matches nav-dock::before */
 .dropdown-menu::before {
     content: "";
     position: absolute;
@@ -448,7 +472,7 @@
     bottom: 0;
     background: linear-gradient(
         135deg,
-        rgba(255, 255, 255, 0.07) 0%,
+        rgba(255, 255, 255, 0.1) 0%,
         transparent 55%,
         rgba(255, 255, 255, 0.03) 100%
     );
@@ -533,6 +557,10 @@
         padding: 6px;
     }
 
+    .dropdown-menu::after {
+        border-radius: 18px;
+    }
+
     .dropdown-menu::before {
         border-radius: 16px;
     }
@@ -556,6 +584,10 @@
         margin-top: 8px;
         border-radius: 16px;
         padding: 6px;
+    }
+
+    .dropdown-menu::after {
+        border-radius: 16px;
     }
 
     .dropdown-menu::before {
