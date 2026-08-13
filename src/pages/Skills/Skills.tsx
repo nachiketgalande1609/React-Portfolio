@@ -39,7 +39,7 @@ import javaIcon from "../../assets/icons/java.svg";
 import azureIcon from "../../assets/icons/azure.png";
 import googleCloudIcon from "../../assets/icons/google-cloud.png";
 import oracleCloudIcon from "../../assets/icons/Oracle-Symbol.png";
-import jestIcon from "../../assets/icons/jest.svg";
+import jestIcon from "../../assets/icons/Jest.svg";
 import postmanIcon from "../../assets/icons/Postman.svg";
 import ShinyText from "../../components/ShinyText/ShinyText";
 
