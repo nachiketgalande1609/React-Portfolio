@@ -93,10 +93,10 @@ const Header: React.FC = () => {
         setIsMoreOpen(!isMoreOpen);
     };
 
-    const handleLinksClick = () => {
+    const handleLinksClick = useCallback(() => {
         setIsLinksModalOpen(true);
         setIsMoreOpen(false);
-    };
+    }, []);
 
     const updateDropdownPos = useCallback(() => {
         if (moreTabRef.current) {
