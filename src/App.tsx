@@ -14,6 +14,7 @@ import Experience from "./pages/Experience/Experience";
 import Testimonials from "./pages/Testimonials/Testimonials";
 import Certificates from "./pages/Certificates/Certificates";
 import GitHub from "./pages/GitHub/GitHub";
+import Timeline from "./pages/Timeline/Timeline";
 
 const ScrollToTop: React.FC = () => {
     const location = useLocation();
@@ -79,6 +80,7 @@ const App: React.FC = () => {
                     <Routes>
                         <Route path="/" element={<PortfolioHome />} />
                         <Route path="/github" element={<GitHub />} />
+                        <Route path="/timeline" element={<Timeline />} />
                     </Routes>
                 </div>
             </div>

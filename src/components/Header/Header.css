@@ -109,6 +109,10 @@
     z-index: 2; /* Keep nav items above the glass overlay */
 }
 
+.nav-item:focus {
+    outline: none;
+}
+
 .nav-item {
     position: relative;
     height: 50px;

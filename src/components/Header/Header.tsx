@@ -15,11 +15,20 @@ const mainNavItemsConfig = [
     { id: "projects", label: "Projects" },
 ];
 
-const dropdownNavItemsConfig = (handleLinksClick: () => void) => [
+interface DropdownNavItem {
+    id: string;
+    label: string;
+    isRoute?: boolean;
+    isModal?: boolean;
+}
+
+const dropdownNavItemsConfig: DropdownNavItem[] = [
     { id: "certificates", label: "Certifications" },
     { id: "testimonials", label: "Testimonials" },
     { id: "contact", label: "Contact" },
-    { id: "links", label: "Links", action: handleLinksClick },
+    { id: "github", label: "GitHub", isRoute: true },
+    { id: "timeline", label: "Timeline", isRoute: true },
+    { id: "links", label: "Links", isModal: true },
 ];
 
 // Viewport width at which all items fit inline (no More dropdown)
@@ -29,6 +38,7 @@ const Header: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const isGitHubPage = location.pathname === "/github";
+    const isTimelinePage = location.pathname === "/timeline";
 
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
@@ -44,7 +54,6 @@ const Header: React.FC = () => {
     const mainNavRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const extraNavRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const moreTabRef = useRef<HTMLButtonElement | null>(null);
-    const githubNavRef = useRef<HTMLButtonElement | null>(null);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -88,7 +97,7 @@ const Header: React.FC = () => {
     }, []);
 
     const scrollToSection = (sectionId: string) => {
-        if (isGitHubPage) {
+        if (isGitHubPage || isTimelinePage) {
             navigate("/", { state: { scrollTo: sectionId } });
             return;
         }
@@ -99,10 +108,15 @@ const Header: React.FC = () => {
         setIsMoreOpen(false);
     };
 
-    const handleGitHubClick = () => {
+    const handleGitHubClick = useCallback(() => {
         navigate("/github");
         setIsMoreOpen(false);
-    };
+    }, [navigate]);
+
+    const handleTimelineClick = useCallback(() => {
+        navigate("/timeline");
+        setIsMoreOpen(false);
+    }, [navigate]);
 
     const handleMoreClick = () => {
         setIsMoreOpen(!isMoreOpen);
@@ -155,16 +169,22 @@ const Header: React.FC = () => {
     }, [isMoreOpen]);
 
     const mainNavItems = useMemo(() => mainNavItemsConfig, []);
-    const dropdownNavItems = useMemo(() => dropdownNavItemsConfig(handleLinksClick), [handleLinksClick]);
+    const dropdownNavItems = dropdownNavItemsConfig;
 
-    const isDropdownActive = dropdownNavItems.some((item) => item.id === activeSection);
+    const isDropdownActive = isGitHubPage || isTimelinePage || dropdownNavItems.some((item) => item.id === activeSection);
 
     useEffect(() => {
         const calculateIndicatorPosition = () => {
             let activeElement: HTMLButtonElement | null = null;
 
-            if (isGitHubPage) {
-                activeElement = githubNavRef.current;
+            if (isGitHubPage || isTimelinePage) {
+                const routeId = isGitHubPage ? "github" : "timeline";
+                if (isFullNav) {
+                    const idx = dropdownNavItems.findIndex((item) => item.id === routeId);
+                    if (idx !== -1) activeElement = extraNavRefs.current[idx];
+                } else {
+                    activeElement = moreTabRef.current;
+                }
             } else if (isDropdownActive) {
                 if (isFullNav) {
                     // All items are visible — point indicator at the actual dropdown button
@@ -210,7 +230,7 @@ const Header: React.FC = () => {
         calculateIndicatorPosition();
         window.addEventListener("resize", calculateIndicatorPosition);
         return () => window.removeEventListener("resize", calculateIndicatorPosition);
-    }, [activeSection, isMobile, isFullNav, isDropdownActive, mainNavItems, dropdownNavItems, isGitHubPage]);
+    }, [activeSection, isMobile, isFullNav, isDropdownActive, mainNavItems, dropdownNavItems, isGitHubPage, isTimelinePage]);
 
     return (
         <>
@@ -236,33 +256,28 @@ const Header: React.FC = () => {
                         </div>
                     ))}
 
-                    <div className="nav-item-wrapper">
-                        <button
-                            ref={(el) => { githubNavRef.current = el; }}
-                            className={`nav-item ${isGitHubPage ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
-                            onClick={handleGitHubClick}
-                            aria-label="GitHub"
-                        >
-                            <span className="nav-text">GitHub</span>
-                            <span className="nav-tooltip">GitHub</span>
-                        </button>
-                    </div>
-
                     {isFullNav ? (
-                        // Desktop: show all dropdown items inline, no More button
-                        dropdownNavItems.map((item, index) => (
-                            <div key={item.id} className="nav-item-wrapper">
-                                <button
-                                    ref={(el) => { extraNavRefs.current[index] = el; }}
-                                    className={`nav-item ${!isGitHubPage && activeSection === item.id ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
-                                    onClick={item.action ? item.action : () => scrollToSection(item.id)}
-                                    aria-label={item.label}
-                                >
-                                    <span className="nav-text">{item.label}</span>
-                                    <span className="nav-tooltip">{item.label}</span>
-                                </button>
-                            </div>
-                        ))
+                        dropdownNavItems.map((item, index) => {
+                            const isActive = item.id === "github" ? isGitHubPage
+                                : item.id === "timeline" ? isTimelinePage
+                                : !isGitHubPage && !isTimelinePage && activeSection === item.id;
+                            const onClick = "isRoute" in item ? () => { navigate(`/${item.id}`); setIsMoreOpen(false); }
+                                : "isModal" in item ? handleLinksClick
+                                : () => scrollToSection(item.id);
+                            return (
+                                <div key={item.id} className="nav-item-wrapper">
+                                    <button
+                                        ref={(el) => { extraNavRefs.current[index] = el; }}
+                                        className={`nav-item ${isActive ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
+                                        onClick={onClick}
+                                        aria-label={item.label}
+                                    >
+                                        <span className="nav-text">{item.label}</span>
+                                        <span className="nav-tooltip">{item.label}</span>
+                                    </button>
+                                </div>
+                            );
+                        })
                     ) : (
                         // Narrow: More dropdown
                         <div className="nav-item-wrapper more-wrapper">
@@ -286,17 +301,25 @@ const Header: React.FC = () => {
                                     className="dropdown-menu"
                                     style={{ position: "fixed", top: dropdownPos.top, right: dropdownPos.right }}
                                 >
-                                    {dropdownNavItems.map((item) => (
-                                        <button
-                                            key={item.id}
-                                            className={`dropdown-item ${activeSection === item.id ? "active" : ""}`}
-                                            onClick={item.action ? item.action : () => scrollToSection(item.id)}
-                                        >
-                                            <span>{item.label} </span>
-                                            {item.id === "links" && <ChevronRightIcon className="dropdown-chevron" fontSize="small" />}
-                                            {activeSection === item.id && <div className="dropdown-active-indicator" />}
-                                        </button>
-                                    ))}
+                                    {dropdownNavItems.map((item) => {
+                                        const isActive = item.id === "github" ? isGitHubPage
+                                            : item.id === "timeline" ? isTimelinePage
+                                            : activeSection === item.id;
+                                        const onClick = "isRoute" in item ? () => { navigate(`/${item.id}`); setIsMoreOpen(false); }
+                                            : "isModal" in item ? handleLinksClick
+                                            : () => scrollToSection(item.id);
+                                        return (
+                                            <button
+                                                key={item.id}
+                                                className={`dropdown-item ${isActive ? "active" : ""}`}
+                                                onClick={onClick}
+                                            >
+                                                <span>{item.label} </span>
+                                                {item.id === "links" && <ChevronRightIcon className="dropdown-chevron" fontSize="small" />}
+                                                {isActive && <div className="dropdown-active-indicator" />}
+                                            </button>
+                                        );
+                                    })}
                                 </div>,
                                 document.body
                             )}

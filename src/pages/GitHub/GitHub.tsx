@@ -264,25 +264,40 @@ function AvatarWithFallback({ src, alt }: { src: string; alt: string }) {
 function SkeletonLoader() {
     return (
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            {/* Profile card */}
             <div className="github-section">
-                <div className="profile-hero">
-                    <div className="skeleton skeleton-avatar" />
-                    <div style={{ flex: 1 }}>
-                        <div className="skeleton skeleton-text" style={{ width: "40%" }} />
-                        <div className="skeleton skeleton-text" style={{ width: "25%" }} />
-                        <div className="skeleton skeleton-text" style={{ width: "60%" }} />
+                <div className="profile-top-row">
+                    <div className="profile-hero">
+                        <div className="skeleton skeleton-avatar" />
+                        <div style={{ flex: 1 }}>
+                            <div className="skeleton skeleton-text" style={{ width: "38%", marginBottom: 8 }} />
+                            <div className="skeleton skeleton-text" style={{ width: "22%", marginBottom: 8 }} />
+                        </div>
                     </div>
+                    <div className="skeleton skeleton-block" style={{ width: 140, height: 36, borderRadius: 20, flexShrink: 0 }} />
                 </div>
                 <div style={{ display: "flex", gap: 10, marginTop: 20, flexWrap: "wrap" }}>
                     {[1, 2, 3, 4, 5, 6].map((i) => (
-                        <div key={i} className="skeleton skeleton-block" style={{ width: 120, height: 60, borderRadius: 12 }} />
+                        <div key={i} className="skeleton skeleton-block" style={{ flex: "1 1 100px", height: 66, borderRadius: 12 }} />
                     ))}
                 </div>
             </div>
+            {/* Heatmap card */}
             <div className="github-section">
-                <div className="skeleton skeleton-text" style={{ width: "30%", marginBottom: 16 }} />
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+                    <div className="skeleton skeleton-text" style={{ width: "32%" }} />
+                    <div className="skeleton skeleton-block" style={{ width: 110, height: 32, borderRadius: 8 }} />
+                </div>
+                {/* Month label row */}
+                <div style={{ display: "flex", gap: 4, marginBottom: 6 }}>
+                    {Array.from({ length: 12 }).map((_, i) => (
+                        <div key={i} className="skeleton skeleton-text" style={{ flex: 1, height: 10 }} />
+                    ))}
+                </div>
                 <div className="skeleton skeleton-heatmap" />
+                <div className="skeleton skeleton-text" style={{ width: "30%", marginTop: 10 }} />
             </div>
+            {/* Repos card */}
             <div className="github-section">
                 <div className="skeleton skeleton-text" style={{ width: "25%", marginBottom: 16 }} />
                 <div className="repos-grid">

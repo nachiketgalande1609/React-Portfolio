@@ -54,7 +54,7 @@
     );
 }
 
-.section-header {
+.github-section .section-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
