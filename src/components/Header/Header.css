@@ -156,6 +156,7 @@
 .active-indicator {
     position: absolute;
     top: -8px; /* Position above the nav items */
+    left: 0;   /* Explicit origin so translateX() measures from nav-dock's left edge */
     height: 5px;
     background: var(--accent);
     border-radius: 4px 4px 4px 4px;

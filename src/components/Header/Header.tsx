@@ -174,11 +174,30 @@ const Header: React.FC = () => {
             }
 
             if (activeElement) {
-                const { offsetLeft, offsetWidth } = activeElement;
+                const navDock = activeElement.closest('.nav-dock') as HTMLElement;
+                if (!navDock) return;
+
+                // Read the header's CSS scale (0.95 when scrolled, 1 otherwise)
+                // so we can convert visual (getBoundingClientRect) coords → layout coords.
+                const header = navDock.closest('.header') as HTMLElement;
+                let scale = 1;
+                if (header) {
+                    const m = window.getComputedStyle(header).transform.match(/matrix\(([^,]+)/);
+                    if (m) scale = parseFloat(m[1]) || 1;
+                }
+
+                const navDockRect = navDock.getBoundingClientRect();
+                const btnRect = activeElement.getBoundingClientRect();
+
+                // Button center from nav-dock's visual left edge, then converted to
+                // layout (CSS) coords. Subtracting navDockRect.left removes the shared
+                // scale-origin offset, so dividing by scale is exact.
+                const btnCenterLayout = ((btnRect.left + btnRect.right) / 2 - navDockRect.left) / scale;
+                const indicatorWidth = (btnRect.width / scale) * 0.75;
 
                 setIndicatorStyle({
-                    transform: `translateX(${offsetLeft}px)`,
-                    width: `${offsetWidth - (25 / 100) * offsetWidth}px`,
+                    transform: `translateX(${btnCenterLayout - indicatorWidth / 2}px)`,
+                    width: `${indicatorWidth}px`,
                 });
             } else {
                 // If no active element is found (e.g., on initial render before scroll update),
