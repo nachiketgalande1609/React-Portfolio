@@ -43,10 +43,10 @@
     border-radius: 30px;
     padding: 3px;
     background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.40) 0%,
-        rgba(0, 0, 0, 0.55) 50%,
-        rgba(255, 255, 255, 0.40) 100%
+        3deg,
+        rgba(255, 255, 255, 0.50) 0%,
+        rgba(0, 0, 0, 0.40) 50%,
+        rgba(255, 255, 255, 0.25) 100%
     );
     -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
@@ -66,10 +66,10 @@
 
 :root[data-theme="light"] .nav-dock::after {
     background: linear-gradient(
-        to bottom,
-        rgba(143, 143, 143, 0.25) 0%,
-        rgba(255, 0, 0, 0) 50%,
-        rgba(140, 140, 140, 0.25) 100%
+        3deg,
+        rgba(143, 143, 143, 0.35) 0%,
+        rgba(255, 255, 255, 0) 50%,
+        rgba(140, 140, 140, 0.20) 100%
     );
 }
 
@@ -440,7 +440,7 @@
     border-radius: 20px;
     padding: 3px;
     background: linear-gradient(
-        to bottom,
+        3deg,
         rgba(255, 255, 255, 0.40) 0%,
         rgba(0, 0, 0, 0.55) 50%,
         rgba(255, 255, 255, 0.40) 100%
@@ -456,7 +456,7 @@
 
 :root[data-theme="light"] .dropdown-menu::after {
     background: linear-gradient(
-        to bottom,
+        3deg,
         rgba(143, 143, 143, 0.25) 0%,
         rgba(255, 0, 0, 0) 50%,
         rgba(140, 140, 140, 0.25) 100%
