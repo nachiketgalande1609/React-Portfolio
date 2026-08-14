@@ -11,17 +11,9 @@ import CheckIcon from "@mui/icons-material/Check";
 import SendIcon from "@mui/icons-material/Send";
 import ShinyText from "../../components/ShinyText/ShinyText";
 
-// ── EmailJS credentials ──────────────────────────────────────
-// 1. Sign up at https://emailjs.com
-// 2. Create a service (Gmail etc.) → copy the Service ID
-// 3. Create an email template with variables:
-//    {{from_name}}, {{from_email}}, {{subject}}, {{message}}
-//    → copy the Template ID
-// 4. Go to Account → API Keys → copy the Public Key
-const EMAILJS_SERVICE_ID = "service_mwvokmi";
-const EMAILJS_TEMPLATE_ID = "template_v7kc6n8";
-const EMAILJS_PUBLIC_KEY = "_PT5uE3P2hnSLpEo4";
-// ─────────────────────────────────────────────────────────────
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
 
 type FormState = "idle" | "sending" | "success" | "error";
 

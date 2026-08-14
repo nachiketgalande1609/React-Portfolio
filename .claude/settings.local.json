@@ -14,7 +14,8 @@
       "PowerShell(Stop-Process -Id 38928 -Force)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "mcp__visualize__show_widget"
     ]
   }
 }
