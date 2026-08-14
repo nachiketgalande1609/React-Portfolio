@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 import LinksModal from "./LinksModal/LinksModal";
 
@@ -48,6 +49,9 @@ const Header: React.FC = () => {
     const [isMoreOpen, setIsMoreOpen] = useState(false);
     const [isLinksModalOpen, setIsLinksModalOpen] = useState(false);
     const [dropdownPos, setDropdownPos] = useState({ top: 0, right: 0 });
+    const [hamburgerOpen, setHamburgerOpen] = useState(false);
+    const mobilePillRef = useRef<HTMLDivElement | null>(null);
+    const mobileDropdownRef = useRef<HTMLDivElement | null>(null);
 
     const [indicatorStyle, setIndicatorStyle] = useState({});
 
@@ -158,6 +162,24 @@ const Header: React.FC = () => {
         };
     }, [isMoreOpen]);
 
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            const insidePill = mobilePillRef.current?.contains(event.target as Node);
+            const insideDropdown = mobileDropdownRef.current?.contains(event.target as Node);
+            if (!insidePill && !insideDropdown) {
+                setHamburgerOpen(false);
+            }
+        };
+
+        if (hamburgerOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [hamburgerOpen]);
+
     const mainNavItems = useMemo(() => mainNavItemsConfig, []);
     const dropdownNavItems = dropdownNavItemsConfig;
 
@@ -221,6 +243,64 @@ const Header: React.FC = () => {
         window.addEventListener("resize", calculateIndicatorPosition);
         return () => window.removeEventListener("resize", calculateIndicatorPosition);
     }, [activeSection, isMobile, isFullNav, isDropdownActive, mainNavItems, dropdownNavItems, isGitHubPage, isTimelinePage]);
+
+    const allNavItems = [...mainNavItems.map(i => ({ ...i, isRoute: false, isModal: false })), ...dropdownNavItems];
+
+    if (isMobile) {
+        return (
+            <>
+                <header className={`header ${isScrolled ? "scrolled" : ""} mobile`}>
+                    <div ref={mobilePillRef} className="mobile-nav-buttons">
+                        <div className="mobile-btn-wrap"><ThemeToggle /></div>
+                        <div className="mobile-btn-wrap">
+                            <button
+                                className={`hamburger-btn ${hamburgerOpen ? "open" : ""}`}
+                                onClick={() => setHamburgerOpen(o => !o)}
+                                aria-label="Open menu"
+                                aria-expanded={hamburgerOpen}
+                            >
+                                <svg className="hamburger-icon" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect className="hline hline-1" x="0" y="0" width="18" height="2" rx="1" />
+                                    <rect className="hline hline-2" x="0" y="6" width="18" height="2" rx="1" />
+                                    <rect className="hline hline-3" x="0" y="12" width="18" height="2" rx="1" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                {hamburgerOpen && createPortal(
+                    <div
+                        ref={mobileDropdownRef}
+                        className="mobile-dropdown"
+                    >
+                        {allNavItems.map((item) => {
+                            const isActive = item.id === "github" ? isGitHubPage
+                                : item.id === "timeline" ? isTimelinePage
+                                : !isGitHubPage && !isTimelinePage && activeSection === item.id;
+                            const onClick = item.isRoute ? () => { navigate(`/${item.id}`); setHamburgerOpen(false); }
+                                : item.isModal ? () => { setIsLinksModalOpen(true); setHamburgerOpen(false); }
+                                : () => { scrollToSection(item.id); setHamburgerOpen(false); };
+                            return (
+                                <button
+                                    key={item.id}
+                                    className={`dropdown-item ${isActive ? "active" : ""}`}
+                                    onClick={onClick}
+                                >
+                                    <span>{item.label}</span>
+                                    {item.id === "links" && <ChevronRightIcon className="dropdown-chevron" fontSize="small" />}
+                                    {isActive && <div className="dropdown-active-indicator" />}
+                                </button>
+                            );
+                        })}
+                    </div>,
+                    document.body
+                )}
+
+                <LinksModal isOpen={isLinksModalOpen} onClose={() => setIsLinksModalOpen(false)} />
+            </>
+        );
+    }
 
     return (
         <>

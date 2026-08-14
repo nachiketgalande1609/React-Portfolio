@@ -74,7 +74,7 @@ const App: React.FC = () => {
                     <ScrollToTop />
                     <ScrollProgress />
                     <Header />
-                    <div style={{ position: "fixed", top: 30, right: 24, zIndex: 1000 }}>
+                    <div className="desktop-theme-toggle">
                         <ThemeToggle />
                     </div>
                     <Routes>

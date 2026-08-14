@@ -450,3 +450,6 @@ body {
         padding: 0 1rem;
     }
 }
+
+.desktop-theme-toggle { position: fixed; top: 30px; right: 24px; z-index: 1000; }
+@media (max-width: 768px) { .desktop-theme-toggle { display: none; } }
