@@ -150,8 +150,29 @@
 /* Prevent the UA's default group size/transform interpolation — if the root
    snapshot size changes even slightly (e.g. a scrollbar toggling), Chrome
    scales the whole group, which shifts our clip-path circle off the button. */
+/* Force the group to viewport dimensions so clip-path pixel coordinates
+   on ::view-transition-new(root) map directly to viewport space.
+   Without this, the group matches the full HTML element height (~12000px),
+   making y=53px land far from the button's visual position. */
 ::view-transition-group(root) {
-    animation-duration: 0s !important;
+    animation: none !important;
+    transform: none !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Scale the captured snapshot to fill the viewport-sized group,
+   anchored top-left so viewport px coordinates remain valid. */
+::view-transition-old(root),
+::view-transition-new(root) {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: top left !important;
 }
 
 /* ── Performance: strip backdrop blur during the spread animation ──

@@ -26,9 +26,8 @@ const ThemeToggle: React.FC = () => {
         if (busyRef.current) return;
         busyRef.current = true;
 
-        const rect = buttonRef.current?.getBoundingClientRect();
-        const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
-        const y = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
+        const x = window.innerWidth + window.innerWidth * 0.25;
+        const y = 0;
         const W = window.innerWidth;
         const H = window.innerHeight;
         const radius = Math.ceil(Math.hypot(Math.max(x, W - x), Math.max(y, H - y)));
@@ -48,42 +47,27 @@ const ThemeToggle: React.FC = () => {
             busyRef.current = false;
         };
 
-        // After icon exits, start the page spread
         setTimeout(() => {
             const vt = (document as any).startViewTransition;
 
-            // ── Fallback: no View Transition API support ──────────────────
             if (!vt) {
                 setTheme(newTheme);
                 finish();
                 return;
             }
 
-            // Drop backdrop-filter blur for the duration of the transition.
-            // Animating clip-path while dozens of blurred cards/navbar need to
-            // resample their backdrop every frame is what causes the stutter.
             document.documentElement.classList.add("vt-active");
 
-            // Circle origin/radius, read live by ::view-transition-new(root)'s
-            // CSS keyframe animation (see ThemeToggle.css). Measured fresh on
-            // every click so the circle always starts at the button's current
-            // position, even if the layout shifted since the last toggle.
             document.documentElement.style.setProperty("--vt-x", `${x}px`);
             document.documentElement.style.setProperty("--vt-y", `${y}px`);
             document.documentElement.style.setProperty("--vt-r", `${radius}px`);
+            console.log(`VT origin: --vt-x=${x}px --vt-y=${y}px --vt-r=${radius}px`);
 
-            // ── View Transition ───────────────────────────────────────────
-            // Minimal callback: only update the CSS-variable source attribute.
-            // Keeping React out of the callback avoids flushSync conflicts
-            // with the scheduler and prevents InvalidStateError.
             const transition = vt.call(document, () => {
                 document.documentElement.setAttribute("data-theme", newTheme);
                 try { localStorage.setItem(STORAGE_KEY, newTheme); } catch {}
             });
 
-            // Sync React state after the DOM has been captured for the VT snapshot.
-            // ::view-transition-new(root) is the live layer — it updates as React
-            // re-renders with the new theme, so content is visible during the transition.
             transition.updateCallbackDone?.then(() => setTheme(newTheme), () => setTheme(newTheme));
 
             const cleanup = () => {
@@ -91,15 +75,7 @@ const ThemeToggle: React.FC = () => {
                 finish();
             };
 
-            // `finished` is the only promise guaranteed to settle after the whole
-            // transition (including our circle animation) is done — that's what
-            // clears busyRef, so the next click can never overlap this one.
             transition.finished.then(cleanup, cleanup);
-
-            // `ready` rejects when the browser skips the transition outright
-            // (e.g. reduced-motion, or another transition already active).
-            // Nothing to animate in that case — `finished` above still settles
-            // and drives cleanup — this just prevents an unhandled rejection.
             transition.ready.catch(() => {});
         }, 180);
     };
