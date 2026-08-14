@@ -12,10 +12,10 @@
 
 /* Theme toggle stays top-right */
 .hero-theme-toggle {
-    position: absolute;
-    top: 20px;
+    position: fixed;
+    top: 30px;
     right: 24px;
-    z-index: 20;
+    z-index: 1000;
 }
 
 @media (max-width: 768px) {
