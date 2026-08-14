@@ -108,16 +108,6 @@ const Header: React.FC = () => {
         setIsMoreOpen(false);
     };
 
-    const handleGitHubClick = useCallback(() => {
-        navigate("/github");
-        setIsMoreOpen(false);
-    }, [navigate]);
-
-    const handleTimelineClick = useCallback(() => {
-        navigate("/timeline");
-        setIsMoreOpen(false);
-    }, [navigate]);
-
     const handleMoreClick = () => {
         setIsMoreOpen(!isMoreOpen);
     };

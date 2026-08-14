@@ -95,6 +95,10 @@
     color-scheme: light;
 }
 
+html {
+    scroll-snap-type: y mandatory;
+}
+
 body {
     font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif !important;
     line-height: 1.6;
@@ -133,6 +137,7 @@ body {
     padding: 50px 0;
     position: relative;
     background: transparent;
+    scroll-snap-align: start;
 }
 
 .section::before {

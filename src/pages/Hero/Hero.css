@@ -4,6 +4,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    scroll-snap-align: start;
     justify-content: center;
     overflow: hidden;
     padding: 80px 24px 60px;
