@@ -151,3 +151,17 @@
         gap: 1rem;
     }
 }
+
+/* ===== Masonry Grid ===== */
+.projects-masonry {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+    .projects-masonry {
+        grid-template-columns: 1fr;
+    }
+}

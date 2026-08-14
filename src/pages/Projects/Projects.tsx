@@ -1,19 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import "./Projects.css";
-import CardsCarousel from "./CardsCarousel/CardsCarousel";
 import ShinyText from "../../components/ShinyText/ShinyText";
+import ProjectCard, { type Project } from "./ProjectCard/ProjectCard";
 import { projectsData } from "../../data/portfolioData";
 
 const Projects: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
-    const headerRef = useRef<HTMLDivElement>(null);
-
-    const { scrollYProgress } = useScroll({ target: headerRef, offset: ["start start", "end start"] });
-    const headerOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
-    const headerY = useTransform(scrollYProgress, [0.65, 1], [0, 110]);
-    const headerScale = useTransform(scrollYProgress, [0.65, 1], [1, 0.92]);
-    const headerBlur = useTransform(scrollYProgress, [0.65, 1], ["blur(0px)", "blur(3px)"]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -40,11 +33,7 @@ const Projects: React.FC = () => {
     return (
         <section ref={sectionRef} id="projects" className="section projects-section">
             <div className="container">
-                <motion.div
-                    ref={headerRef}
-                    className="section-header projects-header"
-                    style={{ opacity: headerOpacity, y: headerY, scale: headerScale, filter: headerBlur }}
-                >
+                <div className="section-header projects-header">
                     <div className="projects-eyebrow animate-on-scroll">
                         <span className="projects-eyebrow-dot" aria-hidden="true" />
                         <span>Selected work</span>
@@ -56,8 +45,19 @@ const Projects: React.FC = () => {
                     <p className="projects-subtitle animate-on-scroll">
                         A curated set of products, tools, and experiments I've designed and shipped end-to-end.
                     </p>
+                </div>
+
+                <motion.div
+                    className="projects-masonry"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.05 }}
+                    variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07 } } }}
+                >
+                    {[...projectsData.projects].sort((a, b) => a.id - b.id).map((project: Project, idx) => (
+                        <ProjectCard key={project.id} project={project} index={idx} />
+                    ))}
                 </motion.div>
-                <CardsCarousel />
             </div>
         </section>
     );

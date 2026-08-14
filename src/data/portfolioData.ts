@@ -2,7 +2,13 @@ import type { Experience, Skill, SocialLink, TestimonialsData } from "../types";
 
 // Import project images
 import livoImage from "../assets/projects/livo.png";
-import rippleImage from "../assets/projects/ripple.png";
+import rippleImage1 from "../assets/projects/Ripple/ripple1.png";
+import rippleImage2 from "../assets/projects/Ripple/ripple2.png";
+import rippleImage3 from "../assets/projects/Ripple/ripple3.png";
+import rippleImage4 from "../assets/projects/Ripple/ripple4.png";
+import rippleImage5 from "../assets/projects/Ripple/ripple5.png";
+import rippleImage6 from "../assets/projects/Ripple/ripple6.png";
+import rippleImage7 from "../assets/projects/Ripple/ripple7.png";
 import streamlineImage from "../assets/projects/streamline.png";
 import urbanImage from "../assets/projects/urban.png";
 import echoImage from "../assets/projects/echo.png";
@@ -122,7 +128,7 @@ export const projectsData = {
             description:
                 "A fitness tracking web application that allows users to manage workouts and diet plans. Features include progress tracking, workout scheduling, meal logging, and personalized dashboards. Backend APIs are built with Flask, while MongoDB stores user activity and nutrition data.",
             techStack: ["React", "Flask", "Python", "MongoDB", "AWS", "Material UI"],
-            image: livoImage,
+            images: [livoImage],
             liveLink: "https://livo.nachiketgalande.com/",
             githubLink: "https://github.com/nachiketgalande1609/dietplanner",
         },
@@ -132,7 +138,7 @@ export const projectsData = {
             description:
                 "A scalable social media platform with real-time messaging, video calls, and expiring stories. Features include push notifications, media sharing, and end-to-end encryption. Deployed on AWS with containerized architecture using Docker.",
             techStack: ["React", "React Native", "TypeScript", "Node.js", "WebRTC", "AWS"],
-            image: rippleImage,
+            images: [rippleImage1, rippleImage2, rippleImage3, rippleImage4, rippleImage5, rippleImage6, rippleImage7],
             liveLink: "https://ripple.nachiketgalande.com/",
             githubLink: "https://nachiketgalande1609.github.io/ripple-links/",
         },
@@ -142,7 +148,7 @@ export const projectsData = {
             description:
                 "Comprehensive ERP system with modules for users, inventory, orders, warehouses, customers, and sales. Provides a unified solution for business management with modern UI and efficient data handling.",
             techStack: ["React", "Node.js", "Express.js", "MongoDB", "Material UI"],
-            image: streamlineImage,
+            images: [streamlineImage],
             liveLink: "https://streamline.nachiketgalande.com/",
             githubLink: "https://github.com/nachiketgalande1609/Streamline",
         },
@@ -152,7 +158,7 @@ export const projectsData = {
             description:
                 "Platform supporting children with autism through interactive modules and personalized learning experiences. Leverages generative AI for real-time therapist interaction and adaptive learning paths.",
             techStack: ["Flask", "Python", "Open AI", "SQLite"],
-            image: "https://github.com/nachiketgalande1609/GIST/blob/main/static/screenshots/profile.png?raw=true",
+            images: ["https://github.com/nachiketgalande1609/GIST/blob/main/static/screenshots/profile.png?raw=true"],
             githubLink: "https://github.com/nachiketgalande1609/GIST",
         },
         {
@@ -161,7 +167,7 @@ export const projectsData = {
             description:
                 "AI-powered assistant for project knowledge transfer, featuring document summarization and advanced Q&A capabilities. Deployed on Azure to enhance productivity for new team members with contextual understanding.",
             techStack: ["Flask", "Python", "OpenAI", "Azure"],
-            image: "https://github.com/nachiketgalande1609/GenAI-Onboarding-Assistant/blob/main/static/screenshots/snap.png?raw=true",
+            images: ["https://github.com/nachiketgalande1609/GenAI-Onboarding-Assistant/blob/main/static/screenshots/snap.png?raw=true"],
             githubLink: "https://github.com/nachiketgalande1609/GenAI-Onboarding-Assistant",
         },
         {
@@ -170,7 +176,7 @@ export const projectsData = {
             description:
                 "Full-featured e-commerce platform with user authentication, product management, shopping cart, wishlists, and admin dashboard. Built with Flask and MongoDB for efficient data handling.",
             techStack: ["Flask", "MongoDB", "Bootstrap"],
-            image: urbanImage,
+            images: [urbanImage],
             githubLink: "https://github.com/nachiketgalande1609/urban",
         },
         {
@@ -179,7 +185,7 @@ export const projectsData = {
             description:
                 "Dynamic chat application with real-time messaging using WebSockets. Features user authentication, chat rooms, and message persistence with MongoDB for seamless communication experience.",
             techStack: ["Flask", "Socket.IO", "MongoDB"],
-            image: echoImage,
+            images: [echoImage],
             githubLink: "https://github.com/nachiketgalande1609/Echo",
         },
         {
@@ -188,7 +194,7 @@ export const projectsData = {
             description:
                 "Web app for predicting Bitcoin and Ethereum prices using machine learning algorithms. Features data analysis, model training with historical data, and interactive visualizations. Published research in ICACCS 2021 journal.",
             techStack: ["Python", "Streamlit"],
-            image: cryptoImage,
+            images: [cryptoImage],
             githubLink: "https://github.com/nachiketgalande1609/Cryptocurrency_Price_Prediction_Using_Neural_Networks_and_Deep_Learning",
         },
         {
@@ -197,7 +203,7 @@ export const projectsData = {
             description:
                 "Classic Flappy Bird game implementation with Pygame. Features dynamic obstacle generation, collision detection, gravity mechanics, and sound effects for an engaging gaming experience.",
             techStack: ["Python", "Pygame"],
-            image: flappyBirdImage,
+            images: [flappyBirdImage],
             githubLink: "https://github.com/nachiketgalande1609/FlappyBird",
         },
         {
@@ -206,7 +212,7 @@ export const projectsData = {
             description:
                 "Web application for vocabulary learning with quizzes and pronunciation features. Includes Barron's GRE word lists, multiple-choice quizzes, and text-to-speech functionality.",
             techStack: ["Flask", "Python", "pyttsx3"],
-            image: vocabImage,
+            images: [vocabImage],
             githubLink: "https://github.com/nachiketgalande1609/English-Vocalbulary-Builder",
         },
     ],

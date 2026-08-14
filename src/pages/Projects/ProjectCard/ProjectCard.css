@@ -2,8 +2,7 @@
     --mouse-x: 50%;
     --mouse-y: 50%;
     position: relative;
-    width: 380px;
-    flex-shrink: 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
     background: var(--bg-card);
@@ -13,8 +12,6 @@
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     box-shadow: var(--shadow-soft);
-    transform-style: preserve-3d;
-    transform: perspective(1200px);
     transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
     isolation: isolate;
 }
@@ -55,26 +52,74 @@
 
 .project-image-frame {
     position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 10;
+    margin: 0 1rem 0;
+    border-radius: 12px;
     overflow: hidden;
-    border-bottom: 1px solid var(--border-subtle);
-    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+}
+
+.project-carousel-track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
 }
 
 .project-img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
+    flex-shrink: 0;
+    height: auto;
     display: block;
-    transition: transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1), filter 0.4s ease;
     filter: saturate(0.95);
 }
 
-.project-card:hover .project-img {
-    transform: scale(1.06);
-    filter: saturate(1.1);
+/* Carousel controls */
+.project-carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 1.5rem 2px;
+}
+
+.project-carousel-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--border-default);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.project-carousel-btn:hover {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+}
+
+.project-carousel-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.project-carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: none;
+    background: var(--border-strong);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.project-carousel-dot.active {
+    background: var(--text-primary);
+    transform: scale(1.35);
 }
 
 .project-image-overlay {
@@ -85,21 +130,13 @@
 }
 
 .project-index {
-    position: absolute;
-    top: 14px;
-    left: 16px;
-    z-index: 3;
-    font-family: "Story Script", "Special Gothic Expanded One", sans-serif;
-    font-size: 0.85rem;
+    display: inline-block;
+    margin: 1.2rem 0 0.6rem 1.5rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
-    padding: 4px 10px;
-    border-radius: 999px;
-    color: var(--text-primary);
-    background: var(--bg-overlay);
-    border: 1px solid var(--border-default);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
 }
 
 .project-body {
@@ -239,17 +276,9 @@
     transform: translate(2px, -2px);
 }
 
-/* Tablet */
-@media (max-width: 1024px) {
-    .project-card {
-        width: 360px;
-    }
-}
-
 /* Mobile */
 @media (max-width: 768px) {
     .project-card {
-        width: min(85vw, 340px);
         border-radius: 20px;
     }
 
@@ -273,10 +302,6 @@
 }
 
 @media (max-width: 480px) {
-    .project-card {
-        width: min(86vw, 320px);
-    }
-
     .project-index {
         font-size: 0.75rem;
         top: 10px;

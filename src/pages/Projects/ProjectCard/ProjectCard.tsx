@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import React, { useRef, useState, useCallback } from "react";
+import { motion } from "framer-motion";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { techIcons } from "../../../data/portfolioData";
 import "./ProjectCard.css";
 
@@ -11,7 +13,7 @@ export interface Project {
     name: string;
     description: string;
     techStack: string[];
-    image: string;
+    images: string[];
     liveLink?: string;
     githubLink?: string;
 }
@@ -23,35 +25,25 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
     const cardRef = useRef<HTMLDivElement>(null);
+    const [slide, setSlide] = useState(0);
+    const images = project.images;
 
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const mouseX = useSpring(x, { stiffness: 200, damping: 25, restDelta: 0.001 });
-    const mouseY = useSpring(y, { stiffness: 200, damping: 25, restDelta: 0.001 });
+    const prev = useCallback((e: React.MouseEvent) => {
+        e.stopPropagation();
+        setSlide((s) => (s - 1 + images.length) % images.length);
+    }, [images.length]);
 
-    const rotateX = useTransform(mouseY, [-150, 150], [4, -4]);
-    const rotateY = useTransform(mouseX, [-150, 150], [-4, 4]);
+    const next = useCallback((e: React.MouseEvent) => {
+        e.stopPropagation();
+        setSlide((s) => (s + 1) % images.length);
+    }, [images.length]);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        const isDesktop = window.innerWidth > 768;
         const rect = e.currentTarget.getBoundingClientRect();
         const offsetX = e.clientX - rect.left;
         const offsetY = e.clientY - rect.top;
-
         e.currentTarget.style.setProperty("--mouse-x", `${(offsetX / rect.width) * 100}%`);
         e.currentTarget.style.setProperty("--mouse-y", `${(offsetY / rect.height) * 100}%`);
-
-        if (isDesktop) {
-            x.set(offsetX - rect.width / 2);
-            y.set(offsetY - rect.height / 2);
-        }
-    };
-
-    const handleMouseLeave = () => {
-        if (window.innerWidth > 768) {
-            x.set(0);
-            y.set(0);
-        }
     };
 
     return (
@@ -63,20 +55,41 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
             transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1], delay: (index % 4) * 0.06 }}
             viewport={{ once: true, amount: 0.2 }}
             onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{
-                rotateX: window.innerWidth > 768 ? rotateX : 0,
-                rotateY: window.innerWidth > 768 ? rotateY : 0,
-            }}
         >
             <div className="project-card-glow" aria-hidden="true" />
             <div className="project-card-border" aria-hidden="true" />
 
+            <span className="project-index">{String(index + 1).padStart(2, "0")}</span>
+
             <div className="project-image-frame">
-                <span className="project-index">{String(index + 1).padStart(2, "0")}</span>
-                <img src={project.image} alt={project.name} className="project-img" loading="lazy" />
+                <div className="project-carousel-track" style={{ transform: `translateX(-${slide * 100}%)` }}>
+                    {images.map((src, i) => (
+                        <img key={i} src={src} alt={`${project.name} screenshot ${i + 1}`} className="project-img" loading="lazy" />
+                    ))}
+                </div>
                 <div className="project-image-overlay" aria-hidden="true" />
             </div>
+
+            {images.length > 1 && (
+                <div className="project-carousel-controls">
+                    <button className="project-carousel-btn" onClick={prev} aria-label="Previous image">
+                        <ChevronLeftIcon fontSize="small" />
+                    </button>
+                    <div className="project-carousel-dots">
+                        {images.map((_, i) => (
+                            <button
+                                key={i}
+                                className={`project-carousel-dot ${i === slide ? "active" : ""}`}
+                                onClick={(e) => { e.stopPropagation(); setSlide(i); }}
+                                aria-label={`Go to image ${i + 1}`}
+                            />
+                        ))}
+                    </div>
+                    <button className="project-carousel-btn" onClick={next} aria-label="Next image">
+                        <ChevronRightIcon fontSize="small" />
+                    </button>
+                </div>
+            )}
 
             <div className="project-body">
                 <header className="project-heading">
