@@ -53,7 +53,7 @@ const education = [
 
 const stats = [
     { value: "5+", label: "Years Experience", description: "Shipping production systems across industries." },
-    { value: "20+", label: "Projects Shipped", description: "From side experiments to enterprise platforms." },
+    { value: "20+", label: "Projects", description: "From side experiments to enterprise platforms." },
     { value: "40+", label: "Certifications", description: "Cloud, data, AI/ML and engineering credentials." },
 ];
 

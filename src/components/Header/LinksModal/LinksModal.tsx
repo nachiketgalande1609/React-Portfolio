@@ -3,7 +3,6 @@ import "./LinksModal.css";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import EmailIcon from "@mui/icons-material/Email";
 import CloseIcon from "@mui/icons-material/Close";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -26,7 +25,6 @@ const LinksModal: React.FC<LinksModalProps> = ({ isOpen, onClose }) => {
         switch (platform.toLowerCase()) {
             case "github":    return <GitHubIcon />;
             case "linkedin":  return <LinkedInIcon />;
-            case "twitter":   return <TwitterIcon />;
             case "email":     return <EmailIcon />;
             case "codepen":   return <CodeIcon />;
             case "unsplash":  return <PhotoIcon />;
@@ -55,7 +53,6 @@ const LinksModal: React.FC<LinksModalProps> = ({ isOpen, onClose }) => {
         { name: "LinkedIn",  icon: "linkedin", url: "https://www.linkedin.com/in/nachiketgalande/",          handle: "@nachiketgalande" },
         { name: "GitHub",    icon: "github",   url: "https://github.com/nachiketgalande1609",                handle: "@nachiketgalande1609" },
         { name: "CodePen",   icon: "codepen",  url: "https://codepen.io/Nachiket-Galande",                   handle: "@Nachiket-Galande" },
-        { name: "Twitter",   icon: "twitter",  url: "https://twitter.com/yourhandle",                        handle: "@yourhandle" },
         { name: "Unsplash",  icon: "unsplash", url: "https://unsplash.com/@nachiketgalande",                 handle: "@nachiketgalande" },
         { name: "Email",     icon: "email",    url: "mailto:nachiketgalande1609@gmail.com",                  handle: "nachiketgalande1609@gmail.com" },
     ];

@@ -85,12 +85,6 @@ const skills: Skill[] = [
     { name: "PL/SQL", category: "database", icon: plsqlIcon, website: "https://www.oracle.com/database/technologies/appdev/plsql.html" },
 
     { name: "Python", category: "programmingLanguages", icon: pythonIcon, website: "https://www.python.org/" },
-    {
-        name: "JavaScript",
-        category: "programmingLanguages",
-        icon: javascriptIcon,
-        website: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-    },
     { name: "Java", category: "programmingLanguages", icon: javaIcon, website: "https://www.java.com/" },
 
     { name: "Azure", category: "cloud", icon: azureIcon, website: "https://azure.microsoft.com/" },

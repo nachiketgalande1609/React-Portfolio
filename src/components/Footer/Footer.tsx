@@ -1,6 +1,6 @@
 import React from "react";
 import { personalInfo } from "../../data/portfolioData"; // Assuming personalInfo is available
-import { GitHub, LinkedIn, X } from "@mui/icons-material";
+import { GitHub, LinkedIn } from "@mui/icons-material";
 
 import "./Footer.css";
 
@@ -20,9 +20,6 @@ const Footer: React.FC = () => {
                             </a>
                             <a href="https://www.linkedin.com/in/nachiketgalande/" target="_blank" rel="noopener noreferrer" className="social-link">
                                 <LinkedIn />
-                            </a>
-                            <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener noreferrer" className="social-link">
-                                <X />
                             </a>
                         </div>
                     </div>

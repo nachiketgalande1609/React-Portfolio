@@ -9,7 +9,6 @@ import echoImage from "../assets/projects/echo.png";
 import cryptoImage from "../assets/projects/crypto.jpg";
 import flappyBirdImage from "../assets/projects/flappybird.png";
 import vocabImage from "../assets/projects/vocab.png";
-import tetrisImage from "../assets/projects/tetris.png";
 
 // Import tech stack icons
 import reactIcon from "../assets/icons/react.png";
@@ -209,14 +208,6 @@ export const projectsData = {
             techStack: ["Flask", "Python", "pyttsx3"],
             image: vocabImage,
             githubLink: "https://github.com/nachiketgalande1609/English-Vocalbulary-Builder",
-        },
-        {
-            id: 11,
-            name: "Tetris Game",
-            description:
-                "Classic Tetris implementation with Pygame. Features smooth controls, shape rotation, collision detection, scoring system, and sound effects for an authentic gaming experience.",
-            techStack: ["Python", "Pygame"],
-            image: tetrisImage,
         },
     ],
 };

@@ -7,7 +7,6 @@ import "./Hero.css";
 // Import MUI icons
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import EmailIcon from "@mui/icons-material/Email";
 import ArticleIcon from "@mui/icons-material/Article";
 import WavingHandIcon from "@mui/icons-material/WavingHand";
@@ -49,8 +48,6 @@ const Hero: React.FC = () => {
                 return <GitHubIcon fontSize="small" />;
             case "linkedin":
                 return <LinkedInIcon fontSize="small" />;
-            case "twitter":
-                return <TwitterIcon fontSize="small" />;
             case "email":
                 return <EmailIcon fontSize="small" />;
             default:

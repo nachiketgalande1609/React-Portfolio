@@ -1,60 +1,65 @@
-// components/ScrollProgress.tsx
 import React, { useState, useEffect } from "react";
 import "./ScrollProgress.css";
 
+const sections = [
+    { id: "home",       label: "Home" },
+    { id: "about",      label: "About" },
+    { id: "skills",     label: "Skills" },
+    { id: "experience", label: "Experience" },
+    { id: "projects",   label: "Projects" },
+    { id: "contact",    label: "Contact" },
+];
+
 const ScrollProgress: React.FC = () => {
-    const [scrollProgress, setScrollProgress] = useState(0);
+    const [activeSection, setActiveSection] = useState("home");
 
     useEffect(() => {
         const handleScroll = () => {
-            // Calculate scroll progress
-            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = (window.scrollY / totalHeight) * 100;
-            setScrollProgress(progress);
-        };
-
-        // Throttle scroll events for better performance
-        let ticking = false;
-        const throttledScroll = () => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    handleScroll();
-                    ticking = false;
-                });
-                ticking = true;
+            // Use getBoundingClientRect so Framer Motion transforms are accounted for
+            const threshold = window.innerHeight * 0.5;
+            let current = sections[0].id;
+            for (const s of sections) {
+                const el = document.getElementById(s.id);
+                if (el && el.getBoundingClientRect().top <= threshold) {
+                    current = s.id;
+                }
             }
+            setActiveSection(current);
         };
 
-        window.addEventListener("scroll", throttledScroll, { passive: true });
-
-        return () => {
-            window.removeEventListener("scroll", throttledScroll);
-        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const handleProgressClick = (e: React.MouseEvent) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const clickY = e.clientY - rect.top;
-        const percentage = clickY / rect.height;
-
-        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const targetScroll = percentage * totalHeight;
-
-        window.scrollTo({
-            top: targetScroll,
-            behavior: "smooth",
-        });
+    const scrollTo = (id: string) => {
+        if (id === "home") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+        }
+        const el = document.getElementById(id);
+        if (!el) return;
+        const navDock = document.querySelector(".nav-dock") as HTMLElement;
+        const navBottom = navDock ? navDock.getBoundingClientRect().bottom + 24 : 88;
+        const top = el.getBoundingClientRect().top + window.scrollY - navBottom;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
     };
 
     return (
-        <div className={`scroll-progress`}>
-            <div className="progress-track" onClick={handleProgressClick}>
-                <div className="progress-fill" style={{ height: `${scrollProgress}%` }}>
-                    <div className="progress-glow" />
-                    <div className="progress-dot" />
-                </div>
-            </div>
-        </div>
+        <nav className="section-nav" aria-label="Page sections">
+            <div className="section-nav-line" />
+            {sections.map((s) => (
+                <button
+                    key={s.id}
+                    className={`section-nav-item ${activeSection === s.id ? "active" : ""}`}
+                    onClick={() => scrollTo(s.id)}
+                    aria-label={`Scroll to ${s.label}`}
+                >
+                    <span className="section-nav-label">{s.label}</span>
+                    <span className="section-nav-dot" />
+                </button>
+            ))}
+        </nav>
     );
 };
 
