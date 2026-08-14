@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { personalInfo, socialLinks } from "../../data/portfolioData";
-import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 import "./Hero.css";
 
 // Import MUI icons
@@ -64,11 +63,7 @@ const Hero: React.FC = () => {
                 <div className="hero-grid-pattern" />
             </div>
 
-            <div className="hero-theme-toggle">
-                <ThemeToggle />
-            </div>
-
-            <motion.div className="hero-container" style={{ opacity: heroOpacity, y: heroY, scale: heroScale, filter: heroBlur }}>
+<motion.div className="hero-container" style={{ opacity: heroOpacity, y: heroY, scale: heroScale, filter: heroBlur }}>
                 <div className="hero-grid">
                     <motion.div
                         className="hero-text"

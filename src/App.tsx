@@ -1,5 +1,6 @@
-// App.tsx
-import React from "react";
+import React, { useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
 import Header from "./components/Header/Header";
 import Hero from "./pages/Hero/Hero";
 import About from "./pages/About/About";
@@ -12,33 +13,76 @@ import "./styles/globals.css";
 import Experience from "./pages/Experience/Experience";
 import Testimonials from "./pages/Testimonials/Testimonials";
 import Certificates from "./pages/Certificates/Certificates";
+import GitHub from "./pages/GitHub/GitHub";
+
+const ScrollToTop: React.FC = () => {
+    const location = useLocation();
+    useEffect(() => {
+        if (location.state && (location.state as { scrollTo?: string }).scrollTo) return;
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }, [location.pathname]);
+    return null;
+};
+
+const ScrollToSection: React.FC = () => {
+    const location = useLocation();
+    useEffect(() => {
+        const scrollTo = (location.state as { scrollTo?: string } | null)?.scrollTo;
+        if (!scrollTo) return;
+        const attempt = (tries: number) => {
+            const el = document.getElementById(scrollTo);
+            if (el) {
+                el.scrollIntoView({ behavior: "smooth" });
+            } else if (tries > 0) {
+                setTimeout(() => attempt(tries - 1), 120);
+            }
+        };
+        attempt(5);
+    }, [location.state]);
+    return null;
+};
+
+const PortfolioHome: React.FC = () => (
+    <>
+        <ScrollToSection />
+        <Hero />
+        <About />
+        <Skills />
+        <Experience />
+        <Projects />
+        <Certificates />
+        <Testimonials />
+        <Contact />
+        <Footer />
+    </>
+);
 
 const App: React.FC = () => {
     return (
-        <div className="App">
-            <div className="site-background" aria-hidden="true" />
+        <BrowserRouter>
+            <div className="App">
+                <div className="site-background" aria-hidden="true" />
 
-            {/* Content layer */}
-            <div
-                style={{
-                    position: "relative",
-                    zIndex: 1,
-                    pointerEvents: "auto",
-                }}
-            >
-                <ScrollProgress />
-                <Header />
-                <Hero />
-                <About />
-                <Skills />
-                <Experience />
-                <Projects />
-                <Certificates />
-                <Testimonials />
-                <Contact />
-                <Footer />
+                <div
+                    style={{
+                        position: "relative",
+                        zIndex: 1,
+                        pointerEvents: "auto",
+                    }}
+                >
+                    <ScrollToTop />
+                    <ScrollProgress />
+                    <Header />
+                    <div style={{ position: "fixed", top: 30, right: 24, zIndex: 1000 }}>
+                        <ThemeToggle />
+                    </div>
+                    <Routes>
+                        <Route path="/" element={<PortfolioHome />} />
+                        <Route path="/github" element={<GitHub />} />
+                    </Routes>
+                </div>
             </div>
-        </div>
+        </BrowserRouter>
     );
 };
 

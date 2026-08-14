@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -25,6 +26,10 @@ const dropdownNavItemsConfig = (handleLinksClick: () => void) => [
 const FULL_NAV_BREAKPOINT = 1100;
 
 const Header: React.FC = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const isGitHubPage = location.pathname === "/github";
+
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
     const [isHovering, setIsHovering] = useState(false);
@@ -39,6 +44,7 @@ const Header: React.FC = () => {
     const mainNavRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const extraNavRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const moreTabRef = useRef<HTMLButtonElement | null>(null);
+    const githubNavRef = useRef<HTMLButtonElement | null>(null);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -82,10 +88,19 @@ const Header: React.FC = () => {
     }, []);
 
     const scrollToSection = (sectionId: string) => {
+        if (isGitHubPage) {
+            navigate("/", { state: { scrollTo: sectionId } });
+            return;
+        }
         const element = document.getElementById(sectionId);
         if (element) {
             element.scrollIntoView({ behavior: "smooth" });
         }
+        setIsMoreOpen(false);
+    };
+
+    const handleGitHubClick = () => {
+        navigate("/github");
         setIsMoreOpen(false);
     };
 
@@ -148,7 +163,9 @@ const Header: React.FC = () => {
         const calculateIndicatorPosition = () => {
             let activeElement: HTMLButtonElement | null = null;
 
-            if (isDropdownActive) {
+            if (isGitHubPage) {
+                activeElement = githubNavRef.current;
+            } else if (isDropdownActive) {
                 if (isFullNav) {
                     // All items are visible — point indicator at the actual dropdown button
                     const activeIdx = dropdownNavItems.findIndex((item) => item.id === activeSection);
@@ -193,7 +210,7 @@ const Header: React.FC = () => {
         calculateIndicatorPosition();
         window.addEventListener("resize", calculateIndicatorPosition);
         return () => window.removeEventListener("resize", calculateIndicatorPosition);
-    }, [activeSection, isMobile, isFullNav, isDropdownActive, mainNavItems, dropdownNavItems]);
+    }, [activeSection, isMobile, isFullNav, isDropdownActive, mainNavItems, dropdownNavItems, isGitHubPage]);
 
     return (
         <>
@@ -209,7 +226,7 @@ const Header: React.FC = () => {
                         <div key={item.id} className="nav-item-wrapper">
                             <button
                                 ref={(el) => { mainNavRefs.current[index] = el; }}
-                                className={`nav-item ${activeSection === item.id ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
+                                className={`nav-item ${!isGitHubPage && activeSection === item.id ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
                                 onClick={() => scrollToSection(item.id)}
                                 aria-label={item.label}
                             >
@@ -219,13 +236,25 @@ const Header: React.FC = () => {
                         </div>
                     ))}
 
+                    <div className="nav-item-wrapper">
+                        <button
+                            ref={(el) => { githubNavRef.current = el; }}
+                            className={`nav-item ${isGitHubPage ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
+                            onClick={handleGitHubClick}
+                            aria-label="GitHub"
+                        >
+                            <span className="nav-text">GitHub</span>
+                            <span className="nav-tooltip">GitHub</span>
+                        </button>
+                    </div>
+
                     {isFullNav ? (
                         // Desktop: show all dropdown items inline, no More button
                         dropdownNavItems.map((item, index) => (
                             <div key={item.id} className="nav-item-wrapper">
                                 <button
                                     ref={(el) => { extraNavRefs.current[index] = el; }}
-                                    className={`nav-item ${activeSection === item.id ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
+                                    className={`nav-item ${!isGitHubPage && activeSection === item.id ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
                                     onClick={item.action ? item.action : () => scrollToSection(item.id)}
                                     aria-label={item.label}
                                 >
