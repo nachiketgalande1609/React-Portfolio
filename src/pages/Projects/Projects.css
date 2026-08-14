@@ -152,6 +152,33 @@
     }
 }
 
+/* ===== Expand button ===== */
+.projects-expand {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0 1rem;
+}
+
+.projects-expand-btn {
+    padding: 10px 28px;
+    border-radius: 999px;
+    border: 1px solid var(--border-default);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    backdrop-filter: blur(10px);
+}
+
+.projects-expand-btn:hover {
+    background: var(--bg-elevated);
+    border-color: var(--border-strong);
+    color: var(--text-primary);
+}
+
 /* ===== Masonry Grid ===== */
 .projects-masonry {
     display: grid;

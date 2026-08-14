@@ -1,12 +1,15 @@
-import React, { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import "./Projects.css";
 import ShinyText from "../../components/ShinyText/ShinyText";
 import ProjectCard, { type Project } from "./ProjectCard/ProjectCard";
 import { projectsData } from "../../data/portfolioData";
 
+const FEATURED_COUNT = 4;
+
 const Projects: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
+    const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -28,7 +31,9 @@ const Projects: React.FC = () => {
         };
     }, []);
 
-    const projectCount = projectsData.projects.length;
+    const sorted = [...projectsData.projects].sort((a, b) => a.id - b.id);
+    const totalCount = sorted.length;
+    const visible = expanded ? sorted : sorted.slice(0, FEATURED_COUNT);
 
     return (
         <section ref={sectionRef} id="projects" className="section projects-section">
@@ -37,7 +42,7 @@ const Projects: React.FC = () => {
                     <div className="projects-eyebrow animate-on-scroll">
                         <span className="projects-eyebrow-dot" aria-hidden="true" />
                         <span>Selected work</span>
-                        <span className="projects-eyebrow-count">{projectCount} projects</span>
+                        <span className="projects-eyebrow-count">{totalCount} projects</span>
                     </div>
                     <div className="header-decoration true-focus animate-on-scroll">
                         <ShinyText text="My Projects" disabled={false} speed={2} className="section-title" />
@@ -54,10 +59,20 @@ const Projects: React.FC = () => {
                     viewport={{ once: true, amount: 0.05 }}
                     variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07 } } }}
                 >
-                    {[...projectsData.projects].sort((a, b) => a.id - b.id).map((project: Project, idx) => (
-                        <ProjectCard key={project.id} project={project} index={idx} />
-                    ))}
+                    <AnimatePresence>
+                        {visible.map((project: Project, idx) => (
+                            <ProjectCard key={project.id} project={project} index={idx} />
+                        ))}
+                    </AnimatePresence>
                 </motion.div>
+
+                {totalCount > FEATURED_COUNT && (
+                    <div className="projects-expand">
+                        <button className="projects-expand-btn" onClick={() => setExpanded((e) => !e)}>
+                            {expanded ? `Show less` : `Show ${totalCount - FEATURED_COUNT} more projects`}
+                        </button>
+                    </div>
+                )}
             </div>
         </section>
     );

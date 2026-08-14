@@ -12,21 +12,8 @@
     padding: 6px 0;
 }
 
-/* Thin vertical line behind dots */
 .section-nav-line {
-    position: absolute;
-    right: 3px;
-    top: 18px;
-    bottom: 18px;
-    width: 1px;
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        rgba(255, 255, 255, 0.1) 20%,
-        rgba(255, 255, 255, 0.1) 80%,
-        transparent
-    );
-    pointer-events: none;
+    display: none;
 }
 
 .section-nav-item {
@@ -48,7 +35,7 @@
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.35);
+    color: var(--text-muted);
     white-space: nowrap;
     user-select: none;
     opacity: 0;
@@ -64,14 +51,14 @@
 
 /* Highlight hovered item's label */
 .section-nav-item:hover .section-nav-label {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-secondary);
 }
 
 /* Active label always visible, even without hover */
 .section-nav-item.active .section-nav-label {
     opacity: 1;
     transform: translateX(0);
-    color: rgba(255, 255, 255, 0.95);
+    color: var(--text-primary);
 }
 
 /* Dot */
@@ -79,8 +66,8 @@
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--border-default);
+    border: 1px solid var(--border-default);
     flex-shrink: 0;
     transition: width 0.25s ease, height 0.25s ease,
                 background 0.25s ease, border-color 0.25s ease,
@@ -88,17 +75,15 @@
 }
 
 .section-nav-item:hover .section-nav-dot {
-    background: rgba(255, 255, 255, 0.45);
-    border-color: rgba(255, 255, 255, 0.4);
+    background: var(--text-tertiary);
+    border-color: var(--text-tertiary);
 }
 
 .section-nav-item.active .section-nav-dot {
-    width: 7px;
-    height: 7px;
-    background: #ffffff;
-    border-color: #ffffff;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5),
-                0 0 16px rgba(255, 255, 255, 0.2);
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    transform: scale(1.6);
+    box-shadow: 0 0 8px var(--accent-glow);
 }
 
 /* Hide browser scrollbar */

@@ -9,6 +9,18 @@ import rippleImage4 from "../assets/projects/Ripple/ripple4.png";
 import rippleImage5 from "../assets/projects/Ripple/ripple5.png";
 import rippleImage6 from "../assets/projects/Ripple/ripple6.png";
 import rippleImage7 from "../assets/projects/Ripple/ripple7.png";
+import upscalerImage1 from "../assets/projects/upscaler/upscaler1.png";
+import upscalerImage2 from "../assets/projects/upscaler/upscaler2.png";
+import velaImage1 from "../assets/projects/Vela/vela1.png";
+import velaImage2 from "../assets/projects/Vela/vela2.png";
+import velaImage3 from "../assets/projects/Vela/vela3.png";
+import velaImage4 from "../assets/projects/Vela/vela4.png";
+import velaImage5 from "../assets/projects/Vela/vela5.png";
+import cineplexImage1 from "../assets/projects/Cineplex/cineplex1.png";
+import cineplexImage2 from "../assets/projects/Cineplex/cineplex2.png";
+import cineplexImage3 from "../assets/projects/Cineplex/cineplex3.png";
+import cineplexImage4 from "../assets/projects/Cineplex/cineplex4.png";
+import cineplexImage5 from "../assets/projects/Cineplex/cineplex5.png";
 import streamlineImage from "../assets/projects/streamline.png";
 import urbanImage from "../assets/projects/urban.png";
 import echoImage from "../assets/projects/echo.png";
@@ -123,7 +135,36 @@ export const personalInfo = {
 export const projectsData = {
     projects: [
         {
-            id: 1,
+            id: 2,
+            name: "Vela – Premium Wallpaper Marketplace",
+            description:
+                "A premium mobile wallpaper marketplace with AI-generated, high-resolution wallpapers across categories like Abstract, Nature, Dark, Minimal, Architecture, and Neon. Buy individual wallpapers or subscribe to Vela+ for unlimited downloads. Payments via Razorpay (UPI & cards). Built with a dark, minimal aesthetic focused purely on the wallpapers.",
+            techStack: ["React", "Node.js", "Express.js", "MongoDB"],
+            images: [velaImage1, velaImage2, velaImage3, velaImage4, velaImage5],
+            liveLink: "https://vela.nachiketgalande.com/",
+            githubLink: "https://github.com/nachiketgalande1609/vela",
+        },
+        {
+            id: 3,
+            name: "AI Image Upscaler",
+            description:
+                "A local, GPU-accelerated image super-resolution tool that enhances photos up to 4× using deep learning — entirely on your machine with no cloud or API keys. Supports Real-HAT (Swin Transformer) and Real-ESRGAN (CNN) models. Uses tiled inference for large images and BF16 precision on Ampere+ GPUs to cut VRAM usage by 4×. Clean dark web UI served via FastAPI with real-time tile-progress streaming via SSE, a draggable before/after comparison slider, and batch folder processing.",
+            techStack: ["Python", "FastAPI", "PyTorch"],
+            images: [upscalerImage1, upscalerImage2],
+            githubLink: "https://github.com/nachiketgalande1609/upscaler",
+        },
+        {
+            id: 4,
+            name: "CineLocal - Local Movie Streaming",
+            description:
+                "A Netflix-style local media streaming app that serves your personal video library to any browser on your network. Point it at a local folder in settings, and it fetches movie metadata from an external API to build a rich browsing UI — browse, search, and stream your movies over local IP.",
+            techStack: ["React", "Node.js", "Express.js", "MongoDB"],
+            images: [cineplexImage1, cineplexImage2, cineplexImage3, cineplexImage4, cineplexImage5],
+            liveLink: "https://cineplex.nachiketgalande.com/",
+            githubLink: "https://github.com/nachiketgalande1609/CineLocal",
+        },
+        {
+            id: 5,
             name: "Workout & Diet Tracker – Livo",
             description:
                 "A fitness tracking web application that allows users to manage workouts and diet plans. Features include progress tracking, workout scheduling, meal logging, and personalized dashboards. Backend APIs are built with Flask, while MongoDB stores user activity and nutrition data.",
@@ -133,7 +174,7 @@ export const projectsData = {
             githubLink: "https://github.com/nachiketgalande1609/dietplanner",
         },
         {
-            id: 2,
+            id: 1,
             name: "Social Media App (Web & Mobile) - Ripple",
             description:
                 "A scalable social media platform with real-time messaging, video calls, and expiring stories. Features include push notifications, media sharing, and end-to-end encryption. Deployed on AWS with containerized architecture using Docker.",
@@ -143,7 +184,7 @@ export const projectsData = {
             githubLink: "https://nachiketgalande1609.github.io/ripple-links/",
         },
         {
-            id: 3,
+            id: 6,
             name: "MERN-Based ERP System - Streamline",
             description:
                 "Comprehensive ERP system with modules for users, inventory, orders, warehouses, customers, and sales. Provides a unified solution for business management with modern UI and efficient data handling.",
@@ -153,7 +194,7 @@ export const projectsData = {
             githubLink: "https://github.com/nachiketgalande1609/Streamline",
         },
         {
-            id: 4,
+            id: 7,
             name: "Generative Intelligence Speech Therapy - GIST",
             description:
                 "Platform supporting children with autism through interactive modules and personalized learning experiences. Leverages generative AI for real-time therapist interaction and adaptive learning paths.",
@@ -162,7 +203,7 @@ export const projectsData = {
             githubLink: "https://github.com/nachiketgalande1609/GIST",
         },
         {
-            id: 5,
+            id: 8,
             name: "Gen AI Onboarding Assistant",
             description:
                 "AI-powered assistant for project knowledge transfer, featuring document summarization and advanced Q&A capabilities. Deployed on Azure to enhance productivity for new team members with contextual understanding.",
@@ -171,7 +212,7 @@ export const projectsData = {
             githubLink: "https://github.com/nachiketgalande1609/GenAI-Onboarding-Assistant",
         },
         {
-            id: 6,
+            id: 9,
             name: "URBAN E-Commerce Platform",
             description:
                 "Full-featured e-commerce platform with user authentication, product management, shopping cart, wishlists, and admin dashboard. Built with Flask and MongoDB for efficient data handling.",
@@ -180,7 +221,7 @@ export const projectsData = {
             githubLink: "https://github.com/nachiketgalande1609/urban",
         },
         {
-            id: 7,
+            id: 10,
             name: "Echo - Real-Time Chat",
             description:
                 "Dynamic chat application with real-time messaging using WebSockets. Features user authentication, chat rooms, and message persistence with MongoDB for seamless communication experience.",
@@ -189,7 +230,7 @@ export const projectsData = {
             githubLink: "https://github.com/nachiketgalande1609/Echo",
         },
         {
-            id: 8,
+            id: 11,
             name: "Cryptocurrency Price Prediction",
             description:
                 "Web app for predicting Bitcoin and Ethereum prices using machine learning algorithms. Features data analysis, model training with historical data, and interactive visualizations. Published research in ICACCS 2021 journal.",
@@ -198,7 +239,7 @@ export const projectsData = {
             githubLink: "https://github.com/nachiketgalande1609/Cryptocurrency_Price_Prediction_Using_Neural_Networks_and_Deep_Learning",
         },
         {
-            id: 9,
+            id: 12,
             name: "Flappy Bird Game",
             description:
                 "Classic Flappy Bird game implementation with Pygame. Features dynamic obstacle generation, collision detection, gravity mechanics, and sound effects for an engaging gaming experience.",
@@ -207,7 +248,7 @@ export const projectsData = {
             githubLink: "https://github.com/nachiketgalande1609/FlappyBird",
         },
         {
-            id: 10,
+            id: 13,
             name: "English Vocabulary Builder",
             description:
                 "Web application for vocabulary learning with quizzes and pronunciation features. Includes Barron's GRE word lists, multiple-choice quizzes, and text-to-speech functionality.",

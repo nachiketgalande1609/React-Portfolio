@@ -456,7 +456,7 @@
     font-weight: 600;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--text-tertiary);
+    color: var(--text-primary);
     background: transparent;
     border: none;
     cursor: pointer;
@@ -478,11 +478,9 @@
     0%,
     100% {
         transform: translateY(-2px);
-        opacity: 0.6;
     }
     50% {
         transform: translateY(4px);
-        opacity: 1;
     }
 }
 

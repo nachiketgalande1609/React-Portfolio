@@ -6,6 +6,7 @@ import NorthEastIcon from "@mui/icons-material/NorthEast";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { techIcons } from "../../../data/portfolioData";
+import ImageLightbox from "../../../components/ImageLightbox/ImageLightbox";
 import "./ProjectCard.css";
 
 export interface Project {
@@ -26,6 +27,7 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const [slide, setSlide] = useState(0);
+    const [lightboxOpen, setLightboxOpen] = useState(false);
     const images = project.images;
 
     const prev = useCallback((e: React.MouseEvent) => {
@@ -56,18 +58,33 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
             viewport={{ once: true, amount: 0.2 }}
             onMouseMove={handleMouseMove}
         >
-            <div className="project-card-glow" aria-hidden="true" />
-            <div className="project-card-border" aria-hidden="true" />
 
             <span className="project-index">{String(index + 1).padStart(2, "0")}</span>
 
-            <div className="project-image-frame">
-                <div className="project-carousel-track" style={{ transform: `translateX(-${slide * 100}%)` }}>
-                    {images.map((src, i) => (
-                        <img key={i} src={src} alt={`${project.name} screenshot ${i + 1}`} className="project-img" loading="lazy" />
-                    ))}
-                </div>
-                <div className="project-image-overlay" aria-hidden="true" />
+            <div
+                className="project-image-frame"
+                style={{ cursor: images.length > 0 ? "pointer" : "default" }}
+                onClick={() => images.length > 0 && setLightboxOpen(true)}
+            >
+                {images.length > 0 ? (
+                    <>
+                        <div className="project-carousel-track" style={{ transform: `translateX(-${slide * 100}%)` }}>
+                            {images.map((src, i) => (
+                                <img key={i} src={src} alt={`${project.name} screenshot ${i + 1}`} className="project-img" loading="lazy" />
+                            ))}
+                        </div>
+                        <div className="project-image-overlay" aria-hidden="true" />
+                    </>
+                ) : (
+                    <div className="project-img-empty">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <polyline points="21 15 16 10 5 21" />
+                        </svg>
+                        <span>No preview available</span>
+                    </div>
+                )}
             </div>
 
             {images.length > 1 && (
@@ -90,6 +107,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
                     </button>
                 </div>
             )}
+
+            <ImageLightbox images={images} startIndex={slide} isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} />
 
             <div className="project-body">
                 <header className="project-heading">
