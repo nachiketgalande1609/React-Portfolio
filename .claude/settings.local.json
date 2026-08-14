@@ -11,7 +11,10 @@
       "PowerShell(Get-ChildItem -Path 'src\\\\assets' -Recurse -File | Sort-Object Length -Descending | Select-Object -First 25 | ForEach-Object { \"{0,8:N0} KB  {1}\" -f \\($_.Length/1KB\\), $_.FullName })",
       "PowerShell($size = \\(Get-ChildItem -Path 'src\\\\assets\\\\certificates\\\\certificate_photos' -Recurse -File | Measure-Object -Property Length -Sum\\).Sum; \"{0:N1} MB across {1} files\" -f \\($size/1MB\\), \\(Get-ChildItem -Path 'src\\\\assets\\\\certificates\\\\certificate_photos' -File\\).Count)",
       "PowerShell(Get-NetTCPConnection -LocalPort 5173 -ErrorAction SilentlyContinue)",
-      "PowerShell(Stop-Process -Id 38928 -Force)"
+      "PowerShell(Stop-Process -Id 38928 -Force)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(npx tsc *)"
     ]
   }
 }

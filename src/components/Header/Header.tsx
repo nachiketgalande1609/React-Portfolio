@@ -6,7 +6,6 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import LinksModal from "./LinksModal/LinksModal";
 
-// Define static navigation items outside the component to prevent re-creation on every render
 const mainNavItemsConfig = [
     { id: "home", label: "Home" },
     { id: "about", label: "About" },
@@ -22,30 +21,36 @@ const dropdownNavItemsConfig = (handleLinksClick: () => void) => [
     { id: "links", label: "Links", action: handleLinksClick },
 ];
 
+// Viewport width at which all items fit inline (no More dropdown)
+const FULL_NAV_BREAKPOINT = 1100;
+
 const Header: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
     const [isHovering, setIsHovering] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [isFullNav, setIsFullNav] = useState(window.innerWidth >= FULL_NAV_BREAKPOINT);
     const [isMoreOpen, setIsMoreOpen] = useState(false);
     const [isLinksModalOpen, setIsLinksModalOpen] = useState(false);
     const [dropdownPos, setDropdownPos] = useState({ top: 0, right: 0 });
 
-    // State to hold the dynamic style for the indicator
     const [indicatorStyle, setIndicatorStyle] = useState({});
 
-    // Refs for nav items - fixed type definition
     const mainNavRefs = useRef<(HTMLButtonElement | null)[]>([]);
+    const extraNavRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const moreTabRef = useRef<HTMLButtonElement | null>(null);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        const checkMobile = () => {
+        const checkViewport = () => {
             setIsMobile(window.innerWidth <= 768);
+            const full = window.innerWidth >= FULL_NAV_BREAKPOINT;
+            setIsFullNav(full);
+            if (full) setIsMoreOpen(false);
         };
 
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
+        checkViewport();
+        window.addEventListener("resize", checkViewport);
 
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
@@ -58,9 +63,6 @@ const Header: React.FC = () => {
                 const element = document.getElementById(section);
                 if (element) {
                     const rect = element.getBoundingClientRect();
-                    // Check if the middle of the section is within the viewport middle
-                    // OR if the entire section is visible and its top is within the viewport.
-                    // This creates a more robust active section detection.
                     if (rect.top <= viewportMiddle && rect.bottom >= viewportMiddle) {
                         currentSection = section;
                     }
@@ -71,12 +73,11 @@ const Header: React.FC = () => {
         };
 
         window.addEventListener("scroll", handleScroll);
-        // Also trigger on load in case the page is already scrolled
         handleScroll();
 
         return () => {
             window.removeEventListener("scroll", handleScroll);
-            window.removeEventListener("resize", checkMobile);
+            window.removeEventListener("resize", checkViewport);
         };
     }, []);
 
@@ -85,7 +86,6 @@ const Header: React.FC = () => {
         if (element) {
             element.scrollIntoView({ behavior: "smooth" });
         }
-        // setActiveSection(sectionId); // Let scroll handler update this to avoid flicker
         setIsMoreOpen(false);
     };
 
@@ -139,33 +139,24 @@ const Header: React.FC = () => {
         };
     }, [isMoreOpen]);
 
-    // Use memoized versions of the navigation items inside the component
-    // This ensures they are not re-created unless their dependencies change
     const mainNavItems = useMemo(() => mainNavItemsConfig, []);
     const dropdownNavItems = useMemo(() => dropdownNavItemsConfig(handleLinksClick), [handleLinksClick]);
 
-    // Determine if any dropdown item is the active section
     const isDropdownActive = dropdownNavItems.some((item) => item.id === activeSection);
 
-    // NEW: useEffect to calculate indicator position dynamically
     useEffect(() => {
         const calculateIndicatorPosition = () => {
             let activeElement: HTMLButtonElement | null = null;
-            const sectionsWithoutMainIndicator = ["certificates", "testimonials", "contact", "links"];
-
-            const shouldHideMainIndicator = sectionsWithoutMainIndicator.includes(activeSection);
-
-            if (shouldHideMainIndicator) {
-                // If it's one of these sections, hide the main indicator
-                setIndicatorStyle({
-                    width: "0px",
-                    transform: "translateX(0px)",
-                });
-                return; // Exit early
-            }
 
             if (isDropdownActive) {
-                activeElement = moreTabRef.current;
+                if (isFullNav) {
+                    // All items are visible — point indicator at the actual dropdown button
+                    const activeIdx = dropdownNavItems.findIndex((item) => item.id === activeSection);
+                    if (activeIdx !== -1) activeElement = extraNavRefs.current[activeIdx];
+                } else {
+                    // Collapsed — point indicator at the More tab
+                    activeElement = moreTabRef.current;
+                }
             } else {
                 const activeIndex = mainNavItems.findIndex((item) => item.id === activeSection);
                 if (activeIndex !== -1) {
@@ -177,8 +168,6 @@ const Header: React.FC = () => {
                 const navDock = activeElement.closest('.nav-dock') as HTMLElement;
                 if (!navDock) return;
 
-                // Read the header's CSS scale (0.95 when scrolled, 1 otherwise)
-                // so we can convert visual (getBoundingClientRect) coords → layout coords.
                 const header = navDock.closest('.header') as HTMLElement;
                 let scale = 1;
                 if (header) {
@@ -189,9 +178,6 @@ const Header: React.FC = () => {
                 const navDockRect = navDock.getBoundingClientRect();
                 const btnRect = activeElement.getBoundingClientRect();
 
-                // Button center from nav-dock's visual left edge, then converted to
-                // layout (CSS) coords. Subtracting navDockRect.left removes the shared
-                // scale-origin offset, so dividing by scale is exact.
                 const btnCenterLayout = ((btnRect.left + btnRect.right) / 2 - navDockRect.left) / scale;
                 const indicatorWidth = (btnRect.width / scale) * 0.75;
 
@@ -200,23 +186,14 @@ const Header: React.FC = () => {
                     width: `${indicatorWidth}px`,
                 });
             } else {
-                // If no active element is found (e.g., on initial render before scroll update),
-                // you might want to hide the indicator or place it at a default position.
-                // For now, we'll ensure it has a default state or is hidden.
-                setIndicatorStyle({
-                    width: "0px",
-                    transform: "translateX(0px)",
-                });
+                setIndicatorStyle({ width: "0px", transform: "translateX(0px)" });
             }
         };
 
-        // Recalculate on activeSection change, mobile state change, or dropdown activation
         calculateIndicatorPosition();
-
-        // Recalculate on resize
         window.addEventListener("resize", calculateIndicatorPosition);
         return () => window.removeEventListener("resize", calculateIndicatorPosition);
-    }, [activeSection, isMobile, isDropdownActive, mainNavItems]); // Dependencies ensure this runs when relevant state changes
+    }, [activeSection, isMobile, isFullNav, isDropdownActive, mainNavItems, dropdownNavItems]);
 
     return (
         <>
@@ -226,16 +203,12 @@ const Header: React.FC = () => {
                     onMouseEnter={() => !isMobile && setIsHovering(true)}
                     onMouseLeave={() => !isMobile && setIsHovering(false)}
                 >
-                    {/* Active indicator bar - now uses style from state */}
                     <div className="active-indicator" style={indicatorStyle} />
 
                     {mainNavItems.map((item, index) => (
                         <div key={item.id} className="nav-item-wrapper">
                             <button
-                                // Fixed ref callback - returns void instead of the element
-                                ref={(el) => {
-                                    mainNavRefs.current[index] = el;
-                                }}
+                                ref={(el) => { mainNavRefs.current[index] = el; }}
                                 className={`nav-item ${activeSection === item.id ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
                                 onClick={() => scrollToSection(item.id)}
                                 aria-label={item.label}
@@ -246,46 +219,60 @@ const Header: React.FC = () => {
                         </div>
                     ))}
 
-                    <div className="nav-item-wrapper more-wrapper">
-                        <button
-                            // Fixed ref callback
-                            ref={(el) => {
-                                moreTabRef.current = el;
-                            }}
-                            className={`nav-item more-tab ${isMoreOpen ? "open" : ""} ${isDropdownActive ? "active" : ""}`}
-                            onClick={handleMoreClick}
-                            aria-label="More options"
-                            aria-expanded={isMoreOpen}
-                        >
-                            <span className="nav-text">More</span>
-                            <span className="chevron-icon">
-                                <ExpandMoreIcon fontSize="small" />
-                            </span>
-                            <span className="nav-tooltip">More Options</span>
-                        </button>
-
-                        {isMoreOpen && createPortal(
-                            <div
-                                ref={dropdownRef}
-                                className="dropdown-menu"
-                                style={{ position: "fixed", top: dropdownPos.top, right: dropdownPos.right }}
+                    {isFullNav ? (
+                        // Desktop: show all dropdown items inline, no More button
+                        dropdownNavItems.map((item, index) => (
+                            <div key={item.id} className="nav-item-wrapper">
+                                <button
+                                    ref={(el) => { extraNavRefs.current[index] = el; }}
+                                    className={`nav-item ${activeSection === item.id ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
+                                    onClick={item.action ? item.action : () => scrollToSection(item.id)}
+                                    aria-label={item.label}
+                                >
+                                    <span className="nav-text">{item.label}</span>
+                                    <span className="nav-tooltip">{item.label}</span>
+                                </button>
+                            </div>
+                        ))
+                    ) : (
+                        // Narrow: More dropdown
+                        <div className="nav-item-wrapper more-wrapper">
+                            <button
+                                ref={(el) => { moreTabRef.current = el; }}
+                                className={`nav-item more-tab ${isMoreOpen ? "open" : ""} ${isDropdownActive ? "active" : ""}`}
+                                onClick={handleMoreClick}
+                                aria-label="More options"
+                                aria-expanded={isMoreOpen}
                             >
-                                {dropdownNavItems.map((item) => (
-                                    <button
-                                        key={item.id}
-                                        className={`dropdown-item ${activeSection === item.id ? "active" : ""}`}
-                                        onClick={item.action ? item.action : () => scrollToSection(item.id)}
-                                    >
-                                        <span>{item.label} </span>
-                                        {item.id === "links" && <ChevronRightIcon className="dropdown-chevron" fontSize="small" />}
-                                        {activeSection === item.id && <div className="dropdown-active-indicator" />}
-                                    </button>
-                                ))}
-                            </div>,
-                            document.body
-                        )}
-                    </div>
-                    {/* Removed the extra glass-overlay div as it's now handled by ::before on .nav-dock */}
+                                <span className="nav-text">More</span>
+                                <span className="chevron-icon">
+                                    <ExpandMoreIcon fontSize="small" />
+                                </span>
+                                <span className="nav-tooltip">More Options</span>
+                            </button>
+
+                            {isMoreOpen && createPortal(
+                                <div
+                                    ref={dropdownRef}
+                                    className="dropdown-menu"
+                                    style={{ position: "fixed", top: dropdownPos.top, right: dropdownPos.right }}
+                                >
+                                    {dropdownNavItems.map((item) => (
+                                        <button
+                                            key={item.id}
+                                            className={`dropdown-item ${activeSection === item.id ? "active" : ""}`}
+                                            onClick={item.action ? item.action : () => scrollToSection(item.id)}
+                                        >
+                                            <span>{item.label} </span>
+                                            {item.id === "links" && <ChevronRightIcon className="dropdown-chevron" fontSize="small" />}
+                                            {activeSection === item.id && <div className="dropdown-active-indicator" />}
+                                        </button>
+                                    ))}
+                                </div>,
+                                document.body
+                            )}
+                        </div>
+                    )}
                 </nav>
             </header>
 
