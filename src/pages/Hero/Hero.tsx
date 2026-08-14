@@ -141,6 +141,7 @@ const Hero: React.FC = () => {
                                     src={profileImage}
                                     alt={`${personalInfo.name} – ${personalInfo.title}`}
                                     className="hero-portrait-img"
+                                    // @ts-ignore
                                     fetchpriority="high"
                                     decoding="async"
                                 />
