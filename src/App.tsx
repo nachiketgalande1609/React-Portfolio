@@ -76,6 +76,7 @@ const App: React.FC = () => {
                 >
                     <ScrollToTop />
                     <ScrollProgress />
+                    <Analytics />
                     <ScrollToTopButton />
                     <Header />
                     <div className="desktop-theme-toggle">
@@ -90,7 +91,6 @@ const App: React.FC = () => {
                 </div>
             </div>
         </BrowserRouter>
-        <Analytics />
     );
 };
 
