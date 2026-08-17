@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+﻿import React, { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { personalInfo } from "../../data/portfolioData";
@@ -25,11 +25,11 @@ const Contact: React.FC = () => {
     const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
     const [errors, setErrors] = useState<Partial<typeof form>>({});
 
-    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
-    const sectionOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
-    const sectionY = useTransform(scrollYProgress, [0.65, 1], [0, 110]);
-    const sectionScale = useTransform(scrollYProgress, [0.65, 1], [1, 0.92]);
-    const sectionBlur = useTransform(scrollYProgress, [0.65, 1], ["blur(0px)", "blur(3px)"]);
+    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["end 200px", "end start"] });
+    const sectionOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+    const sectionY = useTransform(scrollYProgress, [0, 1], [0, 110]);
+    const sectionScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+    const sectionBlur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(3px)"]);
 
     const copyToClipboard = async (text: string, field: string) => {
         try {
@@ -123,7 +123,7 @@ const Contact: React.FC = () => {
                 </div>
 
                 <div className="contact-content">
-                    {/* ── Left: info ── */}
+                    {/* â”€â”€ Left: info â”€â”€ */}
                     <div className="contact-info">
                         <div className="contact-intro animate-on-scroll">
                             <h3 className="contact-title">Let's Connect</h3>
@@ -161,7 +161,7 @@ const Contact: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* ── Right: form ── */}
+                    {/* â”€â”€ Right: form â”€â”€ */}
                     <div className="contact-form-wrapper animate-on-scroll">
                         <form ref={formRef} className="contact-form" onSubmit={handleSubmit} noValidate>
                             <div className="form-row">
@@ -230,9 +230,9 @@ const Contact: React.FC = () => {
                                 disabled={formState === "sending" || formState === "success"}
                             >
                                 {formState === "idle" && <><SendIcon fontSize="small" /> Send Message</>}
-                                {formState === "sending" && <><span className="spinner" /> Sending…</>}
+                                {formState === "sending" && <><span className="spinner" /> Sendingâ€¦</>}
                                 {formState === "success" && <><CheckIcon fontSize="small" /> Message Sent!</>}
-                                {formState === "error" && <><SendIcon fontSize="small" /> Failed — Try Again</>}
+                                {formState === "error" && <><SendIcon fontSize="small" /> Failed â€” Try Again</>}
                             </button>
                         </form>
                     </div>
@@ -243,3 +243,4 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
+

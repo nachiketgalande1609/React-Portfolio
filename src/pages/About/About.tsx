@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+﻿import React, { useRef } from "react";
 import "./About.css";
 import CakeIcon from "@mui/icons-material/Cake";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
@@ -33,13 +33,13 @@ const personalDetails = [
 const education = [
     {
         degree: "Bachelor of Technology, Computer Science & Engineering",
-        period: "2017 – 2021",
+        period: "2017 â€“ 2021",
         grade: "7.0 CGPA",
         institution: "MIT ADT University, Pune",
     },
     {
         degree: "Class XII (HSC)",
-        period: "2015 – 2017",
+        period: "2015 â€“ 2017",
         grade: "82%",
         institution: "Shubham Raje Jr. College",
     },
@@ -59,11 +59,11 @@ const stats = [
 
 const About: React.FC = () => {
     const exitRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({ target: exitRef, offset: ["start start", "end start"] });
-    const exitOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
-    const exitY = useTransform(scrollYProgress, [0.65, 1], [0, 110]);
-    const exitScale = useTransform(scrollYProgress, [0.65, 1], [1, 0.92]);
-    const exitBlur = useTransform(scrollYProgress, [0.65, 1], ["blur(0px)", "blur(3px)"]);
+    const { scrollYProgress } = useScroll({ target: exitRef, offset: ["end 200px", "end start"] });
+    const exitOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+    const exitY = useTransform(scrollYProgress, [0, 1], [0, 110]);
+    const exitScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+    const exitBlur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(3px)"]);
 
     return (
         <motion.div ref={exitRef} style={{ opacity: exitOpacity, y: exitY, scale: exitScale, filter: exitBlur }}>
@@ -88,7 +88,7 @@ const About: React.FC = () => {
                 <motion.div className="about-lead" variants={itemVariants}>
                     <p className="about-lead-text">
                         Senior Full Stack Software Developer with <strong>5+ years</strong> of experience designing, developing, and deploying
-                        scalable, high-performance web applications — strong across frontend, backend, and database architecture.
+                        scalable, high-performance web applications â€” strong across frontend, backend, and database architecture.
                     </p>
                 </motion.div>
 
@@ -163,3 +163,4 @@ const About: React.FC = () => {
 };
 
 export default About;
+

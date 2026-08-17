@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+﻿import React, { useRef } from "react";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
@@ -73,11 +73,11 @@ const isCurrentRole = (period: string) => /present|current/i.test(period);
 
 const Experience: React.FC = () => {
     const exitRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({ target: exitRef, offset: ["start start", "end start"] });
-    const exitOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
-    const exitY = useTransform(scrollYProgress, [0.65, 1], [0, 110]);
-    const exitScale = useTransform(scrollYProgress, [0.65, 1], [1, 0.92]);
-    const exitBlur = useTransform(scrollYProgress, [0.65, 1], ["blur(0px)", "blur(3px)"]);
+    const { scrollYProgress } = useScroll({ target: exitRef, offset: ["end 200px", "end start"] });
+    const exitOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+    const exitY = useTransform(scrollYProgress, [0, 1], [0, 110]);
+    const exitScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+    const exitBlur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(3px)"]);
 
     return (
         <motion.div ref={exitRef} style={{ opacity: exitOpacity, y: exitY, scale: exitScale, filter: exitBlur }}>
@@ -99,7 +99,7 @@ const Experience: React.FC = () => {
                         </span>
                     </span>
                     <ShinyText text="Professional Experience" disabled={false} speed={2} className="section-title" />
-                    <p className="experience-subtitle">My journey through the tech industry — roles, teams, and the impact I've delivered.</p>
+                    <p className="experience-subtitle">My journey through the tech industry â€” roles, teams, and the impact I've delivered.</p>
                 </motion.header>
 
                 <div className="experience-timeline">
@@ -128,7 +128,7 @@ const Experience: React.FC = () => {
                                         <h3 className="experience-role">{exp.role}</h3>
                                         <p className="experience-company">
                                             <span className="experience-company-name">{exp.company}</span>
-                                            {exp.location && <span className="experience-company-location"> · {exp.location}</span>}
+                                            {exp.location && <span className="experience-company-location"> Â· {exp.location}</span>}
                                         </p>
                                     </div>
                                 </header>
@@ -169,3 +169,4 @@ const Experience: React.FC = () => {
 };
 
 export default Experience;
+

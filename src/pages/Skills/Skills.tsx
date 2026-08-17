@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+﻿import React, { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import "./Skill.css";
 
@@ -103,11 +103,11 @@ const skills: Skill[] = [
 const Skills: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
 
-    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
-    const sectionOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
-    const sectionY = useTransform(scrollYProgress, [0.65, 1], [0, 110]);
-    const sectionScale = useTransform(scrollYProgress, [0.65, 1], [1, 0.92]);
-    const sectionBlur = useTransform(scrollYProgress, [0.65, 1], ["blur(0px)", "blur(3px)"]);
+    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["end 200px", "end start"] });
+    const sectionOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+    const sectionY = useTransform(scrollYProgress, [0, 1], [0, 110]);
+    const sectionScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+    const sectionBlur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(3px)"]);
 
     useEffect(() => {
         // Intersection Observer for scroll animations
@@ -222,3 +222,4 @@ const Skills: React.FC = () => {
 };
 
 export default Skills;
+

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+﻿import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { personalInfo, socialLinks } from "../../data/portfolioData";
 import "./Hero.css";
@@ -21,13 +21,13 @@ const Hero: React.FC = () => {
 
     const { scrollYProgress } = useScroll({
         target: heroRef,
-        offset: ["start start", "end start"],
+        offset: ["end 200px", "end start"],
     });
 
-    const heroOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
-    const heroY = useTransform(scrollYProgress, [0.65, 1], [0, 110]);
-    const heroScale = useTransform(scrollYProgress, [0.65, 1], [1, 0.92]);
-    const heroBlur = useTransform(scrollYProgress, [0.65, 1], ["blur(0px)", "blur(3px)"]);
+    const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+    const heroY = useTransform(scrollYProgress, [0, 1], [0, 110]);
+    const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+    const heroBlur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(3px)"]);
 
     const scrollToContact = () => {
         document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
@@ -139,7 +139,7 @@ const Hero: React.FC = () => {
                             <div className="hero-portrait-frame">
                                 <img
                                     src={profileImage}
-                                    alt={`${personalInfo.name} – ${personalInfo.title}`}
+                                    alt={`${personalInfo.name} â€“ ${personalInfo.title}`}
                                     className="hero-portrait-img"
                                     // @ts-ignore
                                     fetchpriority="high"
@@ -160,3 +160,4 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
+
