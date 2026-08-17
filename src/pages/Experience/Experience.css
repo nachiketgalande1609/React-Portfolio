@@ -130,7 +130,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: radial-gradient(500px circle at 100% 0%, var(--accent-soft), transparent 60%);
+    background: none;
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: -1;

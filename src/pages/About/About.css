@@ -21,7 +21,7 @@
     position: absolute;
     width: 480px;
     height: 480px;
-    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+    background: none;
     border-radius: 50%;
     filter: blur(60px);
     top: 5%;
@@ -140,7 +140,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(420px circle at 0% 0%, var(--accent-soft), transparent 60%);
+    background: none;
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: -1;

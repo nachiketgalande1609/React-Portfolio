@@ -409,7 +409,7 @@
     position: absolute;
     inset: -30px;
     border-radius: 50%;
-    background: radial-gradient(circle, var(--accent-soft), transparent 70%);
+    background: none;
     filter: blur(40px);
     opacity: 0.7;
 }
