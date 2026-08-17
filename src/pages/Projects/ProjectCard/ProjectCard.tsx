@@ -24,6 +24,14 @@ interface ProjectCardProps {
     index?: number;
 }
 
+const hexToRgb = (hex: string) => {
+    const h = hex.replace("#", "");
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    return `${r},${g},${b}`;
+};
+
 const PROJECT_META: Record<number, { category: string; color: string }> = {
     1:  { category: "FULL STACK",    color: "#6366f1" },
     2:  { category: "WEB APP",       color: "#f97316" },
@@ -114,7 +122,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
             <h3 className="pc-title">{project.name}</h3>
 
             {/* Colored panel */}
-            <div className="pc-panel" style={{ background: meta.color }}>
+            <div className="pc-panel" style={{ "--pc-color-rgb": hexToRgb(meta.color) } as React.CSSProperties}>
                 <p className="pc-desc">{project.description}</p>
 
                 {images.length > 0 && (
