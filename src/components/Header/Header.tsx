@@ -72,7 +72,9 @@ const Header: React.FC = () => {
         window.addEventListener("resize", checkViewport);
 
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
+            const scrolled = window.scrollY > 50;
+            setIsScrolled(scrolled);
+            document.documentElement.dataset.scrolled = scrolled ? "true" : "false";
 
             const sections = ["home", "about", "skills", "experience", "projects", "certificates", "testimonials", "contact"];
             const viewportMiddle = window.innerHeight / 2;
