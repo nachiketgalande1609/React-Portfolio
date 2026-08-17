@@ -1,3 +1,7 @@
+.projects-section .container {
+    max-width: 860px;
+}
+
 .projects-section {
     color: var(--text-primary);
     position: relative;
@@ -179,16 +183,9 @@
     color: var(--text-primary);
 }
 
-/* ===== Masonry Grid ===== */
+/* ===== Project List ===== */
 .projects-masonry {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    padding-bottom: 4rem;
-}
-
-@media (max-width: 768px) {
-    .projects-masonry {
-        grid-template-columns: 1fr;
-    }
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
 }
