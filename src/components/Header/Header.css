@@ -143,14 +143,17 @@
 }
 
 .nav-item--page .nav-text {
-    color: var(--text-tertiary);
     font-size: 0.82rem;
-    letter-spacing: 0.02em;
+    color: var(--text-tertiary);
+    font-weight: 600;
 }
 
-.nav-item--page.active .nav-text,
 .nav-item--page:hover .nav-text {
-    color: var(--text-secondary);
+    color: var(--text-primary);
+}
+
+.nav-item--page.active .nav-text {
+    color: var(--accent);
 }
 
 .nav-item::before {
@@ -171,11 +174,13 @@
 }
 
 .nav-text {
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-weight: 500;
     transition: all 0.3s ease;
     white-space: nowrap;
     text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 /* Active indicator bar */
