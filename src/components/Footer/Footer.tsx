@@ -1,11 +1,37 @@
 import React from "react";
-import { personalInfo } from "../../data/portfolioData"; // Assuming personalInfo is available
+import { useNavigate, useLocation } from "react-router-dom";
+import { personalInfo } from "../../data/portfolioData";
 import { GitHub, LinkedIn } from "@mui/icons-material";
 
 import "./Footer.css";
 
+const NAV_LINKS = [
+    { label: "Home",         id: "home" },
+    { label: "About",        id: "about" },
+    { label: "Skills",       id: "skills" },
+    { label: "Experience",   id: "experience" },
+    { label: "Projects",     id: "projects" },
+    { label: "Certificates", id: "certificates" },
+    { label: "Testimonials", id: "testimonials" },
+    { label: "Contact",      id: "contact" },
+];
+
 const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleNavClick = (id: string) => {
+        if (location.pathname !== "/") {
+            navigate("/", { state: { scrollTo: id } });
+        } else {
+            if (id === "home") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            } else {
+                document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    };
 
     return (
         <footer className="footer">
@@ -28,10 +54,10 @@ const Footer: React.FC = () => {
                         <div className="footer-links-group">
                             <h4>Navigation</h4>
                             <div className="footer-links">
-                                {["Home", "About", "Skills", "Experience"].map((link) => (
-                                    <a key={link} href={`#${link.toLowerCase()}`} className="footer-link">
-                                        {link}
-                                    </a>
+                                {NAV_LINKS.slice(0, 4).map(({ label, id }) => (
+                                    <button key={id} className="footer-link" onClick={() => handleNavClick(id)}>
+                                        {label}
+                                    </button>
                                 ))}
                             </div>
                         </div>
@@ -39,10 +65,10 @@ const Footer: React.FC = () => {
                         <div className="footer-links-group">
                             <h4>Resources</h4>
                             <div className="footer-links">
-                                {["Projects", "Certificates", "Testimonials", "Contact"].map((link) => (
-                                    <a key={link} href={`#${link.toLowerCase()}`} className="footer-link">
-                                        {link}
-                                    </a>
+                                {NAV_LINKS.slice(4).map(({ label, id }) => (
+                                    <button key={id} className="footer-link" onClick={() => handleNavClick(id)}>
+                                        {label}
+                                    </button>
                                 ))}
                             </div>
                         </div>

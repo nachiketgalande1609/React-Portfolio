@@ -119,6 +119,12 @@
     font-weight: 300;
     font-size: 0.95rem;
     letter-spacing: 0.03em;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
     padding: 0.3rem 0;
     transition: all 0.3s ease-in-out;
     position: relative;

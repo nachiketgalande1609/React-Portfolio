@@ -207,7 +207,7 @@ export const projectsData = {
             name: "Gen AI Onboarding Assistant",
             description:
                 "AI-powered assistant for project knowledge transfer, featuring document summarization and advanced Q&A capabilities. Deployed on Azure to enhance productivity for new team members with contextual understanding.",
-            techStack: ["Flask", "Python", "OpenAI", "Azure"],
+            techStack: ["Flask", "Python", "Open AI", "Azure"],
             images: ["https://github.com/nachiketgalande1609/GenAI-Onboarding-Assistant/blob/main/static/screenshots/snap.png?raw=true"],
             githubLink: "https://github.com/nachiketgalande1609/GenAI-Onboarding-Assistant",
         },

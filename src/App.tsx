@@ -11,6 +11,7 @@ import Footer from "./components/Footer/Footer";
 import ScrollProgress from "./components/ScrollProgress/ScrollProgress";
 import ScrollToTopButton from "./components/ScrollToTop/ScrollToTop";
 import "./styles/globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import Experience from "./pages/Experience/Experience";
 import Testimonials from "./pages/Testimonials/Testimonials";
 import Certificates from "./pages/Certificates/Certificates";
@@ -89,6 +90,7 @@ const App: React.FC = () => {
                 </div>
             </div>
         </BrowserRouter>
+        <Analytics />
     );
 };
 

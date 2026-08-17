@@ -1,5 +1,4 @@
-﻿"use client";
-
+﻿
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import FormatQuoteRoundedIcon from "@mui/icons-material/FormatQuoteRounded";

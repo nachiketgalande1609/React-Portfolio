@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./NotFound.css";
 
 const NotFound: React.FC = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const prev = document.title;
+        document.title = "Page Not Found | Nachiket Galande";
+        return () => { document.title = prev; };
+    }, []);
 
     return (
         <div className="notfound">
