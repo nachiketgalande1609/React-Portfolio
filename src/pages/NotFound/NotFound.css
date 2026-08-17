@@ -1,0 +1,97 @@
+.notfound {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-primary);
+}
+
+.notfound-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 50% at 50% 0%, var(--accent-soft) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.notfound-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.2rem;
+    padding: 2rem;
+    z-index: 1;
+}
+
+.notfound-code {
+    font-size: clamp(7rem, 20vw, 12rem);
+    font-weight: 800;
+    color: transparent;
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-muted) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    user-select: none;
+}
+
+.notfound-divider {
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    box-shadow: 0 0 12px var(--accent-glow);
+    margin: 0.4rem 0;
+}
+
+.notfound-title {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.notfound-desc {
+    font-size: 1rem;
+    color: var(--text-tertiary);
+    max-width: 340px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.notfound-btn {
+    margin-top: 0.8rem;
+    padding: 12px 32px;
+    border-radius: 999px;
+    border: 1px solid var(--border-default);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    backdrop-filter: blur(10px);
+}
+
+.notfound-btn:hover {
+    background: var(--bg-elevated);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--accent-glow);
+}
+
+@media (max-width: 480px) {
+    .notfound-desc {
+        font-size: 0.9rem;
+    }
+
+    .notfound-btn {
+        padding: 10px 24px;
+        font-size: 0.85rem;
+    }
+}
