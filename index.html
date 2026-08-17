@@ -51,43 +51,62 @@
         <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet" />
 
-        <!-- JSON-LD Structured Data -->
+        <!-- JSON-LD Structured Data: ProfilePage (generates rich results) -->
         <script type="application/ld+json">
         {
             "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "Nachiket Galande",
-            "url": "https://nachiketgalande.com",
-            "image": "https://nachiketgalande.com/og-image.png",
-            "jobTitle": "Senior Full Stack Developer",
-            "description": "Senior Full Stack Developer with 5+ years of experience delivering scalable, high-performance web applications, specializing in system architecture, database design, and performance optimization.",
-            "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Mumbai",
-                "addressCountry": "IN"
-            },
-            "sameAs": [
-                "https://github.com/nachiketgalande1609",
-                "https://www.linkedin.com/in/nachiketgalande/"
-            ],
-            "knowsAbout": [
-                "React", "Node.js", "TypeScript", "JavaScript", "MongoDB",
-                "Express.js", "PostgreSQL", "System Architecture", "Full Stack Development"
-            ],
-            "alumniOf": {
-                "@type": "Organization",
-                "name": "Accenture"
+            "@type": "ProfilePage",
+            "dateCreated": "2024-01-01T00:00:00Z",
+            "dateModified": "2026-08-17T00:00:00Z",
+            "url": "https://nachiketgalande.com/",
+            "name": "Nachiket Galande – Senior Full Stack Developer Portfolio",
+            "description": "Portfolio of Nachiket Galande, Senior Full Stack Developer with 5+ years of experience building scalable web applications.",
+            "mainEntity": {
+                "@type": "Person",
+                "@id": "https://nachiketgalande.com/#person",
+                "name": "Nachiket Galande",
+                "url": "https://nachiketgalande.com",
+                "image": {
+                    "@type": "ImageObject",
+                    "url": "https://nachiketgalande.com/og-image.png",
+                    "width": 1200,
+                    "height": 630
+                },
+                "jobTitle": "Senior Full Stack Developer",
+                "description": "Senior Full Stack Developer with 5+ years of experience delivering scalable, high-performance web applications, specializing in system architecture, database design, and performance optimization.",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Mumbai",
+                    "addressCountry": "IN"
+                },
+                "sameAs": [
+                    "https://github.com/nachiketgalande1609",
+                    "https://www.linkedin.com/in/nachiketgalande/"
+                ],
+                "knowsAbout": [
+                    "React", "Node.js", "TypeScript", "JavaScript", "MongoDB",
+                    "Express.js", "PostgreSQL", "System Architecture", "Full Stack Development"
+                ],
+                "worksFor": {
+                    "@type": "Organization",
+                    "name": "Accenture"
+                }
             }
         }
         </script>
 
-        <!-- WebSite structured data for sitelinks search box -->
+        <!-- WebSite structured data -->
         <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "Nachiket Galande Portfolio",
-            "url": "https://nachiketgalande.com"
+            "url": "https://nachiketgalande.com",
+            "description": "Portfolio of Nachiket Galande, Senior Full Stack Developer",
+            "author": {
+                "@type": "Person",
+                "name": "Nachiket Galande"
+            }
         }
         </script>
     </head>
