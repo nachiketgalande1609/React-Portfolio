@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import "./LinksModal.css";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -54,7 +54,7 @@ const LinksModal: React.FC<LinksModalProps> = ({ isOpen, onClose }) => {
         { name: "GitHub",    icon: "github",   url: "https://github.com/nachiketgalande1609",                handle: "@nachiketgalande1609" },
         { name: "CodePen",   icon: "codepen",  url: "https://codepen.io/Nachiket-Galande",                   handle: "@Nachiket-Galande" },
         { name: "Unsplash",  icon: "unsplash", url: "https://unsplash.com/@nachiketgalande",                 handle: "@nachiketgalande" },
-        { name: "Email",     icon: "email",    url: "mailto:nachiketgalande1609@gmail.com",                  handle: "nachiketgalande1609@gmail.com" },
+        { name: "Email",     icon: "email",    url: "mailto:nachiket.galande.in@gmail.com",                  handle: "nachiket.galande.in@gmail.com" },
     ];
 
     const projects = [
@@ -133,3 +133,4 @@ const LinksModal: React.FC<LinksModalProps> = ({ isOpen, onClose }) => {
 };
 
 export default LinksModal;
+

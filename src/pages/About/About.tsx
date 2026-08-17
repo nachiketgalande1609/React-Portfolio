@@ -27,7 +27,7 @@ const personalDetails = [
     { label: "Phone", value: "+91 97649 93023", icon: <CallRoundedIcon /> },
     { label: "Location", value: "Mumbai, India", icon: <PersonPinCircleRoundedIcon /> },
     { label: "Age", value: String(Math.floor((Date.now() - new Date("1999-09-16").getTime()) / (365.25 * 24 * 60 * 60 * 1000))), icon: <CakeIcon /> },
-    { label: "Email", value: "nachiketgalande1609@gmail.com", icon: <EmailRoundedIcon /> },
+    { label: "Email", value: "nachiket.galande.in@gmail.com", icon: <EmailRoundedIcon /> },
 ];
 
 const education = [
@@ -163,4 +163,5 @@ const About: React.FC = () => {
 };
 
 export default About;
+
 
