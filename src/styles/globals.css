@@ -96,7 +96,6 @@
 }
 
 html {
-    scroll-snap-type: y proximity;
 }
 
 body {
@@ -137,7 +136,6 @@ body {
     padding: 50px 0;
     position: relative;
     background: transparent;
-    scroll-snap-align: start;
 }
 
 .section::before {

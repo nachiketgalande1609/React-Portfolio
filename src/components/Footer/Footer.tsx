@@ -24,25 +24,27 @@ const Footer: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="footer-links-group">
-                        <h4>Navigation</h4>
-                        <div className="footer-links">
-                            {["Home", "About", "Skills", "Experience"].map((link) => (
-                                <a key={link} href={`#${link.toLowerCase()}`} className="footer-link">
-                                    {link}
-                                </a>
-                            ))}
+                    <div className="footer-links-wrapper">
+                        <div className="footer-links-group">
+                            <h4>Navigation</h4>
+                            <div className="footer-links">
+                                {["Home", "About", "Skills", "Experience"].map((link) => (
+                                    <a key={link} href={`#${link.toLowerCase()}`} className="footer-link">
+                                        {link}
+                                    </a>
+                                ))}
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="footer-links-group">
-                        <h4>Resources</h4>
-                        <div className="footer-links">
-                            {["Projects", "Certificates", "Testimonials", "Contact"].map((link) => (
-                                <a key={link} href={`#${link.toLowerCase()}`} className="footer-link">
-                                    {link}
-                                </a>
-                            ))}
+                        <div className="footer-links-group">
+                            <h4>Resources</h4>
+                            <div className="footer-links">
+                                {["Projects", "Certificates", "Testimonials", "Contact"].map((link) => (
+                                    <a key={link} href={`#${link.toLowerCase()}`} className="footer-link">
+                                        {link}
+                                    </a>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
