@@ -11,7 +11,7 @@ import ShinyText from "../../components/ShinyText/ShinyText";
 
 const trimRole = (role: string) => {
     const firstSegment = role.split("|")[0].trim();
-    return firstSegment.length > 70 ? `${firstSegment.slice(0, 68)}â€¦` : firstSegment;
+    return firstSegment.length > 70 ? `${firstSegment.slice(0, 68)}…` : firstSegment;
 };
 
 interface TestimonialCardProps {

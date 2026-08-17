@@ -136,7 +136,7 @@ export const projectsData = {
     projects: [
         {
             id: 2,
-            name: "Vela â€“ Premium Wallpaper Marketplace",
+            name: "Vela - Premium Wallpaper Marketplace",
             description:
                 "A premium mobile wallpaper marketplace with AI-generated, high-resolution wallpapers across categories like Abstract, Nature, Dark, Minimal, Architecture, and Neon. Buy individual wallpapers or subscribe to Vela+ for unlimited downloads. Payments via Razorpay (UPI & cards). Built with a dark, minimal aesthetic focused purely on the wallpapers.",
             techStack: ["React", "Node.js", "Express.js", "MongoDB"],
@@ -148,7 +148,7 @@ export const projectsData = {
             id: 3,
             name: "AI Image Upscaler",
             description:
-                "A local, GPU-accelerated image super-resolution tool that enhances photos up to 4Ã— using deep learning â€” entirely on your machine with no cloud or API keys. Supports Real-HAT (Swin Transformer) and Real-ESRGAN (CNN) models. Uses tiled inference for large images and BF16 precision on Ampere+ GPUs to cut VRAM usage by 4Ã—. Clean dark web UI served via FastAPI with real-time tile-progress streaming via SSE, a draggable before/after comparison slider, and batch folder processing.",
+                "A local, GPU-accelerated image super-resolution tool that enhances photos up to 4x using deep learning - entirely on your machine with no cloud or API keys. Supports Real-HAT (Swin Transformer) and Real-ESRGAN (CNN) models. Uses tiled inference for large images and BF16 precision on Ampere+ GPUs to cut VRAM usage by 4x. Clean dark web UI served via FastAPI with real-time tile-progress streaming via SSE, a draggable before/after comparison slider, and batch folder processing.",
             techStack: ["Python", "FastAPI", "PyTorch"],
             images: [upscalerImage1, upscalerImage2],
             githubLink: "https://github.com/nachiketgalande1609/upscaler",
@@ -157,7 +157,7 @@ export const projectsData = {
             id: 4,
             name: "CineLocal - Local Movie Streaming",
             description:
-                "A Netflix-style local media streaming app that serves your personal video library to any browser on your network. Point it at a local folder in settings, and it fetches movie metadata from an external API to build a rich browsing UI â€” browse, search, and stream your movies over local IP.",
+                "A Netflix-style local media streaming app that serves your personal video library to any browser on your network. Point it at a local folder in settings, and it fetches movie metadata from an external API to build a rich browsing UI - browse, search, and stream your movies over local IP.",
             techStack: ["React", "Node.js", "Express.js", "MongoDB"],
             images: [cineplexImage1, cineplexImage2, cineplexImage3, cineplexImage4, cineplexImage5],
             liveLink: "https://cineplex.nachiketgalande.com/",
@@ -165,7 +165,7 @@ export const projectsData = {
         },
         {
             id: 5,
-            name: "Workout & Diet Tracker â€“ Livo",
+            name: "Workout & Diet Tracker - Livo",
             description:
                 "A fitness tracking web application that allows users to manage workouts and diet plans. Features include progress tracking, workout scheduling, meal logging, and personalized dashboards. Backend APIs are built with Flask, while MongoDB stores user activity and nutrition data.",
             techStack: ["React", "Flask", "Python", "MongoDB", "AWS", "Material UI"],
@@ -293,7 +293,7 @@ export const experienceData: Experience[] = [
             "Architected scalable microservices, improving overall system throughput by 30%.",
             "Optimized database query performance by 15% across 10M+ record datasets and migrated high-volume SQL workloads to Azure Databricks, lifting analytics performance 20%.",
             "Improved frontend performance by 20% through code-splitting, lazy loading, and optimized state management, and enhanced UX with asynchronous data export via Azure Function Apps.",
-            "Streamlined operations by automating workflows (30% less manual effort, 10â€“15% cost savings) and Oracle ERP user provisioning (5â€“10 hours to under 5 minutes).",
+            "Streamlined operations by automating workflows (30% less manual effort, 10-15% cost savings) and Oracle ERP user provisioning (5-10 hours to under 5 minutes).",
             "Built production agentic AI on OCI AI Agent Studio, including a RAG-based onboarding assistant that cut training time 30% and a serverless Gen AI function that parses .iar files, generates summaries, and automates TDD validation with mismatch detection.",
             "Engineered an AI-powered EBS-to-Cloud migration planning tool on Oracle APEX, integrating Oracle Select-AI with a PL/SQL prompt-resolution engine.",
         ],

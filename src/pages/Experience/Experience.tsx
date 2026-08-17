@@ -99,7 +99,7 @@ const Experience: React.FC = () => {
                         </span>
                     </span>
                     <ShinyText text="Professional Experience" disabled={false} speed={2} className="section-title" />
-                    <p className="experience-subtitle">My journey through the tech industry â€” roles, teams, and the impact I've delivered.</p>
+                    <p className="experience-subtitle">My journey through the tech industry — roles, teams, and the impact I've delivered.</p>
                 </motion.header>
 
                 <div className="experience-timeline">

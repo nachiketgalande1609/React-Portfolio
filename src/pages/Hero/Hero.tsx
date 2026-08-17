@@ -14,7 +14,6 @@ import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownR
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 
 import profileImage from "../../assets/profile.png";
-import resumeFile from "../../assets/resume.pdf";
 
 const Hero: React.FC = () => {
     const heroRef = useRef<HTMLElement>(null);
@@ -38,7 +37,7 @@ const Hero: React.FC = () => {
     };
 
     const handleResumeOpen = () => {
-        window.open(resumeFile, "_blank", "noopener,noreferrer");
+        window.open("/resume.pdf", "_blank", "noopener,noreferrer");
     };
 
     const getSocialIcon = (iconName: string) => {
@@ -139,7 +138,7 @@ const Hero: React.FC = () => {
                             <div className="hero-portrait-frame">
                                 <img
                                     src={profileImage}
-                                    alt={`${personalInfo.name} â€“ ${personalInfo.title}`}
+                                    alt={`${personalInfo.name} — ${personalInfo.title}`}
                                     className="hero-portrait-img"
                                     // @ts-ignore
                                     fetchpriority="high"

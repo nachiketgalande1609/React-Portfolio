@@ -182,7 +182,7 @@ const Skills: React.FC = () => {
             <div className="container">
                 <div className="section-header">
                     <div className="header-decoration animate-on-scroll">
-                        <ShinyText text="My Skill" disabled={false} speed={2} className="section-title" />
+                        <ShinyText text="My Skills" disabled={false} speed={2} className="section-title" />
                     </div>
                     <p className="section-subtitle animate-on-scroll">Technologies I work with to create amazing experiences</p>
                 </div>

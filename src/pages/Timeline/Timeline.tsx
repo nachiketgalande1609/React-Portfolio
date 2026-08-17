@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./Timeline.css";
 
 interface WorkEntry {
@@ -21,7 +21,15 @@ interface EduEntry {
     grade: string;
 }
 
-type TimelineEntry = WorkEntry | EduEntry;
+interface AchievementEntry {
+    type: "achievement";
+    title: string;
+    organizer: string;
+    period: string;
+    description: string;
+}
+
+type TimelineEntry = WorkEntry | EduEntry | AchievementEntry;
 
 const ENTRIES: TimelineEntry[] = [
     {
@@ -35,9 +43,23 @@ const ENTRIES: TimelineEntry[] = [
         bullets: [
             "Built production agentic AI including a RAG-based onboarding assistant that cut training time by 30%",
             "Engineered an AI-powered EBS-to-Cloud migration planning tool on Oracle APEX",
-            "Streamlined operations by automating workflows (30% less manual effort, 10–15% cost savings)",
+            "Streamlined operations by automating workflows (30% less manual effort, 10-15% cost savings)",
         ],
         tech: ["React", "TypeScript", "Node.js", "Python", "Azure Databricks", "Oracle OCI"],
+    },
+    {
+        type: "achievement",
+        title: "1st Place – GTIC Season 7 India Finale & Global Finale",
+        organizer: "Accenture",
+        period: "Jul 2025",
+        description: "Won 1st place at Accenture's Global Technology Innovation Challenge (GTIC) Season 7, competing at both the India Finale and the Global Finale.",
+    },
+    {
+        type: "achievement",
+        title: "1st Runner-Up – GTIC Season 6 India Finale",
+        organizer: "Accenture",
+        period: "Jul 2024",
+        description: "Secured 1st Runner-Up at Accenture's Global Technology Innovation Challenge (GTIC) Season 6 India Finale.",
     },
     {
         type: "work",
@@ -94,10 +116,10 @@ const ENTRIES: TimelineEntry[] = [
 ];
 
 const STATS = [
-    { label: "Experience", value: "4+" },
+    { label: "Experience", value: "5+" },
     { label: "Positions", value: "3" },
-    { label: "Institutions", value: "3" },
-    { label: "Technologies", value: "7" },
+    { label: "Achievements", value: "2" },
+    { label: "Technologies", value: "10+" },
 ];
 
 function BriefcaseIcon() {
@@ -150,6 +172,32 @@ function WorkCard({ entry, align }: { entry: WorkEntry; align: "left" | "right" 
     );
 }
 
+function TrophyIcon() {
+    return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 9H4a2 2 0 0 1-2-2V5h4" />
+            <path d="M18 9h2a2 2 0 0 0 2-2V5h-4" />
+            <path d="M12 17v4" />
+            <path d="M8 21h8" />
+            <path d="M6 3h12v6a6 6 0 0 1-12 0V3z" />
+        </svg>
+    );
+}
+
+function AchievementCard({ entry, align }: { entry: AchievementEntry; align: "left" | "right" }) {
+    return (
+        <div className={`tl-card tl-card-achievement ${align === "left" ? "tl-card-left" : ""}`}>
+            <div className="tl-card-top">
+                <span className="tl-badge tl-badge-achievement">Achievement</span>
+                <span className="tl-period">{entry.period}</span>
+            </div>
+            <div className="tl-role">{entry.title}</div>
+            <div className="tl-subtitle">{entry.organizer}</div>
+            <p className="tl-achievement-desc">{entry.description}</p>
+        </div>
+    );
+}
+
 function EduCard({ entry, align }: { entry: EduEntry; align: "left" | "right" }) {
     return (
         <div className={`tl-card ${align === "left" ? "tl-card-left" : ""}`}>
@@ -167,13 +215,40 @@ function EduCard({ entry, align }: { entry: EduEntry; align: "left" | "right" })
 }
 
 const Timeline: React.FC = () => {
+    const observerRef = useRef<IntersectionObserver | null>(null);
+
+    useEffect(() => {
+        observerRef.current = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("tl-visible");
+                        observerRef.current?.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15 }
+        );
+
+        const elements = document.querySelectorAll(".tl-animate");
+        elements.forEach((el) => observerRef.current?.observe(el));
+
+        return () => observerRef.current?.disconnect();
+    }, []);
+
     return (
         <div className="timeline-page">
             <div className="timeline-inner">
-                <div className="timeline-section">
+                <div className="tl-header tl-animate">
+                    <p className="tl-eyebrow">Career & Education</p>
+                    <h1 className="tl-title">My Timeline</h1>
+                    <p className="tl-desc">A chronological view of my professional journey and academic background.</p>
+                </div>
+
+                <div className="timeline-section tl-animate">
                     <div className="tl-stats">
-                        {STATS.map((s) => (
-                            <div key={s.label} className="tl-stat-card">
+                        {STATS.map((s, i) => (
+                            <div key={s.label} className="tl-stat-card" style={{ transitionDelay: `${i * 60}ms` }}>
                                 <div className="tl-stat-value">{s.value}</div>
                                 <div className="tl-stat-label">{s.label}</div>
                             </div>
@@ -186,14 +261,16 @@ const Timeline: React.FC = () => {
                         <div className="tl-line" />
                         {ENTRIES.map((entry, idx) => {
                             const align: "left" | "right" = idx % 2 === 0 ? "left" : "right";
-                            const icon = entry.type === "work" ? <BriefcaseIcon /> : <GradCapIcon />;
+                            const icon = entry.type === "work" ? <BriefcaseIcon /> : entry.type === "achievement" ? <TrophyIcon /> : <GradCapIcon />;
                             return (
-                                <div key={idx} className={`tl-entry ${align}`}>
+                                <div key={idx} className={`tl-entry ${align} tl-animate`} style={{ transitionDelay: `${idx * 80}ms` }}>
                                     {align === "left" ? (
                                         <>
                                             <div className="tl-card-slot">
                                                 {entry.type === "work"
                                                     ? <WorkCard entry={entry} align="left" />
+                                                    : entry.type === "achievement"
+                                                    ? <AchievementCard entry={entry} align="left" />
                                                     : <EduCard entry={entry} align="left" />}
                                             </div>
                                             <div className="tl-node">{icon}</div>
@@ -206,6 +283,8 @@ const Timeline: React.FC = () => {
                                             <div className="tl-card-slot">
                                                 {entry.type === "work"
                                                     ? <WorkCard entry={entry} align="right" />
+                                                    : entry.type === "achievement"
+                                                    ? <AchievementCard entry={entry} align="right" />
                                                     : <EduCard entry={entry} align="right" />}
                                             </div>
                                         </>

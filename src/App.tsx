@@ -80,8 +80,8 @@ const App: React.FC = () => {
                     </div>
                     <Routes>
                         <Route path="/" element={<PortfolioHome />} />
-                        <Route path="/github" element={<GitHub />} />
-                        <Route path="/timeline" element={<Timeline />} />
+                        <Route path="/github" element={<><GitHub /><Footer /></>} />
+                        <Route path="/timeline" element={<><Timeline /><Footer /></>} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </div>
