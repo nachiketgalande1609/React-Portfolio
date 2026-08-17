@@ -9,6 +9,7 @@ import Projects from "./pages/Projects/Projects";
 import Contact from "./pages/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 import ScrollProgress from "./components/ScrollProgress/ScrollProgress";
+import ScrollToTopButton from "./components/ScrollToTop/ScrollToTop";
 import "./styles/globals.css";
 import Experience from "./pages/Experience/Experience";
 import Testimonials from "./pages/Testimonials/Testimonials";
@@ -74,6 +75,7 @@ const App: React.FC = () => {
                 >
                     <ScrollToTop />
                     <ScrollProgress />
+                    <ScrollToTopButton />
                     <Header />
                     <div className="desktop-theme-toggle">
                         <ThemeToggle />

@@ -18,7 +18,7 @@ const getInitialTheme = (): Theme => {
     } catch {
         // ignore
     }
-    return "dark";
+    return "light";
 };
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
