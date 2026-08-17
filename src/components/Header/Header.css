@@ -131,6 +131,28 @@
     flex-shrink: 0; /* Prevent items from shrinking unnecessarily */
 }
 
+.nav-page-separator {
+    width: 1px;
+    height: 20px;
+    background: var(--border-default);
+    border-radius: 1px;
+    align-self: center;
+    margin: 0 4px;
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+.nav-item--page .nav-text {
+    color: var(--text-tertiary);
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+}
+
+.nav-item--page.active .nav-text,
+.nav-item--page:hover .nav-text {
+    color: var(--text-secondary);
+}
+
 .nav-item::before {
     content: "";
     position: absolute;

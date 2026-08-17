@@ -334,18 +334,23 @@ const Header: React.FC = () => {
                             const onClick = "isRoute" in item ? () => { navigate(`/${item.id}`); setIsMoreOpen(false); }
                                 : "isModal" in item ? handleLinksClick
                                 : () => scrollToSection(item.id);
+                            const isPageNav = !!(item.isRoute || item.isModal);
+                            const isFirstPageNav = isPageNav && !dropdownNavItems.slice(0, index).some(i => i.isRoute || i.isModal);
                             return (
-                                <div key={item.id} className="nav-item-wrapper">
-                                    <button
-                                        ref={(el) => { extraNavRefs.current[index] = el; }}
-                                        className={`nav-item ${isActive ? "active" : ""} ${isHovering ? "hover-visible" : ""}`}
-                                        onClick={onClick}
-                                        aria-label={item.label}
-                                    >
-                                        <span className="nav-text">{item.label}</span>
-                                        <span className="nav-tooltip">{item.label}</span>
-                                    </button>
-                                </div>
+                                <React.Fragment key={item.id}>
+                                    {isFirstPageNav && <div className="nav-page-separator" aria-hidden="true" />}
+                                    <div className="nav-item-wrapper">
+                                        <button
+                                            ref={(el) => { extraNavRefs.current[index] = el; }}
+                                            className={`nav-item ${isActive ? "active" : ""} ${isHovering ? "hover-visible" : ""} ${isPageNav ? "nav-item--page" : ""}`}
+                                            onClick={onClick}
+                                            aria-label={item.label}
+                                        >
+                                            <span className="nav-text">{item.label}</span>
+                                            <span className="nav-tooltip">{item.label}</span>
+                                        </button>
+                                    </div>
+                                </React.Fragment>
                             );
                         })
                     ) : (
