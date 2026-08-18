@@ -26,7 +26,7 @@ const AnimatedName: React.FC<{ firstName: string; lastName: string }> = ({ first
                     className={`hero-title-char ${extraClass}`}
                     initial={{ opacity: 0, y: 32, rotateX: -50 }}
                     animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ delay, duration: 0.5, ease: [0.215, 0.61, 0.355, 1] }}
+                    transition={{ delay, duration: 0.5, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] }}
                 >
                     {char}
                 </motion.span>
@@ -50,7 +50,7 @@ const stagger = {
 
 const fadeUp = {
     hidden: { opacity: 0, y: 16 },
-    show:   { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.215, 0.61, 0.355, 1] } },
+    show:   { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] } },
 };
 
 const Hero: React.FC = () => {
@@ -174,7 +174,7 @@ const Hero: React.FC = () => {
                         className="hero-portrait"
                         initial={{ opacity: 0, scale: 0.92, y: 24 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        transition={{ delay: 0.3, duration: 0.85, ease: [0.215, 0.61, 0.355, 1] }}
+                        transition={{ delay: 0.3, duration: 0.85, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] }}
                     >
                         <div className="hero-portrait-stage">
                             <div className="hero-portrait-ring hero-portrait-ring--outer" aria-hidden="true" />
