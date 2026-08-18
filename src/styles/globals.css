@@ -25,11 +25,11 @@
     /* Theme tokens — Dark */
     --bg-primary: #000000;
     --bg-secondary: #0a0a0a;
-    --bg-tertiary: rgba(255, 255, 255, 0.05);
-    --bg-elevated: rgba(255, 255, 255, 0.08);
+    --bg-tertiary: #0d0d0d;
+    --bg-elevated: #161616;
     --bg-overlay: rgba(0, 0, 0, 0.8);
-    --bg-card: rgba(255, 255, 255, 0.04);
-    --bg-card-hover: rgba(255, 255, 255, 0.08);
+    --bg-card: #111111;
+    --bg-card-hover: #1a1a1a;
 
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.85);
@@ -71,8 +71,8 @@
     --bg-tertiary: rgba(0, 0, 0, 0.04);
     --bg-elevated: rgba(0, 0, 0, 0.06);
     --bg-overlay: rgba(255, 255, 255, 0.85);
-    --bg-card: rgba(0, 0, 0, 0.03);
-    --bg-card-hover: rgba(0, 0, 0, 0.06);
+    --bg-card: #ffffff;
+    --bg-card-hover: #f5f5f7;
 
     --text-primary: #111827;
     --text-secondary: rgba(17, 24, 39, 0.85);
@@ -114,8 +114,10 @@ body {
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-image: radial-gradient(var(--border-default) 1px, transparent 1px);
-    background-size: 28px 28px;
+    background-image:
+        linear-gradient(var(--border-subtle) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+    background-size: 40px 40px;
     background-position: 0 0;
     mask-image: radial-gradient(ellipse 85% 70% at center, #000 35%, transparent 92%);
     -webkit-mask-image: radial-gradient(ellipse 85% 70% at center, #000 35%, transparent 92%);
@@ -124,7 +126,7 @@ body {
 
 @media (max-width: 768px) {
     .site-background {
-        background-size: 22px 22px;
+        background-size: 28px 28px;
         opacity: 0.45;
     }
 }
