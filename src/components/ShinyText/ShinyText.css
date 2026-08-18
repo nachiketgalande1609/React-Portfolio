@@ -1,22 +1,17 @@
 .shiny-text {
-    color: var(--text-tertiary); /* Adjust this color to change intensity/style */
-    background: linear-gradient(120deg, transparent 40%, var(--text-primary) 50%, transparent 60%);
-    background-size: 200% 100%;
+    background: linear-gradient(
+        120deg,
+        #bf00ff 0%,
+        #7b2fff 50%,
+        #d400ff 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     display: inline-block;
-    animation: shine 5s linear infinite;
-}
-
-@keyframes shine {
-    0% {
-        background-position: 100%;
-    }
-    100% {
-        background-position: -100%;
-    }
 }
 
 .shiny-text.disabled {
-    animation: none;
+    background: none;
+    -webkit-text-fill-color: var(--primary-color);
 }

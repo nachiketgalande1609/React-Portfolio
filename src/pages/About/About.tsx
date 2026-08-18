@@ -82,7 +82,6 @@ const About: React.FC = () => {
                         <span>Get to know me</span>
                     </span>
                     <ShinyText text="About Me" disabled={false} speed={2} className="section-title" />
-                    <p className="about-subtitle">A quick look at who I am, what I've built, and where I've learned.</p>
                 </motion.div>
 
                 <motion.div className="about-lead" variants={itemVariants}>
