@@ -48,7 +48,7 @@
 /* Glass panel */
 .pc-panel {
     border-radius: 20px;
-    padding: 24px 24px 0;
+    padding: 16px 16px 0;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -101,7 +101,7 @@
     overflow: hidden;
     cursor: pointer;
     box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.25);
-    margin: 0 16px;
+    margin: 0;
     border: 1px solid rgba(255, 255, 255, 0.10);
     border-bottom: none;
 }
@@ -157,16 +157,16 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: rgba(0, 0, 0, 0.2);
-    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid var(--border-default);
+    background: var(--bg-card);
+    color: var(--text-secondary);
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, color 0.2s;
 }
 
 .pc-carousel-btn:hover {
-    background: rgba(0, 0, 0, 0.35);
-    color: #fff;
+    background: var(--bg-elevated);
+    color: var(--text-primary);
 }
 
 .pc-dots {
@@ -180,14 +180,14 @@
     height: 6px;
     border-radius: 50%;
     border: none;
-    background: rgba(255, 255, 255, 0.35);
+    background: var(--border-default);
     cursor: pointer;
     padding: 0;
     transition: background 0.2s, transform 0.2s;
 }
 
 .pc-dot.active {
-    background: #fff;
+    background: var(--text-primary);
     transform: scale(1.4);
 }
 
@@ -298,7 +298,7 @@
     }
 
     .pc-panel {
-        padding: 18px 18px 0;
+        padding: 12px 12px 0;
         border-radius: 16px;
     }
 
@@ -308,6 +308,17 @@
 
     .pc-footer-bottom {
         justify-content: flex-start;
+    }
+
+    .pc-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+    }
+
+    .pc-btn {
+        justify-content: center;
+        width: 100%;
     }
 
 }
