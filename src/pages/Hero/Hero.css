@@ -181,11 +181,12 @@
 .hero-title-name {
     display: flex;
     flex-wrap: wrap;
-    gap: 0 0.5em;
+    gap: 0;
     font-size: clamp(2.4rem, 6vw, 4.5rem);
     line-height: 1.05;
     color: var(--text-primary);
     justify-content: center;
+    perspective: 600px;
 }
 
 @media (min-width: 900px) {
@@ -194,17 +195,40 @@
     }
 }
 
-.hero-title-first {
+.hero-title-word {
+    display: inline-flex;
+}
+
+.hero-title-space {
+    display: inline-block;
+    width: 0.35em;
+}
+
+/* Individual character */
+.hero-title-char {
+    display: inline-block;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    transform-origin: bottom center;
     color: var(--text-primary);
 }
 
-.hero-title-last {
-    background: linear-gradient(120deg, var(--text-primary), var(--text-tertiary) 60%, var(--text-primary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% 100%;
-    animation: heroNameShimmer 6s ease-in-out infinite;
+/* Last name — slightly muted */
+.hero-title-char--dim {
+    color: var(--text-secondary);
+}
+
+/* Lower text blocks */
+.hero-lower {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+    align-items: center;
+}
+
+@media (min-width: 900px) {
+    .hero-lower { align-items: flex-start; }
 }
 
 @keyframes heroNameShimmer {
@@ -414,10 +438,20 @@
     opacity: 0.7;
 }
 
-.hero-portrait-frame {
+/* Tilt wrapper (inside rings) */
+.hero-portrait-tilt {
     position: relative;
     width: 78%;
     height: 78%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-portrait-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid var(--border-default);
@@ -426,11 +460,20 @@
         0 24px 60px rgba(0, 0, 0, 0.25),
         0 0 0 4px var(--bg-primary),
         0 0 0 5px var(--border-subtle);
-    transition: transform 0.4s ease;
 }
 
-.hero-portrait-stage:hover .hero-portrait-frame {
-    transform: scale(1.02);
+/* Glass shine */
+.hero-portrait-shine {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.14) 0%,
+        rgba(255,255,255,0.04) 35%,
+        transparent 60%
+    );
+    pointer-events: none;
 }
 
 .hero-portrait-img {
