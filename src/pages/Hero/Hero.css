@@ -208,12 +208,11 @@
     font-weight: 800;
     letter-spacing: -0.025em;
     transform-origin: bottom center;
-    color: #bf00ff;
+    color: #F59E0B;
 }
 
-/* Last name — slightly dimmer purple */
 .hero-title-char--dim {
-    color: #9b00cc;
+    color: #F59E0B;
 }
 
 /* Lower text blocks */

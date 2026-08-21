@@ -47,10 +47,7 @@
     letter-spacing: -0.05em;
     position: relative;
     line-height: 1.1;
-    background: linear-gradient(120deg, #bf00ff 0%, #7b2fff 50%, #d400ff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #F59E0B;
 }
 
 .footer-name::after {
