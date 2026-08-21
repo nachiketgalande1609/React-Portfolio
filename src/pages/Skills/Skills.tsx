@@ -48,6 +48,7 @@ interface Skill {
     category: "frontend" | "backend" | "database" | "tools" | "programmingLanguages" | "cloud";
     icon: string;
     website: string;
+    darkBg?: boolean;
 }
 
 // ===== Skill data =====
@@ -71,10 +72,10 @@ const skills: Skill[] = [
     // Backend
     { name: "Node.Js", category: "backend", icon: nodejsIcon, website: "https://nodejs.org/" },
     { name: "NestJS", category: "backend", icon: nestjsIcon, website: "https://nestjs.com/" },
-    { name: "Flask", category: "backend", icon: flaskIcon, website: "https://flask.palletsprojects.com/" },
-    { name: "Express.Js", category: "backend", icon: expressIcon, website: "https://expressjs.com/" },
+    { name: "Flask", category: "backend", icon: flaskIcon, website: "https://flask.palletsprojects.com/", darkBg: true },
+    { name: "Express.Js", category: "backend", icon: expressIcon, website: "https://expressjs.com/", darkBg: true },
     { name: "GraphQL", category: "backend", icon: graphQLIcon, website: "https://graphql.org/" },
-    { name: "Fastify", category: "backend", icon: fastifyIcon, website: "https://www.fastify.io/" },
+    { name: "Fastify", category: "backend", icon: fastifyIcon, website: "https://www.fastify.io/", darkBg: true },
 
     // Database
     { name: "PostgreSQL", category: "database", icon: postgresqlIcon, website: "https://www.postgresql.org/" },
@@ -143,7 +144,7 @@ const Skills: React.FC = () => {
     const SkillItem: React.FC<{ skill: Skill }> = ({ skill }) => (
         <a href={skill.website} target="_blank" rel="noopener noreferrer" className="skill-item-link">
             <div className="skill-item animate-on-scroll">
-                <div className="skill-icon">
+                <div className={`skill-icon${skill.darkBg ? " skill-icon--dark" : ""}`}>
                     <img
                         src={skill.icon}
                         alt={skill.name}
