@@ -1,10 +1,9 @@
-﻿import React, { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useEffect, useRef, useState, useMemo } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import "./Certificates.css";
 import LaunchIcon from "@mui/icons-material/Launch";
+import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import { certificatesData } from "../../data/portfolioData";
-import { Modal, Box, Typography, IconButton, Backdrop, Fade } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import ShinyText from "../../components/ShinyText/ShinyText";
 
 interface Certificate {
@@ -16,13 +15,17 @@ interface Certificate {
     image?: string;
 }
 
+const parseYear = (dateStr: string): string => {
+    const match = dateStr.match(/\d{4}/);
+    return match ? match[0] : "Unknown";
+};
+
 const Certificates: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
     const [filter, setFilter] = useState<string>("all");
-    const [filteredCertificates, setFilteredCertificates] = useState<Certificate[]>(certificatesData);
-    const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
-    const [visibleCount, setVisibleCount] = useState<number>(9);
-    const [isAnimating, setIsAnimating] = useState(false);
+    const [expanded, setExpanded] = useState<string | null>(null);
+    const [showAll, setShowAll] = useState(false);
+    const INITIAL_COUNT = 5;
 
     const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["end 200px", "end start"] });
     const sectionOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
@@ -30,82 +33,29 @@ const Certificates: React.FC = () => {
     const sectionScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
     const sectionBlur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(3px)"]);
 
-    // Observer for scroll animations
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("animate-in");
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
-
-        if (sectionRef.current) {
-            // Target the header-decoration directly for the animation
-            const elementsToAnimate = sectionRef.current.querySelectorAll(".header-decoration, .section-subtitle, .filter-btn, .certificate-card");
-            elementsToAnimate.forEach((el) => observer.observe(el));
-        }
-
-        return () => observer.disconnect();
-    }, [filteredCertificates, visibleCount]); // Keep dependencies as they are
-    // Extract unique organizations for filter
-    const organizations = React.useMemo(() => {
-        const orgs = certificatesData.map((cert) => cert.organization);
+    const organizations = useMemo(() => {
+        const orgs = certificatesData.map((c) => c.organization);
         return ["all", ...Array.from(new Set(orgs))];
     }, []);
 
-    // Filter certificates
-    useEffect(() => {
-        setIsAnimating(true);
-        const timer = setTimeout(() => {
-            if (filter === "all") {
-                setFilteredCertificates(certificatesData);
-            } else {
-                setFilteredCertificates(certificatesData.filter((cert) => cert.organization === filter));
-            }
-            setVisibleCount(9);
-            setIsAnimating(false);
-        }, 500);
-
-        return () => clearTimeout(timer);
+    const filtered = useMemo(() => {
+        const list = filter === "all" ? certificatesData : certificatesData.filter((c) => c.organization === filter);
+        return [...list].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     }, [filter]);
 
-    const handleViewMore = () => {
-        setVisibleCount(filteredCertificates.length);
-    };
+    const visibleCerts = showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
 
-    const handleOpenModal = (certificate: Certificate) => {
-        setSelectedCertificate(certificate);
-    };
+    const groupedByYear = useMemo(() => {
+        const groups: Record<string, Certificate[]> = {};
+        visibleCerts.forEach((cert) => {
+            const year = parseYear(cert.date);
+            if (!groups[year]) groups[year] = [];
+            groups[year].push(cert);
+        });
+        return groups;
+    }, [visibleCerts]);
 
-    const handleCloseModal = () => {
-        setSelectedCertificate(null);
-    };
-
-    const visibleCertificates = filteredCertificates.slice(0, visibleCount);
-    const hasMoreCertificates = visibleCount < filteredCertificates.length;
-
-    const modalStyle = {
-        position: "absolute" as "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: { xs: "calc(100% - 24px)", sm: "90%" },
-        maxWidth: 900,
-        maxHeight: "90vh",
-        overflowY: "auto",
-        bgcolor: "rgba(25, 25, 30, 0.7)",
-        border: "1px solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "20px",
-        p: { xs: "12px", sm: 3 },
-        backdropFilter: "blur(20px) saturate(180%)",
-        boxShadow: "0 25px 50px rgba(0, 0, 0, 0.5)",
-        color: "white",
-        outline: "none",
-    };
+    const toggle = (title: string) => setExpanded((prev) => (prev === title ? null : title));
 
     return (
         <motion.section
@@ -114,208 +64,117 @@ const Certificates: React.FC = () => {
             className="section certificates-section"
             style={{ opacity: sectionOpacity, y: sectionY, scale: sectionScale, filter: sectionBlur }}
         >
-            <div className="background-glow"></div>
-            <div className="container">
+            <div className="container certs-container">
                 <div className="section-header">
-                    <div className="header-decoration">
-                        {/* <h2 className="section-title">Certifications</h2> */}
+                    <div className="header-decoration animate-on-scroll">
                         <ShinyText text="Certifications" disabled={false} speed={2} className="section-title" />
                     </div>
                     <p className="section-subtitle">A collection of my professional certifications and achievements.</p>
                 </div>
 
+                {/* Filters */}
                 <div className="certificate-filters">
                     {organizations.map((org) => (
-                        <button key={org} className={`filter-btn ${filter === org ? "active" : ""}`} onClick={() => setFilter(org)}>
+                        <button
+                            key={org}
+                            className={`filter-btn ${filter === org ? "active" : ""}`}
+                            onClick={() => { setFilter(org); setExpanded(null); }}
+                        >
                             {org === "all" ? "All" : org}
                         </button>
                     ))}
                 </div>
 
-                <div className={`certificates-grid ${isAnimating ? "animating-out" : ""}`}>
-                    {visibleCertificates.map((certificate, index) => (
-                        <div key={`${certificate.title}-${index}`} className="certificate-card" onClick={() => handleOpenModal(certificate)}>
-                            <div className="certificate-content">
-                                <div className="certificate-header">
-                                    <div className="certificate-logo">
-                                        <img
-                                            src={certificate.logo}
-                                            alt={`${certificate.organization} logo`}
-                                            loading="lazy"
-                                            onError={(e) => {
-                                                (e.target as HTMLImageElement).src = "/fallback-logo.png";
-                                            }}
-                                        />
-                                    </div>
-                                    <div className="certificate-info">
-                                        <h3 className="certificate-title">{certificate.title}</h3>
-                                        <p className="certificate-organization">{certificate.organization}</p>
-                                    </div>
-                                </div>
+                {/* Timeline */}
+                <div className={`timeline ${!showAll ? "timeline--collapsed" : ""}`}>
+                    {Object.entries(groupedByYear).sort(([a], [b]) => Number(b) - Number(a)).map(([year, certs]) => (
+                        <div key={year} className="timeline-year-group">
+                            <div className="timeline-year-label">{year}</div>
 
-                                <div className="certificate-footer">
-                                    <p className="certificate-date">{certificate.date}</p>
-                                    <a
-                                        href={certificate.credential_url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="certificate-link"
-                                        onClick={(e) => e.stopPropagation()}
-                                        aria-label="View Credential"
-                                    >
-                                        <LaunchIcon className="link-icon" />
-                                    </a>
-                                </div>
-                            </div>
+                            {certs.map((cert) => {
+                                const isOpen = expanded === cert.title;
+                                return (
+                                    <div key={cert.title} className="timeline-item">
+                                        <div className={`cert-card ${isOpen ? "open" : ""}`} onClick={() => toggle(cert.title)}>
+                                            <div className="cert-card-header">
+                                                <div className="cert-logo">
+                                                    <img
+                                                        src={cert.logo}
+                                                        alt={cert.organization}
+                                                        loading="lazy"
+                                                        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                                                    />
+                                                </div>
+                                                <div className="cert-info">
+                                                    <h3 className="cert-title">{cert.title}</h3>
+                                                    <span className="cert-org">{cert.organization}</span>
+                                                </div>
+                                                <div className="cert-meta">
+                                                    <span className="cert-date">{cert.date}</span>
+                                                    <KeyboardArrowDownRoundedIcon
+                                                        className={`cert-chevron ${isOpen ? "rotated" : ""}`}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <AnimatePresence initial={false}>
+                                                {isOpen && (
+                                                    <motion.div
+                                                        className="cert-card-body"
+                                                        initial={{ height: 0, opacity: 0 }}
+                                                        animate={{ height: "auto", opacity: 1 }}
+                                                        exit={{ height: 0, opacity: 0 }}
+                                                        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                                                    >
+                                                        <div className="cert-card-body-inner">
+                                                            {cert.image && (
+                                                                <img
+                                                                    src={cert.image}
+                                                                    alt={cert.title}
+                                                                    className="cert-preview-image"
+                                                                    onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                                                                />
+                                                            )}
+                                                            <a
+                                                                href={cert.credential_url}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="cert-credential-btn"
+                                                                onClick={(e) => e.stopPropagation()}
+                                                            >
+                                                                <span>View Credential</span>
+                                                                <LaunchIcon style={{ fontSize: "0.9rem" }} />
+                                                            </a>
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </div>
                     ))}
                 </div>
-
-                {hasMoreCertificates && (
-                    <div className="view-more-container">
-                        <button className="view-more-btn" onClick={handleViewMore}>
-                            View More ({filteredCertificates.length - visibleCount} remaining)
+                {filtered.length > INITIAL_COUNT && (
+                    <div className="certs-expand-wrap">
+                        <button className="certs-expand-btn" onClick={() => setShowAll((p) => !p)}>
+                            {showAll
+                                ? "Show less"
+                                : `Show ${filtered.length - INITIAL_COUNT} more certifications`}
+                            <KeyboardArrowDownRoundedIcon
+                                style={{
+                                    fontSize: "1.1rem",
+                                    transition: "transform 0.25s ease",
+                                    transform: showAll ? "rotate(180deg)" : "rotate(0deg)",
+                                }}
+                            />
                         </button>
                     </div>
                 )}
-
-                <div className="certificates-count">
-                    Showing {visibleCertificates.length} of {filteredCertificates.length} certificates
-                    {filter !== "all" && ` for ${filter}`}
-                </div>
-
-                <Modal
-                    open={selectedCertificate !== null}
-                    onClose={handleCloseModal}
-                    aria-labelledby="certificate-modal-title"
-                    aria-describedby="certificate-modal-description"
-                    closeAfterTransition
-                    BackdropComponent={Backdrop}
-                    BackdropProps={{
-                        timeout: 500,
-                        sx: { backdropFilter: "blur(10px)" },
-                    }}
-                >
-                    <Fade in={selectedCertificate !== null}>
-                        <Box sx={modalStyle}>
-                            {selectedCertificate && (
-                                <>
-                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 1.5 }}>
-                                        <Typography
-                                            id="certificate-modal-title"
-                                            variant="h6"
-                                            component="h2"
-                                            sx={{
-                                                background: "linear-gradient(135deg, #ffffff 0%, #cccccc 100%)",
-                                                WebkitBackgroundClip: "text",
-                                                WebkitTextFillColor: "transparent",
-                                                flex: 1,
-                                                mr: 1,
-                                                lineHeight: 1.3,
-                                                fontSize: { xs: "1.1rem", sm: "1.4rem" },
-                                            }}
-                                        >
-                                            {selectedCertificate.title}
-                                        </Typography>
-                                        <IconButton
-                                            aria-label="close"
-                                            onClick={handleCloseModal}
-                                            sx={{
-                                                color: "rgba(255, 255, 255, 0.8)",
-                                                bgcolor: "rgba(255, 255, 255, 0.1)",
-                                                border: "1px solid rgba(255, 255, 255, 0.2)",
-                                                transition: "all 0.3s ease",
-                                                p: { xs: 0.5, sm: 1 },
-                                                "&:hover": {
-                                                    color: "white",
-                                                    background: "rgba(255, 255, 255, 0.2)",
-                                                    borderColor: "rgba(255, 255, 255, 0.3)",
-                                                    transform: "scale(1.1)",
-                                                },
-                                            }}
-                                        >
-                                            <CloseIcon sx={{ fontSize: { xs: "1.2rem", sm: "1.5rem" } }} />
-                                        </IconButton>
-                                    </Box>
-                                    <Box>
-                                        {selectedCertificate.image && (
-                                            <Box sx={{ width: "100%", display: "flex", justifyContent: "center", mb: 2 }}>
-                                                <img
-                                                    src={selectedCertificate.image}
-                                                    alt={`${selectedCertificate.title} Certificate`}
-                                                    style={{
-                                                        width: "100%",
-                                                        maxHeight: "500px",
-                                                        borderRadius: "16px",
-                                                        border: "1px solid rgba(255, 255, 255, 0.15)",
-                                                        objectFit: "contain",
-                                                    }}
-                                                    onError={(e) => {
-                                                        (e.target as HTMLImageElement).style.display = "none";
-                                                    }}
-                                                />
-                                            </Box>
-                                        )}
-                                        <Box
-                                            sx={{
-                                                display: "flex",
-                                                alignItems: "center",
-                                                gap: 1.5,
-                                                flexDirection: { xs: "column", sm: "row" },
-                                                textAlign: { xs: "center", sm: "left" },
-                                            }}
-                                        >
-                                            <Box
-                                                sx={{
-                                                    width: { xs: 50, sm: 80 },
-                                                    height: { xs: 50, sm: 80 },
-                                                    borderRadius: "12px",
-                                                    border: "1px solid rgba(255, 255, 255, 0.15)",
-                                                    background: "rgba(255, 255, 255, 0.08)",
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    justifyContent: "center",
-                                                    p: 1,
-                                                    backdropFilter: "blur(15px)",
-                                                    flexShrink: 0,
-                                                }}
-                                            >
-                                                <img
-                                                    src={selectedCertificate.logo}
-                                                    alt={`${selectedCertificate.organization} logo`}
-                                                    style={{ width: "100%", height: "100%", objectFit: "contain" }}
-                                                />
-                                            </Box>
-                                            <Box sx={{ flex: 1, width: "100%" }}>
-                                                <Typography sx={{ color: "#10b981", fontSize: { xs: "1rem", sm: "1.2rem" }, fontWeight: 600 }}>
-                                                    {selectedCertificate.organization}
-                                                </Typography>
-                                                <Typography
-                                                    sx={{ color: "rgba(255, 255, 255, 0.8)", fontSize: { xs: "0.85rem", sm: "1rem" }, mb: 1.5 }}
-                                                >
-                                                    Issued: {selectedCertificate.date}
-                                                </Typography>
-                                                <a
-                                                    href={selectedCertificate.credential_url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="modal-link"
-                                                >
-                                                    <span>View Credential</span>
-                                                    <LaunchIcon className="link-icon" />
-                                                </a>
-                                            </Box>
-                                        </Box>
-                                    </Box>
-                                </>
-                            )}
-                        </Box>
-                    </Fade>
-                </Modal>
             </div>
         </motion.section>
     );
 };
 
 export default Certificates;
-
