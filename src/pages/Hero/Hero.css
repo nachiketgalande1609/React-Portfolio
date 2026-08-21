@@ -540,8 +540,33 @@
         order: -1;
     }
 
+    .hero-grid {
+        justify-items: center;
+        text-align: center;
+    }
+
     .hero-text {
         align-items: center;
+    }
+
+    .hero-pill-row {
+        justify-content: center;
+    }
+
+    .hero-title-name {
+        justify-content: center;
+    }
+
+    .hero-lower {
+        align-items: center;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-socials {
+        justify-content: center;
     }
 }
 
