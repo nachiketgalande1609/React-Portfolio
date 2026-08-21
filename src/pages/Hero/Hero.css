@@ -63,8 +63,8 @@
     grid-template-columns: 1fr;
     gap: 3rem;
     align-items: center;
-    justify-items: center;
-    text-align: center;
+    justify-items: start;
+    text-align: left;
 }
 
 @media (min-width: 900px) {
@@ -84,7 +84,7 @@
     gap: 1.25rem;
     max-width: 640px;
     width: 100%;
-    align-items: center;
+    align-items: flex-start;
 }
 
 @media (min-width: 900px) {
@@ -98,7 +98,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 @media (min-width: 900px) {
@@ -182,9 +182,11 @@
     font-size: clamp(2rem, 5.5vw, 4.5rem);
     line-height: 1.05;
     color: var(--text-primary);
-    justify-content: center;
+    justify-content: flex-start;
     perspective: 600px;
     white-space: nowrap;
+    letter-spacing: -0.025em;
+    margin-left: -0.05em;
 }
 
 @media (min-width: 900px) {
@@ -206,7 +208,7 @@
 .hero-title-char {
     display: inline-block;
     font-weight: 800;
-    letter-spacing: -0.025em;
+    letter-spacing: 0;
     transform-origin: bottom center;
     color: #F59E0B;
 }
@@ -221,7 +223,7 @@
     flex-direction: column;
     gap: 1.25rem;
     width: 100%;
-    align-items: center;
+    align-items: flex-start;
 }
 
 @media (min-width: 900px) {
