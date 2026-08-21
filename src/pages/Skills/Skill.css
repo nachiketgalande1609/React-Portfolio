@@ -94,7 +94,7 @@
 .technologies-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 12px;
 }
 
 /* Skill pill */
@@ -109,8 +109,9 @@
     gap: 8px;
     padding: 7px 14px 7px 10px;
     border-radius: 999px;
-    border: 1px solid var(--border-subtle);
+    border: 1px solid var(--border-strong);
     background: var(--bg-card);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
     opacity: 0;
