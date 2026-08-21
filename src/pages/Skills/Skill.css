@@ -42,9 +42,21 @@
 .category-header-item {
     display: flex;
     align-items: flex-start;
+    gap: 10px;
     opacity: 0;
     transform: translateX(-20px);
     padding-top: 0.25rem;
+}
+
+.category-header-item::before {
+    content: "";
+    display: block;
+    width: 3px;
+    height: 1em;
+    border-radius: 999px;
+    background: #F59E0B;
+    flex-shrink: 0;
+    margin-top: 0.1em;
 }
 
 .category-glow { display: none; }
