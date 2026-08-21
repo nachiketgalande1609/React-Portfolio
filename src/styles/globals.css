@@ -165,7 +165,7 @@ body {
     font-size: clamp(1.6rem, 3vw, 3rem);
     font-weight: 400;
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 0.5rem;
     font-family: "Special Gothic Expanded One", sans-serif !important;
     width: 100%;
     position: relative;
@@ -228,17 +228,7 @@ body {
 }
 
 .section-title::after {
-    content: "";
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 4px;
-    border-radius: 100%;
-    background: rgba(255, 255, 255, 0.3);
-    transition: width 1.5s ease 0.3s;
-    animation: underlineFlow 3s ease-in-out infinite;
+    display: none;
 }
 
 @keyframes underlineFlow {
