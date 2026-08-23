@@ -53,6 +53,7 @@ import sqliteIcon from "../assets/icons/SQLite.svg";
 import AbhishekProfileImage from "../assets/testimonials/abhishek.jpg";
 import SumitProfileImage from "../assets/testimonials/sumit.jpg";
 import SudarshanProfileImage from "../assets/testimonials/sudarshan.jpg";
+import PrabhatProfileImage from "../assets/testimonials/prabhat.jpg";
 
 import CognitiveClassLogo from "../assets/certificates/cognitiveclass.png";
 import CourseraLogo from "../assets/certificates/coursera.svg";
@@ -303,6 +304,12 @@ export const experienceData: Experience[] = [
 
 export const testimonialsData: TestimonialsData = {
     testimonials: [
+        {
+            quote: "I really enjoyed working with Nachiket for almost 2 years on the same client project. We worked closely as Full Stack Developers, working mainly with React, Python, Flask, Azure, and SQL. He's someone I could always count on, both technically and as a teammate. Whether it was getting stuck on a problem, discussing an approach, or needing a hand with something, Nachiket was always ready to help. He has a strong understanding of the tech stack we worked with and was particularly good at breaking down problems and finding practical solutions. He was also great at coordinating with the team and keeping things moving. More than anything, I genuinely enjoyed working with him and became quite close during our time on the project. He's someone I'd be very happy to work with again, and I'd definitely recommend him to any team.",
+            image: PrabhatProfileImage,
+            name: "Prabhat Kumar",
+            role: "React Fullstack Developer @Deloitte | React, NextJs, Typescript, Python, Flask",
+        },
         {
             quote: "I highly recommend Nachiket, with whom I collaborated on Python-based machine learning and deep learning projects. His strong grasp of cloud technologies, particularly Azure Cloud, has greatly enhanced our project outcomes. Nachiket's passion, adaptability, and eagerness to learn make him a valuable team member. He made a significant impact on our undergraduate projects, driving innovation and achieving objectives. Nachiket's creative problem-solving skills ensure efficient task completion and project success. I confidently endorse Nachiket for any role that matches his skill set and aspirations. He is a talented individual who consistently delivers excellent results.",
             image: "https://media.licdn.com/dms/image/v2/D5603AQHDoPYEUIW5rQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1714244228097?e=2147483647&v=beta&t=JoDgwEkks6bNxrZtVf91hQzdcqziI1N6JMC3ni2PEg8",

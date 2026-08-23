@@ -71,6 +71,7 @@ const skills: Skill[] = [
 
     // Backend
     { name: "Node.Js", category: "backend", icon: nodejsIcon, website: "https://nodejs.org/" },
+    { name: "FastAPI", category: "backend", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg", website: "https://fastapi.tiangolo.com/" },
     { name: "NestJS", category: "backend", icon: nestjsIcon, website: "https://nestjs.com/" },
     { name: "Flask", category: "backend", icon: flaskIcon, website: "https://flask.palletsprojects.com/", darkBg: true },
     { name: "Express.Js", category: "backend", icon: expressIcon, website: "https://expressjs.com/", darkBg: true },
