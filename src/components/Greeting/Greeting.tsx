@@ -23,7 +23,7 @@ const Greeting: React.FC<Props> = ({ onDone }) => {
     };
 
     useEffect(() => {
-        const t = setTimeout(dismiss, 3000);
+        const t = setTimeout(dismiss, 1500);
         return () => clearTimeout(t);
     }, []);
 
@@ -51,7 +51,7 @@ const Greeting: React.FC<Props> = ({ onDone }) => {
                             className="greeting-bar"
                             initial={{ scaleX: 1 }}
                             animate={{ scaleX: 0 }}
-                            transition={{ duration: 3, ease: "linear" }}
+                            transition={{ duration: 1.5, ease: "linear" }}
                         />
                     </motion.div>
                 </motion.div>
