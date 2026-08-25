@@ -12,7 +12,7 @@ import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 
-import profileImage from "../../assets/profile.png";
+import profileImage from "../../assets/profile.webp";
 
 /* Character-by-character animated name */
 const AnimatedName: React.FC<{ firstName: string; lastName: string }> = ({ firstName, lastName }) => {
