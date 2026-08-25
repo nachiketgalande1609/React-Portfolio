@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import "./ScrollProgress.css";
 
 const sections = [
-    { id: "home",       label: "Home" },
-    { id: "about",      label: "About" },
-    { id: "skills",     label: "Skills" },
-    { id: "experience", label: "Experience" },
-    { id: "projects",   label: "Projects" },
-    { id: "contact",    label: "Contact" },
+    { id: "home",         label: "Home" },
+    { id: "about",        label: "About" },
+    { id: "skills",       label: "Skills" },
+    { id: "experience",   label: "Experience" },
+    { id: "projects",     label: "Projects" },
+    { id: "certificates", label: "Certificates" },
+    { id: "testimonials", label: "Testimonials" },
+    { id: "contact",      label: "Contact" },
+    { id: "footer",       label: "Footer" },
 ];
 
 const ScrollProgress: React.FC = () => {

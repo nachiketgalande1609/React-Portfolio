@@ -144,6 +144,7 @@ export const projectsData = {
                 "A premium mobile wallpaper marketplace with AI-generated, high-resolution wallpapers across categories like Abstract, Nature, Dark, Minimal, Architecture, and Neon. Buy individual wallpapers or subscribe to Vela+ for unlimited downloads. Payments via Razorpay (UPI & cards). Built with a dark, minimal aesthetic focused purely on the wallpapers.",
             techStack: ["React", "Node.js", "Express.js", "MongoDB"],
             images: [velaImage1, velaImage2, velaImage3, velaImage4, velaImage5],
+            filterTag: "full-stack",
             liveLink: "https://vela.nachiketgalande.com/",
             githubLink: "https://github.com/nachiketgalande1609/vela",
             caseStudy: {
@@ -161,6 +162,7 @@ export const projectsData = {
             images: [upscalerImage1, upscalerImage2],
             videos: [upscalerVideoSingle, upscalerVideoBatch],
             videoLabels: ["Single", "Batch"],
+            filterTag: "ai-ml",
             githubLink: "https://github.com/nachiketgalande1609/upscaler",
             caseStudy: {
                 problem: "Cloud upscalers leak private images and charge per image. Running large SOTA models locally caused OOM crashes on mid-range GPUs.",
@@ -175,6 +177,7 @@ export const projectsData = {
                 "A Netflix-style local media streaming app that serves your personal video library to any browser on your network. Point it at a local folder in settings, and it fetches movie metadata from an external API to build a rich browsing UI - browse, search, and stream your movies over local IP.",
             techStack: ["React", "Node.js", "Express.js", "MongoDB"],
             images: [cineplexImage1, cineplexImage2, cineplexImage3, cineplexImage4, cineplexImage5],
+            filterTag: "full-stack",
             liveLink: "https://cineplex.nachiketgalande.com/",
             githubLink: "https://github.com/nachiketgalande1609/CineLocal",
             caseStudy: {
@@ -190,6 +193,7 @@ export const projectsData = {
                 "A fitness tracking web application that allows users to manage workouts and diet plans. Features include progress tracking, workout scheduling, meal logging, and personalized dashboards. Backend APIs are built with Flask, while MongoDB stores user activity and nutrition data.",
             techStack: ["React", "Flask", "Python", "MongoDB", "AWS", "Material UI"],
             images: [livoImage],
+            filterTag: "full-stack",
             liveLink: "https://livo.nachiketgalande.com/",
             githubLink: "https://github.com/nachiketgalande1609/dietplanner",
             caseStudy: {
@@ -205,6 +209,7 @@ export const projectsData = {
                 "A scalable social media platform with real-time messaging, video calls, and expiring stories. Features include push notifications, media sharing, and end-to-end encryption. Deployed on AWS with containerized architecture using Docker.",
             techStack: ["React", "React Native", "TypeScript", "Node.js", "WebRTC", "AWS"],
             images: [rippleImage1, rippleImage2, rippleImage3, rippleImage4, rippleImage5, rippleImage6, rippleImage7],
+            filterTag: "full-stack",
             liveLink: "https://ripple.nachiketgalande.com/",
             githubLink: "https://nachiketgalande1609.github.io/ripple-links/",
             caseStudy: {
@@ -220,6 +225,7 @@ export const projectsData = {
                 "Comprehensive ERP system with modules for users, inventory, orders, warehouses, customers, and sales. Provides a unified solution for business management with modern UI and efficient data handling.",
             techStack: ["React", "Node.js", "Express.js", "MongoDB", "Material UI"],
             images: [streamlineImage],
+            filterTag: "full-stack",
             liveLink: "https://streamline.nachiketgalande.com/",
             githubLink: "https://github.com/nachiketgalande1609/Streamline",
             caseStudy: {
@@ -235,6 +241,7 @@ export const projectsData = {
                 "Platform supporting children with autism through interactive modules and personalized learning experiences. Leverages generative AI for real-time therapist interaction and adaptive learning paths.",
             techStack: ["Flask", "Python", "Open AI", "SQLite"],
             images: ["https://github.com/nachiketgalande1609/GIST/blob/main/static/screenshots/profile.png?raw=true"],
+            filterTag: "ai-ml",
             githubLink: "https://github.com/nachiketgalande1609/GIST",
             caseStudy: {
                 problem: "Children with autism often have limited access to consistent, personalized speech therapy. Traditional software lacks adaptive interaction and real-time feedback.",
@@ -249,6 +256,7 @@ export const projectsData = {
                 "AI-powered assistant for project knowledge transfer, featuring document summarization and advanced Q&A capabilities. Deployed on Azure to enhance productivity for new team members with contextual understanding.",
             techStack: ["Flask", "Python", "Open AI", "Azure"],
             images: ["https://github.com/nachiketgalande1609/GenAI-Onboarding-Assistant/blob/main/static/screenshots/snap.png?raw=true"],
+            filterTag: "ai-ml",
             githubLink: "https://github.com/nachiketgalande1609/GenAI-Onboarding-Assistant",
             caseStudy: {
                 problem: "New team members spend weeks getting up to speed on project documentation. Knowledge is siloed in lengthy docs, wikis, and past conversations with no easy way to query it.",
@@ -262,6 +270,7 @@ export const projectsData = {
             description:
                 "Full-featured e-commerce platform with user authentication, product management, shopping cart, wishlists, and admin dashboard. Built with Flask and MongoDB for efficient data handling.",
             techStack: ["Flask", "MongoDB", "Bootstrap"],
+            filterTag: "full-stack",
             images: [urbanImage],
             githubLink: "https://github.com/nachiketgalande1609/urban",
         },
@@ -271,6 +280,7 @@ export const projectsData = {
             description:
                 "Dynamic chat application with real-time messaging using WebSockets. Features user authentication, chat rooms, and message persistence with MongoDB for seamless communication experience.",
             techStack: ["Flask", "Socket.IO", "MongoDB"],
+            filterTag: "full-stack",
             images: [echoImage],
             githubLink: "https://github.com/nachiketgalande1609/Echo",
         },
@@ -280,6 +290,7 @@ export const projectsData = {
             description:
                 "Web app for predicting Bitcoin and Ethereum prices using machine learning algorithms. Features data analysis, model training with historical data, and interactive visualizations. Published research in ICACCS 2021 journal.",
             techStack: ["Python", "Streamlit"],
+            filterTag: "ai-ml",
             images: [cryptoImage],
             githubLink: "https://github.com/nachiketgalande1609/Cryptocurrency_Price_Prediction_Using_Neural_Networks_and_Deep_Learning",
         },
@@ -289,6 +300,7 @@ export const projectsData = {
             description:
                 "Classic Flappy Bird game implementation with Pygame. Features dynamic obstacle generation, collision detection, gravity mechanics, and sound effects for an engaging gaming experience.",
             techStack: ["Python", "Pygame"],
+            filterTag: "game",
             images: [flappyBirdImage],
             githubLink: "https://github.com/nachiketgalande1609/FlappyBird",
         },
@@ -298,6 +310,7 @@ export const projectsData = {
             description:
                 "Web application for vocabulary learning with quizzes and pronunciation features. Includes Barron's GRE word lists, multiple-choice quizzes, and text-to-speech functionality.",
             techStack: ["Flask", "Python", "pyttsx3"],
+            filterTag: "tools",
             images: [vocabImage],
             githubLink: "https://github.com/nachiketgalande1609/English-Vocalbulary-Builder",
         },

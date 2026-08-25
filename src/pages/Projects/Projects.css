@@ -101,6 +101,53 @@
     transform: translateY(0);
 }
 
+/* Filter tabs */
+.projects-filter {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+}
+
+.projects-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--border-subtle);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.projects-filter-btn:hover {
+    border-color: var(--border-default);
+    color: var(--text-secondary);
+    background: var(--bg-elevated);
+}
+
+.projects-filter-btn.active {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--bg-primary);
+}
+
+.projects-filter-count {
+    font-size: 0.68rem;
+    font-weight: 700;
+    opacity: 0.6;
+}
+
+.projects-filter-btn.active .projects-filter-count {
+    opacity: 0.7;
+}
+
 .header-decoration {
     display: flex;
     align-items: center;

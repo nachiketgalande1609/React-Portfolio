@@ -59,6 +59,9 @@
     opacity: 1;
     transform: translateX(0);
     color: var(--text-primary);
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
 }
 
 /* Dot */

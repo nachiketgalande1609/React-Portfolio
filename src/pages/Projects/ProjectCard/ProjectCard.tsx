@@ -29,6 +29,7 @@ export interface Project {
     liveLink?: string;
     githubLink?: string;
     caseStudy?: CaseStudy;
+    filterTag?: "full-stack" | "ai-ml" | "tools" | "game";
 }
 
 interface ProjectCardProps {
