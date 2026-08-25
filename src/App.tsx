@@ -10,6 +10,7 @@ import ScrollToTopButton from "./components/ScrollToTop/ScrollToTop";
 import Terminal from "./components/Terminal/Terminal";
 import SectionProgress from "./components/SectionProgress/SectionProgress";
 import Greeting from "./components/Greeting/Greeting";
+import ChatBot from "./components/ChatBot/ChatBot";
 import { GreetingContext } from "./context/GreetingContext";
 import "./styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
@@ -122,6 +123,7 @@ const App: React.FC = () => {
                 </div>
 
                 <Greeting onDone={() => setGreetingDone(true)} />
+                <ChatBot />
 
                 <AnimatePresence>
                     {terminalOpen && <Terminal onClose={() => setTerminalOpen(false)} />}
