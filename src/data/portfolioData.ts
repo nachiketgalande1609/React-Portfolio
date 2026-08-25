@@ -11,6 +11,8 @@ import rippleImage6 from "../assets/projects/Ripple/ripple6.png";
 import rippleImage7 from "../assets/projects/Ripple/ripple7.png";
 import upscalerImage1 from "../assets/projects/upscaler/upscaler1.png";
 import upscalerImage2 from "../assets/projects/upscaler/upscaler2.png";
+import upscalerVideoSingle from "../assets/projects/upscaler/single.mp4";
+import upscalerVideoBatch from "../assets/projects/upscaler/batch.mp4";
 import velaImage1 from "../assets/projects/Vela/vela1.png";
 import velaImage2 from "../assets/projects/Vela/vela2.png";
 import velaImage3 from "../assets/projects/Vela/vela3.png";
@@ -152,6 +154,7 @@ export const projectsData = {
                 "A local, GPU-accelerated image super-resolution tool that enhances photos up to 4x using deep learning - entirely on your machine with no cloud or API keys. Supports Real-HAT (Swin Transformer) and Real-ESRGAN (CNN) models. Uses tiled inference for large images and BF16 precision on Ampere+ GPUs to cut VRAM usage by 4x. Clean dark web UI served via FastAPI with real-time tile-progress streaming via SSE, a draggable before/after comparison slider, and batch folder processing.",
             techStack: ["Python", "FastAPI", "PyTorch"],
             images: [upscalerImage1, upscalerImage2],
+            videos: [upscalerVideoSingle, upscalerVideoBatch],
             githubLink: "https://github.com/nachiketgalande1609/upscaler",
         },
         {

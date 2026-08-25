@@ -1,10 +1,12 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import PlayCircleOutlineRoundedIcon from "@mui/icons-material/PlayCircleOutlineRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { techIcons } from "../../../data/portfolioData";
 import ImageLightbox from "../../../components/ImageLightbox/ImageLightbox";
 import "./ProjectCard.css";
@@ -15,6 +17,7 @@ export interface Project {
     description: string;
     techStack: string[];
     images: string[];
+    videos?: string[];
     liveLink?: string;
     githubLink?: string;
 }
@@ -48,10 +51,76 @@ const PROJECT_META: Record<number, { category: string; color: string }> = {
     13: { category: "TOOL",          color: "#a855f7" },
 };
 
+/* ── Video Modal ── */
+const VideoModal: React.FC<{ videos: string[]; title: string; onClose: () => void }> = ({ videos, title, onClose }) => {
+    const [activeVideo, setActiveVideo] = useState(0);
+
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+        document.addEventListener("keydown", onKey);
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.removeEventListener("keydown", onKey);
+            document.body.style.overflow = "";
+        };
+    }, [onClose]);
+
+    return (
+        <motion.div
+            className="video-modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+        >
+            <motion.div
+                className="video-modal"
+                initial={{ scale: 0.92, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.92, opacity: 0 }}
+                transition={{ duration: 0.25, ease: [0.215, 0.61, 0.355, 1] }}
+                onClick={(e) => e.stopPropagation()}
+            >
+                <div className="video-modal-header">
+                    <span className="video-modal-title">{title}</span>
+                    <button className="video-modal-close" onClick={onClose} aria-label="Close video">
+                        <CloseRoundedIcon fontSize="small" />
+                    </button>
+                </div>
+
+                <video
+                    key={activeVideo}
+                    className="video-modal-player"
+                    controls
+                    autoPlay
+                    src={videos[activeVideo]}
+                />
+
+                {videos.length > 1 && (
+                    <div className="video-modal-tabs">
+                        {videos.map((_, i) => (
+                            <button
+                                key={i}
+                                className={`video-modal-tab ${i === activeVideo ? "active" : ""}`}
+                                onClick={() => setActiveVideo(i)}
+                                aria-label={`Video ${i + 1}`}
+                            >
+                                Demo {i + 1}
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </motion.div>
+        </motion.div>
+    );
+};
+
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
     const [slide, setSlide] = useState(0);
     const [lightboxOpen, setLightboxOpen] = useState(false);
+    const [videoOpen, setVideoOpen] = useState(false);
     const images = project.images;
+    const videos = project.videos ?? [];
     const touchStartX = useRef(0);
     const wheelAccum = useRef(0);
     const wheelTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -104,95 +173,109 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
     }, [images.length]);
 
     return (
-        <motion.div
-            className="pc-card"
-            initial={{ opacity: 0, y: 48 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: [0.215, 0.61, 0.355, 1], delay: (index % 4) * 0.06 }}
-            viewport={{ once: true, amount: 0.15 }}
-        >
-            {/* Eyebrow */}
-            <div className="pc-eyebrow">
-                <span className="pc-num">{String(index + 1).padStart(2, "0")}</span>
-                <span className="pc-dash">—</span>
-                <span className="pc-category">{meta.category}</span>
-            </div>
+        <>
+            <motion.div
+                className="pc-card"
+                initial={{ opacity: 0, y: 48 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, ease: [0.215, 0.61, 0.355, 1], delay: (index % 4) * 0.06 }}
+                viewport={{ once: true, amount: 0.15 }}
+            >
+                {/* Eyebrow */}
+                <div className="pc-eyebrow">
+                    <span className="pc-num">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="pc-dash">—</span>
+                    <span className="pc-category">{meta.category}</span>
+                </div>
 
-            {/* Title */}
-            <h3 className="pc-title">{project.name}</h3>
+                {/* Title */}
+                <h3 className="pc-title">{project.name}</h3>
 
-            {/* Colored panel */}
-            <div className="pc-panel" style={{ "--pc-color-rgb": hexToRgb(meta.color) } as React.CSSProperties}>
-                <p className="pc-desc">{project.description}</p>
+                {/* Colored panel */}
+                <div className="pc-panel" style={{ "--pc-color-rgb": hexToRgb(meta.color) } as React.CSSProperties}>
+                    <p className="pc-desc">{project.description}</p>
 
-                {images.length > 0 && (
-                    <div
-                        ref={frameRef}
-                        className="pc-frame"
-                        onClick={() => setLightboxOpen(true)}
-                        onTouchStart={handleTouchStart}
-                        onTouchEnd={handleTouchEnd}
-                    >
-                        <div className="pc-browser-chrome">
-                            <span /><span /><span />
+                    {images.length > 0 && (
+                        <div
+                            ref={frameRef}
+                            className="pc-frame"
+                            onClick={() => setLightboxOpen(true)}
+                            onTouchStart={handleTouchStart}
+                            onTouchEnd={handleTouchEnd}
+                        >
+                            <div className="pc-browser-chrome">
+                                <span /><span /><span />
+                            </div>
+                            <div className="pc-carousel-track" style={{ transform: `translateX(-${slide * 100}%)` }}>
+                                {images.map((src, i) => (
+                                    <img key={i} src={src} alt={`${project.name} screenshot ${i + 1}`} className="pc-img" loading={i === 0 ? "eager" : "lazy"} />
+                                ))}
+                            </div>
                         </div>
-                        <div className="pc-carousel-track" style={{ transform: `translateX(-${slide * 100}%)` }}>
-                            {images.map((src, i) => (
-                                <img key={i} src={src} alt={`${project.name} screenshot ${i + 1}`} className="pc-img" loading={i === 0 ? "eager" : "lazy"} />
-                            ))}
+                    )}
+
+                    {images.length > 1 && (
+                        <div className="pc-carousel-controls">
+                            <button className="pc-carousel-btn" onClick={prev} aria-label="Previous">
+                                <ChevronLeftIcon fontSize="small" />
+                            </button>
+                            <div className="pc-dots">
+                                {images.map((_, i) => (
+                                    <button key={i} className={`pc-dot ${i === slide ? "active" : ""}`} aria-label={`Go to image ${i + 1}`} onClick={(e) => { e.stopPropagation(); setSlide(i); }} />
+                                ))}
+                            </div>
+                            <button className="pc-carousel-btn" onClick={next} aria-label="Next">
+                                <ChevronRightIcon fontSize="small" />
+                            </button>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
 
-                {images.length > 1 && (
-                    <div className="pc-carousel-controls">
-                        <button className="pc-carousel-btn" onClick={prev} aria-label="Previous">
-                            <ChevronLeftIcon fontSize="small" />
-                        </button>
-                        <div className="pc-dots">
-                            {images.map((_, i) => (
-                                <button key={i} className={`pc-dot ${i === slide ? "active" : ""}`} aria-label={`Go to image ${i + 1}`} onClick={(e) => { e.stopPropagation(); setSlide(i); }} />
-                            ))}
+                {/* Footer */}
+                <div className="pc-footer">
+                    <ul className="pc-tech-list">
+                        {project.techStack.map((tech) => (
+                            <li key={tech} className="pc-tech-tag">
+                            {techIcons[tech] && <img src={techIcons[tech]} alt="" className="pc-tech-icon" aria-hidden="true" />}
+                            {tech}
+                        </li>
+                        ))}
+                    </ul>
+
+                    <div className="pc-footer-bottom">
+                        <div className="pc-actions">
+                            {videos.length > 0 && (
+                                <button className="pc-btn pc-btn--demo" onClick={() => setVideoOpen(true)}>
+                                    <PlayCircleOutlineRoundedIcon fontSize="small" />
+                                    <span>Watch Demo</span>
+                                </button>
+                            )}
+                            {project.githubLink && (
+                                <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="pc-btn pc-btn--ghost">
+                                    <GitHubIcon fontSize="small" />
+                                    <span>Code</span>
+                                </a>
+                            )}
+                            {project.liveLink && (
+                                <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="pc-btn pc-btn--primary">
+                                    <LaunchIcon fontSize="small" />
+                                    <span>Live</span>
+                                    <NorthEastIcon fontSize="small" className="pc-arrow" />
+                                </a>
+                            )}
                         </div>
-                        <button className="pc-carousel-btn" onClick={next} aria-label="Next">
-                            <ChevronRightIcon fontSize="small" />
-                        </button>
-                    </div>
-                )}
-            </div>
-
-            {/* Footer */}
-            <div className="pc-footer">
-                <ul className="pc-tech-list">
-                    {project.techStack.map((tech) => (
-                        <li key={tech} className="pc-tech-tag">
-                        {techIcons[tech] && <img src={techIcons[tech]} alt="" className="pc-tech-icon" aria-hidden="true" />}
-                        {tech}
-                    </li>
-                    ))}
-                </ul>
-
-                <div className="pc-footer-bottom">
-                    <div className="pc-actions">
-                        {project.githubLink && (
-                            <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="pc-btn pc-btn--ghost">
-                                <GitHubIcon fontSize="small" />
-                                <span>Code</span>
-                            </a>
-                        )}
-                        {project.liveLink && (
-                            <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="pc-btn pc-btn--primary">
-                                <LaunchIcon fontSize="small" />
-                                <span>Live</span>
-                                <NorthEastIcon fontSize="small" className="pc-arrow" />
-                            </a>
-                        )}
                     </div>
                 </div>
-            </div>
 
-            <ImageLightbox images={images} startIndex={slide} isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} />
-        </motion.div>
+                <ImageLightbox images={images} startIndex={slide} isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} />
+            </motion.div>
+
+            <AnimatePresence>
+                {videoOpen && (
+                    <VideoModal videos={videos} title={project.name} onClose={() => setVideoOpen(false)} />
+                )}
+            </AnimatePresence>
+        </>
     );
 };
 
