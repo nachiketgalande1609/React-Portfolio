@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import LaunchIcon from "@mui/icons-material/Launch";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -10,6 +11,12 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { techIcons } from "../../../data/portfolioData";
 import ImageLightbox from "../../../components/ImageLightbox/ImageLightbox";
 import "./ProjectCard.css";
+
+export interface CaseStudy {
+    problem: string;
+    solution: string;
+    impact: string;
+}
 
 export interface Project {
     id: number;
@@ -21,6 +28,7 @@ export interface Project {
     videoLabels?: string[];
     liveLink?: string;
     githubLink?: string;
+    caseStudy?: CaseStudy;
 }
 
 interface ProjectCardProps {
@@ -120,6 +128,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
     const [slide, setSlide] = useState(0);
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [videoOpen, setVideoOpen] = useState(false);
+    const [caseOpen, setCaseOpen] = useState(false);
     const images = project.images;
     const videos = project.videos ?? [];
     const touchStartX = useRef(0);
@@ -267,6 +276,50 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
                         </div>
                     </div>
                 </div>
+
+                {project.caseStudy && (
+                    <button
+                        className="pc-expand-btn"
+                        onClick={() => setCaseOpen((o) => !o)}
+                        aria-expanded={caseOpen}
+                        aria-label={caseOpen ? "Collapse details" : "Expand details"}
+                    >
+                        <motion.span
+                            className="pc-expand-icon"
+                            animate={{ rotate: caseOpen ? 180 : 0 }}
+                            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                        >
+                            <ExpandMoreRoundedIcon />
+                        </motion.span>
+                    </button>
+                )}
+
+                <AnimatePresence initial={false}>
+                    {caseOpen && project.caseStudy && (
+                        <motion.div
+                            className="pc-case-study"
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.32, ease: [0.4, 0, 0.2, 1] }}
+                        >
+                            <div className="pc-case-inner">
+                                <div className="pc-case-block">
+                                    <span className="pc-case-label">Problem</span>
+                                    <p className="pc-case-text">{project.caseStudy.problem}</p>
+                                </div>
+                                <div className="pc-case-block">
+                                    <span className="pc-case-label">Solution</span>
+                                    <p className="pc-case-text">{project.caseStudy.solution}</p>
+                                </div>
+                                <div className="pc-case-block">
+                                    <span className="pc-case-label">Impact</span>
+                                    <p className="pc-case-text">{project.caseStudy.impact}</p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 <ImageLightbox images={images} startIndex={slide} isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} />
             </motion.div>

@@ -146,6 +146,11 @@ export const projectsData = {
             images: [velaImage1, velaImage2, velaImage3, velaImage4, velaImage5],
             liveLink: "https://vela.nachiketgalande.com/",
             githubLink: "https://github.com/nachiketgalande1609/vela",
+            caseStudy: {
+                problem: "Wallpaper apps are cluttered with low-quality content and aggressive ads. Users had no clean way to discover and purchase premium AI-generated art.",
+                solution: "Built a curated dark-aesthetic marketplace with category browsing, a Vela+ subscription tier, and Razorpay integration for seamless UPI and card payments.",
+                impact: "Delivered a polished end-to-end commerce experience with secure payment flows and a browsing experience optimized for high-resolution visual content.",
+            },
         },
         {
             id: 3,
@@ -157,6 +162,11 @@ export const projectsData = {
             videos: [upscalerVideoSingle, upscalerVideoBatch],
             videoLabels: ["Single", "Batch"],
             githubLink: "https://github.com/nachiketgalande1609/upscaler",
+            caseStudy: {
+                problem: "Cloud upscalers leak private images and charge per image. Running large SOTA models locally caused OOM crashes on mid-range GPUs.",
+                solution: "Implemented tiled inference with BF16 precision to cut VRAM usage 4×. Served the UI via FastAPI with SSE for real-time tile-progress feedback and a before/after comparison slider.",
+                impact: "Enables 4× super-resolution entirely on-device with no API keys. Batch mode processes entire folders in one run, making it practical for photographers and content creators.",
+            },
         },
         {
             id: 4,
@@ -167,6 +177,11 @@ export const projectsData = {
             images: [cineplexImage1, cineplexImage2, cineplexImage3, cineplexImage4, cineplexImage5],
             liveLink: "https://cineplex.nachiketgalande.com/",
             githubLink: "https://github.com/nachiketgalande1609/CineLocal",
+            caseStudy: {
+                problem: "Managing a personal video library meant dealing with clunky desktop apps or manual file browsing. There was no elegant way to stream local files across devices on a home network.",
+                solution: "Built a Node.js media server that scans a configured folder, fetches movie metadata from an external API, and streams video to any browser on the LAN with a Netflix-style React UI.",
+                impact: "Transformed a raw file system into a browsable, searchable media experience — accessible from any device on the network without any cloud dependency.",
+            },
         },
         {
             id: 5,
@@ -177,6 +192,11 @@ export const projectsData = {
             images: [livoImage],
             liveLink: "https://livo.nachiketgalande.com/",
             githubLink: "https://github.com/nachiketgalande1609/dietplanner",
+            caseStudy: {
+                problem: "Most fitness apps are feature-heavy and hard to customize. Users needed a focused tool to log both workouts and nutrition in one place with meaningful progress insights.",
+                solution: "Built a full-stack tracker with workout scheduling, meal logging, and personalized dashboards. Flask REST APIs serve structured data stored in MongoDB, deployed on AWS.",
+                impact: "Gives users a single source of truth for fitness and nutrition data, with visual progress tracking that makes consistency easier to maintain over time.",
+            },
         },
         {
             id: 1,
@@ -187,6 +207,11 @@ export const projectsData = {
             images: [rippleImage1, rippleImage2, rippleImage3, rippleImage4, rippleImage5, rippleImage6, rippleImage7],
             liveLink: "https://ripple.nachiketgalande.com/",
             githubLink: "https://nachiketgalande1609.github.io/ripple-links/",
+            caseStudy: {
+                problem: "Building a cross-platform social app that handles real-time messaging, video calls, and expiring stories simultaneously — without performance degradation at scale.",
+                solution: "Architected a WebSocket-based messaging layer alongside WebRTC peer connections for video. Used Docker containers on AWS to isolate services, with push notifications via FCM for the React Native client.",
+                impact: "Shipped a fully functional cross-platform social platform (web + mobile) with sub-100ms message delivery, live video, and story expiry — covering the full feature set of a production social app.",
+            },
         },
         {
             id: 6,
@@ -197,6 +222,11 @@ export const projectsData = {
             images: [streamlineImage],
             liveLink: "https://streamline.nachiketgalande.com/",
             githubLink: "https://github.com/nachiketgalande1609/Streamline",
+            caseStudy: {
+                problem: "Small businesses struggle with fragmented tools for inventory, orders, and customer management. Off-the-shelf ERPs are expensive and over-engineered for their needs.",
+                solution: "Designed a modular MERN-stack ERP with role-based access, covering users, inventory, orders, warehouses, customers, and sales in a unified React dashboard.",
+                impact: "Replaced multiple disconnected spreadsheets and tools with a single system, improving operational visibility and reducing manual data entry across business units.",
+            },
         },
         {
             id: 7,
@@ -206,6 +236,11 @@ export const projectsData = {
             techStack: ["Flask", "Python", "Open AI", "SQLite"],
             images: ["https://github.com/nachiketgalande1609/GIST/blob/main/static/screenshots/profile.png?raw=true"],
             githubLink: "https://github.com/nachiketgalande1609/GIST",
+            caseStudy: {
+                problem: "Children with autism often have limited access to consistent, personalized speech therapy. Traditional software lacks adaptive interaction and real-time feedback.",
+                solution: "Integrated OpenAI's language models into a Flask backend to power an AI therapist that adapts to each child's learning pace, with interactive modules designed around ABA therapy principles.",
+                impact: "Created an accessible, always-available supplement to in-person therapy — enabling children to practice communication skills at home with AI-guided, personalized sessions.",
+            },
         },
         {
             id: 8,
@@ -215,6 +250,11 @@ export const projectsData = {
             techStack: ["Flask", "Python", "Open AI", "Azure"],
             images: ["https://github.com/nachiketgalande1609/GenAI-Onboarding-Assistant/blob/main/static/screenshots/snap.png?raw=true"],
             githubLink: "https://github.com/nachiketgalande1609/GenAI-Onboarding-Assistant",
+            caseStudy: {
+                problem: "New team members spend weeks getting up to speed on project documentation. Knowledge is siloed in lengthy docs, wikis, and past conversations with no easy way to query it.",
+                solution: "Built a RAG-based Q&A assistant that ingests project documents and answers natural-language questions with context-aware responses, deployed on Azure for enterprise accessibility.",
+                impact: "Reduced onboarding ramp-up time by giving new members instant, accurate answers from existing docs — cutting the need for repetitive knowledge-transfer meetings.",
+            },
         },
         {
             id: 9,
