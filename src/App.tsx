@@ -1,23 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
 import Header from "./components/Header/Header";
 import Hero from "./pages/Hero/Hero";
-import About from "./pages/About/About";
-import Skills from "./pages/Skills/Skills";
-import Projects from "./pages/Projects/Projects";
-import Contact from "./pages/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 import ScrollProgress from "./components/ScrollProgress/ScrollProgress";
 import ScrollToTopButton from "./components/ScrollToTop/ScrollToTop";
 import "./styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import Experience from "./pages/Experience/Experience";
-import Testimonials from "./pages/Testimonials/Testimonials";
-import Certificates from "./pages/Certificates/Certificates";
-import GitHub from "./pages/GitHub/GitHub";
-import Timeline from "./pages/Timeline/Timeline";
-import NotFound from "./pages/NotFound/NotFound";
+
+// Lazy-load all below-fold sections — reduces initial JS bundle & TBT
+const About        = lazy(() => import("./pages/About/About"));
+const Skills       = lazy(() => import("./pages/Skills/Skills"));
+const Experience   = lazy(() => import("./pages/Experience/Experience"));
+const Projects     = lazy(() => import("./pages/Projects/Projects"));
+const Certificates = lazy(() => import("./pages/Certificates/Certificates"));
+const Testimonials = lazy(() => import("./pages/Testimonials/Testimonials"));
+const Contact      = lazy(() => import("./pages/Contact/Contact"));
+const GitHub       = lazy(() => import("./pages/GitHub/GitHub"));
+const Timeline     = lazy(() => import("./pages/Timeline/Timeline"));
+const NotFound     = lazy(() => import("./pages/NotFound/NotFound"));
 
 const ScrollToTop: React.FC = () => {
     const location = useLocation();
@@ -50,14 +52,16 @@ const PortfolioHome: React.FC = () => (
     <>
         <ScrollToSection />
         <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Certificates />
-        <Testimonials />
-        <Contact />
-        <Footer />
+        <Suspense fallback={null}>
+            <About />
+            <Skills />
+            <Experience />
+            <Projects />
+            <Certificates />
+            <Testimonials />
+            <Contact />
+            <Footer />
+        </Suspense>
     </>
 );
 
@@ -83,12 +87,14 @@ const App: React.FC = () => {
                         <ThemeToggle />
                     </div>
                     <main>
-                        <Routes>
-                            <Route path="/" element={<PortfolioHome />} />
-                            <Route path="/github" element={<><GitHub /><Footer /></>} />
-                            <Route path="/timeline" element={<><Timeline /><Footer /></>} />
-                            <Route path="*" element={<NotFound />} />
-                        </Routes>
+                        <Suspense fallback={null}>
+                            <Routes>
+                                <Route path="/" element={<PortfolioHome />} />
+                                <Route path="/github" element={<Suspense fallback={null}><GitHub /><Footer /></Suspense>} />
+                                <Route path="/timeline" element={<Suspense fallback={null}><Timeline /><Footer /></Suspense>} />
+                                <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />
+                            </Routes>
+                        </Suspense>
                     </main>
                 </div>
             </div>

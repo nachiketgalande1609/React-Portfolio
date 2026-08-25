@@ -1,37 +1,24 @@
-# Nachiket Galande — Senior Full Stack Developer
+# Nachiket Galande
 
-> Personal portfolio of Nachiket Galande, a Senior Full Stack Developer with 5+ years of experience building scalable, high-performance web applications.
+> Senior Full Stack Developer with 5+ years of experience building scalable, high-performance web applications. Based in Mumbai, India. Currently at Accenture.
 
 ## About
 
-Nachiket Galande is a Senior Full Stack Developer (Senior Analyst) at Accenture, based in Mumbai, India. He specialises in system architecture, database design, performance optimisation, and translating complex requirements into efficient solutions.
+Nachiket Galande is a Senior Full Stack Developer (Senior Analyst) at Accenture, specialising in React, Node.js, Python, Azure, and database design.
+
+## Links
+
+- [Portfolio](https://nachiketgalande.com/)
+- [Resume](https://nachiketgalande.com/resume.pdf)
+- [GitHub Activity](https://nachiketgalande.com/github)
+- [Career Timeline](https://nachiketgalande.com/timeline)
+- [LinkedIn](https://www.linkedin.com/in/nachiketgalande/)
+- [GitHub](https://github.com/nachiketgalande1609)
 
 ## Skills
 
-- **Frontend**: React, Next.js, React Native, TypeScript, JavaScript, Redux, Zustand, Tailwind CSS, Material UI
-- **Backend**: Node.js, NestJS, Express.js, FastAPI, Flask, GraphQL, Fastify
-- **Databases**: PostgreSQL, MySQL, MongoDB, Redis, Azure SQL, PL/SQL
-- **Cloud**: Azure, AWS, Google Cloud, Oracle Cloud (OCI/OIC)
-- **Tools**: Docker, Git, Jest, Postman
-- **Languages**: Python, Java, JavaScript, TypeScript
-
-## Contact
-
-- Email: nachiket.galande.in@gmail.com
-- LinkedIn: https://www.linkedin.com/in/nachiketgalande/
-- GitHub: https://github.com/nachiketgalande1609
-- Portfolio: https://nachiketgalande.com
-
-## Key Sections
-
-- [Home](https://nachiketgalande.com/)
-- [About](https://nachiketgalande.com/#about)
-- [Skills](https://nachiketgalande.com/#skills)
-- [Experience](https://nachiketgalande.com/#experience)
-- [Projects](https://nachiketgalande.com/#projects)
-- [Certifications](https://nachiketgalande.com/#certificates)
-- [Testimonials](https://nachiketgalande.com/#testimonials)
-- [Contact](https://nachiketgalande.com/#contact)
-- [Resume](https://nachiketgalande.com/resume.pdf)
-- [GitHub Activity](https://nachiketgalande.com/github)
-- [Timeline](https://nachiketgalande.com/timeline)
+- Frontend: React, Next.js, TypeScript, JavaScript, Redux, Tailwind CSS, Material UI
+- Backend: Node.js, NestJS, Express.js, FastAPI, Flask, GraphQL
+- Databases: PostgreSQL, MySQL, MongoDB, Redis, Azure SQL
+- Cloud: Azure, AWS, Google Cloud, Oracle Cloud
+- Languages: Python, Java, JavaScript, TypeScript
