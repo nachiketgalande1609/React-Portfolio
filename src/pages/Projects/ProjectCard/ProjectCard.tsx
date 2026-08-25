@@ -18,6 +18,7 @@ export interface Project {
     techStack: string[];
     images: string[];
     videos?: string[];
+    videoLabels?: string[];
     liveLink?: string;
     githubLink?: string;
 }
@@ -52,7 +53,7 @@ const PROJECT_META: Record<number, { category: string; color: string }> = {
 };
 
 /* ── Video Modal ── */
-const VideoModal: React.FC<{ videos: string[]; title: string; onClose: () => void }> = ({ videos, title, onClose }) => {
+const VideoModal: React.FC<{ videos: string[]; videoLabels?: string[]; title: string; onClose: () => void }> = ({ videos, videoLabels, title, onClose }) => {
     const [activeVideo, setActiveVideo] = useState(0);
 
     useEffect(() => {
@@ -103,9 +104,9 @@ const VideoModal: React.FC<{ videos: string[]; title: string; onClose: () => voi
                                 key={i}
                                 className={`video-modal-tab ${i === activeVideo ? "active" : ""}`}
                                 onClick={() => setActiveVideo(i)}
-                                aria-label={`Video ${i + 1}`}
+                                aria-label={videoLabels?.[i] ?? `Video ${i + 1}`}
                             >
-                                Demo {i + 1}
+                                {videoLabels?.[i] ?? `Demo ${i + 1}`}
                             </button>
                         ))}
                     </div>
@@ -272,7 +273,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
 
             <AnimatePresence>
                 {videoOpen && (
-                    <VideoModal videos={videos} title={project.name} onClose={() => setVideoOpen(false)} />
+                    <VideoModal videos={videos} videoLabels={project.videoLabels} title={project.name} onClose={() => setVideoOpen(false)} />
                 )}
             </AnimatePresence>
         </>

@@ -155,6 +155,7 @@ export const projectsData = {
             techStack: ["Python", "FastAPI", "PyTorch"],
             images: [upscalerImage1, upscalerImage2],
             videos: [upscalerVideoSingle, upscalerVideoBatch],
+            videoLabels: ["Single", "Batch"],
             githubLink: "https://github.com/nachiketgalande1609/upscaler",
         },
         {
