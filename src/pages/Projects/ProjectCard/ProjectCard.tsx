@@ -157,7 +157,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    message: `Give a concise 2-3 sentence summary of this project for a technical recruiter. Focus on what it does, the key technical challenge, and the impact. Project: "${project.name}". Description: "${project.description}". Tech stack: ${project.techStack.join(", ")}.`,
+                    message: `Summarize this project for a technical recruiter. Start with one sentence in the format "${project.name} is a [what it is and what it does]." Then add 3-4 concise bullet points covering: key features, technical challenges solved, and impact or outcome. Keep it sharp and impressive. Project: "${project.name}". Description: "${project.description}". Tech stack: ${project.techStack.join(", ")}.`,
                     history: [],
                 }),
             });
@@ -319,8 +319,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
                                 disabled={summarizing}
                                 aria-label="AI summarize"
                             >
-                                <AutoAwesomeRoundedIcon fontSize="small" />
-                                <span>{summarizing ? "Summarizing…" : "Summarize"}</span>
+                                {summarizing ? <span className="pc-summary-spin" /> : <AutoAwesomeRoundedIcon fontSize="small" />}
                             </button>
                         </div>
                     </div>
@@ -410,10 +409,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
                                 <div className="pc-summary-modal-body">
                                     {summarizing ? (
                                         <div className="pc-summary-loading">
-                                            <span /><span /><span />
+                                            <div className="pc-summary-loading-line" style={{ width: "92%" }} />
+                                            <div className="pc-summary-loading-line" style={{ width: "78%", animationDelay: "0.15s" }} />
+                                            <div className="pc-summary-loading-line" style={{ width: "85%", animationDelay: "0.3s" }} />
+                                            <div className="pc-summary-loading-line" style={{ width: "60%", animationDelay: "0.45s" }} />
+                                            <div className="pc-summary-loading-line" style={{ width: "88%", animationDelay: "0.6s" }} />
+                                            <div className="pc-summary-loading-line" style={{ width: "72%", animationDelay: "0.75s" }} />
                                         </div>
                                     ) : (
-                                        <p>{summary}</p>
+                                        <div className="pc-summary-content">
+                                            {summary.split("\n").map((line, i) => {
+                                                const bullet = line.match(/^[-•*]\s+(.*)/);
+                                                if (bullet) return <div key={i} className="pc-summary-bullet"><span>•</span>{bullet[1]}</div>;
+                                                if (line.trim()) return <p key={i}>{line}</p>;
+                                                return null;
+                                            })}
+                                        </div>
                                     )}
                                 </div>
                             </motion.div>

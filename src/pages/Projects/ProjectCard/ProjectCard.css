@@ -367,41 +367,87 @@ body.modal-blur-active .App {
 }
 
 .pc-summary-modal-body p {
-    margin: 0;
+    margin: 0 0 10px;
 }
 
-/* Loading dots */
+.pc-summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.pc-summary-bullet {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.pc-summary-bullet span {
+    color: #F59E0B;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+/* AI generation skeleton */
 .pc-summary-loading {
     display: flex;
-    gap: 6px;
-    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: 4px 0;
 }
 
-.pc-summary-loading span {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--text-tertiary);
-    animation: typing-bounce 1.2s ease-in-out infinite;
+.pc-summary-loading-line {
+    height: 13px;
+    border-radius: 6px;
+    background: linear-gradient(
+        90deg,
+        var(--bg-elevated, #1a1a1a) 0%,
+        rgba(245, 158, 11, 0.18) 40%,
+        rgba(245, 158, 11, 0.08) 55%,
+        var(--bg-elevated, #1a1a1a) 100%
+    );
+    background-size: 300% 100%;
+    animation: ai-shimmer 1.6s ease-in-out infinite;
 }
 
-.pc-summary-loading span:nth-child(2) { animation-delay: 0.2s; }
-.pc-summary-loading span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes ai-shimmer {
+    0%   { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
 
 /* Summarize button */
 .pc-btn--summarize {
-    background: transparent;
-    border: 1px solid var(--border-subtle);
-    color: var(--text-tertiary);
-    gap: 5px;
-    font-size: 0.75rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+    padding: 9px 12px;
 }
 
 .pc-btn--summarize:hover:not(:disabled) {
-    border-color: #F59E0B;
-    color: #F59E0B;
+    background: var(--bg-elevated);
+    color: var(--text-primary);
     transform: translateY(-2px);
 }
+
+.pc-summary-spin {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--border-subtle);
+    border-top-color: #F59E0B;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
 
 .pc-btn--summarize:disabled {
     opacity: 0.6;
