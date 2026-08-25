@@ -41,11 +41,11 @@ const Footer: React.FC = () => {
                         <h3 className="footer-name">{personalInfo.name}</h3>
                         <p className="footer-role">Senior Full Stack Developer</p>
                         <div className="social-links">
-                            <a href="https://github.com/nachiketgalande1609" target="_blank" rel="noopener noreferrer" className="social-link">
-                                <GitHub />
+                            <a href="https://github.com/nachiketgalande1609" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub profile">
+                                <GitHub aria-hidden="true" />
                             </a>
-                            <a href="https://www.linkedin.com/in/nachiketgalande/" target="_blank" rel="noopener noreferrer" className="social-link">
-                                <LinkedIn />
+                            <a href="https://www.linkedin.com/in/nachiketgalande/" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn profile">
+                                <LinkedIn aria-hidden="true" />
                             </a>
                         </div>
                     </div>
