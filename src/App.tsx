@@ -74,6 +74,7 @@ const PortfolioHome: React.FC = () => (
 const App: React.FC = () => {
     const [terminalOpen, setTerminalOpen] = useState(false);
     const [greetingDone, setGreetingDone] = useState(false);
+    const [chatOpen, setChatOpen] = useState(false);
 
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => {
@@ -99,6 +100,8 @@ const App: React.FC = () => {
                         position: "relative",
                         zIndex: 1,
                         pointerEvents: "auto",
+                        filter: chatOpen ? "blur(6px)" : "none",
+                        transition: "filter 0.3s ease",
                     }}
                 >
                     <ScrollToTop />
@@ -123,7 +126,7 @@ const App: React.FC = () => {
                 </div>
 
                 <Greeting onDone={() => setGreetingDone(true)} />
-                <ChatBot />
+                <ChatBot onOpenChange={setChatOpen} />
 
                 <AnimatePresence>
                     {terminalOpen && <Terminal onClose={() => setTerminalOpen(false)} />}

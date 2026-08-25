@@ -1,8 +1,17 @@
+/* Backdrop */
+.chatbot-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 8999;
+    background: rgba(0, 0, 0, 0.55);
+    pointer-events: auto;
+}
+
 .chatbot-root {
     position: fixed;
     bottom: 24px;
     right: 24px;
-    z-index: 9000;
+    z-index: 9001;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -36,8 +45,8 @@
 
 /* Window */
 .chatbot-window {
-    width: 360px;
-    max-height: 520px;
+    width: 420px;
+    height: 580px;
     border-radius: 14px;
     background: var(--bg-primary, #0a0a0a);
     border: 1px solid var(--border-subtle);
@@ -257,5 +266,6 @@
 @media (max-width: 480px) {
     .chatbot-window {
         width: calc(100vw - 32px);
+        height: 70vh;
     }
 }

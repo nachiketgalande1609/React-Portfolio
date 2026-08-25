@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -16,8 +17,13 @@ const SUGGESTIONS = [
     "How can I contact you?",
 ];
 
-const ChatBot: React.FC = () => {
+const ChatBot: React.FC<{ onOpenChange?: (open: boolean) => void }> = ({ onOpenChange }) => {
     const [open, setOpen] = useState(false);
+
+    const toggleOpen = (val: boolean) => {
+        setOpen(val);
+        onOpenChange?.(val);
+    };
     const [messages, setMessages] = useState<Message[]>([
         { role: "bot", text: "Hi! I'm Nachiket's AI assistant. Ask me anything about his skills, projects, or experience." },
     ]);
@@ -70,7 +76,23 @@ const ChatBot: React.FC = () => {
     };
 
     return (
+        <>
+            <AnimatePresence>
+                {open && createPortal(
+                    <motion.div
+                        className="chatbot-backdrop"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        onClick={() => toggleOpen(false)}
+                    />,
+                    document.body
+                )}
+            </AnimatePresence>
+
         <div className="chatbot-root">
+
             <AnimatePresence>
                 {open && (
                     <motion.div
@@ -88,7 +110,7 @@ const ChatBot: React.FC = () => {
                                     <p className="chatbot-name">Ask Me Anything</p>
                                 </div>
                             </div>
-                            <button className="chatbot-close" onClick={() => setOpen(false)} aria-label="Close">✕</button>
+                            <button className="chatbot-close" onClick={() => toggleOpen(false)} aria-label="Close">✕</button>
                         </div>
 
                         {/* Messages */}
@@ -145,7 +167,7 @@ const ChatBot: React.FC = () => {
             {/* Bubble */}
             <motion.button
                 className="chatbot-bubble"
-                onClick={() => setOpen((o) => !o)}
+                onClick={() => toggleOpen(!open)}
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Chat with AI assistant"
@@ -153,6 +175,7 @@ const ChatBot: React.FC = () => {
                 {open ? <CloseRoundedIcon fontSize="small" /> : <AutoAwesomeRoundedIcon fontSize="small" />}
             </motion.button>
         </div>
+        </>
     );
 };
 
