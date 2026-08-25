@@ -189,6 +189,18 @@ const Skills: React.FC = () => {
                     <p className="section-subtitle animate-on-scroll">Technologies I work with to create amazing experiences</p>
                 </div>
 
+                {/* Marquee strip */}
+                <div className="skills-marquee-wrapper">
+                    <div className="skills-marquee-track">
+                        {[...skills, ...skills].map((skill, i) => (
+                            <span key={i} className="skills-marquee-item">
+                                <img src={skill.icon} alt={skill.name} className={`skills-marquee-icon${skill.darkBg ? " skills-marquee-icon--dark" : ""}`} />
+                                <span>{skill.name}</span>
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
                 <div className="two-column-layout">
                     {(Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>).map((category, categoryIndex) => (
                         // Each category now gets its own grid row within two-column-layout
