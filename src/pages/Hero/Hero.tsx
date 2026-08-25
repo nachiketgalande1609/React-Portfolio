@@ -185,9 +185,12 @@ const Hero: React.FC = () => {
                                         src={profileImage}
                                         alt={`${personalInfo.name} — ${personalInfo.title}`}
                                         className="hero-portrait-img"
+                                        width="320"
+                                        height="320"
                                         // @ts-ignore
                                         fetchpriority="high"
-                                        decoding="async"
+                                        decoding="sync"
+                                        loading="eager"
                                     />
                                     <div className="hero-portrait-shine" aria-hidden="true" />
                                 </div>

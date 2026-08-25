@@ -82,12 +82,14 @@ const App: React.FC = () => {
                     <div className="desktop-theme-toggle">
                         <ThemeToggle />
                     </div>
-                    <Routes>
-                        <Route path="/" element={<PortfolioHome />} />
-                        <Route path="/github" element={<><GitHub /><Footer /></>} />
-                        <Route path="/timeline" element={<><Timeline /><Footer /></>} />
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>
+                    <main>
+                        <Routes>
+                            <Route path="/" element={<PortfolioHome />} />
+                            <Route path="/github" element={<><GitHub /><Footer /></>} />
+                            <Route path="/timeline" element={<><Timeline /><Footer /></>} />
+                            <Route path="*" element={<NotFound />} />
+                        </Routes>
+                    </main>
                 </div>
             </div>
         </BrowserRouter>

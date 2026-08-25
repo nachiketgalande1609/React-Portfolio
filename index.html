@@ -58,12 +58,12 @@
         <meta name="theme-color" content="#08080c" />
         <meta name="msapplication-TileColor" content="#08080c" />
 
-        <!-- Fonts -->
+        <!-- Fonts — non-render-blocking -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Story+Script&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet" />
+        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Expanded+One&family=Story+Script&display=swap" />
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Expanded+One&family=Story+Script&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+        <noscript><link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Expanded+One&family=Story+Script&display=swap" rel="stylesheet" /></noscript>
 
         <!-- JSON-LD Structured Data: ProfilePage (generates rich results) -->
         <script type="application/ld+json">

@@ -101,6 +101,8 @@ const Certificates: React.FC = () => {
                                                     <img
                                                         src={cert.logo}
                                                         alt={cert.organization}
+                                                        width="20"
+                                                        height="20"
                                                         loading="lazy"
                                                         onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
                                                     />
@@ -130,8 +132,11 @@ const Certificates: React.FC = () => {
                                                             {cert.image && (
                                                                 <img
                                                                     src={cert.image}
-                                                                    alt={cert.title}
+                                                                    alt={`${cert.title} certificate preview`}
                                                                     className="cert-preview-image"
+                                                                    width="700"
+                                                                    height="420"
+                                                                    loading="lazy"
                                                                     onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
                                                                 />
                                                             )}
