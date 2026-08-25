@@ -418,7 +418,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
                                         </div>
                                     ) : (
                                         <div className="pc-summary-content">
-                                            {summary.split("\n").map((line, i) => {
+                                            {(summary ?? "").split("\n").map((line, i) => {
                                                 const bullet = line.match(/^[-•*]\s+(.*)/);
                                                 if (bullet) return <div key={i} className="pc-summary-bullet"><span>•</span>{bullet[1]}</div>;
                                                 if (line.trim()) return <p key={i}>{line}</p>;
