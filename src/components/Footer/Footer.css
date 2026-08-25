@@ -136,6 +136,28 @@
     transform: translateX(5px); /* Slide effect on hover */
 }
 
+.footer-terminal-hint {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.footer-terminal-hint kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-size: 0.7rem;
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border-default);
+    background: var(--bg-elevated);
+    color: var(--text-tertiary);
+    line-height: 1.5;
+}
+
 .footer-bottom {
     display: flex;
     justify-content: space-between;

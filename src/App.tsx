@@ -1,11 +1,14 @@
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
 import Header from "./components/Header/Header";
 import Hero from "./pages/Hero/Hero";
 import Footer from "./components/Footer/Footer";
 import ScrollProgress from "./components/ScrollProgress/ScrollProgress";
 import ScrollToTopButton from "./components/ScrollToTop/ScrollToTop";
+import Terminal from "./components/Terminal/Terminal";
+import SectionProgress from "./components/SectionProgress/SectionProgress";
 import "./styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -66,6 +69,21 @@ const PortfolioHome: React.FC = () => (
 );
 
 const App: React.FC = () => {
+    const [terminalOpen, setTerminalOpen] = useState(false);
+
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => {
+            const tag = (e.target as HTMLElement).tagName;
+            if (tag === "INPUT" || tag === "TEXTAREA") return;
+            if (e.key === "`") {
+                e.preventDefault();
+                setTerminalOpen((o) => !o);
+            }
+        };
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, []);
+
     return (
         <BrowserRouter>
             <div className="App">
@@ -82,6 +100,7 @@ const App: React.FC = () => {
                     <ScrollProgress />
                     <Analytics />
                     <ScrollToTopButton />
+                    <SectionProgress />
                     <Header />
                     <div className="desktop-theme-toggle">
                         <ThemeToggle />
@@ -97,6 +116,10 @@ const App: React.FC = () => {
                         </Suspense>
                     </main>
                 </div>
+
+                <AnimatePresence>
+                    {terminalOpen && <Terminal onClose={() => setTerminalOpen(false)} />}
+                </AnimatePresence>
             </div>
         </BrowserRouter>
     );

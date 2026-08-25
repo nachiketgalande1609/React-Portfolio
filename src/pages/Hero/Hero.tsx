@@ -204,6 +204,16 @@ const Hero: React.FC = () => {
                 <span>Scroll</span>
                 <KeyboardArrowDownRoundedIcon fontSize="small" />
             </button>
+
+            <motion.p
+                className="hero-terminal-hint"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2.2, duration: 0.8 }}
+                aria-hidden="true"
+            >
+                Press <kbd>`</kbd> for terminal
+            </motion.p>
         </section>
     );
 };
