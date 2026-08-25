@@ -134,19 +134,6 @@ body {
 /* ===== BLACK ANIMATED BACKGROUND MASTERPIECE ===== */
 
 /* ===== ENHANCED SECTION STYLES ===== */
-/* Force GPU compositing on animated sections to fix non-composited animation warnings */
-[style*="transform"],
-[style*="opacity"] {
-    will-change: transform, opacity;
-}
-
-/* Reduce animation overhead on mobile */
-@media (max-width: 768px) {
-    [style*="will-change"] {
-        will-change: auto;
-    }
-}
-
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
