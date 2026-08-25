@@ -1,4 +1,4 @@
-﻿﻿import React, { useRef } from "react";
+﻿﻿import React, { useRef, useState, useEffect } from "react";
 import "./About.css";
 import CakeIcon from "@mui/icons-material/Cake";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
@@ -52,10 +52,54 @@ const education = [
 ];
 
 const stats = [
-    { value: "5+", label: "Years Experience", description: "Shipping production systems across industries." },
-    { value: "20+", label: "Projects", description: "From side experiments to enterprise platforms." },
-    { value: "40+", label: "Certifications", description: "Cloud, data, AI/ML and engineering credentials." },
+    { end: 5, suffix: "+", label: "Years Experience", description: "Shipping production systems across industries." },
+    { end: 20, suffix: "+", label: "Projects", description: "From side experiments to enterprise platforms." },
+    { end: 40, suffix: "+", label: "Certifications", description: "Cloud, data, AI/ML and engineering credentials." },
 ];
+
+const useCountUp = (end: number, duration = 1500) => {
+    const [count, setCount] = useState(0);
+    const [started, setStarted] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) setStarted(true); },
+            { threshold: 0.5 }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (!started) return;
+        let start: number | null = null;
+        const step = (timestamp: number) => {
+            if (!start) start = timestamp;
+            const progress = Math.min((timestamp - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(eased * end));
+            if (progress < 1) requestAnimationFrame(step);
+            else setCount(end);
+        };
+        requestAnimationFrame(step);
+    }, [started, end, duration]);
+
+    return { count, ref };
+};
+
+const StatCounter: React.FC<{ end: number; suffix: string; label: string; description: string }> = ({ end, suffix, label, description }) => {
+    const { count, ref } = useCountUp(end);
+    return (
+        <motion.div ref={ref} className="about-stat" variants={itemVariants}>
+            <div className="about-stat-value">{count}{suffix}</div>
+            <div className="about-stat-label">{label}</div>
+            <p className="about-stat-description">{description}</p>
+        </motion.div>
+    );
+};
 
 const About: React.FC = () => {
     const exitRef = useRef<HTMLDivElement>(null);
@@ -93,11 +137,7 @@ const About: React.FC = () => {
 
                 <motion.div className="about-stats" variants={containerVariants}>
                     {stats.map((stat) => (
-                        <motion.div key={stat.label} className="about-stat" variants={itemVariants}>
-                            <div className="about-stat-value">{stat.value}</div>
-                            <div className="about-stat-label">{stat.label}</div>
-                            <p className="about-stat-description">{stat.description}</p>
-                        </motion.div>
+                        <StatCounter key={stat.label} end={stat.end} suffix={stat.suffix} label={stat.label} description={stat.description} />
                     ))}
                 </motion.div>
 
