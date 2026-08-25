@@ -9,6 +9,8 @@ import ScrollProgress from "./components/ScrollProgress/ScrollProgress";
 import ScrollToTopButton from "./components/ScrollToTop/ScrollToTop";
 import Terminal from "./components/Terminal/Terminal";
 import SectionProgress from "./components/SectionProgress/SectionProgress";
+import Greeting from "./components/Greeting/Greeting";
+import { GreetingContext } from "./context/GreetingContext";
 import "./styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -70,6 +72,7 @@ const PortfolioHome: React.FC = () => (
 
 const App: React.FC = () => {
     const [terminalOpen, setTerminalOpen] = useState(false);
+    const [greetingDone, setGreetingDone] = useState(false);
 
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => {
@@ -85,6 +88,7 @@ const App: React.FC = () => {
     }, []);
 
     return (
+        <GreetingContext.Provider value={greetingDone}>
         <BrowserRouter>
             <div className="App">
                 <div className="site-background" aria-hidden="true" />
@@ -117,11 +121,14 @@ const App: React.FC = () => {
                     </main>
                 </div>
 
+                <Greeting onDone={() => setGreetingDone(true)} />
+
                 <AnimatePresence>
                     {terminalOpen && <Terminal onClose={() => setTerminalOpen(false)} />}
                 </AnimatePresence>
             </div>
         </BrowserRouter>
+        </GreetingContext.Provider>
     );
 };
 

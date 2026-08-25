@@ -1,0 +1,45 @@
+.greeting-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.greeting-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.greeting-text {
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin: 0;
+    font-family: "Special Gothic Expanded One", sans-serif;
+}
+
+.greeting-sub {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    color: rgba(255, 255, 255, 0.38);
+    margin: 0;
+    letter-spacing: 0.04em;
+}
+
+.greeting-bar {
+    width: 48px;
+    height: 2px;
+    background: #F59E0B;
+    border-radius: 999px;
+    transform-origin: left;
+    margin-top: 24px;
+}

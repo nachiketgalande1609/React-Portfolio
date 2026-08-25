@@ -1,22 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { personalInfo } from "../../data/portfolioData";
 import { GitHub, LinkedIn } from "@mui/icons-material";
 
 import "./Footer.css";
-
-const useVisitorCount = () => {
-    const [count, setCount] = useState<number | null>(null);
-
-    useEffect(() => {
-        fetch("https://api.countapi.xyz/hit/nachiketgalande.vercel.app/visits")
-            .then((r) => r.json())
-            .then((d) => setCount(d.value))
-            .catch(() => {});
-    }, []);
-
-    return count;
-};
 
 const NAV_LINKS = [
     { label: "Home",         id: "home" },
@@ -31,7 +18,6 @@ const NAV_LINKS = [
 
 const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();
-    const visitorCount = useVisitorCount();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -96,12 +82,6 @@ const Footer: React.FC = () => {
                     <div className="footer-message">
                         <span>Crafted with precision & passion</span>
                     </div>
-                    {visitorCount !== null && (
-                        <p className="footer-visitor-count">
-                            <span className="footer-visitor-dot" aria-hidden="true" />
-                            {visitorCount.toLocaleString()} visitors
-                        </p>
-                    )}
                 </div>
             </div>
         </footer>

@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useGreetingDone } from "../../context/GreetingContext";
 import { personalInfo, socialLinks } from "../../data/portfolioData";
 import "./Hero.css";
 
@@ -15,7 +16,7 @@ import NorthEastIcon from "@mui/icons-material/NorthEast";
 import profileImage from "../../assets/profile.webp";
 
 /* Character-by-character animated name */
-const AnimatedName: React.FC<{ firstName: string; lastName: string }> = ({ firstName, lastName }) => {
+const AnimatedName: React.FC<{ firstName: string; lastName: string; ready: boolean }> = ({ firstName, lastName, ready }) => {
     let idx = 0;
     const renderWord = (word: string, extraClass = "") =>
         word.split("").map((char) => {
@@ -25,7 +26,7 @@ const AnimatedName: React.FC<{ firstName: string; lastName: string }> = ({ first
                     key={`${char}-${idx}`}
                     className={`hero-title-char ${extraClass}`}
                     initial={{ opacity: 0, y: 32, rotateX: -50 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                    animate={ready ? { opacity: 1, y: 0, rotateX: 0 } : { opacity: 0, y: 32, rotateX: -50 }}
                     transition={{ delay, duration: 0.5, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] }}
                 >
                     {char}
@@ -55,6 +56,7 @@ const fadeUp = {
 
 const Hero: React.FC = () => {
     const heroRef = useRef<HTMLElement>(null);
+    const ready = useGreetingDone();
 
     /* Scroll-out parallax */
     const { scrollYProgress } = useScroll({ target: heroRef, offset: ["end 200px", "end start"] });
@@ -97,7 +99,7 @@ const Hero: React.FC = () => {
                         <motion.div
                             className="hero-pill-row"
                             initial={{ opacity: 0, y: 14 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
                             transition={{ delay: 0.1, duration: 0.55 }}
                         >
                             <span className="hero-status-pill">
@@ -115,12 +117,12 @@ const Hero: React.FC = () => {
                             <motion.span
                                 className="hero-title-greet"
                                 initial={{ opacity: 0, x: -12 }}
-                                animate={{ opacity: 1, x: 0 }}
+                                animate={ready ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }}
                                 transition={{ delay: 0.25, duration: 0.45 }}
                             >
                                 Hi, I'm
                             </motion.span>
-                            <AnimatedName firstName={firstName} lastName={lastName} />
+                            <AnimatedName firstName={firstName} lastName={lastName} ready={ready} />
                         </h1>
 
                         {/* Staggered lower blocks */}
@@ -128,7 +130,7 @@ const Hero: React.FC = () => {
                             className="hero-lower"
                             variants={stagger}
                             initial="hidden"
-                            animate="show"
+                            animate={ready ? "show" : "hidden"}
                         >
                             <motion.h2 className="hero-subtitle" variants={fadeUp}>
                                 <span className="hero-subtitle-cursor" aria-hidden="true" />
@@ -173,7 +175,7 @@ const Hero: React.FC = () => {
                     <motion.div
                         className="hero-portrait"
                         initial={{ opacity: 0, scale: 0.92, y: 24 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        animate={ready ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.92, y: 24 }}
                         transition={{ delay: 0.3, duration: 0.85, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] }}
                     >
                         <div className="hero-portrait-stage">

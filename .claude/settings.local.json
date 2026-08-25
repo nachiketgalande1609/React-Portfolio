@@ -19,7 +19,12 @@
       "PowerShell(New-Item -ItemType Directory -Force -Path \"C:\\\\Users\\\\n.manish.galande\\\\Desktop\\\\React-Portfolio\\\\src\\\\pages\\\\GitHub\")",
       "Bash(npx vite *)",
       "Bash(copy \"C:\\\\Users\\\\n.manish.galande\\\\Desktop\\\\React-Portfolio\\\\src\\\\assets\\\\profile.png\" \"C:\\\\Users\\\\n.manish.galande\\\\Desktop\\\\React-Portfolio\\\\public\\\\og-image.png\")",
-      "PowerShell(Copy-Item \"C:\\\\Users\\\\n.manish.galande\\\\Desktop\\\\React-Portfolio\\\\src\\\\assets\\\\profile.png\" \"C:\\\\Users\\\\n.manish.galande\\\\Desktop\\\\React-Portfolio\\\\public\\\\og-image.png\")"
+      "PowerShell(Copy-Item \"C:\\\\Users\\\\n.manish.galande\\\\Desktop\\\\React-Portfolio\\\\src\\\\assets\\\\profile.png\" \"C:\\\\Users\\\\n.manish.galande\\\\Desktop\\\\React-Portfolio\\\\public\\\\og-image.png\")",
+      "PowerShell(curl -s \"https://api.counterapi.dev/v1/nachiketgalande-portfolio/visits/up\" 2>&1)",
+      "PowerShell(Invoke-RestMethod -Uri \"https://api.counterapi.dev/v1/nachiketgalande-portfolio/visits/up\")",
+      "PowerShell(Invoke-RestMethod -Uri \"https://api.counterapi.dev/v2/nachiketgalande-portfolio/visits/up\")",
+      "PowerShell(Invoke-RestMethod -Uri \"https://api.counterapi.dev/v2/nachiketgalande-portfolio/visits/up\" -Method POST)",
+      "PowerShell(Invoke-RestMethod -Uri \"https://hits.sh/nachiketgalande.vercel.app.json\")"
     ]
   }
 }
