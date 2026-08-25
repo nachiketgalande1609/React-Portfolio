@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import "./ChatBot.css";
 
 interface Message {
@@ -83,8 +85,7 @@ const ChatBot: React.FC = () => {
                             <div className="chatbot-header-info">
                                 <span className="chatbot-avatar">N</span>
                                 <div>
-                                    <p className="chatbot-name">Nachiket's Assistant</p>
-                                    <p className="chatbot-status"><span className="chatbot-dot" />Online</p>
+                                    <p className="chatbot-name">Ask Me Anything</p>
                                 </div>
                             </div>
                             <button className="chatbot-close" onClick={() => setOpen(false)} aria-label="Close">✕</button>
@@ -149,7 +150,7 @@ const ChatBot: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
                 aria-label="Chat with AI assistant"
             >
-                {open ? "✕" : "💬"}
+                {open ? <CloseRoundedIcon fontSize="small" /> : <AutoAwesomeRoundedIcon fontSize="small" />}
             </motion.button>
         </div>
     );
