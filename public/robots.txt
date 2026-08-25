@@ -1,4 +1,17 @@
 User-agent: *
 Allow: /
+Disallow: /src/
+Disallow: /.env
+
+# Allow major crawlers to index assets
+User-agent: Googlebot
+Allow: /
+Allow: /*.js
+Allow: /*.css
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.svg
+Allow: /*.webp
+Allow: /resume.pdf
 
 Sitemap: https://nachiketgalande.com/sitemap.xml
