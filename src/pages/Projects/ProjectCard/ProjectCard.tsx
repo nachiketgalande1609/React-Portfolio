@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
@@ -8,6 +9,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import PlayCircleOutlineRoundedIcon from "@mui/icons-material/PlayCircleOutlineRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import { techIcons } from "../../../data/portfolioData";
 import ImageLightbox from "../../../components/ImageLightbox/ImageLightbox";
 import "./ProjectCard.css";
@@ -130,6 +132,43 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [videoOpen, setVideoOpen] = useState(false);
     const [caseOpen, setCaseOpen] = useState(false);
+    const [summary, setSummary] = useState<string | null>(null);
+    const [summarizing, setSummarizing] = useState(false);
+    const [summaryOpen, setSummaryOpen] = useState(false);
+
+    const openSummaryModal = () => {
+        setSummaryOpen(true);
+        document.body.classList.add("modal-blur-active");
+    };
+
+    const closeSummaryModal = () => {
+        setSummaryOpen(false);
+        document.body.classList.remove("modal-blur-active");
+    };
+
+    const handleSummarize = useCallback(async () => {
+        if (summarizing) return;
+        setSummaryOpen(true);
+        document.body.classList.add("modal-blur-active");
+        if (summary) return;
+        setSummarizing(true);
+        try {
+            const res = await fetch("/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    message: `Give a concise 2-3 sentence summary of this project for a technical recruiter. Focus on what it does, the key technical challenge, and the impact. Project: "${project.name}". Description: "${project.description}". Tech stack: ${project.techStack.join(", ")}.`,
+                    history: [],
+                }),
+            });
+            const data = await res.json() as { text?: string };
+            setSummary(data.text ?? "Could not generate summary.");
+        } catch {
+            setSummary("Network error. Please try again.");
+        } finally {
+            setSummarizing(false);
+        }
+    }, [project, summary, summarizing]);
     const images = project.images;
     const videos = project.videos ?? [];
     const touchStartX = useRef(0);
@@ -274,6 +313,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
                                     <NorthEastIcon fontSize="small" className="pc-arrow" />
                                 </a>
                             )}
+                            <button
+                                className="pc-btn pc-btn--summarize"
+                                onClick={summary ? openSummaryModal : handleSummarize}
+                                disabled={summarizing}
+                                aria-label="AI summarize"
+                            >
+                                <AutoAwesomeRoundedIcon fontSize="small" />
+                                <span>{summarizing ? "Summarizing…" : "Summarize"}</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -330,6 +378,50 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
                     <VideoModal videos={videos} videoLabels={project.videoLabels} title={project.name} onClose={() => setVideoOpen(false)} />
                 )}
             </AnimatePresence>
+
+            {createPortal(
+                <AnimatePresence>
+                    {summaryOpen && (
+                        <motion.div
+                            className="pc-summary-backdrop"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            onClick={closeSummaryModal}
+                        >
+                            <motion.div
+                                className="pc-summary-modal"
+                                initial={{ opacity: 0, scale: 0.94, y: 16 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.94, y: 16 }}
+                                transition={{ duration: 0.22, ease: [0.215, 0.61, 0.355, 1] }}
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <div className="pc-summary-modal-header">
+                                    <span className="pc-summary-modal-title">
+                                        <AutoAwesomeRoundedIcon style={{ fontSize: 16 }} />
+                                        AI Summary — {project.name}
+                                    </span>
+                                    <button className="pc-summary-modal-close" onClick={closeSummaryModal} aria-label="Close">
+                                        <CloseRoundedIcon fontSize="small" />
+                                    </button>
+                                </div>
+                                <div className="pc-summary-modal-body">
+                                    {summarizing ? (
+                                        <div className="pc-summary-loading">
+                                            <span /><span /><span />
+                                        </div>
+                                    ) : (
+                                        <p>{summary}</p>
+                                    )}
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
         </>
     );
 };

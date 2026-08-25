@@ -77,19 +77,21 @@ const ChatBot: React.FC<{ onOpenChange?: (open: boolean) => void }> = ({ onOpenC
 
     return (
         <>
-            <AnimatePresence>
-                {open && createPortal(
-                    <motion.div
-                        className="chatbot-backdrop"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        onClick={() => toggleOpen(false)}
-                    />,
-                    document.body
-                )}
-            </AnimatePresence>
+            {createPortal(
+                <AnimatePresence>
+                    {open && (
+                        <motion.div
+                            className="chatbot-backdrop"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            onClick={() => toggleOpen(false)}
+                        />
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
 
         <div className="chatbot-root">
 
