@@ -151,7 +151,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
                         </button>
                         <div className="pc-dots">
                             {images.map((_, i) => (
-                                <button key={i} className={`pc-dot ${i === slide ? "active" : ""}`} onClick={(e) => { e.stopPropagation(); setSlide(i); }} />
+                                <button key={i} className={`pc-dot ${i === slide ? "active" : ""}`} aria-label={`Go to image ${i + 1}`} onClick={(e) => { e.stopPropagation(); setSlide(i); }} />
                             ))}
                         </div>
                         <button className="pc-carousel-btn" onClick={next} aria-label="Next">
