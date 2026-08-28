@@ -59,11 +59,18 @@ const Hero: React.FC = () => {
     const ready = useGreetingDone();
 
     /* Scroll-out parallax */
-    const { scrollYProgress } = useScroll({ target: heroRef, offset: ["end 200px", "end start"] });
-    const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+    const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+    const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
     const heroY       = useTransform(scrollYProgress, [0, 1], [0, 110]);
-    const heroScale   = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
-    const heroBlur    = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(3px)"]);
+    const heroScale   = useTransform(scrollYProgress, [0, 0.7], [1, 0.92]);
+    const heroBlur    = useTransform(scrollYProgress, [0, 0.7], ["blur(0px)", "blur(3px)"]);
+
+    /* Individual element parallax */
+    const textX       = useTransform(scrollYProgress, [0, 0.6], [0, -140]);
+    const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+    const portraitX   = useTransform(scrollYProgress, [0, 0.6], [0, 140]);
+    const portraitY   = useTransform(scrollYProgress, [0, 0.6], [0, -80]);
+    const portraitScale = useTransform(scrollYProgress, [0, 0.6], [1, 0.7]);
 
     const scrollToContact = () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
     const scrollToAbout   = () => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
@@ -94,7 +101,7 @@ const Hero: React.FC = () => {
                 <div className="hero-grid">
 
                     {/* ── Left: Text ── */}
-                    <div className="hero-text">
+                    <motion.div className="hero-text" style={{ x: textX, opacity: textOpacity }}>
                         {/* Pills */}
                         <motion.div
                             className="hero-pill-row"
@@ -169,7 +176,7 @@ const Hero: React.FC = () => {
                                 ))}
                             </motion.div>
                         </motion.div>
-                    </div>
+                    </motion.div>
 
                     {/* ── Right: Portrait ── */}
                     <motion.div
@@ -177,6 +184,7 @@ const Hero: React.FC = () => {
                         initial={{ opacity: 0, scale: 0.92, y: 24 }}
                         animate={ready ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.92, y: 24 }}
                         transition={{ delay: 0.3, duration: 0.85, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] }}
+                        style={{ x: portraitX, y: portraitY, scale: portraitScale }}
                     >
                         <div className="hero-portrait-stage">
                             <div className="hero-portrait-ring hero-portrait-ring--outer" aria-hidden="true" />

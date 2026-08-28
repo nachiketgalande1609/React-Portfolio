@@ -33,13 +33,13 @@ const personalDetails = [
 const education = [
     {
         degree: "Bachelor of Technology, Computer Science & Engineering",
-        period: "2017 — 2021",
+        period: "2017 ï¿½ 2021",
         grade: "7.0 CGPA",
         institution: "MIT ADT University, Pune",
     },
     {
         degree: "Class XII (HSC)",
-        period: "2015 — 2017",
+        period: "2015 ï¿½ 2017",
         grade: "82%",
         institution: "Shubham Raje Jr. College",
     },
@@ -103,11 +103,20 @@ const StatCounter: React.FC<{ end: number; suffix: string; label: string; descri
 
 const About: React.FC = () => {
     const exitRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({ target: exitRef, offset: ["end 200px", "end start"] });
-    const exitOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-    const exitY = useTransform(scrollYProgress, [0, 1], [0, 110]);
-    const exitScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
-    const exitBlur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(3px)"]);
+    const sectionRef = useRef<HTMLDivElement>(null);
+
+    /* Scroll-out */
+    const { scrollYProgress: exitProgress } = useScroll({ target: exitRef, offset: ["end 200px", "end start"] });
+    const exitOpacity = useTransform(exitProgress, [0, 1], [1, 0]);
+    const exitY = useTransform(exitProgress, [0, 1], [0, 110]);
+    const exitScale = useTransform(exitProgress, [0, 1], [1, 0.92]);
+    const exitBlur = useTransform(exitProgress, [0, 1], ["blur(0px)", "blur(3px)"]);
+
+    /* Scroll-in parallax for columns */
+    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+    const leftX  = useTransform(scrollYProgress, [0, 0.4], [-100, 0]);
+    const rightX = useTransform(scrollYProgress, [0, 0.4], [100, 0]);
+    const colOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
 
     return (
         <motion.div ref={exitRef} style={{ opacity: exitOpacity, y: exitY, scale: exitScale, filter: exitBlur }}>
@@ -131,7 +140,7 @@ const About: React.FC = () => {
                 <motion.div className="about-lead" variants={itemVariants}>
                     <p className="about-lead-text">
                         Senior Full Stack Software Developer with <strong>5+ years</strong> of experience designing, developing, and deploying
-                        scalable, high-performance web applications — strong across frontend, backend, and database architecture.
+                        scalable, high-performance web applications ï¿½ strong across frontend, backend, and database architecture.
                     </p>
                 </motion.div>
 
@@ -141,8 +150,9 @@ const About: React.FC = () => {
                     ))}
                 </motion.div>
 
-                <div className="about-columns">
-                    <motion.section className="about-card" variants={itemVariants} aria-labelledby="about-details-heading">
+                <div className="about-columns" ref={sectionRef}>
+                    <motion.section className="about-card" variants={itemVariants} aria-labelledby="about-details-heading"
+                        style={{ x: leftX, opacity: colOpacity }}>
                         <header className="about-card-header">
                             <h3 id="about-details-heading" className="about-card-title">
                                 Personal Details
@@ -165,7 +175,8 @@ const About: React.FC = () => {
                         </ul>
                     </motion.section>
 
-                    <motion.section className="about-card" variants={itemVariants} aria-labelledby="about-education-heading">
+                    <motion.section className="about-card" variants={itemVariants} aria-labelledby="about-education-heading"
+                        style={{ x: rightX, opacity: colOpacity }}>
                         <header className="about-card-header">
                             <h3 id="about-education-heading" className="about-card-title">
                                 Education
