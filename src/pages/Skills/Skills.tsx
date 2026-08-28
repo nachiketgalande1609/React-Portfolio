@@ -118,14 +118,14 @@ const Skills: React.FC = () => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add("animate-in");
-
-                        // Add staggered animation for skill items
                         if (entry.target.classList.contains("technologies-group")) {
                             const skillItems = entry.target.querySelectorAll(".skill-item");
                             skillItems.forEach((item, index) => {
                                 (item as HTMLElement).style.animationDelay = `${index * 0.05}s`;
                             });
                         }
+                    } else {
+                        entry.target.classList.remove("animate-in");
                     }
                 });
             },
