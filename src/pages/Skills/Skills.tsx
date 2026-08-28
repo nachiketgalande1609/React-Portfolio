@@ -210,7 +210,7 @@ const Skills: React.FC = () => {
                                     className="category-header-item"
                                     initial={{ opacity: 0, x: -60 }}
                                     whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true, amount: 0.4 }}
+                                    viewport={{ once: true, amount: 0, margin: "0px 0px -40px 0px" }}
                                     transition={{ duration: 0.5, ease: [0.215, 0.61, 0.355, 1] }}
                                 >
                                     <div className="category-glow"></div>
@@ -227,7 +227,7 @@ const Skills: React.FC = () => {
                                                 key={skill.name}
                                                 initial={{ opacity: 0, scale: 0.7, y: 20 }}
                                                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                                                viewport={{ once: true, amount: 0.2 }}
+                                                viewport={{ once: true, amount: 0, margin: "0px 0px -40px 0px" }}
                                                 transition={{ duration: 0.35, delay: i * 0.04, ease: [0.215, 0.61, 0.355, 1] }}
                                             >
                                                 <SkillItem skill={skill} />
