@@ -129,7 +129,7 @@ const Skills: React.FC = () => {
                     }
                 });
             },
-            { threshold: 0.15, rootMargin: "-20% 0px -20% 0px" }
+            { threshold: 0.15, rootMargin: "-10% 0px -10% 0px" }
         );
 
         const animateElements = document.querySelectorAll(".animate-on-scroll, .skill-pop, .skill-label-anim");
