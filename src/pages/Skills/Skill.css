@@ -177,8 +177,15 @@
     white-space: nowrap;
 }
 
-.skill-item.animate-on-scroll {
-    animation: skillFadeIn 0.4s ease forwards;
+.skill-item.animate-on-scroll,
+.skill-pop.animate-in .skill-item {
+    animation: skillPopIn 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+}
+
+@keyframes skillPopIn {
+    0%   { opacity: 0; transform: scale(0.75) translateY(16px); }
+    60%  { transform: scale(1.05) translateY(-2px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 @keyframes skillFadeIn {

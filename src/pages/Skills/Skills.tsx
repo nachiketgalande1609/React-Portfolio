@@ -132,11 +132,12 @@ const Skills: React.FC = () => {
             { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
         );
 
-        const animateElements = document.querySelectorAll(".animate-on-scroll");
+        const animateElements = document.querySelectorAll(".animate-on-scroll, .skill-pop");
         animateElements.forEach((el) => observer.observe(el));
 
         return () => {
             animateElements.forEach((el) => observer.unobserve(el));
+
         };
     }, []);
 
@@ -220,18 +221,12 @@ const Skills: React.FC = () => {
 
                             {/* Technologies Column — each skill pops in with scale */}
                             <div className="technologies-group-wrapper">
-                                <div className="technologies-group">
+                                <div className="technologies-group animate-on-scroll">
                                     <div className="technologies-grid">
                                         {getSkillsByCategory(category).map((skill, i) => (
-                                            <motion.div
-                                                key={skill.name}
-                                                initial={{ opacity: 0, scale: 0.7, y: 20 }}
-                                                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                                                viewport={{ once: true, amount: 0, margin: "0px 0px -40px 0px" }}
-                                                transition={{ duration: 0.35, delay: i * 0.04, ease: [0.215, 0.61, 0.355, 1] }}
-                                            >
+                                            <div key={skill.name} className="skill-pop animate-on-scroll" style={{ animationDelay: `${i * 0.04}s` }}>
                                                 <SkillItem skill={skill} />
-                                            </motion.div>
+                                            </div>
                                         ))}
                                     </div>
                                 </div>
