@@ -129,10 +129,10 @@ const Skills: React.FC = () => {
                     }
                 });
             },
-            { threshold: 0.15, rootMargin: "-10% 0px -10% 0px" }
+            { threshold: 0.15, rootMargin: "-20% 0px -20% 0px" }
         );
 
-        const animateElements = document.querySelectorAll(".animate-on-scroll, .skill-pop");
+        const animateElements = document.querySelectorAll(".animate-on-scroll, .skill-pop, .skill-label-anim");
         animateElements.forEach((el) => observer.observe(el));
 
         return () => {
@@ -207,16 +207,10 @@ const Skills: React.FC = () => {
                         <React.Fragment key={category}>
                             {/* Header Column — slides in from left */}
                             <div className="category-header-item-wrapper">
-                                <motion.div
-                                    className="category-header-item"
-                                    initial={{ opacity: 0, x: -60 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true, amount: 0, margin: "0px 0px -40px 0px" }}
-                                    transition={{ duration: 0.5, ease: [0.215, 0.61, 0.355, 1] }}
-                                >
+                                <div className="category-header-item animate-on-scroll skill-label-anim">
                                     <div className="category-glow"></div>
                                     <h3 className="category-header-title">{categoryConfig[category].title}</h3>
-                                </motion.div>
+                                </div>
                             </div>
 
                             {/* Technologies Column — each skill pops in with scale */}
