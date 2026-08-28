@@ -7,7 +7,7 @@
 
 :root,
 :root[data-theme="dark"] {
-    --brand: #4A70A9;
+    --brand: #8FABD4;
     --brand-soft: rgba(74, 112, 169, 0.12);
     --brand-glow: rgba(74, 112, 169, 0.35);
     --primary-color: var(--brand);
@@ -56,6 +56,9 @@
 }
 
 :root[data-theme="light"] {
+    --brand: #4A70A9;
+    --brand-soft: rgba(74, 112, 169, 0.12);
+    --brand-glow: rgba(74, 112, 169, 0.35);
     --primary-color: var(--brand);
     --secondary-color: #3a5a8a;
     --accent-color: var(--brand);
