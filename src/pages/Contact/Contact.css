@@ -83,7 +83,7 @@
 
 .contact-grid-item:hover {
     border-color: var(--border-default);
-    border-left-color: #F59E0B;
+    border-left-color: var(--brand);
     background: var(--bg-card-hover);
 }
 
@@ -109,7 +109,7 @@
 
 .contact-mui-icon {
     font-size: 1rem !important;
-    color: #F59E0B !important;
+    color: var(--brand) !important;
 }
 
 .contact-grid-item:hover .contact-icon-wrapper {
@@ -286,7 +286,7 @@
     border-radius: 8px;
     border: 1px solid rgba(245, 158, 11, 0.5);
     background: rgba(245, 158, 11, 0.08);
-    color: #F59E0B;
+    color: var(--brand);
     font-size: 0.875rem;
     font-weight: 600;
     font-family: inherit;
@@ -324,7 +324,7 @@
     width: 13px;
     height: 13px;
     border: 2px solid rgba(245, 158, 11, 0.25);
-    border-top-color: #F59E0B;
+    border-top-color: var(--brand);
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
     flex-shrink: 0;

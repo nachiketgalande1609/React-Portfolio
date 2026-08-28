@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import "./LinksModal.css";
 
 import GitHubIcon from "@mui/icons-material/GitHub";

@@ -1,4 +1,4 @@
-﻿
+
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import FormatQuoteRoundedIcon from "@mui/icons-material/FormatQuoteRounded";
@@ -9,7 +9,7 @@ import ShinyText from "../../components/ShinyText/ShinyText";
 
 const trimRole = (role: string) => {
     const firstSegment = role.split("|")[0].trim();
-    return firstSegment.length > 70 ? `${firstSegment.slice(0, 68)}…` : firstSegment;
+    return firstSegment.length > 70 ? `${firstSegment.slice(0, 68)}�` : firstSegment;
 };
 
 interface TestimonialCardProps {

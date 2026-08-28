@@ -1,4 +1,4 @@
-ï»¿import type { Experience, Skill, SocialLink, TestimonialsData } from "../types";
+import type { Experience, Skill, SocialLink, TestimonialsData } from "../types";
 
 // Import project images
 import livoImage from "../assets/projects/livo.png";
@@ -166,8 +166,8 @@ export const projectsData = {
             githubLink: "https://github.com/nachiketgalande1609/upscaler",
             caseStudy: {
                 problem: "Cloud upscalers leak private images and charge per image. Running large SOTA models locally caused OOM crashes on mid-range GPUs.",
-                solution: "Implemented tiled inference with BF16 precision to cut VRAM usage 4Ã—. Served the UI via FastAPI with SSE for real-time tile-progress feedback and a before/after comparison slider.",
-                impact: "Enables 4Ã— super-resolution entirely on-device with no API keys. Batch mode processes entire folders in one run, making it practical for photographers and content creators.",
+                solution: "Implemented tiled inference with BF16 precision to cut VRAM usage 4×. Served the UI via FastAPI with SSE for real-time tile-progress feedback and a before/after comparison slider.",
+                impact: "Enables 4× super-resolution entirely on-device with no API keys. Batch mode processes entire folders in one run, making it practical for photographers and content creators.",
             },
         },
         {
@@ -183,7 +183,7 @@ export const projectsData = {
             caseStudy: {
                 problem: "Managing a personal video library meant dealing with clunky desktop apps or manual file browsing. There was no elegant way to stream local files across devices on a home network.",
                 solution: "Built a Node.js media server that scans a configured folder, fetches movie metadata from an external API, and streams video to any browser on the LAN with a Netflix-style React UI.",
-                impact: "Transformed a raw file system into a browsable, searchable media experience â€” accessible from any device on the network without any cloud dependency.",
+                impact: "Transformed a raw file system into a browsable, searchable media experience — accessible from any device on the network without any cloud dependency.",
             },
         },
         {
@@ -213,9 +213,9 @@ export const projectsData = {
             liveLink: "https://ripple.nachiketgalande.com/",
             githubLink: "https://nachiketgalande1609.github.io/ripple-links/",
             caseStudy: {
-                problem: "Building a cross-platform social app that handles real-time messaging, video calls, and expiring stories simultaneously â€” without performance degradation at scale.",
+                problem: "Building a cross-platform social app that handles real-time messaging, video calls, and expiring stories simultaneously — without performance degradation at scale.",
                 solution: "Architected a WebSocket-based messaging layer alongside WebRTC peer connections for video. Used Docker containers on AWS to isolate services, with push notifications via FCM for the React Native client.",
-                impact: "Shipped a fully functional cross-platform social platform (web + mobile) with sub-100ms message delivery, live video, and story expiry â€” covering the full feature set of a production social app.",
+                impact: "Shipped a fully functional cross-platform social platform (web + mobile) with sub-100ms message delivery, live video, and story expiry — covering the full feature set of a production social app.",
             },
         },
         {
@@ -246,7 +246,7 @@ export const projectsData = {
             caseStudy: {
                 problem: "Children with autism often have limited access to consistent, personalized speech therapy. Traditional software lacks adaptive interaction and real-time feedback.",
                 solution: "Integrated OpenAI's language models into a Flask backend to power an AI therapist that adapts to each child's learning pace, with interactive modules designed around ABA therapy principles.",
-                impact: "Created an accessible, always-available supplement to in-person therapy â€” enabling children to practice communication skills at home with AI-guided, personalized sessions.",
+                impact: "Created an accessible, always-available supplement to in-person therapy — enabling children to practice communication skills at home with AI-guided, personalized sessions.",
             },
         },
         {
@@ -261,7 +261,7 @@ export const projectsData = {
             caseStudy: {
                 problem: "New team members spend weeks getting up to speed on project documentation. Knowledge is siloed in lengthy docs, wikis, and past conversations with no easy way to query it.",
                 solution: "Built a RAG-based Q&A assistant that ingests project documents and answers natural-language questions with context-aware responses, deployed on Azure for enterprise accessibility.",
-                impact: "Reduced onboarding ramp-up time by giving new members instant, accurate answers from existing docs â€” cutting the need for repetitive knowledge-transfer meetings.",
+                impact: "Reduced onboarding ramp-up time by giving new members instant, accurate answers from existing docs — cutting the need for repetitive knowledge-transfer meetings.",
             },
         },
         {

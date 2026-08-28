@@ -76,7 +76,7 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: #F59E0B;
+    background: var(--brand);
     color: #000;
     font-weight: 700;
     font-size: 0.8rem;
@@ -157,7 +157,7 @@
 }
 
 .chatbot-msg--user {
-    background: #F59E0B;
+    background: var(--brand);
     color: #000;
     align-self: flex-end;
     border-bottom-right-radius: 4px;
@@ -208,8 +208,8 @@
 }
 
 .chatbot-suggestion:hover {
-    border-color: #F59E0B;
-    color: #F59E0B;
+    border-color: var(--brand);
+    color: var(--brand);
 }
 
 /* Input */
@@ -245,7 +245,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: #F59E0B;
+    background: var(--brand);
     color: #000;
     border: none;
     cursor: pointer;

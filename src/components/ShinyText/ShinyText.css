@@ -1,5 +1,5 @@
 .shiny-text {
-    color: #F59E0B;
+    color: var(--brand);
     display: inline-block;
 }
 

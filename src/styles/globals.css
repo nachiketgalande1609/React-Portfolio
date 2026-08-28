@@ -7,9 +7,12 @@
 
 :root,
 :root[data-theme="dark"] {
-    --primary-color: #3b82f6;
-    --secondary-color: #1e40af;
-    --accent-color: #8b5cf6;
+    --brand: #4A70A9;
+    --brand-soft: rgba(74, 112, 169, 0.12);
+    --brand-glow: rgba(74, 112, 169, 0.35);
+    --primary-color: var(--brand);
+    --secondary-color: #3a5a8a;
+    --accent-color: var(--brand);
     --text-color: #ffffff;
     --text-light: #9ca3af;
     --background-color: #000000;
@@ -17,7 +20,7 @@
     --border-color: #1f2937;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7);
-    --section-title: #3b82f6;
+    --section-title: var(--brand);
     --mouse-x: 50%;
     --mouse-y: 50%;
     --gradient-rotation: 0deg;
@@ -53,9 +56,9 @@
 }
 
 :root[data-theme="light"] {
-    --primary-color: #2563eb;
-    --secondary-color: #1d4ed8;
-    --accent-color: #7c3aed;
+    --primary-color: var(--brand);
+    --secondary-color: #3a5a8a;
+    --accent-color: var(--brand);
     --text-color: #111827;
     --text-light: #4b5563;
     --background-color: #ffffff;
@@ -63,7 +66,7 @@
     --border-color: #e5e7eb;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.12);
-    --section-title: #2563eb;
+    --section-title: var(--brand);
 
     /* Theme tokens — Light */
     --bg-primary: #ffffff;

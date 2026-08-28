@@ -38,7 +38,7 @@
 .greeting-bar {
     width: 48px;
     height: 2px;
-    background: #F59E0B;
+    background: var(--brand);
     border-radius: 999px;
     transform-origin: left;
     margin-top: 24px;

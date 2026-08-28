@@ -45,7 +45,7 @@
 .filter-btn.active {
     background: rgba(245, 158, 11, 0.1);
     border-color: rgba(245, 158, 11, 0.5);
-    color: #F59E0B;
+    color: var(--brand);
     font-weight: 600;
 }
 
@@ -73,7 +73,7 @@
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #F59E0B;
+    color: var(--brand);
     margin-bottom: 4px;
     position: relative;
 }
@@ -87,7 +87,7 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #F59E0B;
+    background: var(--brand);
     border: 2px solid var(--bg-primary);
     box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
 }
@@ -159,7 +159,7 @@
 .cert-org {
     font-size: 0.7rem;
     font-weight: 600;
-    color: #F59E0B;
+    color: var(--brand);
     letter-spacing: 0.02em;
 }
 
@@ -185,7 +185,7 @@
 
 .cert-chevron.rotated {
     transform: rotate(180deg);
-    color: #F59E0B;
+    color: var(--brand);
 }
 
 /* Expanded body */
@@ -228,7 +228,7 @@
 
 .cert-credential-btn:hover {
     border-color: rgba(245, 158, 11, 0.5);
-    color: #F59E0B;
+    color: var(--brand);
 }
 
 /* Expand button */
@@ -256,7 +256,7 @@
 
 .certs-expand-btn:hover {
     border-color: rgba(245, 158, 11, 0.5);
-    color: #F59E0B;
+    color: var(--brand);
 }
 
 .animate-in {

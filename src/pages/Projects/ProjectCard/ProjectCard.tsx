@@ -54,7 +54,7 @@ const PROJECT_META: Record<number, { category: string; color: string }> = {
     4:  { category: "WEB APP",       color: "#ef4444" },
     5:  { category: "WEB APP",       color: "#10b981" },
     6:  { category: "ERP SYSTEM",    color: "#3b82f6" },
-    7:  { category: "AI / ML",       color: "#f59e0b" },
+    7:  { category: "AI / ML",       color: "#4A70A9" },
     8:  { category: "AI TOOL",       color: "#06b6d4" },
     9:  { category: "E-COMMERCE",    color: "#ec4899" },
     10: { category: "REAL-TIME APP", color: "#84cc16" },

@@ -210,11 +210,11 @@
     font-weight: 800;
     letter-spacing: 0;
     transform-origin: bottom center;
-    color: #F59E0B;
+    color: var(--brand);
 }
 
 .hero-title-char--dim {
-    color: #F59E0B;
+    color: var(--brand);
 }
 
 /* Lower text blocks */

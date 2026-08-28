@@ -1,4 +1,4 @@
-﻿import React, { useRef } from "react";
+import React, { useRef } from "react";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
@@ -99,7 +99,7 @@ const Experience: React.FC = () => {
                         </span>
                     </span>
                     <ShinyText text="Professional Experience" disabled={false} speed={2} className="section-title" />
-                    <p className="experience-subtitle">My journey through the tech industry — roles, teams, and the impact I've delivered.</p>
+                    <p className="experience-subtitle">My journey through the tech industry � roles, teams, and the impact I've delivered.</p>
                 </motion.header>
 
                 <div className="experience-timeline">
@@ -128,7 +128,7 @@ const Experience: React.FC = () => {
                                         <h3 className="experience-role">{exp.role}</h3>
                                         <p className="experience-company">
                                             <span className="experience-company-name">{exp.company}</span>
-                                            {exp.location && <span className="experience-company-location"> Â· {exp.location}</span>}
+                                            {exp.location && <span className="experience-company-location"> · {exp.location}</span>}
                                         </p>
                                     </div>
                                 </header>
