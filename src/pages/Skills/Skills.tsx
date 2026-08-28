@@ -202,27 +202,36 @@ const Skills: React.FC = () => {
                 </div>
 
                 <div className="two-column-layout">
-                    {(Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>).map((category, categoryIndex) => (
-                        // Each category now gets its own grid row within two-column-layout
+                    {(Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>).map((category) => (
                         <React.Fragment key={category}>
-                            {/* Header Column */}
+                            {/* Header Column — slides in from left */}
                             <div className="category-header-item-wrapper">
-                                {" "}
-                                {/* New wrapper for sticky behavior */}
-                                <div className="category-header-item animate-on-scroll" style={{ animationDelay: `${categoryIndex * 0.15}s` }}>
+                                <motion.div
+                                    className="category-header-item"
+                                    initial={{ opacity: 0, x: -60 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, amount: 0.4 }}
+                                    transition={{ duration: 0.5, ease: [0.215, 0.61, 0.355, 1] }}
+                                >
                                     <div className="category-glow"></div>
                                     <h3 className="category-header-title">{categoryConfig[category].title}</h3>
-                                </div>
+                                </motion.div>
                             </div>
 
-                            {/* Technologies Column */}
+                            {/* Technologies Column — each skill pops in with scale */}
                             <div className="technologies-group-wrapper">
-                                {" "}
-                                {/* New wrapper to manage padding/borders */}
-                                <div className="technologies-group animate-on-scroll" style={{ animationDelay: `${categoryIndex * 0.15}s` }}>
+                                <div className="technologies-group">
                                     <div className="technologies-grid">
-                                        {getSkillsByCategory(category).map((skill) => (
-                                            <SkillItem key={skill.name} skill={skill} />
+                                        {getSkillsByCategory(category).map((skill, i) => (
+                                            <motion.div
+                                                key={skill.name}
+                                                initial={{ opacity: 0, scale: 0.7, y: 20 }}
+                                                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                                                viewport={{ once: true, amount: 0.2 }}
+                                                transition={{ duration: 0.35, delay: i * 0.04, ease: [0.215, 0.61, 0.355, 1] }}
+                                            >
+                                                <SkillItem skill={skill} />
+                                            </motion.div>
                                         ))}
                                     </div>
                                 </div>
